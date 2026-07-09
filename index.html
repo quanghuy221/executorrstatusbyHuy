@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Executors Status by Huy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #080b11;
+            --glass: rgba(22, 27, 34, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --acc-work: #23a55a;
+            --acc-patch: #da373c;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: radial-gradient(circle at 50% -20%, #1a2238 0%, #080b11 60%); 
+            color: #f0f6fc; margin: 0; padding: 50px 20px; min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: auto; }
+        h1 { text-align: center; margin-bottom: 30px; letter-spacing: -1px; font-weight: 700; }
+        
+        .controls { display: flex; gap: 15px; margin-bottom: 30px; }
+        input, select { 
+            background: var(--glass); border: 1px solid var(--border); color: white; 
+            padding: 14px 20px; border-radius: 12px; flex: 1; backdrop-filter: blur(10px);
+        }
+        
+        table { 
+            width: 100%; border-collapse: separate; border-spacing: 0; 
+            background: var(--glass); backdrop-filter: blur(20px); 
+            border-radius: 16px; border: 1px solid var(--border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        th, td { padding: 20px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { font-size: 0.85rem; color: #8b949e; text-transform: uppercase; }
+        td { font-size: 0.95rem; } /* Font size đồng bộ */
+        tr:last-child td { border: none; }
+        tr:hover { background: rgba(255,255,255,0.03); }
+        
+        .badge { padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+        .working { color: var(--acc-work); background: rgba(35, 165, 90, 0.15); }
+        .patched { color: var(--acc-patch); background: rgba(218, 55, 60, 0.15); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Web check trạng thái Executors</h1>
+    <div class="controls">
+        <input type="text" id="search" placeholder="🔍 Tìm kiếm executor...">
+        <select id="platFilter">
+            <option value="all">Tất cả nền tảng</option>
+            <option value="Windows">Windows</option>
+            <option value="Android">Android</option>
+            <option value="iOS">iOS</option>
+        </select>
+    </div>
+    <table>
+        <thead><tr><th>Tên</th><th>Trạng thái</th><th>Nền tảng</th><th>Last Update</th></tr></thead>
+        <tbody id="body"></tbody>
+    </table>
+</div>
+
+<script>
+    const data = [
+        {name: "Potassium", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "Volt", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "Ronix", plat: "Windows", status: "patched", time: "Cập nhật sau"},
+        {name: "Wave", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "Synapse Z", plat: "Windows", status: "patched", time: "Cập nhật sau"},
+        {name: "Seliware", plat: "Windows", status: "patched", time: "Cập nhật sau"},
+        {name: "Madium", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "Cosmic", plat: "Windows", status: "patched", time: "Cập nhật sau"},
+        {name: "Velocity", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "SirHurt", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "Xeno", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "Solara", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "TDT", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "Sapphire", plat: "Windows", status: "patched", time: "Cập nhật sau"},
+        {name: "Real", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "Yub X", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "ByteBreaker", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "Vortex", plat: "Windows", status: "working", time: "Cập nhật sau"},
+        {name: "Delta", plat: "Android", status: "working", time: "Cập nhật sau"},
+        {name: "Codex", plat: "Android", status: "working", time: "Cập nhật sau"},
+        {name: "Vega X", plat: "Android", status: "working", time: "Cập nhật sau"},
+        {name: "Delta", plat: "iOS", status: "working", time: "Cập nhật sau"}
+    ];
+
+    function render(filter = '', plat = 'all') {
+        document.getElementById('body').innerHTML = data
+            .filter(x => x.name.toLowerCase().includes(filter.toLowerCase()) && (plat === 'all' || x.plat === plat))
+            .map(x => `<tr>
+                <td><strong>${x.name}</strong></td>
+                <td><span class="badge ${x.status}">${x.status}</span></td>
+                <td style="color: #8b949e;">${x.plat}</td>
+                <td style="font-family: 'JetBrains Mono', monospace; color: #f0f6fc;">${x.time}</td>
+            </tr>`).join('');
+    }
+
+    document.getElementById('search').addEventListener('input', (e) => render(e.target.value, document.getElementById('platFilter').value));
+    document.getElementById('platFilter').addEventListener('change', (e) => render(document.getElementById('search').value, e.target.value));
+    render();
+</script>
+</body>
+<script>
+    // 1. Chặn chuột phải
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // 2. Chặn các phím tắt F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.onkeydown = function(e) {
+        // F12
+        if (e.keyCode == 123) return false;
+        
+        // Ctrl + Shift + I hoặc J (Mở bảng Console/Inspect)
+        if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) return false;
+        
+        // Ctrl + U (Xem nguồn trang)
+        if (e.ctrlKey && e.keyCode == 85) return false;
+        
+        // Ctrl + S (Lưu trang)
+        if (e.ctrlKey && e.keyCode == 83) return false;
+    };
+</script>
+</html>
