@@ -92,6 +92,17 @@
         document.getElementById('search').addEventListener('input', (e) => render(e.target.value, document.getElementById('platFilter').value));
         document.getElementById('platFilter').addEventListener('change', (e) => render(document.getElementById('search').value, e.target.value));
         render();
+        // Chặn chuột phải, F12, các phím tắt và bôi đen
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+        if (e.keyCode === 123 || 
+            (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
+            (e.ctrlKey && [85, 83, 65, 80].includes(e.keyCode))) {
+            e.preventDefault();
+            return false;
+        }
+    });
+    document.onselectstart = e => e.preventDefault();
     </script>
 </body>
 </html>
