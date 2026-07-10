@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Executors Status by Huy</title>
+    <title>What Exploits Are Online</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,37 +11,22 @@
             --border: rgba(255, 255, 255, 0.08);
             --acc-work: #23a55a;
             --acc-patch: #da373c;
+            --acc-unstable: #f79533;
         }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: radial-gradient(circle at 50% -20%, #1a2238 0%, #080b11 60%); 
-            color: #f0f6fc; margin: 0; padding: 50px 20px; min-height: 100vh;
-        }
-        .container { max-width: 900px; margin: auto; }
-        h1 { text-align: center; margin-bottom: 30px; letter-spacing: -1px; font-weight: 700; }
-        
+        body { font-family: 'Inter', sans-serif; background: #080b11; color: #f0f6fc; margin: 0; padding: 40px 20px; min-height: 100vh; }
+        .container { max-width: 1000px; margin: auto; }
+        h1 { text-align: center; margin-bottom: 30px; }
         .controls { display: flex; gap: 15px; margin-bottom: 30px; }
-        input, select { 
-            background: var(--glass); border: 1px solid var(--border); color: white; 
-            padding: 14px 20px; border-radius: 12px; flex: 1; backdrop-filter: blur(10px);
-        }
-        
-        table { 
-            width: 100%; border-collapse: separate; border-spacing: 0; 
-            background: var(--glass); backdrop-filter: blur(20px); 
-            border-radius: 16px; border: 1px solid var(--border);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-        }
+        input, select { background: var(--glass); border: 1px solid var(--border); color: white; padding: 14px 20px; border-radius: 12px; flex: 1; backdrop-filter: blur(10px); }
+        table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--glass); border-radius: 16px; border: 1px solid var(--border); }
         th, td { padding: 20px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { font-size: 0.85rem; color: #8b949e; text-transform: uppercase; }
-        td { font-size: 0.95rem; } /* Font size đồng bộ */
+        th { font-size: 0.75rem; color: #8b949e; text-transform: uppercase; }
+        td { font-size: 0.95rem; }
         tr:last-child td { border: none; }
-        tr:hover { background: rgba(255,255,255,0.03); }
-        
-        .badge { padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+        .badge { padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
         .working { color: var(--acc-work); background: rgba(35, 165, 90, 0.15); }
         .patched { color: var(--acc-patch); background: rgba(218, 55, 60, 0.15); }
-        .unstable { color: #f79533; background: rgba(247, 149, 51, 0.15); }
+        .unstable { color: var(--acc-unstable); background: rgba(247, 149, 51, 0.15); }
     </style>
 </head>
 <body>
@@ -57,35 +42,36 @@
         </select>
     </div>
     <table>
-        <thead><tr><th>Tên</th><th>Trạng thái</th><th>Nền tảng</th><th>Last Update</th></tr></thead>
+        <thead><tr><th>TÊN</th><th>TRẠNG THÁI</th><th>NỀN TẢNG</th><th>LAST UPDATE</th><th>GHI CHÚ</th></tr></thead>
         <tbody id="body"></tbody>
     </table>
 </div>
 
 <script>
+    // Dữ liệu chuẩn 20 cái theo ảnh của bạn
     const data = [
-        {name: "Potassium", plat: "Windows", status: "unstable", time: "Cập nhật sau"},
-        {name: "Volt", plat: "Windows", status: "working", time: "Cập nhật sau"},
-        {name: "Ronix", plat: "Windows", status: "patched", time: "Cập nhật sau"},
-        {name: "Wave", plat: "Windows", status: "working", time: "Cập nhật sau"},
-        {name: "Synapse Z", plat: "Windows", status: "patched", time: "Cập nhật sau"},
-        {name: "Seliware", plat: "Windows", status: "patched", time: "Cập nhật sau"},
-        {name: "Madium", plat: "Windows", status: "unstable", time: "Cập nhật sau"},
-        {name: "Cosmic", plat: "Windows", status: "patched", time: "Cập nhật sau"},
-        {name: "Velocity", plat: "Windows", status: "patched", time: "Cập nhật sau"},
-        {name: "SirHurt", plat: "Windows", status: "working", time: "Cập nhật sau"},
-        {name: "Xeno", plat: "Windows", status: "working", time: "Cập nhật sau"},
-        {name: "Solara", plat: "Windows", status: "working", time: "Cập nhật sau"},
-        {name: "TDT", plat: "Windows", status: "working", time: "Cập nhật sau"},
-        {name: "Sapphire", plat: "Windows", status: "patched", time: "Cập nhật sau"},
-        {name: "Real", plat: "Windows", status: "working", time: "Cập nhật sau"},
-        {name: "Yub X", plat: "Windows", status: "patched", time: "Cập nhật sau"},
-        {name: "ByteBreaker", plat: "Windows", status: "working", time: "Cập nhật sau"},
-        {name: "Vortex", plat: "Windows", status: "working", time: "Cập nhật sau"},
-        {name: "Delta", plat: "Android", status: "working", time: "Cập nhật sau"},
-        {name: "Codex", plat: "Android", status: "working", time: "Cập nhật sau"},
-        {name: "Vega X", plat: "Android", status: "working", time: "Cập nhật sau"},
-        {name: "Delta", plat: "iOS", status: "working", time: "Cập nhật sau"}
+        {name: "Potassium", plat: "Windows", status: "unstable", time: "Cập nhật sau", note: "Lỗi về hookfunction"},
+        {name: "Volt", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+        {name: "Ronix", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
+        {name: "Wave", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+        {name: "Synapse Z", plat: "Windows", status: "patched", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Seliware", plat: "Windows", status: "patched", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Madium", plat: "Windows", status: "unstable", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Cosmic", plat: "Windows", status: "patched", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Velocity", plat: "Windows", status: "patched", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "SirHurt", plat: "Windows", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Xeno", plat: "Windows", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Solara", plat: "Windows", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "TDT", plat: "Windows", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Sapphire", plat: "Windows", status: "patched", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Real", plat: "Windows", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Yub X", plat: "Windows", status: "patched", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "ByteBreaker", plat: "Windows", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Vortex", plat: "Windows", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Delta", plat: "Android", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Codex", plat: "Android", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Vega X", plat: "Android", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"},
+        {name: "Delta", plat: "iOS", status: "working", time: "Cập nhật sau", note: "Ghi chú vào đây"}
     ];
 
     function render(filter = '', plat = 'all') {
@@ -93,34 +79,20 @@
             .filter(x => x.name.toLowerCase().includes(filter.toLowerCase()) && (plat === 'all' || x.plat === plat))
             .map(x => `<tr>
                 <td><strong>${x.name}</strong></td>
-                <td><span class="badge ${x.status}">${x.status}</span></td>
+                <td><span class="badge ${x.status.toLowerCase()}">${x.status}</span></td>
                 <td style="color: #8b949e;">${x.plat}</td>
-                <td style="font-family: 'JetBrains Mono', monospace; color: #f0f6fc;">${x.time}</td>
+                <td style="color: #f0f6fc;">${x.time}</td>
+                <td style="color: #8b949e;">${x.note}</td>
             </tr>`).join('');
     }
 
     document.getElementById('search').addEventListener('input', (e) => render(e.target.value, document.getElementById('platFilter').value));
     document.getElementById('platFilter').addEventListener('change', (e) => render(document.getElementById('search').value, e.target.value));
     render();
+
+    // Chặn F12 và chuột phải
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = e => { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false; };
 </script>
 </body>
-<script>
-    // 1. Chặn chuột phải
-    document.addEventListener('contextmenu', event => event.preventDefault());
-
-    // 2. Chặn các phím tắt F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-    document.onkeydown = function(e) {
-        // F12
-        if (e.keyCode == 123) return false;
-        
-        // Ctrl + Shift + I hoặc J (Mở bảng Console/Inspect)
-        if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) return false;
-        
-        // Ctrl + U (Xem nguồn trang)
-        if (e.ctrlKey && e.keyCode == 85) return false;
-        
-        // Ctrl + S (Lưu trang)
-        if (e.ctrlKey && e.keyCode == 83) return false;
-    };
-</script>
 </html>
