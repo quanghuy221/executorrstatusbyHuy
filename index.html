@@ -90,9 +90,16 @@
     document.getElementById('platFilter').addEventListener('change', (e) => render(document.getElementById('search').value, e.target.value));
     render();
 
-    // Chặn F12 và chuột phải
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.onkeydown = e => { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false; };
+    // Chặn chuột phải & mọi phím tắt
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.onkeydown = function(e) {
+    if (e.keyCode == 123 || 
+        (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || 
+        (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83 || e.keyCode == 65 || e.keyCode == 80))) {
+        e.preventDefault();
+        return false;
+    }
+};
 </script>
 </body>
 </html>
