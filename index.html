@@ -2,107 +2,96 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Status Exec by Huy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #080b11;
-            --glass: rgba(22, 27, 34, 0.7);
-            --border: rgba(255, 255, 255, 0.08);
-            --acc-work: #23a55a;
-            --acc-patch: #da373c;
-            --acc-unstable: #f79533;
-        }
-        body { font-family: 'Inter', sans-serif; background: #080b11; color: #f0f6fc; margin: 0; padding: 40px 20px; min-height: 100vh; }
-        .container { max-width: 1000px; margin: auto; }
-        h1 { text-align: center; margin-bottom: 30px; }
+        :root { --bg: #050505; --glass: rgba(255, 255, 255, 0.03); --accent: #6366f1; }
+        body { margin: 0; background: var(--bg); color: #fff; font-family: 'Outfit', sans-serif; background-image: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #050505 100%); min-height: 100vh; padding: 40px 20px; }
+        .container { max-width: 950px; margin: auto; animation: fadeInUp 0.8s ease; }
+        h1 { text-align: center; font-size: 3rem; margin-bottom: 10px; }
+        .sub-text { text-align: center; color: #818cf8; margin-bottom: 30px; font-weight: 300; }
+        
+        /* Cải tiến bộ lọc và select */
         .controls { display: flex; gap: 15px; margin-bottom: 30px; }
-        input, select { background: var(--glass); border: 1px solid var(--border); color: white; padding: 14px 20px; border-radius: 12px; flex: 1; backdrop-filter: blur(10px); }
-        table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--glass); border-radius: 16px; border: 1px solid var(--border); }
-        th, td { padding: 20px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { font-size: 0.75rem; color: #8b949e; text-transform: uppercase; }
-        td { font-size: 0.95rem; }
-        tr:last-child td { border: none; }
-        .badge { padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-        .working { color: var(--acc-work); background: rgba(35, 165, 90, 0.15); }
-        .patched { color: var(--acc-patch); background: rgba(218, 55, 60, 0.15); }
-        .unstable { color: var(--acc-unstable); background: rgba(247, 149, 51, 0.15); }
+        input, select { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 15px 20px; border-radius: 12px; flex: 1; backdrop-filter: blur(10px); outline: none; }
+        select { appearance: none; cursor: pointer; }
+        option { background: #111; color: white; }
+
+        table { width: 100%; border-collapse: separate; border-spacing: 0 12px; }
+        th { color: #64748b; font-size: 0.7rem; text-transform: uppercase; padding: 20px; }
+        td { padding: 22px; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
+        tr:hover td { background: rgba(99, 102, 241, 0.1); transform: scale(1.01); transition: 0.3s; }
+        
+        .badge { padding: 6px 14px; border-radius: 50px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; }
+        .working { color: #22d3ee; box-shadow: 0 0 10px rgba(34, 211, 238, 0.3); }
+        .patched { color: #fb7185; box-shadow: 0 0 10px rgba(251, 113, 133, 0.3); }
+        .unstable { color: #fbbf24; box-shadow: 0 0 10px rgba(251, 191, 36, 0.3); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Web check trạng thái Executors</h1>
-    <p style="text-align: center; color: #6b7280; margin-top: -20px; margin-bottom: 30px; font-size: 0.9rem;">
-        *Sắp tới sẽ có bản update giao diện mới*
-    </p>
-    <div class="controls">
-        <input type="text" id="search" placeholder="🔍 Tìm kiếm executor...">
-        <select id="platFilter">
-            <option value="all">Tất cả nền tảng</option>
-            <option value="Windows">Windows</option>
-            <option value="Android">Android</option>
-            <option value="iOS">iOS</option>
-        </select>
+    <div class="container">
+        <h1>Status Exec by Huy</h1>
+        <p class="sub-text">*Đã update UI mới*</p>
+        
+        <div class="controls">
+            <input type="text" id="search" placeholder="🔍 Tìm kiếm executor...">
+            <select id="platFilter">
+                <option value="all">Tất cả nền tảng</option>
+                <option value="Windows">Windows</option>
+                <option value="Android">Android</option>
+                <option value="iOS">iOS</option>
+            </select>
+        </div>
+
+        <table>
+            <thead><tr><th>TÊN</th><th>TRẠNG THÁI</th><th>NỀN TẢNG</th><th>LAST UPDATE</th><th>GHI CHÚ</th></tr></thead>
+            <tbody id="body"></tbody>
+        </table>
     </div>
-    <table>
-        <thead><tr><th>TÊN</th><th>TRẠNG THÁI</th><th>NỀN TẢNG</th><th>LAST UPDATE</th><th>GHI CHÚ</th></tr></thead>
-        <tbody id="body"></tbody>
-    </table>
-</div>
 
-<script>
-    // Dữ liệu chuẩn 20 cái theo ảnh của bạn
-    const data = [
-        {name: "Potassium", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Volt", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Ronix", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-        {name: "Wave", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Synapse Z", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-        {name: "Seliware", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-        {name: "Madium", plat: "Windows", status: "unstable", time: "Cập nhật sau", note: ""},
-        {name: "Cosmic", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-        {name: "Velocity", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-        {name: "SirHurt", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Xeno", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Solara", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "TDT", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Sapphire", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-        {name: "Real", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Yub X", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-        {name: "ByteBreaker", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Vortex", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Delta", plat: "Android", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Codex", plat: "Android", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Vega X", plat: "Android", status: "working", time: "Cập nhật sau", note: ""},
-        {name: "Delta", plat: "iOS", status: "working", time: "Cập nhật sau", note: ""}
-    ];
+    <script>
+        const data = [
+            {name: "Potassium", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Volt", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Ronix", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
+            {name: "Wave", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Synapse Z", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
+            {name: "Seliware", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
+            {name: "Madium", plat: "Windows", status: "unstable", time: "Cập nhật sau", note: ""},
+            {name: "Cosmic", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
+            {name: "Velocity", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
+            {name: "SirHurt", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Xeno", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Solara", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "TDT", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Sapphire", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
+            {name: "Real", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Yub X", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
+            {name: "ByteBreaker", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Vortex", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Delta", plat: "Android", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Codex", plat: "Android", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Vega X", plat: "Android", status: "working", time: "Cập nhật sau", note: ""},
+            {name: "Delta", plat: "iOS", status: "working", time: "Cập nhật sau", note: ""}
+        ];
 
-    function render(filter = '', plat = 'all') {
-        document.getElementById('body').innerHTML = data
-            .filter(x => x.name.toLowerCase().includes(filter.toLowerCase()) && (plat === 'all' || x.plat === plat))
-            .map(x => `<tr>
-                <td><strong>${x.name}</strong></td>
-                <td><span class="badge ${x.status.toLowerCase()}">${x.status}</span></td>
-                <td style="color: #8b949e;">${x.plat}</td>
-                <td style="color: #f0f6fc;">${x.time}</td>
-                <td style="color: #8b949e;">${x.note}</td>
-            </tr>`).join('');
-    }
+        function render(filter = '', plat = 'all') {
+            document.getElementById('body').innerHTML = data
+                .filter(x => x.name.toLowerCase().includes(filter.toLowerCase()) && (plat === 'all' || x.plat === plat))
+                .map(x => `<tr>
+                    <td><strong>${x.name}</strong></td>
+                    <td><span class="badge ${x.status}">${x.status.toUpperCase()}</span></td>
+                    <td style="color: #94a3b8;">${x.plat}</td>
+                    <td style="color: #94a3b8;">${x.time}</td>
+                    <td style="color: #94a3b8;">${x.note}</td>
+                </tr>`).join('');
+        }
 
-    document.getElementById('search').addEventListener('input', (e) => render(e.target.value, document.getElementById('platFilter').value));
-    document.getElementById('platFilter').addEventListener('change', (e) => render(document.getElementById('search').value, e.target.value));
-    render();
-
-    // Chặn chuột phải & mọi phím tắt
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.onkeydown = function(e) {
-    if (e.keyCode == 123 || 
-        (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || 
-        (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83 || e.keyCode == 65 || e.keyCode == 80))) {
-        e.preventDefault();
-        return false;
-    }
-};
-</script>
+        document.getElementById('search').addEventListener('input', (e) => render(e.target.value, document.getElementById('platFilter').value));
+        document.getElementById('platFilter').addEventListener('change', (e) => render(document.getElementById('search').value, e.target.value));
+        render();
+    </script>
 </body>
 </html>
