@@ -2,17 +2,15 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Status Exec by Huy</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #050505; --glass: rgba(255, 255, 255, 0.03); --accent: #6366f1; }
         body { margin: 0; background: var(--bg); color: #fff; font-family: 'Outfit', sans-serif; background-image: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #050505 100%); min-height: 100vh; padding: 40px 20px; }
-        .container { max-width: 950px; margin: auto; animation: fadeInUp 0.8s ease; }
+        .container { max-width: 1050px; margin: auto; animation: fadeInUp 0.8s ease; }
         h1 { text-align: center; font-size: 3rem; margin-bottom: 10px; }
         .sub-text { text-align: center; color: #818cf8; margin-bottom: 30px; font-weight: 300; }
         
-        /* Cải tiến bộ lọc và select */
         .controls { display: flex; gap: 15px; margin-bottom: 30px; }
         input, select { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 15px 20px; border-radius: 12px; flex: 1; backdrop-filter: blur(10px); outline: none; }
         select { appearance: none; cursor: pointer; }
@@ -27,6 +25,7 @@
         .working { color: #22d3ee; box-shadow: 0 0 10px rgba(34, 211, 238, 0.3); }
         .patched { color: #fb7185; box-shadow: 0 0 10px rgba(251, 113, 133, 0.3); }
         .unstable { color: #fbbf24; box-shadow: 0 0 10px rgba(251, 191, 36, 0.3); }
+        .outdated { color: #991b1b; /* Màu đỏ đậm hơn */background: rgba(153, 27, 27, 0.1); box-shadow: 0 0 10px rgba(153, 27, 27, 0.3); }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -46,35 +45,35 @@
         </div>
 
         <table>
-            <thead><tr><th>TÊN</th><th>TRẠNG THÁI</th><th>NỀN TẢNG</th><th>LAST UPDATE</th><th>GHI CHÚ</th></tr></thead>
+            <thead><tr><th>TÊN</th><th>TRẠNG THÁI</th><th>GIÁ TIỀN</th><th>NỀN TẢNG</th><th>LAST UPDATE</th><th>GHI CHÚ</th></tr></thead>
             <tbody id="body"></tbody>
         </table>
     </div>
 
     <script>
         const data = [
-            {name: "Potassium", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Volt", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Ronix", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-            {name: "Wave", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Synapse Z", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-            {name: "Seliware", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-            {name: "Madium", plat: "Windows", status: "unstable", time: "Cập nhật sau", note: ""},
-            {name: "Cosmic", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-            {name: "Velocity", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "SirHurt", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Xeno", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Solara", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "TDT", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Sapphire", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-            {name: "Real", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Yub X", plat: "Windows", status: "patched", time: "Cập nhật sau", note: ""},
-            {name: "ByteBreaker", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Vortex", plat: "Windows", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Delta", plat: "Android", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Codex", plat: "Android", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Vega X", plat: "Android", status: "working", time: "Cập nhật sau", note: ""},
-            {name: "Delta", plat: "iOS", status: "working", time: "Cập nhật sau", note: ""}
+            {name: "Potassium", plat: "Windows", status: "working", price: "549k", time: "Cập nhật sau", note: ""},
+            {name: "Volt", plat: "Windows", status: "working", price: "149 - 499k", time: "Cập nhật sau", note: ""},
+            {name: "Wave", plat: "Windows", status: "working", price: "139 - 489k", time: "Cập nhật sau", note: ""},
+            {name: "Ronix", plat: "Windows", status: "outdated", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Synapse Z", plat: "Windows", status: "patched", price: "none", time: "Cập nhật sau", note: ""},
+            {name: "Seliware", plat: "Windows", status: "outdated", price: "none", time: "Cập nhật sau", note: ""},
+            {name: "Madium", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Cosmic", plat: "Windows", status: "outdated", price: "none", time: "Cập nhật sau", note: ""},
+            {name: "Velocity", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "SirHurt", plat: "Windows", status: "working", price: "none", time: "Cập nhật sau", note: ""},
+            {name: "Xeno", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Solara", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "TDT", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Sapphire", plat: "Windows", status: "outdated", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Real", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Yub X", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "ByteBreaker", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Vortex", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Delta", plat: "Android", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Codex", plat: "Android", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Vega X", plat: "Android", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
+            {name: "Delta", plat: "iOS", status: "working", price: "Free", time: "Cập nhật sau", note: ""}
         ];
 
         function render(filter = '', plat = 'all') {
@@ -83,6 +82,7 @@
                 .map(x => `<tr>
                     <td><strong>${x.name}</strong></td>
                     <td><span class="badge ${x.status}">${x.status.toUpperCase()}</span></td>
+                    <td style="color: #6366f1; font-weight: bold;">${x.price}</td>
                     <td style="color: #94a3b8;">${x.plat}</td>
                     <td style="color: #94a3b8;">${x.time}</td>
                     <td style="color: #94a3b8;">${x.note}</td>
@@ -92,17 +92,15 @@
         document.getElementById('search').addEventListener('input', (e) => render(e.target.value, document.getElementById('platFilter').value));
         document.getElementById('platFilter').addEventListener('change', (e) => render(document.getElementById('search').value, e.target.value));
         render();
-        // Chặn chuột phải, F12, các phím tắt và bôi đen
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-        if (e.keyCode === 123 || 
-            (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
-            (e.ctrlKey && [85, 83, 65, 80].includes(e.keyCode))) {
-            e.preventDefault();
-            return false;
-        }
-    });
-    document.onselectstart = e => e.preventDefault();
+
+        // Bảo mật
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && [85, 83, 65, 80].includes(e.keyCode))) {
+                e.preventDefault(); return false;
+            }
+        });
+        document.onselectstart = e => e.preventDefault();
     </script>
 </body>
 </html>
