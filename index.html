@@ -2,37 +2,260 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Status Exec by Huy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Executors Status by Huy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --bg: #050505; --glass: rgba(255, 255, 255, 0.03); --accent: #6366f1; }
-        body { margin: 0; background: var(--bg); color: #fff; font-family: 'Outfit', sans-serif; background-image: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #050505 100%); min-height: 100vh; padding: 40px 20px; }
-        .container { max-width: 1050px; margin: auto; animation: fadeInUp 0.8s ease; }
-        h1 { text-align: center; font-size: 3rem; margin-bottom: 10px; }
-        .sub-text { text-align: center; color: #818cf8; margin-bottom: 30px; font-weight: 300; }
-        
-        .controls { display: flex; gap: 15px; margin-bottom: 30px; }
-        input, select { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 15px 20px; border-radius: 12px; flex: 1; backdrop-filter: blur(10px); outline: none; }
-        select { appearance: none; cursor: pointer; }
-        option { background: #111; color: white; }
+        :root { 
+            --bg: #030712; 
+            --glass: rgba(15, 23, 42, 0.65); 
+            --glass-hover: rgba(30, 41, 59, 0.75);
+            --accent: #8b5cf6; 
+            --accent-glow: rgba(139, 92, 246, 0.35);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
 
-        table { width: 100%; border-collapse: separate; border-spacing: 0 12px; }
-        th { color: #64748b; font-size: 0.7rem; text-transform: uppercase; padding: 20px; }
-        td { padding: 22px; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
-        tr:hover td { background: rgba(99, 102, 241, 0.1); transform: scale(1.01); transition: 0.3s; }
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body { 
+            margin: 0; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            font-family: 'Outfit', sans-serif; 
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.1) 0%, transparent 45%),
+                #030712; 
+            background-attachment: fixed;
+            min-height: 100vh; 
+            padding: 30px 16px; 
+            overflow-x: hidden;
+        }
+
+        .container { 
+            max-width: 1000px; 
+            margin: auto; 
+            animation: fadeInScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+        }
+
+        .header-box {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        h1 { 
+            font-size: 2.4rem; 
+            margin: 0 0 8px 0; 
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 20%, #c4b5fd 60%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.2));
+        }
+
+        .sub-text { 
+            color: #a5b4fc; 
+            font-size: 0.95rem;
+            font-weight: 300; 
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
         
-        .badge { padding: 6px 14px; border-radius: 50px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; }
-        .working { color: #22d3ee; box-shadow: 0 0 10px rgba(34, 211, 238, 0.3); }
-        .patched { color: #fb7185; box-shadow: 0 0 10px rgba(251, 113, 133, 0.3); }
-        .unstable { color: #fbbf24; box-shadow: 0 0 10px rgba(251, 191, 36, 0.3); }
-        .outdated { color: #991b1b; /* Màu đỏ đậm hơn */background: rgba(153, 27, 27, 0.1); box-shadow: 0 0 10px rgba(153, 27, 27, 0.3); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .controls { 
+            display: flex; 
+            gap: 12px; 
+            margin-bottom: 24px; 
+        }
+
+        input, select { 
+            background: var(--glass); 
+            border: 1px solid var(--border); 
+            color: white; 
+            padding: 14px 18px; 
+            border-radius: 14px; 
+            flex: 1; 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            outline: none; 
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
+            background: rgba(30, 41, 59, 0.85);
+        }
+
+        select { 
+            appearance: none; 
+            cursor: pointer; 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23a5b4fc' viewBox='0 0 16 16'%3E%3Cpath d='M8 10l-4-4h8l-4 4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        option { background: #0f172a; color: white; }
+
+        .table-wrapper {
+            background: rgba(11, 15, 25, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 8px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+        .table-wrapper::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 10px;
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0 8px; 
+            min-width: 700px;
+        }
+
+        th { 
+            color: #64748b; 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            padding: 12px 16px; 
+            letter-spacing: 1.2px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td { 
+            padding: 16px; 
+            background: var(--glass); 
+            border-top: 1px solid rgba(255,255,255,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, background;
+        }
+
+        td:first-child { border-left: 1px solid rgba(255,255,255,0.03); border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+        td:last-child { border-right: 1px solid rgba(255,255,255,0.03); border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+
+        tr {
+            animation: rowAppear 0.5s ease backwards;
+        }
+
+        tr:hover td { 
+            background: var(--glass-hover); 
+            border-color: rgba(139, 92, 246, 0.25);
+            transform: scale(1.005);
+        }
+        
+        .badge { 
+            padding: 5px 12px; 
+            border-radius: 30px; 
+            font-size: 0.62rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            display: inline-block;
+            letter-spacing: 0.8px;
+        }
+        .working { background: rgba(34, 211, 238, 0.12); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.3); box-shadow: 0 0 12px rgba(34, 211, 238, 0.15); }
+        .patched { background: rgba(251, 113, 133, 0.12); color: #fb7185; border: 1px solid rgba(251, 113, 133, 0.3); box-shadow: 0 0 12px rgba(251, 113, 133, 0.15); }
+        .unstable { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); box-shadow: 0 0 12px rgba(251, 191, 36, 0.15); }
+        .outdated { color: #991b1b; background: rgba(153, 27, 27, 0.1); border: 1px solid rgba(153, 27, 27, 0.3); box-shadow: 0 0 10px rgba(153, 27, 27, 0.3); }
+
+        .devtools-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(3, 7, 18, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .devtools-modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .devtools-box {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            border-radius: 22px;
+            padding: 30px;
+            max-width: 340px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9), 0 0 40px rgba(239, 68, 68, 0.25);
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .devtools-box i { font-size: 2.8rem; color: #ef4444; margin-bottom: 14px; text-shadow: 0 0 15px rgba(239, 68, 68, 0.6); }
+        .devtools-box h3 { color: #fff; margin-bottom: 8px; font-size: 1.25rem; font-weight: 700; }
+        .devtools-box p { color: rgba(255,255,255,0.7); font-size: 0.85rem; line-height: 1.5; margin: 0; }
+
+        @keyframes fadeInScale { 
+            from { opacity: 0; transform: scale(0.96) translateY(20px); } 
+            to { opacity: 1; transform: scale(1) translateY(0); } 
+        }
+        @keyframes rowAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes modalPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 20px 10px; }
+            h1 { font-size: 1.9rem; }
+            .controls { flex-direction: column; gap: 10px; }
+            input, select { padding: 12px 16px; font-size: 0.9rem; }
+            td, th { padding: 12px 14px; font-size: 0.88rem; }
+        }
     </style>
 </head>
 <body>
+
+    <div class="devtools-modal" id="devtoolsModal">
+        <div class="devtools-box">
+            <i class="fas fa-shield-halved"></i>
+            <h3>Khu vực cấm soi code</h3>
+            <p>Hệ thống bảo mật tối đa đã kích hoạt. Mọi hành vi cố tình đánh cắp mã nguồn đã bị chặn đứng!</p>
+        </div>
+    </div>
+
     <div class="container">
-        <h1>Status Executors by Huy</h1>
-        <p class="sub-text">*Full Update!*</p>
+        <div class="header-box">
+            <h1>Status Executors by Huy</h1>
+            <p class="sub-text">*Full Update!*</p>
+        </div>
         
         <div class="controls">
             <input type="text" id="search" placeholder="🔍 Tìm kiếm executor...">
@@ -45,13 +268,33 @@
             </select>
         </div>
 
-        <table>
-            <thead><tr><th>TÊN</th><th>TRẠNG THÁI</th><th>GIÁ TIỀN</th><th>NỀN TẢNG</th><th>LAST UPDATE</th><th>GHI CHÚ</th></tr></thead>
-            <tbody id="body"></tbody>
-        </table>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>TÊN</th>
+                        <th>TRẠNG THÁI</th>
+                        <th>GIÁ TIỀN</th>
+                        <th>NỀN TẢNG</th>
+                        <th>LAST UPDATE</th>
+                        <th>GHI CHÚ</th>
+                    </tr>
+                </thead>
+                <tbody id="body"></tbody>
+            </table>
+        </div>
     </div>
 
     <script>
+        (function() {
+            try {
+                const noop = function() {};
+                ['log', 'debug', 'info', 'error', 'warn', 'table'].forEach(fn => {
+                    if (window.console) window.console[fn] = noop;
+                });
+            } catch(e) {}
+        })();
+
         const data = [
             {name: "Potassium", plat: "Windows", status: "working", price: "549k", time: "Cập nhật sau", note: ""},
             {name: "Volt", plat: "Windows", status: "working", price: "149 - 499k", time: "Cập nhật sau", note: ""},
@@ -80,30 +323,67 @@
         ];
 
         function render(filter = '', plat = 'all') {
-            document.getElementById('body').innerHTML = data
-                .filter(x => x.name.toLowerCase().includes(filter.toLowerCase()) && (plat === 'all' || x.plat === plat))
-                .map(x => `<tr>
-                    <td><strong>${x.name}</strong></td>
+            const tbody = document.getElementById('body');
+            const filteredData = data.filter(x => 
+                x.name.toLowerCase().includes(filter.toLowerCase()) && 
+                (plat === 'all' || x.plat.toLowerCase() === plat.toLowerCase())
+            );
+
+            if (filteredData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #64748b; padding: 30px;">Không tìm thấy executor phù hợp!</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filteredData.map((x, index) => `
+                <tr style="animation-delay: ${index * 0.03}s">
+                    <td><strong style="color: #fff; font-size: 1rem; letter-spacing: 0.3px;">${x.name}</strong></td>
                     <td><span class="badge ${x.status}">${x.status.toUpperCase()}</span></td>
                     <td style="color: #6366f1; font-weight: bold;">${x.price}</td>
                     <td style="color: #94a3b8;">${x.plat}</td>
                     <td style="color: #94a3b8;">${x.time}</td>
                     <td style="color: #94a3b8;">${x.note}</td>
-                </tr>`).join('');
+                </tr>
+            `).join('');
         }
 
-        document.getElementById('search').addEventListener('input', (e) => render(e.target.value, document.getElementById('platFilter').value));
-        document.getElementById('platFilter').addEventListener('change', (e) => render(document.getElementById('search').value, e.target.value));
+        const searchInput = document.getElementById('search');
+        const platFilter = document.getElementById('platFilter');
+
+        searchInput.addEventListener('input', (e) => render(e.target.value, platFilter.value));
+        platFilter.addEventListener('change', (e) => render(searchInput.value, e.target.value));
         render();
 
-        // Bảo mật
+        const devtoolsModal = document.getElementById('devtoolsModal');
+
         document.addEventListener('contextmenu', e => e.preventDefault());
+
         document.addEventListener('keydown', e => {
-            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && [85, 83, 65, 80].includes(e.keyCode))) {
-                e.preventDefault(); return false;
+            if (
+                e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
+                (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 65))
+            ) {
+                e.preventDefault();
+                devtoolsModal.classList.add('show');
+                return false;
             }
         });
-        document.onselectstart = e => e.preventDefault();
+
+        setInterval(() => {
+            const widthThreshold = window.outerWidth - window.innerWidth > 160;
+            const heightThreshold = window.outerHeight - window.innerHeight > 160;
+            
+            const start = performance.now();
+            debugger;
+            const end = performance.now();
+            const isDebuggerOpen = (end - start) > 100;
+
+            if (widthThreshold || heightThreshold || isDebuggerOpen) {
+                devtoolsModal.classList.add('show');
+            } else {
+                devtoolsModal.classList.remove('show');
+            }
+        }, 300);
     </script>
 </body>
 </html>
