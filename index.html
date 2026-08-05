@@ -12,16 +12,12 @@
             --glass: rgba(15, 23, 42, 0.85); 
             --glass-hover: rgba(30, 41, 59, 0.9);
             --accent: #8b5cf6; 
-            --accent-glow: rgba(139, 92, 246, 0.25);
             --border: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body { 
             margin: 0; 
@@ -38,16 +34,8 @@
             overflow-x: hidden;
         }
 
-        .container { 
-            max-width: 1000px; 
-            margin: auto; 
-        }
-
-        .header-box {
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-        }
+        .container { max-width: 1000px; margin: auto; }
+        .header-box { text-align: center; margin-bottom: 30px; }
 
         h1 { 
             font-size: 2.4rem; 
@@ -56,24 +44,10 @@
             background: linear-gradient(135deg, #ffffff 20%, #c4b5fd 60%, #818cf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
         }
 
-        .sub-text { 
-            color: #a5b4fc; 
-            font-size: 0.95rem;
-            font-weight: 300; 
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            opacity: 0.9;
-        }
-        
-        .controls { 
-            display: flex; 
-            gap: 12px; 
-            margin-bottom: 24px; 
-            align-items: center;
-        }
+        .sub-text { color: #a5b4fc; font-size: 0.95rem; font-weight: 300; letter-spacing: 1.5px; text-transform: uppercase; }
+        .controls { display: flex; gap: 12px; margin-bottom: 24px; align-items: center; }
 
         input, select { 
             background: var(--glass); 
@@ -85,13 +59,9 @@
             outline: none; 
             font-family: 'Outfit', sans-serif;
             font-size: 0.95rem;
-            transition: border-color 0.2s ease;
         }
 
-        input:focus, select:focus {
-            border-color: var(--accent);
-            background: rgba(30, 41, 59, 0.95);
-        }
+        input:focus, select:focus { border-color: var(--accent); background: rgba(30, 41, 59, 0.95); }
 
         select { 
             appearance: none; 
@@ -116,12 +86,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: background 0.2s ease;
             white-space: nowrap;
-        }
-        .admin-trigger-btn:hover {
-            background: var(--accent);
-            color: white;
         }
 
         .table-wrapper {
@@ -131,55 +96,15 @@
             padding: 8px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
-        .table-wrapper::-webkit-scrollbar { height: 6px; }
-        .table-wrapper::-webkit-scrollbar-track { background: transparent; }
-        .table-wrapper::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.3); border-radius: 10px; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0 8px; min-width: 700px; }
+        th { color: #64748b; font-size: 0.7rem; text-transform: uppercase; padding: 12px 16px; letter-spacing: 1.2px; text-align: left; }
+        td { padding: 16px; background: var(--glass); border-top: 1px solid rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.02); }
+        td:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+        td:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
 
-        table { 
-            width: 100%; 
-            border-collapse: separate; 
-            border-spacing: 0 8px; 
-            min-width: 700px;
-        }
-
-        th { 
-            color: #64748b; 
-            font-size: 0.7rem; 
-            text-transform: uppercase; 
-            padding: 12px 16px; 
-            letter-spacing: 1.2px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        td { 
-            padding: 16px; 
-            background: var(--glass); 
-            border-top: 1px solid rgba(255,255,255,0.02);
-            border-bottom: 1px solid rgba(255,255,255,0.02);
-            transition: background 0.2s ease;
-        }
-
-        td:first-child { border-left: 1px solid rgba(255,255,255,0.03); border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
-        td:last-child { border-right: 1px solid rgba(255,255,255,0.03); border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
-
-        tr:hover td { 
-            background: var(--glass-hover); 
-            border-color: rgba(139, 92, 246, 0.25);
-        }
-        
-        .badge { 
-            padding: 5px 12px; 
-            border-radius: 30px; 
-            font-size: 0.62rem; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            display: inline-block;
-            letter-spacing: 0.8px;
-        }
+        .badge { padding: 5px 12px; border-radius: 30px; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; display: inline-block; }
         .working { background: rgba(34, 211, 238, 0.12); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.3); }
         .patched { background: rgba(251, 113, 133, 0.12); color: #fb7185; border: 1px solid rgba(251, 113, 133, 0.3); }
         .unstable { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
@@ -187,161 +112,65 @@
 
         /* DevTools Modal */
         .devtools-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(3, 7, 18, 0.95);
-            z-index: 999999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(3, 7, 18, 0.95); z-index: 999999;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
         }
         .devtools-modal.show { opacity: 1; pointer-events: auto; }
-        .devtools-box {
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(239, 68, 68, 0.5);
-            border-radius: 22px;
-            padding: 30px;
-            max-width: 340px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-        }
-        .devtools-box i { font-size: 2.8rem; color: #ef4444; margin-bottom: 14px; }
-        .devtools-box h3 { color: #fff; margin-bottom: 8px; font-size: 1.25rem; font-weight: 700; }
-        .devtools-box p { color: rgba(255,255,255,0.7); font-size: 0.85rem; line-height: 1.5; margin: 0; }
+        .devtools-box { background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 22px; padding: 30px; max-width: 340px; text-align: center; }
 
         /* Admin Modal */
         .admin-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(3, 7, 18, 0.88);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-            padding: 15px;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(3, 7, 18, 0.88); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.2s ease; padding: 15px;
         }
         .admin-modal.show { opacity: 1; pointer-events: auto; }
         .admin-box {
-            background: rgba(15, 23, 42, 0.98);
-            border: 1px solid var(--accent);
-            border-radius: 20px;
-            padding: 20px;
-            width: 100%;
-            max-width: 900px;
-            max-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            background: rgba(15, 23, 42, 0.98); border: 1px solid var(--accent);
+            border-radius: 20px; padding: 20px; width: 100%; max-width: 900px;
+            max-height: 90vh; display: flex; flex-direction: column;
         }
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-        }
-        .admin-header h2 { margin: 0; font-size: 1.2rem; color: #fff; display: flex; align-items: center; gap: 8px; }
-        .admin-header h2 i { color: var(--accent); }
-        .close-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            color: #94a3b8;
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+        .close-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: #94a3b8; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; }
 
         .auth-container { text-align: center; padding: 20px 0; }
-        .auth-container i { font-size: 2.5rem; color: var(--accent); margin-bottom: 12px; }
         .auth-form { display: flex; gap: 10px; max-width: 360px; margin: 0 auto; flex-direction: column; }
 
         .admin-content { overflow-y: auto; flex: 1; margin-bottom: 15px; }
-        .admin-content::-webkit-scrollbar { width: 4px; }
-        .admin-content::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.4); border-radius: 10px; }
-
         .admin-table { width: 100%; border-collapse: collapse; min-width: 650px; }
         .admin-table th { color: var(--text-sub); font-size: 0.7rem; padding: 8px; border-bottom: 1px solid var(--border); text-align: left; }
         .admin-table td { padding: 6px; border-bottom: 1px solid rgba(255,255,255,0.03); }
 
         .admin-input, .admin-select {
-            padding: 8px 10px;
-            font-size: 0.85rem;
-            border-radius: 8px;
-            width: 100%;
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #fff;
+            padding: 8px 10px; font-size: 0.85rem; border-radius: 8px; width: 100%;
+            background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff;
         }
 
         .btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-family: 'Outfit', sans-serif;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            font-size: 0.85rem;
+            background: var(--accent); color: white; border: none; padding: 10px 16px;
+            border-radius: 12px; font-weight: 600; font-family: 'Outfit', sans-serif;
+            cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.85rem;
         }
-        .btn:hover { opacity: 0.9; }
         .btn-secondary { background: rgba(255, 255, 255, 0.08); color: var(--text-main); }
         .btn-danger { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
 
-        .admin-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
-            flex-wrap: wrap;
-        }
+        .admin-actions { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding-top: 12px; border-top: 1px solid var(--border); flex-wrap: wrap; }
 
         .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(16, 185, 129, 0.95);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 100000;
+            position: fixed; bottom: 20px; right: 20px; background: rgba(16, 185, 129, 0.95);
+            color: white; padding: 12px 20px; border-radius: 12px; font-weight: 600;
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(100px); opacity: 0; transition: all 0.3s ease; z-index: 100000;
         }
         .toast.show { transform: translateY(0); opacity: 1; }
 
         @media (max-width: 768px) {
             body { padding: 15px 8px; }
-            h1 { font-size: 1.8rem; }
-            .controls { flex-direction: column; gap: 10px; }
+            .controls { flex-direction: column; }
             .admin-trigger-btn { width: 100%; justify-content: center; }
-            input, select { padding: 12px 14px; font-size: 0.9rem; }
-            td, th { padding: 12px; font-size: 0.85rem; }
             .admin-actions { flex-direction: column; width: 100%; }
             .admin-actions > div, .admin-actions > button { width: 100%; }
         }
@@ -351,9 +180,9 @@
 
     <div class="devtools-modal" id="devtoolsModal">
         <div class="devtools-box">
-            <i class="fas fa-shield-halved"></i>
-            <h3>Khu vực cấm soi code</h3>
-            <p>Hệ thống bảo mật tối đa đã kích hoạt. Mọi hành vi cố tình đánh cắp mã nguồn đã bị chặn đứng!</p>
+            <i class="fas fa-shield-halved" style="font-size:2.5rem; color:#ef4444;"></i>
+            <h3 style="color:#fff;">Khu vực cấm soi code</h3>
+            <p style="color:rgba(255,255,255,0.7); font-size:0.85rem;">Hệ thống bảo mật tối đa đã kích hoạt.</p>
         </div>
     </div>
 
@@ -361,20 +190,18 @@
     <div class="admin-modal" id="adminModal">
         <div class="admin-box">
             <div class="admin-header">
-                <h2><i class="fas fa-sliders"></i> Admin Dashboard</h2>
+                <h2 style="margin:0; font-size:1.2rem; color:#fff;"><i class="fas fa-sliders" style="color:var(--accent);"></i> Admin Dashboard</h2>
                 <button class="close-btn" id="closeAdminBtn"><i class="fas fa-xmark"></i></button>
             </div>
 
-            <!-- Lock Screen (Login) -->
             <div id="adminAuthSection" class="auth-container">
-                <i class="fas fa-lock"></i>
+                <i class="fas fa-lock" style="font-size:2.5rem; color:var(--accent); margin-bottom:12px;"></i>
                 <div class="auth-form">
                     <input type="password" id="adminPassInput" placeholder="Nhập mật khẩu Admin..." autofocus>
                     <button class="btn" id="loginAdminBtn"><i class="fas fa-key"></i> Đăng Nhập</button>
                 </div>
             </div>
 
-            <!-- Admin Management Panel -->
             <div id="adminMainSection" style="display: none; flex-direction: column; flex: 1; overflow: hidden;">
                 <div class="admin-content">
                     <div style="overflow-x: auto;">
@@ -398,17 +225,15 @@
                 <div class="admin-actions">
                     <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                         <button class="btn btn-secondary" id="addRowBtn"><i class="fas fa-plus"></i> Thêm</button>
-                        <button class="btn btn-secondary" id="changePassBtn"><i class="fas fa-shield-key"></i> Đổi Pass</button>
-                        <button class="btn btn-danger" id="resetDataBtn"><i class="fas fa-rotate-left"></i> Khôi phục gốc</button>
+                        <button class="btn btn-danger" id="resetDataBtn"><i class="fas fa-rotate-left"></i> Khôi phục</button>
                     </div>
-                    <button class="btn" id="saveDataBtn"><i class="fas fa-floppy-disk"></i> Lưu Thay Đổi</button>
+                    <button class="btn" id="saveDataBtn"><i class="fas fa-floppy-disk"></i> Lưu & Đồng Bộ Cho Tất Cả</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"><i class="fas fa-circle-check"></i> <span id="toastMsg">Cập nhật thành công!</span></div>
+    <div class="toast" id="toast"><i class="fas fa-circle-check"></i> <span id="toastMsg">Thành công!</span></div>
 
     <div class="container">
         <div class="header-box">
@@ -446,16 +271,9 @@
     </div>
 
     <script>
-        (function() {
-            try {
-                const noop = function() {};
-                ['log', 'debug', 'info', 'error', 'warn', 'table'].forEach(fn => {
-                    if (window.console) window.console[fn] = noop;
-                });
-            } catch(e) {}
-        })();
+        // Đường link Npoint API cá nhân của bạn
+        const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
 
-        // Danh sách mặc định ban đầu
         const defaultData = [
             {name: "Potassium", plat: "Windows", status: "working", price: "549k", time: "Cập nhật sau", note: ""},
             {name: "Volt", plat: "Windows", status: "working", price: "149 - 499k", time: "Cập nhật sau", note: ""},
@@ -472,8 +290,6 @@
             {name: "TDT", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
             {name: "Sapphire", plat: "Windows", status: "outdated", price: "Free", time: "Cập nhật sau", note: ""},
             {name: "Real", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Yub X", plat: "Windows", status: "outdated", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "ByteBreaker", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
             {name: "Vortex", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
             {name: "Opiumware", plat: "Mac", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
             {name: "MacSploit", plat: "Mac", status: "patched", price: "Paid", time: "Cập nhật sau", note: ""},
@@ -483,9 +299,22 @@
             {name: "Delta", plat: "iOS", status: "working", price: "Free", time: "Cập nhật sau", note: ""}
         ];
 
-        // Lấy dữ liệu & Mật khẩu từ bộ nhớ LocalStorage
-        let data = JSON.parse(localStorage.getItem('huy_executors_data')) || [...defaultData];
-        let currentAdminPass = localStorage.getItem('huy_admin_pass') || "quanghuy90";
+        let data = [];
+        const currentAdminPass = "daoquanghuy90";
+
+        function loadData() {
+            fetch(API_URL)
+                .then(res => res.json())
+                .then(resData => {
+                    data = Array.isArray(resData) && resData.length > 0 ? resData : defaultData;
+                    render(searchInput.value, platFilter.value);
+                })
+                .catch(() => {
+                    data = defaultData;
+                    render(searchInput.value, platFilter.value);
+                });
+        }
+        loadData();
 
         function render(filter = '', plat = 'all') {
             const tbody = document.getElementById('body');
@@ -516,7 +345,6 @@
 
         searchInput.addEventListener('input', (e) => render(e.target.value, platFilter.value));
         platFilter.addEventListener('change', (e) => render(searchInput.value, e.target.value));
-        render();
 
         /* ADMIN SYSTEM */
         const adminModal = document.getElementById('adminModal');
@@ -530,7 +358,6 @@
         const saveDataBtn = document.getElementById('saveDataBtn');
         const addRowBtn = document.getElementById('addRowBtn');
         const resetDataBtn = document.getElementById('resetDataBtn');
-        const changePassBtn = document.getElementById('changePassBtn');
         let tempAdminData = [];
 
         function showToast(msg) {
@@ -540,37 +367,26 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        function openAdminModal() {
+        openAdminBtn.addEventListener('click', () => {
             adminModal.classList.add('show');
             adminPassInput.value = '';
             adminPassInput.focus();
-        }
+        });
 
-        function closeAdminModal() {
-            adminModal.classList.remove('show');
-        }
-
-        openAdminBtn.addEventListener('click', openAdminModal);
-        closeAdminBtn.addEventListener('click', closeAdminModal);
+        closeAdminBtn.addEventListener('click', () => adminModal.classList.remove('show'));
 
         loginAdminBtn.addEventListener('click', () => {
             if (adminPassInput.value === currentAdminPass) {
                 adminAuthSection.style.display = 'none';
                 adminMainSection.style.display = 'flex';
-                loadAdminTable();
+                tempAdminData = JSON.parse(JSON.stringify(data));
+                renderAdminRows();
             } else {
                 showToast("❌ Sai mật khẩu Admin!");
             }
         });
 
-        adminPassInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') loginAdminBtn.click();
-        });
-
-        function loadAdminTable() {
-            tempAdminData = JSON.parse(JSON.stringify(data));
-            renderAdminRows();
-        }
+        adminPassInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') loginAdminBtn.click(); });
 
         function renderAdminRows() {
             adminTableBody.innerHTML = tempAdminData.map((item, i) => `
@@ -610,15 +426,6 @@
             renderAdminRows();
         });
 
-        changePassBtn.addEventListener('click', () => {
-            const newPass = prompt("Nhập mật khẩu Admin mới:", currentAdminPass);
-            if (newPass && newPass.trim() !== "") {
-                currentAdminPass = newPass.trim();
-                localStorage.setItem('huy_admin_pass', currentAdminPass);
-                showToast("🔑 Đã đổi mật khẩu Admin thành công!");
-            }
-        });
-
         resetDataBtn.addEventListener('click', () => {
             if (confirm("Khôi phục về danh sách gốc mặc định?")) {
                 tempAdminData = JSON.parse(JSON.stringify(defaultData));
@@ -627,24 +434,31 @@
         });
 
         saveDataBtn.addEventListener('click', () => {
-            data = JSON.parse(JSON.stringify(tempAdminData));
-            localStorage.setItem('huy_executors_data', JSON.stringify(data));
-            render(searchInput.value, platFilter.value);
-            closeAdminModal();
-            showToast("✅ Đã lưu danh sách thành công!");
+            saveDataBtn.innerText = "Đang lưu...";
+            fetch(API_URL, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(tempAdminData)
+            })
+            .then(() => {
+                data = JSON.parse(JSON.stringify(tempAdminData));
+                render(searchInput.value, platFilter.value);
+                adminModal.classList.remove('show');
+                showToast("🌐 Đã lưu và đồng bộ tức thì cho TẤT CẢ mọi người!");
+            })
+            .catch(err => {
+                showToast("❌ Lỗi lưu dữ liệu: " + err.message);
+            })
+            .finally(() => {
+                saveDataBtn.innerHTML = `<i class="fas fa-floppy-disk"></i> Lưu & Đồng Bộ Cho Tất Cả`;
+            });
         });
 
-        /* DEVTOOLS PROTECTION */
+        /* PROTECT DEVTOOLS */
         const devtoolsModal = document.getElementById('devtoolsModal');
-        
-        // Chặn chuột phải
         document.addEventListener('contextmenu', e => e.preventDefault());
-        
-        // Chặn phím tắt soi code (Đã bỏ chặn Ctrl+A để bạn chọn bôi đen văn bản thoải mái)
         document.addEventListener('keydown', e => {
-            if (e.key === 'F2') { e.preventDefault(); openAdminModal(); return; }
-            
-            // Chặn F12, Ctrl+Shift+I/J/C, Ctrl+U, Ctrl+S
+            if (e.key === 'F2') { e.preventDefault(); openAdminBtn.click(); return; }
             if (e.keyCode === 123 || 
                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
                (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83))) {
@@ -654,15 +468,11 @@
             }
         });
 
-        // Tối ưu quét Devtools nhẹ nhàng không ngốn RAM/CPU
         setInterval(() => {
             const widthThreshold = window.outerWidth - window.innerWidth > 160;
             const heightThreshold = window.outerHeight - window.innerHeight > 160;
-            if (widthThreshold || heightThreshold) {
-                devtoolsModal.classList.add('show');
-            } else {
-                devtoolsModal.classList.remove('show');
-            }
+            if (widthThreshold || heightThreshold) devtoolsModal.classList.add('show');
+            else devtoolsModal.classList.remove('show');
         }, 1000);
     </script>
 </body>
