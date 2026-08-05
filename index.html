@@ -113,7 +113,6 @@
 
         option { background: #0f172a; color: white; }
 
-        /* Admin Trigger Button */
         .admin-trigger-btn {
             background: rgba(139, 92, 246, 0.15);
             border: 1px solid var(--accent);
@@ -202,7 +201,6 @@
         .unstable { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); box-shadow: 0 0 12px rgba(251, 191, 36, 0.15); }
         .outdated { color: #991b1b; background: rgba(153, 27, 27, 0.1); border: 1px solid rgba(153, 27, 27, 0.3); box-shadow: 0 0 10px rgba(153, 27, 27, 0.3); }
 
-        /* DevTools Modal */
         .devtools-modal {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -233,7 +231,6 @@
         .devtools-box h3 { color: #fff; margin-bottom: 8px; font-size: 1.25rem; font-weight: 700; }
         .devtools-box p { color: rgba(255,255,255,0.7); font-size: 0.85rem; line-height: 1.5; margin: 0; }
 
-        /* Admin Modal */
         .admin-modal {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -393,9 +390,6 @@
             <!-- Lock Screen (Login) -->
             <div id="adminAuthSection" class="auth-container">
                 <i class="fas fa-lock"></i>
-                <p style="color: var(--text-sub); margin-bottom: 15px; font-size: 0.9rem;">
-                    Mật khẩu mặc định: <strong style="color: #a5b4fc;">huy123</strong>
-                </p>
                 <div class="auth-form">
                     <input type="password" id="adminPassInput" placeholder="Nhập mật khẩu Admin..." autofocus>
                     <button class="btn" id="loginAdminBtn"><i class="fas fa-key"></i> Đăng Nhập</button>
@@ -513,7 +507,7 @@
 
         // Lấy dữ liệu & Mật khẩu từ bộ nhớ LocalStorage
         let data = JSON.parse(localStorage.getItem('huy_executors_data')) || [...defaultData];
-        let currentAdminPass = localStorage.getItem('huy_admin_pass') || "huy123";
+        let currentAdminPass = localStorage.getItem('huy_admin_pass') || "daoquanghuy90";
 
         function render(filter = '', plat = 'all') {
             const tbody = document.getElementById('body');
