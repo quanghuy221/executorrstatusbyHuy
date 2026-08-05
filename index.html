@@ -76,6 +76,7 @@
             display: flex; 
             gap: 12px; 
             margin-bottom: 24px; 
+            align-items: center;
         }
 
         input, select { 
@@ -91,6 +92,8 @@
             font-family: 'Outfit', sans-serif;
             font-size: 0.95rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: text;
+            -webkit-user-select: text;
         }
 
         input:focus, select:focus {
@@ -110,6 +113,28 @@
 
         option { background: #0f172a; color: white; }
 
+        /* Admin Trigger Button */
+        .admin-trigger-btn {
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid var(--accent);
+            color: #c4b5fd;
+            padding: 14px 20px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .admin-trigger-btn:hover {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
         .table-wrapper {
             background: rgba(11, 15, 25, 0.6);
             border: 1px solid var(--border);
@@ -122,16 +147,9 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .table-wrapper::-webkit-scrollbar {
-            height: 6px;
-        }
-        .table-wrapper::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .table-wrapper::-webkit-scrollbar-thumb {
-            background: rgba(139, 92, 246, 0.3);
-            border-radius: 10px;
-        }
+        .table-wrapper::-webkit-scrollbar { height: 6px; }
+        .table-wrapper::-webkit-scrollbar-track { background: transparent; }
+        .table-wrapper::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.3); border-radius: 10px; }
 
         table { 
             width: 100%; 
@@ -162,9 +180,7 @@
         td:first-child { border-left: 1px solid rgba(255,255,255,0.03); border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
         td:last-child { border-right: 1px solid rgba(255,255,255,0.03); border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
 
-        tr {
-            animation: rowAppear 0.5s ease backwards;
-        }
+        tr { animation: rowAppear 0.5s ease backwards; }
 
         tr:hover td { 
             background: var(--glass-hover); 
@@ -186,6 +202,7 @@
         .unstable { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); box-shadow: 0 0 12px rgba(251, 191, 36, 0.15); }
         .outdated { color: #991b1b; background: rgba(153, 27, 27, 0.1); border: 1px solid rgba(153, 27, 27, 0.3); box-shadow: 0 0 10px rgba(153, 27, 27, 0.3); }
 
+        /* DevTools Modal */
         .devtools-modal {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -200,10 +217,7 @@
             pointer-events: none;
             transition: opacity 0.25s ease;
         }
-        .devtools-modal.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .devtools-modal.show { opacity: 1; pointer-events: auto; }
         .devtools-box {
             background: rgba(15, 23, 42, 0.9);
             border: 1px solid rgba(239, 68, 68, 0.5);
@@ -219,25 +233,142 @@
         .devtools-box h3 { color: #fff; margin-bottom: 8px; font-size: 1.25rem; font-weight: 700; }
         .devtools-box p { color: rgba(255,255,255,0.7); font-size: 0.85rem; line-height: 1.5; margin: 0; }
 
-        @keyframes fadeInScale { 
-            from { opacity: 0; transform: scale(0.96) translateY(20px); } 
-            to { opacity: 1; transform: scale(1) translateY(0); } 
+        /* Admin Modal */
+        .admin-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 15px;
         }
-        @keyframes rowAppear {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .admin-modal.show { opacity: 1; pointer-events: auto; }
+        .admin-box {
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid var(--accent);
+            border-radius: 24px;
+            padding: 24px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 40px var(--accent-glow);
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        @keyframes modalPop {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
         }
+        .admin-header h2 { margin: 0; font-size: 1.3rem; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .admin-header h2 i { color: var(--accent); }
+        .close-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: #94a3b8;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-container { text-align: center; padding: 20px 0; }
+        .auth-container i { font-size: 2.5rem; color: var(--accent); margin-bottom: 12px; }
+        .auth-form { display: flex; gap: 10px; max-width: 360px; margin: 0 auto; flex-direction: column; }
+
+        .admin-content { overflow-y: auto; flex: 1; margin-bottom: 15px; }
+        .admin-content::-webkit-scrollbar { width: 4px; }
+        .admin-content::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.4); border-radius: 10px; }
+
+        .admin-table { width: 100%; border-collapse: collapse; min-width: 650px; }
+        .admin-table th { color: var(--text-sub); font-size: 0.7rem; padding: 8px; border-bottom: 1px solid var(--border); text-align: left; }
+        .admin-table td { padding: 6px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+
+        .admin-input, .admin-select {
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            width: 100%;
+            background: rgba(30, 41, 59, 0.6);
+        }
+
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+        .btn:hover { filter: brightness(1.15); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.08); color: var(--text-main); }
+        .btn-danger { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+        .admin-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(16, 185, 129, 0.95);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100000;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.96) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes rowAppear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes modalPop { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
         @media (max-width: 768px) {
             body { padding: 20px 10px; }
             h1 { font-size: 1.9rem; }
             .controls { flex-direction: column; gap: 10px; }
+            .admin-trigger-btn { width: 100%; justify-content: center; }
             input, select { padding: 12px 16px; font-size: 0.9rem; }
             td, th { padding: 12px 14px; font-size: 0.88rem; }
+            .admin-actions { flex-direction: column; width: 100%; }
+            .admin-actions > div, .admin-actions > button { width: 100%; }
         }
     </style>
 </head>
@@ -250,6 +381,62 @@
             <p>Hệ thống bảo mật tối đa đã kích hoạt. Mọi hành vi cố tình đánh cắp mã nguồn đã bị chặn đứng!</p>
         </div>
     </div>
+
+    <!-- Admin Panel Modal -->
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-box">
+            <div class="admin-header">
+                <h2><i class="fas fa-sliders"></i> Admin Dashboard</h2>
+                <button class="close-btn" id="closeAdminBtn"><i class="fas fa-xmark"></i></button>
+            </div>
+
+            <!-- Lock Screen (Login) -->
+            <div id="adminAuthSection" class="auth-container">
+                <i class="fas fa-lock"></i>
+                <p style="color: var(--text-sub); margin-bottom: 15px; font-size: 0.9rem;">
+                    Mật khẩu mặc định: <strong style="color: #a5b4fc;">huy123</strong>
+                </p>
+                <div class="auth-form">
+                    <input type="password" id="adminPassInput" placeholder="Nhập mật khẩu Admin..." autofocus>
+                    <button class="btn" id="loginAdminBtn"><i class="fas fa-key"></i> Đăng Nhập</button>
+                </div>
+            </div>
+
+            <!-- Admin Management Panel -->
+            <div id="adminMainSection" style="display: none; flex-direction: column; flex: 1; overflow: hidden;">
+                <div class="admin-content">
+                    <div style="overflow-x: auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Tên Executor</th>
+                                    <th>Nền tảng</th>
+                                    <th>Trạng thái</th>
+                                    <th>Giá tiền</th>
+                                    <th>Last Update</th>
+                                    <th>Ghi chú</th>
+                                    <th style="text-align: center;">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="admin-actions">
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" id="addRowBtn"><i class="fas fa-plus"></i> Thêm</button>
+                        <button class="btn btn-secondary" id="changePassBtn"><i class="fas fa-shield-key"></i> Đổi Pass</button>
+                        <button class="btn btn-danger" id="resetDataBtn"><i class="fas fa-rotate-left"></i> Khôi phục gốc</button>
+                    </div>
+                    <button class="btn" id="saveDataBtn"><i class="fas fa-floppy-disk"></i> Lưu Thay Đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"><i class="fas fa-circle-check"></i> <span id="toastMsg">Cập nhật thành công!</span></div>
 
     <div class="container">
         <div class="header-box">
@@ -266,6 +453,7 @@
                 <option value="iOS">iOS</option>
                 <option value="Mac">Mac</option>
             </select>
+            <button class="admin-trigger-btn" id="openAdminBtn"><i class="fas fa-user-gear"></i> Admin</button>
         </div>
 
         <div class="table-wrapper">
@@ -295,7 +483,8 @@
             } catch(e) {}
         })();
 
-        const data = [
+        // Danh sách mặc định ban đầu
+        const defaultData = [
             {name: "Potassium", plat: "Windows", status: "working", price: "549k", time: "Cập nhật sau", note: ""},
             {name: "Volt", plat: "Windows", status: "working", price: "149 - 499k", time: "Cập nhật sau", note: ""},
             {name: "Wave", plat: "Windows", status: "working", price: "139 - 489k", time: "Cập nhật sau", note: ""},
@@ -322,6 +511,10 @@
             {name: "Delta", plat: "iOS", status: "working", price: "Free", time: "Cập nhật sau", note: ""}
         ];
 
+        // Lấy dữ liệu & Mật khẩu từ bộ nhớ LocalStorage
+        let data = JSON.parse(localStorage.getItem('huy_executors_data')) || [...defaultData];
+        let currentAdminPass = localStorage.getItem('huy_admin_pass') || "huy123";
+
         function render(filter = '', plat = 'all') {
             const tbody = document.getElementById('body');
             const filteredData = data.filter(x => 
@@ -335,13 +528,13 @@
             }
 
             tbody.innerHTML = filteredData.map((x, index) => `
-                <tr style="animation-delay: ${index * 0.03}s">
+                <tr style="animation-delay: ${index * 0.02}s">
                     <td><strong style="color: #fff; font-size: 1rem; letter-spacing: 0.3px;">${x.name}</strong></td>
                     <td><span class="badge ${x.status}">${x.status.toUpperCase()}</span></td>
                     <td style="color: #6366f1; font-weight: bold;">${x.price}</td>
                     <td style="color: #94a3b8;">${x.plat}</td>
                     <td style="color: #94a3b8;">${x.time}</td>
-                    <td style="color: #94a3b8;">${x.note}</td>
+                    <td style="color: #94a3b8;">${x.note || '-'}</td>
                 </tr>
             `).join('');
         }
@@ -353,16 +546,128 @@
         platFilter.addEventListener('change', (e) => render(searchInput.value, e.target.value));
         render();
 
+        /* ADMIN SYSTEM */
+        const adminModal = document.getElementById('adminModal');
+        const openAdminBtn = document.getElementById('openAdminBtn');
+        const closeAdminBtn = document.getElementById('closeAdminBtn');
+        const adminAuthSection = document.getElementById('adminAuthSection');
+        const adminMainSection = document.getElementById('adminMainSection');
+        const adminPassInput = document.getElementById('adminPassInput');
+        const loginAdminBtn = document.getElementById('loginAdminBtn');
+        const adminTableBody = document.getElementById('adminTableBody');
+        const saveDataBtn = document.getElementById('saveDataBtn');
+        const addRowBtn = document.getElementById('addRowBtn');
+        const resetDataBtn = document.getElementById('resetDataBtn');
+        const changePassBtn = document.getElementById('changePassBtn');
+        let tempAdminData = [];
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function openAdminModal() {
+            adminModal.classList.add('show');
+            adminPassInput.value = '';
+            adminPassInput.focus();
+        }
+
+        function closeAdminModal() {
+            adminModal.classList.remove('show');
+        }
+
+        openAdminBtn.addEventListener('click', openAdminModal);
+        closeAdminBtn.addEventListener('click', closeAdminModal);
+
+        loginAdminBtn.addEventListener('click', () => {
+            if (adminPassInput.value === currentAdminPass) {
+                adminAuthSection.style.display = 'none';
+                adminMainSection.style.display = 'flex';
+                loadAdminTable();
+            } else {
+                showToast("❌ Sai mật khẩu Admin!");
+            }
+        });
+
+        adminPassInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') loginAdminBtn.click();
+        });
+
+        function loadAdminTable() {
+            tempAdminData = JSON.parse(JSON.stringify(data));
+            renderAdminRows();
+        }
+
+        function renderAdminRows() {
+            adminTableBody.innerHTML = tempAdminData.map((item, i) => `
+                <tr>
+                    <td><input type="text" class="admin-input" value="${item.name}" onchange="updateTempData(${i}, 'name', this.value)"></td>
+                    <td>
+                        <select class="admin-select" onchange="updateTempData(${i}, 'plat', this.value)">
+                            <option value="Windows" ${item.plat === 'Windows' ? 'selected' : ''}>Windows</option>
+                            <option value="Android" ${item.plat === 'Android' ? 'selected' : ''}>Android</option>
+                            <option value="iOS" ${item.plat === 'iOS' ? 'selected' : ''}>iOS</option>
+                            <option value="Mac" ${item.plat === 'Mac' ? 'selected' : ''}>Mac</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="admin-select" onchange="updateTempData(${i}, 'status', this.value)">
+                            <option value="working" ${item.status === 'working' ? 'selected' : ''}>WORKING</option>
+                            <option value="patched" ${item.status === 'patched' ? 'selected' : ''}>PATCHED</option>
+                            <option value="unstable" ${item.status === 'unstable' ? 'selected' : ''}>UNSTABLE</option>
+                            <option value="outdated" ${item.status === 'outdated' ? 'selected' : ''}>OUTDATED</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="admin-input" value="${item.price}" onchange="updateTempData(${i}, 'price', this.value)"></td>
+                    <td><input type="text" class="admin-input" value="${item.time}" onchange="updateTempData(${i}, 'time', this.value)"></td>
+                    <td><input type="text" class="admin-input" value="${item.note || ''}" onchange="updateTempData(${i}, 'note', this.value)"></td>
+                    <td style="text-align: center;">
+                        <button class="btn btn-danger" style="padding: 6px 10px;" onclick="deleteRow(${i})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        window.updateTempData = function(index, field, value) { tempAdminData[index][field] = value; };
+        window.deleteRow = function(index) { tempAdminData.splice(index, 1); renderAdminRows(); };
+
+        addRowBtn.addEventListener('click', () => {
+            tempAdminData.unshift({ name: "Executor Mới", plat: "Windows", status: "working", price: "Free", time: "Mới cập nhật", note: "" });
+            renderAdminRows();
+        });
+
+        changePassBtn.addEventListener('click', () => {
+            const newPass = prompt("Nhập mật khẩu Admin mới:", currentAdminPass);
+            if (newPass && newPass.trim() !== "") {
+                currentAdminPass = newPass.trim();
+                localStorage.setItem('huy_admin_pass', currentAdminPass);
+                showToast("🔑 Đã đổi mật khẩu Admin thành công!");
+            }
+        });
+
+        resetDataBtn.addEventListener('click', () => {
+            if (confirm("Khôi phục về danh sách gốc mặc định?")) {
+                tempAdminData = JSON.parse(JSON.stringify(defaultData));
+                renderAdminRows();
+            }
+        });
+
+        saveDataBtn.addEventListener('click', () => {
+            data = JSON.parse(JSON.stringify(tempAdminData));
+            localStorage.setItem('huy_executors_data', JSON.stringify(data));
+            render(searchInput.value, platFilter.value);
+            closeAdminModal();
+            showToast("✅ Đã lưu danh sách thành công!");
+        });
+
+        /* DEVTOOLS PROTECTION */
         const devtoolsModal = document.getElementById('devtoolsModal');
-
         document.addEventListener('contextmenu', e => e.preventDefault());
-
         document.addEventListener('keydown', e => {
-            if (
-                e.keyCode === 123 || 
-                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
-                (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 65))
-            ) {
+            if (e.key === 'F2') { e.preventDefault(); openAdminModal(); return; }
+            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 65))) {
                 e.preventDefault();
                 devtoolsModal.classList.add('show');
                 return false;
@@ -372,13 +677,10 @@
         setInterval(() => {
             const widthThreshold = window.outerWidth - window.innerWidth > 160;
             const heightThreshold = window.outerHeight - window.innerHeight > 160;
-            
             const start = performance.now();
             debugger;
             const end = performance.now();
-            const isDebuggerOpen = (end - start) > 100;
-
-            if (widthThreshold || heightThreshold || isDebuggerOpen) {
+            if (widthThreshold || heightThreshold || (end - start) > 100) {
                 devtoolsModal.classList.add('show');
             } else {
                 devtoolsModal.classList.remove('show');
