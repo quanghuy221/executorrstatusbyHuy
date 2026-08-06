@@ -2,8 +2,8 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Executors Status by Huy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executors Status By Huy</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,213 +11,345 @@
             --bg: #030712; 
             --glass: rgba(15, 23, 42, 0.85); 
             --accent: #8b5cf6; 
-            --border: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.1);
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
+
+            --status-working: #10b981;
+            --status-patched: #ef4444;
+            --status-unstable: #f59e0b;
+            --status-outdated: #6b7280;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; }
 
         body { 
             margin: 0; 
             background: var(--bg); 
             color: var(--text-main); 
             font-family: 'Outfit', sans-serif; 
+            min-height: 100vh;
+            padding: 30px 15px;
             background-image: 
                 radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.1) 0%, transparent 45%),
-                #030712; 
+                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.1) 0%, transparent 45%);
             background-attachment: fixed;
-            min-height: 100vh; 
-            padding: 30px 16px; 
-            overflow-x: hidden;
         }
 
-        .container { max-width: 1000px; margin: auto; }
-        .header-box { text-align: center; margin-bottom: 30px; }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-        h1 { 
-            font-size: 2.4rem; 
-            margin: 0 0 8px 0; 
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 20%, #c4b5fd 60%, #818cf8 100%);
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            background: linear-gradient(135deg, #a78bfa, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .sub-text { color: #a5b4fc; font-size: 0.95rem; font-weight: 300; letter-spacing: 1.5px; text-transform: uppercase; }
-        .controls { display: flex; gap: 12px; margin-bottom: 24px; align-items: center; }
-
-        input, select { 
-            background: var(--glass); 
-            border: 1px solid var(--border); 
-            color: white; 
-            padding: 14px 18px; 
-            border-radius: 14px; 
-            flex: 1; 
-            outline: none; 
-            font-family: 'Outfit', sans-serif;
+        .header p {
+            color: var(--text-sub);
+            margin: 0;
             font-size: 0.95rem;
         }
 
-        input:focus, select:focus { border-color: var(--accent); background: rgba(30, 41, 59, 0.95); }
-
-        select { 
-            appearance: none; 
-            cursor: pointer; 
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23a5b4fc' viewBox='0 0 16 16'%3E%3Cpath d='M8 10l-4-4h8l-4 4z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 40px;
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        option { background: #0f172a; color: white; }
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
 
-        .table-wrapper {
-            background: rgba(11, 15, 25, 0.85);
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sub);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 14px 12px 40px;
+            background: rgba(30, 41, 59, 0.7);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 8px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .table-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .table-container {
             overflow-x: auto;
         }
 
-        table { width: 100%; border-collapse: separate; border-spacing: 0 8px; min-width: 700px; }
-        th { color: #64748b; font-size: 0.7rem; text-transform: uppercase; padding: 12px 16px; letter-spacing: 1.2px; text-align: left; }
-        td { padding: 16px; background: var(--glass); border-top: 1px solid rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.02); }
-        td:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
-        td:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
-
-        .badge { padding: 5px 12px; border-radius: 30px; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; display: inline-block; }
-        .working { background: rgba(34, 211, 238, 0.12); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.3); }
-        .patched { background: rgba(251, 113, 133, 0.12); color: #fb7185; border: 1px solid rgba(251, 113, 133, 0.3); }
-        .unstable { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
-        .outdated { color: #f87171; background: rgba(153, 27, 27, 0.2); border: 1px solid rgba(153, 27, 27, 0.4); }
-
-        .devtools-modal {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(3, 7, 18, 0.95); z-index: 999999;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
         }
-        .devtools-modal.show { opacity: 1; pointer-events: auto; }
-        .devtools-box { background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 22px; padding: 30px; max-width: 340px; text-align: center; }
 
-        @media (max-width: 768px) {
-            body { padding: 15px 8px; }
-            .controls { flex-direction: column; }
+        th {
+            background: rgba(15, 23, 42, 0.95);
+            color: var(--text-sub);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 16px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.95rem;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-working { background: rgba(16, 185, 129, 0.15); color: var(--status-working); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-patched { background: rgba(239, 68, 68, 0.15); color: var(--status-patched); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-unstable { background: rgba(245, 158, 11, 0.15); color: var(--status-unstable); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-outdated { background: rgba(107, 114, 128, 0.15); color: var(--status-outdated); border: 1px solid rgba(107, 114, 128, 0.3); }
+
+        .loading-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-sub);
+        }
+
+        .platform-icon {
+            margin-right: 6px;
+            color: var(--accent);
         }
     </style>
 </head>
 <body>
 
-    <div class="devtools-modal" id="devtoolsModal">
-        <div class="devtools-box">
-            <i class="fas fa-shield-halved" style="font-size:2.5rem; color:#ef4444;"></i>
-            <h3 style="color:#fff;">Khu vực cấm soi code</h3>
-            <p style="color:rgba(255,255,255,0.7); font-size:0.85rem;">Hệ thống bảo mật tối đa đã kích hoạt.</p>
-        </div>
-    </div>
-
     <div class="container">
-        <div class="header-box">
-            <h1>Status Executors by Huy</h1>
-            <p class="sub-text">*Fully Updated 2026*</p>
-        </div>
-        
-        <div class="controls">
-            <input type="text" id="search" placeholder="🔍 Tìm kiếm executor...">
-            <select id="platFilter">
-                <option value="all">Tất cả nền tảng</option>
-                <option value="Windows">Windows</option>
-                <option value="Android">Android</option>
-                <option value="iOS">iOS</option>
-                <option value="Mac">Mac</option>
-            </select>
+        <div class="header">
+            <h1><i class="fas fa-bolt"></i> Roblox Executors Status</h1>
+            <p>Trạng thái cập nhật liên tục các Executor cho Windows, Android, iOS & Mac</p>
         </div>
 
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>TÊN</th>
-                        <th>TRẠNG THÁI</th>
-                        <th>GIÁ TIỀN</th>
-                        <th>NỀN TẢNG</th>
-                        <th>LAST UPDATE</th>
-                        <th>GHI CHÚ</th>
-                    </tr>
-                </thead>
-                <tbody id="body"></tbody>
-            </table>
+        <div class="controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Tìm kiếm Executor...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-plat="ALL">Tất cả</button>
+                <button class="filter-btn" data-plat="Windows"><i class="fab fa-windows platform-icon"></i>Windows</button>
+                <button class="filter-btn" data-plat="Android"><i class="fab fa-android platform-icon"></i>Android</button>
+                <button class="filter-btn" data-plat="iOS"><i class="fab fa-apple platform-icon"></i>iOS</button>
+                <button class="filter-btn" data-plat="Mac"><i class="fas fa-laptop platform-icon"></i>Mac</button>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên Executor</th>
+                            <th>Nền tảng</th>
+                            <th>Trạng thái</th>
+                            <th>Giá tiền</th>
+                            <th>Last Update</th>
+                            <th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statusTableBody">
+                        <tr>
+                            <td colspan="6" class="loading-state">
+                                <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 10px;"></i>
+                                <br>Đang tải dữ liệu mới nhất...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <script>
         const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
-        let data = [];
 
-        async function loadData() {
+        let allData = [];
+        let currentFilter = "ALL";
+
+        const statusTableBody = document.getElementById('statusTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        // Hàm tải dữ liệu CHỐNG CACHE TRIỆT ĐỂ
+        async function fetchExecutors() {
             try {
-                const res = await fetch(API_URL);
-                if (!res.ok) throw new Error("Fetch failed");
-                data = await res.json();
-            } catch (err) {
-                console.error("Lỗi tải dữ liệu:", err);
+                // Thêm timestamp ?t= để chống trình duyệt lưu cache
+                const cacheBuster = "?t=" + new Date().getTime();
+                const response = await fetch(API_URL + cacheBuster, {
+                    cache: "no-store", // Cấm lưu cache dưới mọi hình thức
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache'
+                    }
+                });
+
+                if (!response.ok) throw new Error("Không thể kết nối đến server");
+                
+                const data = await response.json();
+                allData = Array.isArray(data) ? data : [];
+                renderTable();
+            } catch (error) {
+                console.error("Lỗi khi tải dữ liệu:", error);
+                statusTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="loading-state" style="color: #ef4444;">
+                            <i class="fas fa-circle-exclamation" style="font-size: 1.5rem; margin-bottom: 10px;"></i>
+                            <br>Không thể lấy dữ liệu mới. Vui lòng bấm F5 thử lại!
+                        </td>
+                    </tr>
+                `;
             }
-            render(searchInput.value, platFilter.value);
         }
-        loadData();
 
-        function render(filter = '', plat = 'all') {
-            const tbody = document.getElementById('body');
-            const filteredData = data.filter(x => 
-                x.name.toLowerCase().includes(filter.toLowerCase()) && 
-                (plat === 'all' || x.plat.toLowerCase() === plat.toLowerCase())
-            );
+        function getStatusBadge(status) {
+            const s = (status || '').toLowerCase();
+            if (s === 'working') return `<span class="badge-status badge-working"><i class="fas fa-check-circle"></i> WORKING</span>`;
+            if (s === 'patched') return `<span class="badge-status badge-patched"><i class="fas fa-circle-xmark"></i> PATCHED</span>`;
+            if (s === 'unstable') return `<span class="badge-status badge-unstable"><i class="fas fa-triangle-exclamation"></i> UNSTABLE</span>`;
+            return `<span class="badge-status badge-outdated"><i class="fas fa-clock"></i> OUTDATED</span>`;
+        }
 
-            if (filteredData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #64748b; padding: 30px;">Không tìm thấy executor phù hợp!</td></tr>`;
+        function getPlatformIcon(plat) {
+            const p = (plat || '').toLowerCase();
+            if (p === 'windows') return `<i class="fab fa-windows platform-icon"></i> Windows`;
+            if (p === 'android') return `<i class="fab fa-android platform-icon"></i> Android`;
+            if (p === 'ios') return `<i class="fab fa-apple platform-icon"></i> iOS`;
+            if (p === 'mac') return `<i class="fas fa-laptop platform-icon"></i> Mac`;
+            return plat;
+        }
+
+        function renderTable() {
+            const query = searchInput.value.toLowerCase().trim();
+
+            const filtered = allData.filter(item => {
+                const matchPlat = currentFilter === 'ALL' || (item.plat && item.plat.toLowerCase() === currentFilter.toLowerCase());
+                const matchSearch = (item.name && item.name.toLowerCase().includes(query)) ||
+                                    (item.note && item.note.toLowerCase().includes(query));
+                return matchPlat && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                statusTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="loading-state">
+                            <i class="fas fa-inbox" style="font-size: 1.5rem; margin-bottom: 10px;"></i>
+                            <br>Không tìm thấy Executor phù hợp.
+                        </td>
+                    </tr>
+                `;
                 return;
             }
 
-            tbody.innerHTML = filteredData.map((x) => `
+            statusTableBody.innerHTML = filtered.map(item => `
                 <tr>
-                    <td><strong style="color: #fff; font-size: 1rem;">${x.name}</strong></td>
-                    <td><span class="badge ${x.status}">${x.status.toUpperCase()}</span></td>
-                    <td style="color: #6366f1; font-weight: bold;">${x.price}</td>
-                    <td style="color: #94a3b8;">${x.plat}</td>
-                    <td style="color: #94a3b8;">${x.time}</td>
-                    <td style="color: #94a3b8;">${x.note || '-'}</td>
+                    <td style="font-weight: 600; color: #fff;">${item.name || ''}</td>
+                    <td>${getPlatformIcon(item.plat)}</td>
+                    <td>${getStatusBadge(item.status)}</td>
+                    <td style="color: #a78bfa; font-weight: 500;">${item.price || 'Free'}</td>
+                    <td style="color: var(--text-sub); font-size: 0.85rem;">${item.time || ''}</td>
+                    <td style="color: var(--text-sub); font-size: 0.85rem;">${item.note || ''}</td>
                 </tr>
             `).join('');
         }
 
-        const searchInput = document.getElementById('search');
-        const platFilter = document.getElementById('platFilter');
-
-        searchInput.addEventListener('input', (e) => render(e.target.value, platFilter.value));
-        platFilter.addEventListener('change', (e) => render(searchInput.value, e.target.value));
-
-        /* BẢO VỆ CHỐNG SOI CODE */
-        const devtoolsModal = document.getElementById('devtoolsModal');
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.keyCode === 123 || 
-               (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
-               (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83))) {
-                e.preventDefault();
-                devtoolsModal.classList.add('show');
-                return false;
-            }
+        // Sự kiện lọc nền tảng
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.getAttribute('data-plat');
+                renderTable();
+            });
         });
-        setInterval(() => {
-            if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
-                devtoolsModal.classList.add('show');
-            } else {
-                devtoolsModal.classList.remove('show');
-            }
-        }, 1000);
+
+        // Sự kiện tìm kiếm
+        searchInput.addEventListener('input', renderTable);
+
+        // Khởi chạy khi vào trang
+        fetchExecutors();
     </script>
 </body>
 </html>
