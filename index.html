@@ -73,21 +73,6 @@
 
         option { background: #0f172a; color: white; }
 
-        .admin-trigger-btn {
-            background: rgba(139, 92, 246, 0.2);
-            border: 1px solid var(--accent);
-            color: #c4b5fd;
-            padding: 14px 20px;
-            border-radius: 14px;
-            cursor: pointer;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-
         .table-wrapper {
             background: rgba(11, 15, 25, 0.85);
             border: 1px solid var(--border);
@@ -109,7 +94,6 @@
         .unstable { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
         .outdated { color: #f87171; background: rgba(153, 27, 27, 0.2); border: 1px solid rgba(153, 27, 27, 0.4); }
 
-        /* DevTools Modal */
         .devtools-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(3, 7, 18, 0.95); z-index: 999999;
@@ -119,61 +103,9 @@
         .devtools-modal.show { opacity: 1; pointer-events: auto; }
         .devtools-box { background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 22px; padding: 30px; max-width: 340px; text-align: center; }
 
-        /* Admin Modal */
-        .admin-modal {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(3, 7, 18, 0.88); z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.2s ease; padding: 15px;
-        }
-        .admin-modal.show { opacity: 1; pointer-events: auto; }
-        .admin-box {
-            background: rgba(15, 23, 42, 0.98); border: 1px solid var(--accent);
-            border-radius: 20px; padding: 20px; width: 100%; max-width: 900px;
-            max-height: 90vh; display: flex; flex-direction: column;
-        }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-        .close-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: #94a3b8; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; }
-
-        .auth-container { text-align: center; padding: 20px 0; }
-        .auth-form { display: flex; gap: 10px; max-width: 360px; margin: 0 auto; flex-direction: column; }
-
-        .admin-content { overflow-y: auto; flex: 1; margin-bottom: 15px; }
-        .admin-table { width: 100%; border-collapse: collapse; min-width: 650px; }
-        .admin-table th { color: var(--text-sub); font-size: 0.7rem; padding: 8px; border-bottom: 1px solid var(--border); text-align: left; }
-        .admin-table td { padding: 6px; border-bottom: 1px solid rgba(255,255,255,0.03); }
-
-        .admin-input, .admin-select {
-            padding: 8px 10px; font-size: 0.85rem; border-radius: 8px; width: 100%;
-            background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff;
-        }
-
-        .btn {
-            background: var(--accent); color: white; border: none; padding: 10px 16px;
-            border-radius: 12px; font-weight: 600; font-family: 'Outfit', sans-serif;
-            cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.85rem;
-            transition: opacity 0.2s ease;
-        }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .btn-secondary { background: rgba(255, 255, 255, 0.08); color: var(--text-main); }
-        .btn-danger { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
-
-        .admin-actions { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding-top: 12px; border-top: 1px solid var(--border); flex-wrap: wrap; }
-
-        .toast {
-            position: fixed; bottom: 20px; right: 20px; background: rgba(16, 185, 129, 0.95);
-            color: white; padding: 12px 20px; border-radius: 12px; font-weight: 600;
-            display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            transform: translateY(100px); opacity: 0; transition: all 0.3s ease; z-index: 100000;
-        }
-        .toast.show { transform: translateY(0); opacity: 1; }
-
         @media (max-width: 768px) {
             body { padding: 15px 8px; }
             .controls { flex-direction: column; }
-            .admin-trigger-btn { width: 100%; justify-content: center; }
-            .admin-actions { flex-direction: column; width: 100%; }
-            .admin-actions > div, .admin-actions > button { width: 100%; }
         }
     </style>
 </head>
@@ -187,59 +119,10 @@
         </div>
     </div>
 
-    <!-- Admin Panel Modal -->
-    <div class="admin-modal" id="adminModal">
-        <div class="admin-box">
-            <div class="admin-header">
-                <h2 style="margin:0; font-size:1.2rem; color:#fff;"><i class="fas fa-sliders" style="color:var(--accent);"></i> Admin Dashboard</h2>
-                <button class="close-btn" id="closeAdminBtn"><i class="fas fa-xmark"></i></button>
-            </div>
-
-            <div id="adminAuthSection" class="auth-container">
-                <i class="fas fa-lock" style="font-size:2.5rem; color:var(--accent); margin-bottom:12px;"></i>
-                <div class="auth-form">
-                    <input type="password" id="adminPassInput" placeholder="Nhập mật khẩu Admin..." autofocus>
-                    <button class="btn" id="loginAdminBtn"><i class="fas fa-key"></i> Đăng Nhập</button>
-                </div>
-            </div>
-
-            <div id="adminMainSection" style="display: none; flex-direction: column; flex: 1; overflow: hidden;">
-                <div class="admin-content">
-                    <div style="overflow-x: auto;">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Tên Executor</th>
-                                    <th>Nền tảng</th>
-                                    <th>Trạng thái</th>
-                                    <th>Giá tiền</th>
-                                    <th>Last Update</th>
-                                    <th>Ghi chú</th>
-                                    <th style="text-align: center;">Xóa</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="admin-actions">
-                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                        <button class="btn btn-secondary" id="addRowBtn"><i class="fas fa-plus"></i> Thêm</button>
-                        <button class="btn btn-danger" id="resetDataBtn"><i class="fas fa-rotate-left"></i> Khôi phục</button>
-                    </div>
-                    <button class="btn" id="saveDataBtn"><i class="fas fa-floppy-disk"></i> Lưu & Đồng Bộ Cho Tất Cả</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="toast" id="toast"><i class="fas fa-circle-check"></i> <span id="toastMsg">Thành công!</span></div>
-
     <div class="container">
         <div class="header-box">
             <h1>Status Executors by Huy</h1>
-            <p class="sub-text">*Fully Updated 5/8/2026!*</p>
+            <p class="sub-text">*Fully Updated 2026*</p>
         </div>
         
         <div class="controls">
@@ -251,7 +134,6 @@
                 <option value="iOS">iOS</option>
                 <option value="Mac">Mac</option>
             </select>
-            <button class="admin-trigger-btn" id="openAdminBtn"><i class="fas fa-user-gear"></i> Admin</button>
         </div>
 
         <div class="table-wrapper">
@@ -273,43 +155,15 @@
 
     <script>
         const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
-
-        const defaultData = [
-            {name: "Potassium", plat: "Windows", status: "working", price: "549k", time: "Cập nhật sau", note: ""},
-            {name: "Volt", plat: "Windows", status: "working", price: "149 - 499k", time: "Cập nhật sau", note: ""},
-            {name: "Wave", plat: "Windows", status: "working", price: "139 - 489k", time: "Cập nhật sau", note: ""},
-            {name: "Ronix", plat: "Windows", status: "outdated", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Synapse Z", plat: "Windows", status: "outdated", price: "none", time: "Cập nhật sau", note: ""},
-            {name: "Seliware", plat: "Windows", status: "outdated", price: "none", time: "Cập nhật sau", note: ""},
-            {name: "Madium V2", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Cosmic", plat: "Windows", status: "unstable", price: "none", time: "Cập nhật sau", note: ""},
-            {name: "Velocity", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "SirHurt", plat: "Windows", status: "working", price: "none", time: "Cập nhật sau", note: ""},
-            {name: "Xeno", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Solara", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "TDT", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Sapphire", plat: "Windows", status: "outdated", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Real", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Vortex", plat: "Windows", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Opiumware", plat: "Mac", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "MacSploit", plat: "Mac", status: "patched", price: "Paid", time: "Cập nhật sau", note: ""},
-            {name: "Delta", plat: "Android", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Codex", plat: "Android", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Vega X", plat: "Android", status: "working", price: "Free", time: "Cập nhật sau", note: ""},
-            {name: "Delta", plat: "iOS", status: "working", price: "Free", time: "Cập nhật sau", note: ""}
-        ];
-
         let data = [];
-        const currentAdminPass = "quanghuy90";
 
         async function loadData() {
             try {
                 const res = await fetch(API_URL);
                 if (!res.ok) throw new Error("Fetch failed");
-                const resData = await res.json();
-                data = Array.isArray(resData) && resData.length > 0 ? resData : defaultData;
+                data = await res.json();
             } catch (err) {
-                data = defaultData;
+                console.error("Lỗi tải dữ liệu:", err);
             }
             render(searchInput.value, platFilter.value);
         }
@@ -345,161 +199,10 @@
         searchInput.addEventListener('input', (e) => render(e.target.value, platFilter.value));
         platFilter.addEventListener('change', (e) => render(searchInput.value, e.target.value));
 
-        /* ADMIN SYSTEM */
-        const adminModal = document.getElementById('adminModal');
-        const openAdminBtn = document.getElementById('openAdminBtn');
-        const closeAdminBtn = document.getElementById('closeAdminBtn');
-        const adminAuthSection = document.getElementById('adminAuthSection');
-        const adminMainSection = document.getElementById('adminMainSection');
-        const adminPassInput = document.getElementById('adminPassInput');
-        const loginAdminBtn = document.getElementById('loginAdminBtn');
-        const adminTableBody = document.getElementById('adminTableBody');
-        const saveDataBtn = document.getElementById('saveDataBtn');
-        const addRowBtn = document.getElementById('addRowBtn');
-        const resetDataBtn = document.getElementById('resetDataBtn');
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        openAdminBtn.addEventListener('click', () => {
-            adminModal.classList.add('show');
-            adminPassInput.value = '';
-            adminPassInput.focus();
-        });
-
-        closeAdminBtn.addEventListener('click', () => adminModal.classList.remove('show'));
-
-        loginAdminBtn.addEventListener('click', () => {
-            if (adminPassInput.value === currentAdminPass) {
-                adminAuthSection.style.display = 'none';
-                adminMainSection.style.display = 'flex';
-                renderAdminRows(data);
-            } else {
-                showToast("❌ Sai mật khẩu Admin!");
-            }
-        });
-
-        adminPassInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') loginAdminBtn.click(); });
-
-        function renderAdminRows(items) {
-            adminTableBody.innerHTML = items.map((item) => `
-                <tr class="admin-row">
-                    <td><input type="text" class="admin-input row-name" value="${item.name}"></td>
-                    <td>
-                        <select class="admin-select row-plat">
-                            <option value="Windows" ${item.plat === 'Windows' ? 'selected' : ''}>Windows</option>
-                            <option value="Android" ${item.plat === 'Android' ? 'selected' : ''}>Android</option>
-                            <option value="iOS" ${item.plat === 'iOS' ? 'selected' : ''}>iOS</option>
-                            <option value="Mac" ${item.plat === 'Mac' ? 'selected' : ''}>Mac</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="admin-select row-status">
-                            <option value="working" ${item.status === 'working' ? 'selected' : ''}>WORKING</option>
-                            <option value="patched" ${item.status === 'patched' ? 'selected' : ''}>PATCHED</option>
-                            <option value="unstable" ${item.status === 'unstable' ? 'selected' : ''}>UNSTABLE</option>
-                            <option value="outdated" ${item.status === 'outdated' ? 'selected' : ''}>OUTDATED</option>
-                        </select>
-                    </td>
-                    <td><input type="text" class="admin-input row-price" value="${item.price}"></td>
-                    <td><input type="text" class="admin-input row-time" value="${item.time}"></td>
-                    <td><input type="text" class="admin-input row-note" value="${item.note || ''}"></td>
-                    <td style="text-align: center;">
-                        <button class="btn btn-danger" style="padding: 6px 10px;" onclick="this.closest('tr').remove()"><i class="fas fa-trash"></i></button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        addRowBtn.addEventListener('click', () => {
-            const tr = document.createElement('tr');
-            tr.className = 'admin-row';
-            tr.innerHTML = `
-                <td><input type="text" class="admin-input row-name" value="Executor Mới"></td>
-                <td>
-                    <select class="admin-select row-plat">
-                        <option value="Windows">Windows</option>
-                        <option value="Android">Android</option>
-                        <option value="iOS">iOS</option>
-                        <option value="Mac">Mac</option>
-                    </select>
-                </td>
-                <td>
-                    <select class="admin-select row-status">
-                        <option value="working">WORKING</option>
-                        <option value="patched">PATCHED</option>
-                        <option value="unstable">UNSTABLE</option>
-                        <option value="outdated">OUTDATED</option>
-                    </select>
-                </td>
-                <td><input type="text" class="admin-input row-price" value="Free"></td>
-                <td><input type="text" class="admin-input row-time" value="Mới cập nhật"></td>
-                <td><input type="text" class="admin-input row-note" value=""></td>
-                <td style="text-align: center;">
-                    <button class="btn btn-danger" style="padding: 6px 10px;" onclick="this.closest('tr').remove()"><i class="fas fa-trash"></i></button>
-                </td>
-            `;
-            adminTableBody.prepend(tr);
-        });
-
-        resetDataBtn.addEventListener('click', () => {
-            if (confirm("Khôi phục về danh sách gốc mặc định?")) {
-                renderAdminRows(defaultData);
-            }
-        });
-
-        function collectDataFromAdmin() {
-            const rows = document.querySelectorAll('.admin-row');
-            const result = [];
-            rows.forEach(row => {
-                result.push({
-                    name: row.querySelector('.row-name').value.trim(),
-                    plat: row.querySelector('.row-plat').value,
-                    status: row.querySelector('.row-status').value,
-                    price: row.querySelector('.row-price').value.trim(),
-                    time: row.querySelector('.row-time').value.trim(),
-                    note: row.querySelector('.row-note').value.trim()
-                });
-            });
-            return result;
-        }
-
-        saveDataBtn.addEventListener('click', async () => {
-            const newData = collectDataFromAdmin();
-            saveDataBtn.disabled = true;
-            saveDataBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Đang lưu...`;
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newData)
-                });
-
-                if (!response.ok) throw new Error("HTTP " + response.status);
-
-                data = newData;
-                render(searchInput.value, platFilter.value);
-                adminModal.classList.remove('show');
-                showToast("🌐 Đã lưu & đồng bộ cho TẤT CẢ mọi người!");
-            } catch (err) {
-                console.error(err);
-                showToast("❌ Không thể lưu! Kiểm tra lại kết nối mạng.");
-            } finally {
-                saveDataBtn.disabled = false;
-                saveDataBtn.innerHTML = `<i class="fas fa-floppy-disk"></i> Lưu & Đồng Bộ Cho Tất Cả`;
-            }
-        });
-
-        /* PROTECT DEVTOOLS */
+        /* BẢO VỆ CHỐNG SOI CODE */
         const devtoolsModal = document.getElementById('devtoolsModal');
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', e => {
-            if (e.key === 'F2') { e.preventDefault(); openAdminBtn.click(); return; }
             if (e.keyCode === 123 || 
                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
                (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83))) {
@@ -508,12 +211,12 @@
                 return false;
             }
         });
-
         setInterval(() => {
-            const widthThreshold = window.outerWidth - window.innerWidth > 160;
-            const heightThreshold = window.outerHeight - window.innerHeight > 160;
-            if (widthThreshold || heightThreshold) devtoolsModal.classList.add('show');
-            else devtoolsModal.classList.remove('show');
+            if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
+                devtoolsModal.classList.add('show');
+            } else {
+                devtoolsModal.classList.remove('show');
+            }
         }, 1000);
     </script>
 </body>
