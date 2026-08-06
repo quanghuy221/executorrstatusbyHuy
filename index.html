@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Executors Status By Huy</title>
+    <title id="pageTitle">Roblox Executors Status</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -18,7 +18,7 @@
 
         * {
             box-sizing: border-box;
-            user-select: none; /* Chống bôi đen copy */
+            user-select: none;
             -webkit-user-select: none;
         }
 
@@ -241,7 +241,7 @@
             gap: 6px;
         }
 
-        /* BADGES STATUS - MÀU SẮC ĐÃ CHỈNH SỬA CHUẨN */
+        /* BADGES STATUS */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -271,7 +271,7 @@
             box-shadow: 0 0 8px #10b981;
         }
 
-        /* 2. UNSTABLE - MÀU CAM */
+        /* 2. UNSTABLE - CAM */
         .status-unstable {
             background: rgba(249, 115, 22, 0.15);
             color: #f97316;
@@ -282,7 +282,7 @@
             box-shadow: 0 0 8px #f97316;
         }
 
-        /* 3. PATCHED - MÀU ĐỎ TƯƠI */
+        /* 3. PATCHED - ĐỎ TƯƠI NỀN TỐI */
         .status-patched {
             background: rgba(239, 68, 68, 0.12);
             color: #ef4444;
@@ -293,15 +293,15 @@
             box-shadow: 0 0 8px #ef4444;
         }
 
-        /* 4. OUTDATED - MÀU ĐỎ ĐẬM / ĐỎ ĐÔ (KHÁC HẲN PATCHED) */
+        /* 4. OUTDATED - CHỮ ĐỎ ĐẬM RÕ NÉT (KHÔNG BỊ MÀU TRẮNG) */
         .status-outdated {
-            background: rgba(153, 27, 27, 0.28);
-            color: #fca5a5;
-            border: 1px solid rgba(220, 38, 38, 0.5);
+            background: rgba(185, 28, 28, 0.22);
+            color: #ff4d4d;
+            border: 1px solid rgba(239, 68, 68, 0.45);
         }
         .status-outdated .dot {
-            background: #dc2626;
-            box-shadow: 0 0 8px #dc2626;
+            background: #ff4d4d;
+            box-shadow: 0 0 8px #ff4d4d;
         }
 
         .price-text {
@@ -383,9 +383,7 @@
     </div>
 
     <script>
-        // ==========================================
         // CHẶN MỞ DEVTOOLS & SOI CODE F12
-        // ==========================================
         document.addEventListener('contextmenu', e => e.preventDefault());
 
         document.addEventListener('keydown', e => {
@@ -408,9 +406,7 @@
             }
         }, 300);
 
-        // ==========================================
         // DỮ LIỆU VÀ HIỂN THỊ
-        // ==========================================
         const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
         let rawItemsList = [];
         let currentTab = 'all';
