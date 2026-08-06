@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Executors Status - Trạng Thái Executor</title>
+    <title>Executors Status By Huy</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -46,7 +46,7 @@
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            transition: filter 0.3s ease, opacity 0.3s ease;
+            transition: filter 0.2s ease, opacity 0.2s ease;
         }
 
         .header {
@@ -202,46 +202,56 @@
             color: var(--accent);
         }
 
-        /* MÀN HÌNH CẢNH BÁO TỰ ĐỘNG KHÓA / MỞ */
+        /* MÀN HÌNH CẢNH BÁO TẠM THỜI (TỰ MẤT KHI BUÔNG PHÍM) */
         #securityOverlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(3, 7, 18, 0.98);
-            backdrop-filter: blur(25px);
+            background: rgba(3, 7, 18, 0.92);
+            backdrop-filter: blur(15px);
             z-index: 999999;
-            display: none;
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            pointer-events: none;
+        }
+
+        #securityOverlay.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
         #securityOverlay i {
-            font-size: 4.5rem;
+            font-size: 4rem;
             color: #ef4444;
-            margin-bottom: 20px;
-            animation: pulse 1.5s infinite;
+            margin-bottom: 15px;
+            animation: pulse 1s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         #securityOverlay h2 {
             font-size: 1.8rem;
             color: #f8fafc;
-            margin: 0 0 12px 0;
+            margin: 0 0 10px 0;
         }
 
         #securityOverlay p {
             color: #94a3b8;
-            max-width: 480px;
+            max-width: 450px;
             line-height: 1.6;
             margin: 0;
             font-size: 0.95rem;
@@ -250,11 +260,11 @@
 </head>
 <body>
 
-    <!-- OVERLAY CẢNH BÁO TỰ ĐỘNG -->
+    <!-- OVERLAY CẢNH BÁO KHI BẤM PHÍM BỊ CHẶN -->
     <div id="securityOverlay">
         <i class="fas fa-shield-virus"></i>
-        <h2>CẢNH BÁO BẢO MẬT!</h2>
-        <p>Phát hiện bảng Developer Tools / Console / Inspect Element đang mở.<br><strong style="color: #ef4444;">Vui lòng đóng công cụ kiểm tra để tiếp tục sử dụng trang web.</strong></p>
+        <h2>THAO TÁC BỊ CHẶN!</h2>
+        <p>Thao tác kiểm tra mã nguồn (Chuột phải / F12 / Phím tắt) đã bị vô hiệu hóa trên trang web này.</p>
     </div>
 
     <!-- NỘI DUNG TRANG WEB -->
@@ -306,29 +316,35 @@
 
     <script>
         // ==========================================
-        // 1. TỰ ĐỘNG PHÁT HIỆN & KHÓA/MỞ KHI BẬT/TẮT DEVTOOLS
+        // 1. XỬ LÝ CẢNH BÁO KHI BẤM NÚT BỊ CHẶN
         // ==========================================
         const securityOverlay = document.getElementById('securityOverlay');
         const appContainer = document.getElementById('appContainer');
+        let hideTimer = null;
 
-        function setSecurityLock(isLocked) {
-            if (isLocked) {
-                securityOverlay.style.display = 'flex';
-                appContainer.style.filter = 'blur(25px)';
-                appContainer.style.opacity = '0.05';
-                appContainer.style.pointerEvents = 'none';
-            } else {
-                securityOverlay.style.display = 'none';
-                appContainer.style.filter = 'none';
-                appContainer.style.opacity = '1';
-                appContainer.style.pointerEvents = 'auto';
-            }
+        function showWarning() {
+            securityOverlay.classList.add('show');
+            appContainer.style.filter = 'blur(10px)';
+            appContainer.style.opacity = '0.2';
+
+            // Tự động ẩn sau 1.2 giây nếu thao tác dạng click chuột
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(hideWarning, 1200);
+        }
+
+        function hideWarning() {
+            securityOverlay.classList.remove('show');
+            appContainer.style.filter = 'none';
+            appContainer.style.opacity = '1';
         }
 
         // A. CHẶN CHUỘT PHẢI
-        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            showWarning();
+        });
 
-        // B. CHẶN PHÍM TẮT F12, CTRL+SHIFT+I/J/C, CTRL+U, CTRL+S
+        // B. BẤM GIỮ PHÍM BỊ CHẶN -> HIỆN CẢNH BÁO
         document.addEventListener('keydown', e => {
             if (
                 e.key === 'F12' ||
@@ -336,30 +352,15 @@
                 (e.ctrlKey && ['U', 'u', 'S', 's'].includes(e.key))
             ) {
                 e.preventDefault();
+                showWarning();
                 return false;
             }
         });
 
-        // C. VÒNG LẶP KIỂM TRA DEVTOOLS THỜI GIAN THỰC (0.4s / LẦN)
-        const threshold = 160;
-        setInterval(() => {
-            // Kiểm tra theo kích thước cửa sổ bị thu nhỏ do bảng DevTools
-            const widthDiff = window.outerWidth - window.innerWidth > threshold;
-            const heightDiff = window.outerHeight - window.innerHeight > threshold;
-
-            // Kiểm tra bẫy Debugger khi mở Console/Inspect
-            const startTime = performance.now();
-            (function() {}.constructor("debugger")());
-            const endTime = performance.now();
-            const isDebuggerActive = (endTime - startTime > 100);
-
-            // Nếu đang mở DevTools -> Khóa; Nếu đã tắt DevTools -> Mở lại ngay!
-            if (widthDiff || heightDiff || isDebuggerActive) {
-                setSecurityLock(true);
-            } else {
-                setSecurityLock(false);
-            }
-        }, 400);
+        // C. BUÔNG TAY KHỎI PHÍM -> CẢNH BÁO TỰ MẤT NGAY LẬP TỨC
+        document.addEventListener('keyup', e => {
+            hideWarning();
+        });
 
         // ==========================================
         // 2. DỮ LIỆU VÀ XỬ LÝ TRANG WEB
