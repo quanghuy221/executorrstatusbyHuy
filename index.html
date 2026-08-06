@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Executors Status By Huy</title>
+    <title>Executors Status - Trạng Thái Executor</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -202,7 +202,7 @@
             color: var(--accent);
         }
 
-        /* MÀN HÌNH CẢNH BÁO KHI CỐ TÌNH SOI CODE / DEVTOOLS */
+        /* MÀN HÌNH CẢNH BÁO TỰ ĐỘNG KHÓA / MỞ */
         #securityOverlay {
             position: fixed;
             top: 0;
@@ -221,7 +221,7 @@
         }
 
         #securityOverlay i {
-            font-size: 4rem;
+            font-size: 4.5rem;
             color: #ef4444;
             margin-bottom: 20px;
             animation: pulse 1.5s infinite;
@@ -236,39 +236,25 @@
         #securityOverlay h2 {
             font-size: 1.8rem;
             color: #f8fafc;
-            margin: 0 0 10px 0;
+            margin: 0 0 12px 0;
         }
 
         #securityOverlay p {
             color: #94a3b8;
-            max-width: 500px;
+            max-width: 480px;
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin: 0;
+            font-size: 0.95rem;
         }
-
-        .btn-reload {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-family: 'Outfit', sans-serif;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
-            transition: all 0.2s ease;
-        }
-        .btn-reload:hover { transform: translateY(-2px); background: #dc2626; }
     </style>
 </head>
 <body>
 
-    <!-- OVERLAY CẢNH BÁO BẢO MẬT -->
+    <!-- OVERLAY CẢNH BÁO TỰ ĐỘNG -->
     <div id="securityOverlay">
         <i class="fas fa-shield-virus"></i>
         <h2>CẢNH BÁO BẢO MẬT!</h2>
-        <p>Phát hiện hành vi mở DevTools / Soi Code. Trang web đã tự động khóa giao diện để bảo vệ bản quyền dữ liệu.</p>
-        <button class="btn-reload" onclick="location.reload()"><i class="fas fa-rotate-right"></i> Tải Lại Trang</button>
+        <p>Phát hiện bảng Developer Tools / Console / Inspect Element đang mở.<br><strong style="color: #ef4444;">Vui lòng đóng công cụ kiểm tra để tiếp tục sử dụng trang web.</strong></p>
     </div>
 
     <!-- NỘI DUNG TRANG WEB -->
@@ -320,56 +306,60 @@
 
     <script>
         // ==========================================
-        // 1. HỆ THỐNG BẢO VỆ & CHẶN SOI CODE (ANTI-DEVTOOLS)
+        // 1. TỰ ĐỘNG PHÁT HIỆN & KHÓA/MỞ KHI BẬT/TẮT DEVTOOLS
         // ==========================================
         const securityOverlay = document.getElementById('securityOverlay');
         const appContainer = document.getElementById('appContainer');
 
-        function triggerSecurityLock() {
-            securityOverlay.style.display = 'flex';
-            appContainer.style.filter = 'blur(20px)';
-            appContainer.style.opacity = '0.1';
-            appContainer.style.pointerEvents = 'none';
+        function setSecurityLock(isLocked) {
+            if (isLocked) {
+                securityOverlay.style.display = 'flex';
+                appContainer.style.filter = 'blur(25px)';
+                appContainer.style.opacity = '0.05';
+                appContainer.style.pointerEvents = 'none';
+            } else {
+                securityOverlay.style.display = 'none';
+                appContainer.style.filter = 'none';
+                appContainer.style.opacity = '1';
+                appContainer.style.pointerEvents = 'auto';
+            }
         }
 
         // A. CHẶN CHUỘT PHẢI
-        document.addEventListener('contextmenu', e => {
-            e.preventDefault();
-            return false;
-        });
+        document.addEventListener('contextmenu', e => e.preventDefault());
 
         // B. CHẶN PHÍM TẮT F12, CTRL+SHIFT+I/J/C, CTRL+U, CTRL+S
         document.addEventListener('keydown', e => {
             if (
                 e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
-                (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's'))
+                (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) ||
+                (e.ctrlKey && ['U', 'u', 'S', 's'].includes(e.key))
             ) {
                 e.preventDefault();
-                triggerSecurityLock();
                 return false;
             }
         });
 
-        // C. PHÁT HIỆN MỞ DEVTOOLS QUA KÍCH THƯỚC CỬA SỔ
+        // C. VÒNG LẶP KIỂM TRA DEVTOOLS THỜI GIAN THỰC (0.4s / LẦN)
         const threshold = 160;
         setInterval(() => {
+            // Kiểm tra theo kích thước cửa sổ bị thu nhỏ do bảng DevTools
             const widthDiff = window.outerWidth - window.innerWidth > threshold;
             const heightDiff = window.outerHeight - window.innerHeight > threshold;
-            if (widthDiff || heightDiff) {
-                triggerSecurityLock();
-            }
-        }, 500);
 
-        // D. BẪY DEBUGGER TRAP (Treo trang khi ai đó cố soi console/element)
-        setInterval(() => {
+            // Kiểm tra bẫy Debugger khi mở Console/Inspect
             const startTime = performance.now();
             (function() {}.constructor("debugger")());
             const endTime = performance.now();
-            if (endTime - startTime > 100) {
-                triggerSecurityLock();
+            const isDebuggerActive = (endTime - startTime > 100);
+
+            // Nếu đang mở DevTools -> Khóa; Nếu đã tắt DevTools -> Mở lại ngay!
+            if (widthDiff || heightDiff || isDebuggerActive) {
+                setSecurityLock(true);
+            } else {
+                setSecurityLock(false);
             }
-        }, 300);
+        }, 400);
 
         // ==========================================
         // 2. DỮ LIỆU VÀ XỬ LÝ TRANG WEB
