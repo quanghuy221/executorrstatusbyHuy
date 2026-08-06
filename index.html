@@ -3,311 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Executors Status By Huy</title>
+    <title id="pageTitle">Roblox Executors Status</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { 
-            --bg: #030712; 
-            --glass: rgba(15, 23, 42, 0.85); 
-            --accent: #8b5cf6; 
-            --border: rgba(255, 255, 255, 0.1);
+        :root {
+            --bg: #030712;
+            --glass: rgba(15, 23, 42, 0.75);
+            --border: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
-
-            --status-working: #10b981;
-            --status-patched: #ef4444;
-            --status-unstable: #f59e0b;
-            --status-outdated: #6b7280;
         }
 
-        /* Khóa chọn văn bản (Anti-Select) */
-        * { 
-            box-sizing: border-box; 
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
+        * { box-sizing: border-box; }
 
-        body { 
-            margin: 0; 
-            background: var(--bg); 
-            color: var(--text-main); 
-            font-family: 'Outfit', sans-serif; 
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
             min-height: 100vh;
-            padding: 30px 15px;
+            padding: 40px 15px;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.1) 0%, transparent 45%);
+                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
             background-attachment: fixed;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            transition: filter 0.2s ease, opacity 0.2s ease;
-        }
+        .container { max-width: 1000px; margin: 0 auto; }
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .header h1 {
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             margin: 0 0 10px 0;
-            background: linear-gradient(135deg, #a78bfa, #c084fc);
+            background: linear-gradient(135deg, #c084fc, #60a5fa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .header p {
             color: var(--text-sub);
+            font-size: 1rem;
             margin: 0;
-            font-size: 0.95rem;
         }
 
-        .controls {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .search-box {
-            position: relative;
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-sub);
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 12px 14px 12px 40px;
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: white;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        .search-box input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid var(--border);
-            color: var(--text-sub);
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .table-card {
+        .card {
             background: var(--glass);
             border: 1px solid var(--border);
-            border-radius: 18px;
-            overflow: hidden;
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(16px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
         }
 
-        .table-container {
-            overflow-x: auto;
-        }
+        .table-wrap { overflow-x: auto; }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 750px;
-        }
+        table { width: 100%; border-collapse: collapse; min-width: 650px; }
+        th, td { padding: 14px 12px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        th { color: var(--text-sub); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        th {
-            background: rgba(15, 23, 42, 0.95);
-            color: var(--text-sub);
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
             font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 16px 14px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        td {
-            padding: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.95rem;
-        }
-
-        tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .badge-status {
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .badge-working { background: rgba(16, 185, 129, 0.15); color: var(--status-working); border: 1px solid rgba(16, 185, 129, 0.3); }
-        .badge-patched { background: rgba(239, 68, 68, 0.15); color: var(--status-patched); border: 1px solid rgba(239, 68, 68, 0.3); }
-        .badge-unstable { background: rgba(245, 158, 11, 0.15); color: var(--status-unstable); border: 1px solid rgba(245, 158, 11, 0.3); }
-        .badge-outdated { background: rgba(107, 114, 128, 0.15); color: var(--status-outdated); border: 1px solid rgba(107, 114, 128, 0.3); }
+        .status-WORKING { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .status-PATCHED { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .status-UNSTABLE { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .status-OUTDATED { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3); }
 
-        .loading-state {
+        .loading {
             text-align: center;
             padding: 40px;
             color: var(--text-sub);
-        }
-
-        .platform-icon {
-            margin-right: 6px;
-            color: var(--accent);
-        }
-
-        /* MÀN HÌNH CẢNH BÁO TẠM THỜI (TỰ MẤT KHI BUÔNG PHÍM) */
-        #securityOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(3, 7, 18, 0.92);
-            backdrop-filter: blur(15px);
-            z-index: 999999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s ease, visibility 0.2s ease;
-            pointer-events: none;
-        }
-
-        #securityOverlay.show {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-
-        #securityOverlay i {
-            font-size: 4rem;
-            color: #ef4444;
-            margin-bottom: 15px;
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        #securityOverlay h2 {
-            font-size: 1.8rem;
-            color: #f8fafc;
-            margin: 0 0 10px 0;
-        }
-
-        #securityOverlay p {
-            color: #94a3b8;
-            max-width: 450px;
-            line-height: 1.6;
-            margin: 0;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- OVERLAY CẢNH BÁO KHI BẤM PHÍM BỊ CHẶN -->
-    <div id="securityOverlay">
-        <i class="fas fa-shield-virus"></i>
-        <h2>THAO TÁC BỊ CHẶN!</h2>
-        <p>Thao tác kiểm tra mã nguồn (Chuột phải / F12 / Phím tắt) đã bị vô hiệu hóa trên trang web này.</p>
-    </div>
-
-    <!-- NỘI DUNG TRANG WEB -->
-    <div class="container" id="appContainer">
+    <div class="container">
         <div class="header">
-            <h1><i class="fas fa-bolt"></i> Roblox Executors Status</h1>
-            <p>Trạng thái cập nhật liên tục các Executor cho Windows, Android, iOS & Mac</p>
+            <h1 id="mainTitle">Roblox Executors Status</h1>
+            <p id="mainSubtitle">Đang tải trạng thái các Executor mới nhất...</p>
         </div>
 
-        <div class="controls">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Tìm kiếm Executor...">
-            </div>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-plat="ALL">Tất cả</button>
-                <button class="filter-btn" data-plat="Windows"><i class="fab fa-windows platform-icon"></i>Windows</button>
-                <button class="filter-btn" data-plat="Android"><i class="fab fa-android platform-icon"></i>Android</button>
-                <button class="filter-btn" data-plat="iOS"><i class="fab fa-apple platform-icon"></i>iOS</button>
-                <button class="filter-btn" data-plat="Mac"><i class="fas fa-laptop platform-icon"></i>Mac</button>
-            </div>
-        </div>
-
-        <div class="table-card">
-            <div class="table-container">
+        <div class="card">
+            <div class="table-wrap">
                 <table>
                     <thead>
                         <tr>
                             <th>Tên Executor</th>
                             <th>Nền tảng</th>
                             <th>Trạng thái</th>
-                            <th>Giá tiền</th>
-                            <th>Last Update</th>
+                            <th>Giá</th>
+                            <th>Cập nhật</th>
                             <th>Ghi chú</th>
                         </tr>
                     </thead>
-                    <tbody id="statusTableBody">
-                        <tr>
-                            <td colspan="6" class="loading-state">
-                                <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 10px;"></i>
-                                <br>Đang tải dữ liệu mới nhất...
-                            </td>
-                        </tr>
+                    <tbody id="publicTableBody">
+                        <tr><td colspan="6" class="loading"><i class="fas fa-spinner fa-spin"></i> Đang đồng bộ dữ liệu...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -315,157 +119,56 @@
     </div>
 
     <script>
-        // ==========================================
-        // 1. XỬ LÝ CẢNH BÁO KHI BẤM NÚT BỊ CHẶN
-        // ==========================================
-        const securityOverlay = document.getElementById('securityOverlay');
-        const appContainer = document.getElementById('appContainer');
-        let hideTimer = null;
-
-        function showWarning() {
-            securityOverlay.classList.add('show');
-            appContainer.style.filter = 'blur(10px)';
-            appContainer.style.opacity = '0.2';
-
-            // Tự động ẩn sau 1.2 giây nếu thao tác dạng click chuột
-            clearTimeout(hideTimer);
-            hideTimer = setTimeout(hideWarning, 1200);
-        }
-
-        function hideWarning() {
-            securityOverlay.classList.remove('show');
-            appContainer.style.filter = 'none';
-            appContainer.style.opacity = '1';
-        }
-
-        // A. CHẶN CHUỘT PHẢI
-        document.addEventListener('contextmenu', e => {
-            e.preventDefault();
-            showWarning();
-        });
-
-        // B. BẤM GIỮ PHÍM BỊ CHẶN -> HIỆN CẢNH BÁO
-        document.addEventListener('keydown', e => {
-            if (
-                e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) ||
-                (e.ctrlKey && ['U', 'u', 'S', 's'].includes(e.key))
-            ) {
-                e.preventDefault();
-                showWarning();
-                return false;
-            }
-        });
-
-        // C. BUÔNG TAY KHỎI PHÍM -> CẢNH BÁO TỰ MẤT NGAY LẬP TỨC
-        document.addEventListener('keyup', e => {
-            hideWarning();
-        });
-
-        // ==========================================
-        // 2. DỮ LIỆU VÀ XỬ LÝ TRANG WEB
-        // ==========================================
         const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
 
-        let allData = [];
-        let currentFilter = "ALL";
-
-        const statusTableBody = document.getElementById('statusTableBody');
-        const searchInput = document.getElementById('searchInput');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-
-        async function fetchExecutors() {
+        async function fetchPublicData() {
             try {
-                const cacheBuster = "?t=" + new Date().getTime();
-                const response = await fetch(API_URL + cacheBuster, {
-                    cache: "no-store",
-                    headers: {
-                        'Cache-Control': 'no-cache, no-store, must-revalidate',
-                        'Pragma': 'no-cache'
-                    }
-                });
+                const res = await fetch(API_URL + "?t=" + new Date().getTime());
+                const data = await res.json();
 
-                if (!response.ok) throw new Error("Không thể kết nối");
-                
-                const data = await response.json();
-                allData = Array.isArray(data) ? data : [];
-                renderTable();
-            } catch (error) {
-                console.error(error);
-                statusTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="6" class="loading-state" style="color: #ef4444;">
-                            <i class="fas fa-circle-exclamation" style="font-size: 1.5rem; margin-bottom: 10px;"></i>
-                            <br>Không thể lấy dữ liệu mới. Vui lòng bấm F5 thử lại!
-                        </td>
-                    </tr>
-                `;
+                let itemsList = [];
+
+                if (Array.isArray(data)) {
+                    itemsList = data;
+                } else if (data && typeof data === 'object') {
+                    if (data.title) {
+                        document.getElementById('mainTitle').textContent = data.title;
+                        document.getElementById('pageTitle').textContent = data.title;
+                    }
+                    if (data.subtitle) {
+                        document.getElementById('mainSubtitle').textContent = data.subtitle;
+                    }
+                    itemsList = Array.isArray(data.items) ? data.items : [];
+                }
+
+                renderTable(itemsList);
+            } catch (err) {
+                console.error("Lỗi khi tải dữ liệu:", err);
+                document.getElementById('publicTableBody').innerHTML = `<tr><td colspan="6" style="text-align:center; color: #ef4444;">Không thể kết nối máy chủ!</td></tr>`;
             }
         }
 
-        function getStatusBadge(status) {
-            const s = (status || '').toLowerCase();
-            if (s === 'working') return `<span class="badge-status badge-working"><i class="fas fa-check-circle"></i> WORKING</span>`;
-            if (s === 'patched') return `<span class="badge-status badge-patched"><i class="fas fa-circle-xmark"></i> PATCHED</span>`;
-            if (s === 'unstable') return `<span class="badge-status badge-unstable"><i class="fas fa-triangle-exclamation"></i> UNSTABLE</span>`;
-            return `<span class="badge-status badge-outdated"><i class="fas fa-clock"></i> OUTDATED</span>`;
-        }
+        function renderTable(items) {
+            const tbody = document.getElementById('publicTableBody');
 
-        function getPlatformIcon(plat) {
-            const p = (plat || '').toLowerCase();
-            if (p === 'windows') return `<i class="fab fa-windows platform-icon"></i> Windows`;
-            if (p === 'android') return `<i class="fab fa-android platform-icon"></i> Android`;
-            if (p === 'ios') return `<i class="fab fa-apple platform-icon"></i> iOS`;
-            if (p === 'mac') return `<i class="fas fa-laptop platform-icon"></i> Mac`;
-            return plat;
-        }
-
-        function renderTable() {
-            const query = searchInput.value.toLowerCase().trim();
-
-            const filtered = allData.filter(item => {
-                const matchPlat = currentFilter === 'ALL' || (item.plat && item.plat.toLowerCase() === currentFilter.toLowerCase());
-                const matchSearch = (item.name && item.name.toLowerCase().includes(query)) ||
-                                    (item.note && item.note.toLowerCase().includes(query));
-                return matchPlat && matchSearch;
-            });
-
-            if (filtered.length === 0) {
-                statusTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="6" class="loading-state">
-                            <i class="fas fa-inbox" style="font-size: 1.5rem; margin-bottom: 10px;"></i>
-                            <br>Không tìm thấy Executor phù hợp.
-                        </td>
-                    </tr>
-                `;
+            if (!items || items.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color: var(--text-sub);">Chưa có dữ liệu nào.</td></tr>`;
                 return;
             }
 
-            statusTableBody.innerHTML = filtered.map(item => `
+            tbody.innerHTML = items.map(item => `
                 <tr>
                     <td style="font-weight: 600; color: #fff;">${item.name || ''}</td>
-                    <td>${getPlatformIcon(item.plat)}</td>
-                    <td>${getStatusBadge(item.status)}</td>
+                    <td><span style="color: var(--text-sub);"><i class="fas fa-laptop-code"></i> ${item.plat || ''}</span></td>
+                    <td><span class="badge status-${item.status}">${item.status}</span></td>
                     <td style="color: #a78bfa; font-weight: 500;">${item.price || 'Free'}</td>
-                    <td style="color: var(--text-sub); font-size: 0.85rem;">${item.time || ''}</td>
-                    <td style="color: var(--text-sub); font-size: 0.85rem;">${item.note || ''}</td>
+                    <td style="color: var(--text-sub); font-size: 0.85rem;">${item.time || 'N/A'}</td>
+                    <td style="color: var(--text-sub); font-size: 0.85rem;">${item.note || '-'}</td>
                 </tr>
             `).join('');
         }
 
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.getAttribute('data-plat');
-                renderTable();
-            });
-        });
-
-        searchInput.addEventListener('input', renderTable);
-
-        fetchExecutors();
+        fetchPublicData();
     </script>
 </body>
 </html>
