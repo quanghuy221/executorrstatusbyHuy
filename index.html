@@ -241,7 +241,7 @@
             gap: 6px;
         }
 
-        /* DEFINITION OF BADGES (FIXED OUTDATED & OTHERS) */
+        /* BADGES STATUS - MÀU SẮC ĐÃ CHỈNH SỬA CHUẨN */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -260,7 +260,7 @@
             border-radius: 50%;
         }
 
-        /* WORKING */
+        /* 1. WORKING - XANH LÁ */
         .status-working {
             background: rgba(16, 185, 129, 0.12);
             color: #10b981;
@@ -271,18 +271,18 @@
             box-shadow: 0 0 8px #10b981;
         }
 
-        /* OUTDATED (ĐÃ SỬA MÀU CAM VÀNG SANG TRỌNG) */
-        .status-outdated {
-            background: rgba(245, 158, 11, 0.15);
-            color: #f59e0b;
-            border: 1px solid rgba(245, 158, 11, 0.35);
+        /* 2. UNSTABLE - MÀU CAM */
+        .status-unstable {
+            background: rgba(249, 115, 22, 0.15);
+            color: #f97316;
+            border: 1px solid rgba(249, 115, 22, 0.35);
         }
-        .status-outdated .dot {
-            background: #f59e0b;
-            box-shadow: 0 0 8px #f59e0b;
+        .status-unstable .dot {
+            background: #f97316;
+            box-shadow: 0 0 8px #f97316;
         }
 
-        /* PATCHED */
+        /* 3. PATCHED - MÀU ĐỎ TƯƠI */
         .status-patched {
             background: rgba(239, 68, 68, 0.12);
             color: #ef4444;
@@ -293,15 +293,15 @@
             box-shadow: 0 0 8px #ef4444;
         }
 
-        /* UNSTABLE */
-        .status-unstable {
-            background: rgba(234, 179, 8, 0.12);
-            color: #eab308;
-            border: 1px solid rgba(234, 179, 8, 0.3);
+        /* 4. OUTDATED - MÀU ĐỎ ĐẬM / ĐỎ ĐÔ (KHÁC HẲN PATCHED) */
+        .status-outdated {
+            background: rgba(153, 27, 27, 0.28);
+            color: #fca5a5;
+            border: 1px solid rgba(220, 38, 38, 0.5);
         }
-        .status-unstable .dot {
-            background: #eab308;
-            box-shadow: 0 0 8px #eab308;
+        .status-outdated .dot {
+            background: #dc2626;
+            box-shadow: 0 0 8px #dc2626;
         }
 
         .price-text {
@@ -384,7 +384,7 @@
 
     <script>
         // ==========================================
-        // SYSTEM ANTI-INSPECT (CHẶN F12 & DEVTOOLS)
+        // CHẶN MỞ DEVTOOLS & SOI CODE F12
         // ==========================================
         document.addEventListener('contextmenu', e => e.preventDefault());
 
@@ -399,7 +399,6 @@
             }
         });
 
-        // Debugger Loop để chặn DevTools nếu cố tình mở
         setInterval(() => {
             const startTime = performance.now();
             debugger;
@@ -410,7 +409,7 @@
         }, 300);
 
         // ==========================================
-        // DỮ LIỆU VÀ XỬ LÝ HIỂN THỊ
+        // DỮ LIỆU VÀ HIỂN THỊ
         // ==========================================
         const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
         let rawItemsList = [];
@@ -507,21 +506,19 @@
             if (s === 'WORKING') {
                 return `<span class="status-badge status-working"><span class="dot"></span>WORKING</span>`;
             }
-            if (s === 'OUTDATED') {
-                return `<span class="status-badge status-outdated"><span class="dot"></span>OUTDATED</span>`;
+            if (s === 'UNSTABLE') {
+                return `<span class="status-badge status-unstable"><span class="dot"></span>UNSTABLE</span>`;
             }
             if (s === 'PATCHED') {
                 return `<span class="status-badge status-patched"><span class="dot"></span>PATCHED</span>`;
             }
-            if (s === 'UNSTABLE') {
-                return `<span class="status-badge status-unstable"><span class="dot"></span>UNSTABLE</span>`;
+            if (s === 'OUTDATED') {
+                return `<span class="status-badge status-outdated"><span class="dot"></span>OUTDATED</span>`;
             }
             return `<span class="status-badge status-outdated"><span class="dot"></span>${s || 'UNKNOWN'}</span>`;
         }
 
-        // Tải dữ liệu ban đầu
         fetchData();
-        // Tự động làm mới mỗi 30 giây
         setInterval(fetchData, 30000);
     </script>
 </body>
