@@ -16,7 +16,11 @@
             --text-sub: #94a3b8;
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+            user-select: none; /* Chống bôi đen copy */
+            -webkit-user-select: none;
+        }
 
         body {
             margin: 0;
@@ -24,178 +28,286 @@
             color: var(--text-main);
             font-family: 'Outfit', sans-serif;
             min-height: 100vh;
-            padding: 30px 15px;
+            padding: 40px 20px;
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(6, 182, 212, 0.12) 0%, transparent 40%);
+                radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.12) 0%, transparent 40%);
             background-attachment: fixed;
             -webkit-font-smoothing: antialiased;
         }
 
-        .container { max-width: 1050px; margin: 0 auto; }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
         /* HEADER */
-        .header { text-align: center; margin-bottom: 30px; }
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
 
-        .header-logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+        .header-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #3b82f6, #a855f7);
             border-radius: 18px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            color: #fff;
+            font-size: 2rem;
+            color: white;
             box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        .header h1 {
+        h1 {
             font-size: 2.3rem;
             font-weight: 800;
-            margin: 0 0 8px 0;
-            background: linear-gradient(135deg, #ffffff 30%, #a78bfa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin: 0 0 10px 0;
             letter-spacing: -0.5px;
         }
 
-        .header p {
+        .subtitle {
             color: var(--text-sub);
-            font-size: 0.98rem;
-            margin: 0 auto;
-            max-width: 650px;
+            font-size: 0.95rem;
+            margin: 0;
         }
 
-        /* STATS BAR */
+        /* STATS BOARD */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 25px;
         }
 
         .stat-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 14px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            backdrop-filter: blur(10px);
-        }
-
-        .stat-info .title { font-size: 0.78rem; color: var(--text-sub); font-weight: 500; text-transform: uppercase; }
-        .stat-info .num { font-size: 1.4rem; font-weight: 700; color: #fff; margin-top: 2px; }
-        .stat-icon { font-size: 1.5rem; opacity: 0.8; }
-
-        /* SEARCH & FILTER BAR */
-        .controls-bar {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 14px 18px;
-            margin-bottom: 20px;
+            padding: 18px 22px;
             display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             backdrop-filter: blur(10px);
         }
 
-        .search-box { position: relative; flex: 1; min-width: 240px; }
-        .search-box i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-sub); }
+        .stat-info .title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-sub);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-info .num {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .stat-icon {
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        /* FILTER BAR */
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sub);
+        }
 
         .search-box input {
             width: 100%;
-            padding: 11px 14px 11px 40px;
-            background: rgba(15, 23, 42, 0.8);
+            padding: 12px 15px 12px 42px;
+            background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            color: #fff;
+            border-radius: 12px;
+            color: white;
+            outline: none;
             font-family: inherit;
             font-size: 0.9rem;
-            outline: none;
             transition: border-color 0.2s ease;
         }
 
-        .search-box input:focus { border-color: var(--accent); }
-
-        .filter-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
-
-        .filter-btn {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--border);
-            color: var(--text-sub);
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--accent);
-            color: #fff;
+        .search-box input:focus {
             border-color: var(--accent);
         }
 
-        /* MAIN CARD & TABLE */
-        .card {
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 4px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+        }
+
+        /* TABLE DESIGN */
+        .table-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 8px;
+            border-radius: 20px;
+            overflow: hidden;
             backdrop-filter: blur(12px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        .table-wrap { overflow-x: auto; }
+        .table-wrap {
+            overflow-x: auto;
+        }
 
-        table { width: 100%; border-collapse: collapse; min-width: 700px; }
-        th, td { padding: 14px 16px; text-align: left; }
-        th { color: var(--text-sub); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid var(--border); font-weight: 600; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 650px;
+        }
 
-        tbody tr { border-bottom: 1px solid rgba(255, 255, 255, 0.03); transition: background-color 0.15s ease; }
-        tbody tr:hover { background-color: rgba(255, 255, 255, 0.03); }
-
-        .status-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
+        th {
+            padding: 16px 20px;
             font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-sub);
+            border-bottom: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.9rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .exec-name {
             font-weight: 700;
+            color: #ffffff;
+        }
+
+        .plat-tag {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* DEFINITION OF BADGES (FIXED OUTDATED & OTHERS) */
+        .status-badge {
             display: inline-flex;
             align-items: center;
-            gap: 7px;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
             letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+        .status-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
 
-        .status-WORKING { background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-        .status-WORKING .dot { background: #34d399; box-shadow: 0 0 8px #34d399; }
+        /* WORKING */
+        .status-working {
+            background: rgba(16, 185, 129, 0.12);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .status-working .dot {
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+        }
 
-        .status-PATCHED { background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
-        .status-PATCHED .dot { background: #f87171; box-shadow: 0 0 8px #f87171; }
+        /* OUTDATED (ĐÃ SỬA MÀU CAM VÀNG SANG TRỌNG) */
+        .status-outdated {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+        }
+        .status-outdated .dot {
+            background: #f59e0b;
+            box-shadow: 0 0 8px #f59e0b;
+        }
 
-        .status-UNSTABLE { background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-        .status-UNSTABLE .dot { background: #fbbf24; box-shadow: 0 0 8px #fbbf24; }
+        /* PATCHED */
+        .status-patched {
+            background: rgba(239, 68, 68, 0.12);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .status-patched .dot {
+            background: #ef4444;
+            box-shadow: 0 0 8px #ef4444;
+        }
 
-        .status-OUTDATED { background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3); }
-        .status-OUTDATED .dot { background: #94a3b8; }
+        /* UNSTABLE */
+        .status-unstable {
+            background: rgba(234, 179, 8, 0.12);
+            color: #eab308;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+        .status-unstable .dot {
+            background: #eab308;
+            box-shadow: 0 0 8px #eab308;
+        }
 
-        .platform-tag { color: #e2e8f0; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; }
-        .price-tag { font-weight: 600; color: #c084fc; font-size: 0.88rem; }
-        .price-free { color: #34d399; }
-        .time-tag { color: var(--text-sub); font-size: 0.83rem; }
-        .note-tag { color: var(--text-sub); font-size: 0.83rem; font-style: italic; }
-
-        .loading-state { text-align: center; padding: 40px; color: var(--text-sub); font-size: 1rem; }
+        .price-text {
+            font-weight: 600;
+            color: #c084fc;
+        }
     </style>
 </head>
 <body>
@@ -203,72 +315,67 @@
     <div class="container">
         <!-- HEADER -->
         <div class="header">
-            <div class="header-logo"><i class="fas fa-bolt"></i></div>
+            <div class="header-icon"><i class="fas fa-bolt"></i></div>
             <h1 id="mainTitle">Roblox Executors Status</h1>
-            <p id="mainSubtitle">Đang đồng bộ trạng thái trực tiếp từ hệ thống...</p>
+            <p class="subtitle" id="mainSubtitle">Trạng thái cập nhật liên tục các Executor cho Windows, Android, iOS & Mac</p>
         </div>
 
-        <!-- STATS BAR -->
+        <!-- STATS BOARD -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-info">
-                    <div class="title">Tổng Executor</div>
-                    <div class="num" id="statTotal">0</div>
+                    <div class="title">TỔNG EXECUTOR</div>
+                    <div class="num" id="totalCount">0</div>
                 </div>
                 <i class="fas fa-cubes stat-icon" style="color: #a78bfa;"></i>
             </div>
             <div class="stat-card">
                 <div class="stat-info">
-                    <div class="title">Đang Hoạt Động</div>
-                    <div class="num" id="statWorking" style="color: #34d399;">0</div>
+                    <div class="title">ĐANG HOẠT ĐỘNG</div>
+                    <div class="num" id="workingCount" style="color: #10b981;">0</div>
                 </div>
-                <i class="fas fa-circle-check stat-icon" style="color: #34d399;"></i>
+                <i class="fas fa-check-circle stat-icon" style="color: #10b981;"></i>
             </div>
             <div class="stat-card">
                 <div class="stat-info">
-                    <div class="title">Bị Khóa / Đang Lỗi</div>
-                    <div class="num" id="statPatched" style="color: #f87171;">0</div>
+                    <div class="title">BỊ KHÓA / ĐANG LỖI</div>
+                    <div class="num" id="errorCount" style="color: #ef4444;">0</div>
                 </div>
-                <i class="fas fa-triangle-exclamation stat-icon" style="color: #f87171;"></i>
+                <i class="fas fa-triangle-exclamation stat-icon" style="color: #ef4444;"></i>
             </div>
         </div>
 
-        <!-- SEARCH & FILTERS -->
-        <div class="controls-bar">
+        <!-- FILTER & SEARCH -->
+        <div class="filter-bar">
             <div class="search-box">
                 <i class="fas fa-search"></i>
                 <input type="text" id="searchInput" placeholder="Tìm kiếm Executor theo tên..." oninput="filterData()">
             </div>
             <div class="filter-tabs">
-                <button class="filter-btn active" onclick="setFilter('ALL', this)">Tất cả</button>
-                <button class="filter-btn" onclick="setFilter('Windows', this)"><i class="fab fa-windows"></i> Windows</button>
-                <button class="filter-btn" onclick="setFilter('Android', this)"><i class="fab fa-android"></i> Android</button>
-                <button class="filter-btn" onclick="setFilter('iOS', this)"><i class="fab fa-apple"></i> iOS</button>
-                <button class="filter-btn" onclick="setFilter('Mac', this)"><i class="fas fa-desktop"></i> Mac</button>
+                <button class="tab-btn active" onclick="setTab('all', this)">Tất cả</button>
+                <button class="tab-btn" onclick="setTab('Windows', this)"><i class="fab fa-windows"></i> Windows</button>
+                <button class="tab-btn" onclick="setTab('Android', this)"><i class="fab fa-android"></i> Android</button>
+                <button class="tab-btn" onclick="setTab('iOS', this)"><i class="fab fa-apple"></i> iOS</button>
+                <button class="tab-btn" onclick="setTab('Mac', this)"><i class="fas fa-desktop"></i> Mac</button>
             </div>
         </div>
 
-        <!-- DATA TABLE -->
-        <div class="card">
+        <!-- MAIN TABLE -->
+        <div class="table-card">
             <div class="table-wrap">
                 <table>
                     <thead>
                         <tr>
-                            <th>Tên Executor</th>
-                            <th>Nền tảng</th>
-                            <th>Trạng thái</th>
-                            <th>Giá</th>
-                            <th>Cập nhật</th>
-                            <th>Ghi chú</th>
+                            <th>TÊN EXECUTOR</th>
+                            <th>NỀN TẢNG</th>
+                            <th>TRẠNG THÁI</th>
+                            <th>GIÁ</th>
+                            <th>CẬP NHẬT</th>
+                            <th>GHI CHÚ</th>
                         </tr>
                     </thead>
-                    <tbody id="publicTableBody">
-                        <tr>
-                            <td colspan="6" class="loading-state">
-                                <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 8px; color: var(--accent);"></i>
-                                <div>Đang kết nối dữ liệu...</div>
-                            </td>
-                        </tr>
+                    <tbody id="execTableBody">
+                        <tr><td colspan="6" style="text-align:center; padding: 30px; color: var(--text-sub);">Đang tải dữ liệu...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -276,20 +383,40 @@
     </div>
 
     <script>
+        // ==========================================
+        // SYSTEM ANTI-INSPECT (CHẶN F12 & DEVTOOLS)
+        // ==========================================
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        document.addEventListener('keydown', e => {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) ||
+                (e.ctrlKey && ['U', 'u', 'S', 's'].includes(e.key))
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Debugger Loop để chặn DevTools nếu cố tình mở
+        setInterval(() => {
+            const startTime = performance.now();
+            debugger;
+            const endTime = performance.now();
+            if (endTime - startTime > 100) {
+                document.body.innerHTML = '<div style="color:#ef4444;text-align:center;padding:100px;font-weight:bold;font-size:24px;">CẢNH BÁO: HÀNH VI SOI CODE BỊ CẤM!</div>';
+            }
+        }, 300);
+
+        // ==========================================
+        // DỮ LIỆU VÀ XỬ LÝ HIỂN THỊ
+        // ==========================================
         const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
         let rawItemsList = [];
-        let currentPlatform = 'ALL';
+        let currentTab = 'all';
 
-        function getPlatIcon(plat) {
-            const p = (plat || '').toLowerCase();
-            if (p.includes('win')) return '<i class="fab fa-windows" style="color:#38bdf8;"></i>';
-            if (p.includes('android')) return '<i class="fab fa-android" style="color:#4ade80;"></i>';
-            if (p.includes('ios')) return '<i class="fab fa-apple" style="color:#f43f5e;"></i>';
-            if (p.includes('mac')) return '<i class="fas fa-desktop" style="color:#c084fc;"></i>';
-            return '<i class="fas fa-terminal"></i>';
-        }
-
-        async function fetchPublicData() {
+        async function fetchData() {
             try {
                 const res = await fetch(API_URL + "?t=" + new Date().getTime());
                 const data = await res.json();
@@ -310,76 +437,92 @@
                 updateStats();
                 filterData();
             } catch (err) {
-                console.error("Lỗi khi tải dữ liệu:", err);
-                document.getElementById('publicTableBody').innerHTML = 
-                    `<tr><td colspan="6" style="text-align:center; color: #f87171; padding:30px;"><i class="fas fa-wifi"></i> Không thể kết nối máy chủ!</td></tr>`;
+                document.getElementById('execTableBody').innerHTML = `<tr><td colspan="6" style="text-align:center; color:#ef4444;">Lỗi tải dữ liệu từ máy chủ!</td></tr>`;
             }
         }
 
         function updateStats() {
-            document.getElementById('statTotal').textContent = rawItemsList.length;
-            
+            const total = rawItemsList.length;
             const working = rawItemsList.filter(i => (i.status || '').toUpperCase() === 'WORKING').length;
-            const patched = rawItemsList.filter(i => {
-                const st = (i.status || '').toUpperCase();
-                return st === 'PATCHED' || st === 'UNSTABLE' || st === 'OUTDATED';
-            }).length;
+            const error = total - working;
 
-            document.getElementById('statWorking').textContent = working;
-            document.getElementById('statPatched').textContent = patched;
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('workingCount').textContent = working;
+            document.getElementById('errorCount').textContent = error;
         }
 
-        function setFilter(plat, btn) {
-            currentPlatform = plat;
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        function setTab(plat, btn) {
+            currentTab = plat;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             filterData();
         }
 
         function filterData() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
-
+            
             const filtered = rawItemsList.filter(item => {
-                const matchesSearch = (item.name || '').toLowerCase().includes(query) || 
-                                      (item.note || '').toLowerCase().includes(query);
-                const matchesPlat = currentPlatform === 'ALL' || (item.plat || '').toLowerCase() === currentPlatform.toLowerCase();
-                return matchesSearch && matchesPlat;
+                const matchPlat = currentTab === 'all' || (item.plat || '').toLowerCase() === currentTab.toLowerCase();
+                const matchSearch = (item.name || '').toLowerCase().includes(query);
+                return matchPlat && matchSearch;
             });
 
             renderTable(filtered);
         }
 
-        function renderTable(items) {
-            const tbody = document.getElementById('publicTableBody');
-
-            if (!items || items.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color: var(--text-sub); padding:30px;">Không tìm thấy Executor phù hợp.</td></tr>`;
+        function renderTable(data) {
+            const tbody = document.getElementById('execTableBody');
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 30px; color: var(--text-sub);">Không tìm thấy dữ liệu phù hợp</td></tr>`;
                 return;
             }
 
-            tbody.innerHTML = items.map(item => {
-                const statusUpper = (item.status || 'WORKING').toUpperCase();
-                const priceClass = (item.price || '').toLowerCase() === 'free' ? 'price-free' : '';
-
-                return `
-                    <tr>
-                        <td style="font-weight: 700; color: #fff; font-size:0.95rem;">${item.name || ''}</td>
-                        <td><span class="platform-tag">${getPlatIcon(item.plat)} ${item.plat || ''}</span></td>
-                        <td>
-                            <span class="status-badge status-${statusUpper}">
-                                <span class="dot"></span>
-                                ${statusUpper}
-                            </span>
-                        </td>
-                        <td><span class="price-tag ${priceClass}">${item.price || 'Free'}</span></td>
-                        <td><span class="time-tag">${item.time || 'Vừa xong'}</span></td>
-                        <td><span class="note-tag">${item.note || '-'}</span></td>
-                    </tr>
-                `;
-            }).join('');
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td class="exec-name">${item.name || '-'}</td>
+                    <td>
+                        <span class="plat-tag">
+                            ${getPlatIcon(item.plat)} ${item.plat || '-'}
+                        </span>
+                    </td>
+                    <td>${getStatusBadge(item.status)}</td>
+                    <td class="price-text">${item.price || 'Free'}</td>
+                    <td style="color: var(--text-sub);">${item.time || 'Cập nhật sau'}</td>
+                    <td style="color: var(--text-sub);">${item.note || '-'}</td>
+                </tr>
+            `).join('');
         }
 
-        fetchPublicData();
+        function getPlatIcon(plat) {
+            const p = (plat || '').toLowerCase();
+            if (p === 'windows') return '<i class="fab fa-windows" style="color:#00a4ef;"></i>';
+            if (p === 'android') return '<i class="fab fa-android" style="color:#3dda84;"></i>';
+            if (p === 'ios') return '<i class="fab fa-apple" style="color:#a6b1b7;"></i>';
+            if (p === 'mac') return '<i class="fas fa-desktop" style="color:#ffffff;"></i>';
+            return '<i class="fas fa-microchip"></i>';
+        }
+
+        function getStatusBadge(status) {
+            const s = (status || '').toUpperCase();
+            if (s === 'WORKING') {
+                return `<span class="status-badge status-working"><span class="dot"></span>WORKING</span>`;
+            }
+            if (s === 'OUTDATED') {
+                return `<span class="status-badge status-outdated"><span class="dot"></span>OUTDATED</span>`;
+            }
+            if (s === 'PATCHED') {
+                return `<span class="status-badge status-patched"><span class="dot"></span>PATCHED</span>`;
+            }
+            if (s === 'UNSTABLE') {
+                return `<span class="status-badge status-unstable"><span class="dot"></span>UNSTABLE</span>`;
+            }
+            return `<span class="status-badge status-outdated"><span class="dot"></span>${s || 'UNKNOWN'}</span>`;
+        }
+
+        // Tải dữ liệu ban đầu
+        fetchData();
+        // Tự động làm mới mỗi 30 giây
+        setInterval(fetchData, 30000);
     </script>
 </body>
 </html>
