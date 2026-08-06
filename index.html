@@ -21,7 +21,14 @@
             --status-outdated: #6b7280;
         }
 
-        * { box-sizing: border-box; }
+        /* Khóa chọn văn bản (Anti-Select) */
+        * { 
+            box-sizing: border-box; 
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
         body { 
             margin: 0; 
@@ -39,6 +46,7 @@
         .container {
             max-width: 1100px;
             margin: 0 auto;
+            transition: filter 0.3s ease, opacity 0.3s ease;
         }
 
         .header {
@@ -193,11 +201,78 @@
             margin-right: 6px;
             color: var(--accent);
         }
+
+        /* MÀN HÌNH CẢNH BÁO KHI CỐ TÌNH SOI CODE / DEVTOOLS */
+        #securityOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(3, 7, 18, 0.98);
+            backdrop-filter: blur(25px);
+            z-index: 999999;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #securityOverlay i {
+            font-size: 4rem;
+            color: #ef4444;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        #securityOverlay h2 {
+            font-size: 1.8rem;
+            color: #f8fafc;
+            margin: 0 0 10px 0;
+        }
+
+        #securityOverlay p {
+            color: #94a3b8;
+            max-width: 500px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn-reload {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+            transition: all 0.2s ease;
+        }
+        .btn-reload:hover { transform: translateY(-2px); background: #dc2626; }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <!-- OVERLAY CẢNH BÁO BẢO MẬT -->
+    <div id="securityOverlay">
+        <i class="fas fa-shield-virus"></i>
+        <h2>CẢNH BÁO BẢO MẬT!</h2>
+        <p>Phát hiện hành vi mở DevTools / Soi Code. Trang web đã tự động khóa giao diện để bảo vệ bản quyền dữ liệu.</p>
+        <button class="btn-reload" onclick="location.reload()"><i class="fas fa-rotate-right"></i> Tải Lại Trang</button>
+    </div>
+
+    <!-- NỘI DUNG TRANG WEB -->
+    <div class="container" id="appContainer">
         <div class="header">
             <h1><i class="fas fa-bolt"></i> Roblox Executors Status</h1>
             <p>Trạng thái cập nhật liên tục các Executor cho Windows, Android, iOS & Mac</p>
@@ -244,6 +319,61 @@
     </div>
 
     <script>
+        // ==========================================
+        // 1. HỆ THỐNG BẢO VỆ & CHẶN SOI CODE (ANTI-DEVTOOLS)
+        // ==========================================
+        const securityOverlay = document.getElementById('securityOverlay');
+        const appContainer = document.getElementById('appContainer');
+
+        function triggerSecurityLock() {
+            securityOverlay.style.display = 'flex';
+            appContainer.style.filter = 'blur(20px)';
+            appContainer.style.opacity = '0.1';
+            appContainer.style.pointerEvents = 'none';
+        }
+
+        // A. CHẶN CHUỘT PHẢI
+        document.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            return false;
+        });
+
+        // B. CHẶN PHÍM TẮT F12, CTRL+SHIFT+I/J/C, CTRL+U, CTRL+S
+        document.addEventListener('keydown', e => {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+                (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's'))
+            ) {
+                e.preventDefault();
+                triggerSecurityLock();
+                return false;
+            }
+        });
+
+        // C. PHÁT HIỆN MỞ DEVTOOLS QUA KÍCH THƯỚC CỬA SỔ
+        const threshold = 160;
+        setInterval(() => {
+            const widthDiff = window.outerWidth - window.innerWidth > threshold;
+            const heightDiff = window.outerHeight - window.innerHeight > threshold;
+            if (widthDiff || heightDiff) {
+                triggerSecurityLock();
+            }
+        }, 500);
+
+        // D. BẪY DEBUGGER TRAP (Treo trang khi ai đó cố soi console/element)
+        setInterval(() => {
+            const startTime = performance.now();
+            (function() {}.constructor("debugger")());
+            const endTime = performance.now();
+            if (endTime - startTime > 100) {
+                triggerSecurityLock();
+            }
+        }, 300);
+
+        // ==========================================
+        // 2. DỮ LIỆU VÀ XỬ LÝ TRANG WEB
+        // ==========================================
         const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
 
         let allData = [];
@@ -253,26 +383,24 @@
         const searchInput = document.getElementById('searchInput');
         const filterBtns = document.querySelectorAll('.filter-btn');
 
-        // Hàm tải dữ liệu CHỐNG CACHE TRIỆT ĐỂ
         async function fetchExecutors() {
             try {
-                // Thêm timestamp ?t= để chống trình duyệt lưu cache
                 const cacheBuster = "?t=" + new Date().getTime();
                 const response = await fetch(API_URL + cacheBuster, {
-                    cache: "no-store", // Cấm lưu cache dưới mọi hình thức
+                    cache: "no-store",
                     headers: {
                         'Cache-Control': 'no-cache, no-store, must-revalidate',
                         'Pragma': 'no-cache'
                     }
                 });
 
-                if (!response.ok) throw new Error("Không thể kết nối đến server");
+                if (!response.ok) throw new Error("Không thể kết nối");
                 
                 const data = await response.json();
                 allData = Array.isArray(data) ? data : [];
                 renderTable();
             } catch (error) {
-                console.error("Lỗi khi tải dữ liệu:", error);
+                console.error(error);
                 statusTableBody.innerHTML = `
                     <tr>
                         <td colspan="6" class="loading-state" style="color: #ef4444;">
@@ -335,7 +463,6 @@
             `).join('');
         }
 
-        // Sự kiện lọc nền tảng
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -345,10 +472,8 @@
             });
         });
 
-        // Sự kiện tìm kiếm
         searchInput.addEventListener('input', renderTable);
 
-        // Khởi chạy khi vào trang
         fetchExecutors();
     </script>
 </body>
