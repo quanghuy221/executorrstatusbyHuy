@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="pulsery">
+<html lang="vi" data-theme="cyber">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,93 +7,109 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- ĐỊNH NGHĨA BỘ THEME PHONG CÁCH WEAO.GG --- */
-        html[data-theme="pulsery"] {
-            --bg: #090d16;
-            --card-bg: rgba(19, 27, 46, 0.8);
-            --border: rgba(255, 255, 255, 0.08);
-            --accent: #8b5cf6;
-            --accent-glow: rgba(139, 92, 246, 0.3);
-            --text-main: #f8fafc;
+        /* --- BỘ MÀU THEMES SANG TRỌNG & CHILL --- */
+        html[data-theme="cyber"] {
+            --bg: #07090e;
+            --card-bg: rgba(14, 19, 31, 0.65);
+            --border: rgba(56, 189, 248, 0.18);
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --orb-1: rgba(56, 189, 248, 0.15);
+            --orb-2: rgba(236, 72, 153, 0.12);
+            --text-main: #f1f5f9;
             --text-sub: #94a3b8;
-            --modal-bg: #131b2e;
+            --modal-bg: rgba(15, 23, 42, 0.92);
         }
 
-        html[data-theme="dark"] {
-            --bg: #0d1117;
-            --card-bg: rgba(22, 27, 34, 0.85);
-            --border: rgba(255, 255, 255, 0.1);
-            --accent: #58a6ff;
-            --accent-glow: rgba(88, 166, 255, 0.3);
-            --text-main: #c9d1d9;
-            --text-sub: #8b949e;
-            --modal-bg: #161b22;
-        }
-
-        html[data-theme="light"] {
-            --bg: #f4f6f8;
-            --card-bg: #ffffff;
-            --border: #e1e4e8;
-            --accent: #0969da;
-            --accent-glow: rgba(9, 105, 218, 0.2);
-            --text-main: #1f2328;
-            --text-sub: #57606a;
-            --modal-bg: #ffffff;
+        html[data-theme="kyoto"] {
+            --bg: #0f0a13;
+            --card-bg: rgba(26, 17, 34, 0.65);
+            --border: rgba(244, 114, 182, 0.2);
+            --accent: #f472b6;
+            --accent-glow: rgba(244, 114, 182, 0.4);
+            --orb-1: rgba(244, 114, 182, 0.18);
+            --orb-2: rgba(168, 85, 247, 0.15);
+            --text-main: #fdf2f8;
+            --text-sub: #fbcfe8;
+            --modal-bg: rgba(24, 15, 31, 0.92);
         }
 
         html[data-theme="amoled"] {
             --bg: #000000;
-            --card-bg: #0d0d0d;
-            --border: #222222;
+            --card-bg: rgba(12, 12, 12, 0.85);
+            --border: rgba(16, 185, 129, 0.2);
             --accent: #10b981;
-            --accent-glow: rgba(16, 185, 129, 0.3);
+            --accent-glow: rgba(16, 185, 129, 0.4);
+            --orb-1: rgba(16, 185, 129, 0.12);
+            --orb-2: rgba(6, 182, 212, 0.1);
             --text-main: #ffffff;
             --text-sub: #a1a1aa;
-            --modal-bg: #121212;
+            --modal-bg: rgba(10, 10, 10, 0.95);
         }
 
-        html[data-theme="kyoto"] {
-            --bg: #181419;
-            --card-bg: rgba(36, 27, 39, 0.85);
-            --border: rgba(244, 114, 182, 0.15);
-            --accent: #f472b6;
-            --accent-glow: rgba(244, 114, 182, 0.3);
-            --text-main: #fdf2f8;
-            --text-sub: #fbcfe8;
-            --modal-bg: #241b27;
+        html[data-theme="sunset"] {
+            --bg: #120913;
+            --card-bg: rgba(30, 15, 30, 0.65);
+            --border: rgba(251, 146, 60, 0.2);
+            --accent: #fb923c;
+            --accent-glow: rgba(251, 146, 60, 0.4);
+            --orb-1: rgba(251, 146, 60, 0.18);
+            --orb-2: rgba(244, 63, 94, 0.15);
+            --text-main: #fff7ed;
+            --text-sub: #fdba74;
+            --modal-bg: rgba(26, 12, 26, 0.92);
         }
 
-        html[data-theme="revision"] {
-            --bg: #1a1a20;
-            --card-bg: rgba(35, 35, 45, 0.85);
-            --border: rgba(255, 255, 255, 0.08);
-            --accent: #f87171;
-            --accent-glow: rgba(248, 113, 113, 0.3);
-            --text-main: #f3f4f6;
-            --text-sub: #9ca3af;
-            --modal-bg: #23232d;
+        html[data-theme="ocean"] {
+            --bg: #06111e;
+            --card-bg: rgba(11, 29, 51, 0.65);
+            --border: rgba(6, 182, 212, 0.2);
+            --accent: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.4);
+            --orb-1: rgba(6, 182, 212, 0.18);
+            --orb-2: rgba(59, 130, 246, 0.15);
+            --text-main: #ecfeff;
+            --text-sub: #a5f3fc;
+            --modal-bg: rgba(9, 23, 41, 0.92);
         }
 
-        html[data-theme="voxlis"] {
-            --bg: #061412;
-            --card-bg: rgba(13, 40, 36, 0.85);
-            --border: rgba(20, 184, 166, 0.15);
-            --accent: #14b8a6;
-            --accent-glow: rgba(20, 184, 166, 0.3);
-            --text-main: #f0fdfa;
-            --text-sub: #99f6e4;
-            --modal-bg: #0d2824;
+        html[data-theme="dracula"] {
+            --bg: #0d0814;
+            --card-bg: rgba(23, 14, 36, 0.65);
+            --border: rgba(168, 85, 247, 0.22);
+            --accent: #a855f7;
+            --accent-glow: rgba(168, 85, 247, 0.4);
+            --orb-1: rgba(168, 85, 247, 0.18);
+            --orb-2: rgba(217, 70, 239, 0.15);
+            --text-main: #faf5ff;
+            --text-sub: #e9d5ff;
+            --modal-bg: rgba(20, 11, 31, 0.92);
         }
 
-        html[data-theme="sirmeme"] {
-            --bg: #120917;
-            --card-bg: rgba(33, 16, 43, 0.85);
-            --border: rgba(224, 86, 253, 0.15);
-            --accent: #e056fd;
-            --accent-glow: rgba(224, 86, 253, 0.3);
-            --text-main: #f5e6ff;
-            --text-sub: #d8b4fe;
-            --modal-bg: #21102b;
+        html[data-theme="gold"] {
+            --bg: #0f0e0a;
+            --card-bg: rgba(28, 25, 17, 0.65);
+            --border: rgba(234, 179, 8, 0.22);
+            --accent: #eab308;
+            --accent-glow: rgba(234, 179, 8, 0.4);
+            --orb-1: rgba(234, 179, 8, 0.15);
+            --orb-2: rgba(249, 115, 22, 0.12);
+            --text-main: #fefce8;
+            --text-sub: #fef08a;
+            --modal-bg: rgba(23, 20, 13, 0.92);
+        }
+
+        html[data-theme="light"] {
+            --bg: #f3f5f9;
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --border: rgba(0, 0, 0, 0.08);
+            --accent: #2563eb;
+            --accent-glow: rgba(37, 99, 235, 0.25);
+            --orb-1: rgba(37, 99, 235, 0.1);
+            --orb-2: rgba(147, 51, 234, 0.08);
+            --text-main: #0f172a;
+            --text-sub: #475569;
+            --modal-bg: rgba(255, 255, 255, 0.95);
         }
 
         * {
@@ -109,28 +125,68 @@
             font-family: 'Outfit', sans-serif;
             min-height: 100vh;
             padding: 40px 20px;
-            transition: background 0.35s ease, color 0.35s ease;
+            transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+            position: relative;
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* ĐỐM ÁNH SÁNG TRÔI TỰ ĐỘNG BỒNG BỀNH PHÒNG NỀN CHILL */
+        .ambient-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            animation: floatOrb 18s infinite alternate ease-in-out;
+            transition: background 0.5s ease;
+        }
+
+        .orb-1 {
+            width: 450px; height: 450px;
+            background: var(--orb-1);
+            top: -10%; left: 15%;
+        }
+
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: var(--orb-2);
+            bottom: -15%; right: 10%;
+            animation-delay: -9s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.1); }
+            100% { transform: translate(-40px, 70px) scale(0.95); }
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
-        /* NÚT MỞ THEME POPUP TRÊN CÙNG */
+        /* TOP BAR WITH THEME BUTTON */
         .top-bar {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .theme-open-btn {
             background: var(--card-bg);
             border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 9px 18px;
+            border-radius: 30px;
             font-family: inherit;
             font-size: 0.88rem;
             font-weight: 600;
@@ -138,29 +194,32 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            backdrop-filter: blur(10px);
-            transition: all 0.25s ease;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .theme-open-btn:hover {
             border-color: var(--accent);
-            box-shadow: 0 0 12px var(--accent-glow);
-            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px) scale(1.02);
         }
 
-        /* POPUP MODAL THEMES */
+        /* MODAL POPUP THEME */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.25s ease;
+            transition: opacity 0.3s ease;
         }
 
         .modal-overlay.show {
@@ -171,47 +230,56 @@
         .modal-container {
             background: var(--modal-bg);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 24px;
+            border-radius: 24px;
+            padding: 26px;
             width: 90%;
-            max-width: 520px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            transform: scale(0.92);
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 540px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px var(--accent-glow);
+            transform: scale(0.88) translateY(20px);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .modal-overlay.show .modal-container {
-            transform: scale(1);
+            transform: scale(1) translateY(0);
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         .modal-header h3 {
             margin: 0;
-            font-size: 1.25rem;
-            font-weight: 700;
+            font-size: 1.3rem;
+            font-weight: 800;
             color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .close-btn {
-            background: transparent;
-            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
             color: var(--text-sub);
-            font-size: 1.2rem;
+            width: 34px; height: 34px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
         }
 
         .close-btn:hover {
-            color: var(--accent);
+            color: var(--text-main);
+            border-color: var(--accent);
+            transform: rotate(90deg);
         }
 
-        /* GRID CÁC TÙY CHỌN THEME GIỐNG WEAO.GG */
+        /* GRID CHỌN THEME */
         .themes-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -225,55 +293,59 @@
         .theme-card {
             background: var(--card-bg);
             border: 1.5px solid var(--border);
-            border-radius: 12px;
-            padding: 10px 14px;
+            border-radius: 14px;
+            padding: 12px 14px;
             display: flex;
             align-items: center;
             gap: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
         }
 
         .theme-card:hover {
             border-color: var(--accent);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--accent-glow);
         }
 
         .theme-card.active {
-            border-color: #10b981;
-            background: rgba(16, 185, 129, 0.08);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: inset 0 0 12px var(--accent-glow);
         }
 
         .dots-preview {
             display: flex;
-            gap: 4px;
+            gap: 5px;
             align-items: center;
         }
 
         .dots-preview span {
-            width: 9px;
-            height: 9px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             display: inline-block;
         }
 
         .theme-name {
-            font-size: 0.88rem;
-            font-weight: 600;
+            font-size: 0.9rem;
+            font-weight: 700;
             color: var(--text-main);
             flex: 1;
         }
 
         .check-icon {
-            color: #10b981;
-            font-size: 0.85rem;
+            color: var(--accent);
+            font-size: 0.9rem;
             opacity: 0;
-            transition: opacity 0.2s ease;
+            transform: scale(0.5);
+            transition: all 0.25s ease;
         }
 
         .theme-card.active .check-icon {
             opacity: 1;
+            transform: scale(1);
         }
 
         /* HEADER */
@@ -283,33 +355,42 @@
         }
 
         .header-icon {
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(135deg, #3b82f6, var(--accent));
-            border-radius: 18px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent), #9333ea);
+            border-radius: 22px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: white;
-            box-shadow: 0 10px 25px var(--accent-glow);
+            box-shadow: 0 12px 30px var(--accent-glow);
             margin-bottom: 20px;
+            animation: pulseHeader 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseHeader {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.05) rotate(3deg); }
         }
 
         h1 {
-            font-size: 2.3rem;
+            font-size: 2.4rem;
             font-weight: 800;
             margin: 0 0 10px 0;
             letter-spacing: -0.5px;
+            background: linear-gradient(180deg, var(--text-main), var(--text-sub));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
             color: var(--text-sub);
-            font-size: 0.95rem;
+            font-size: 0.98rem;
             margin: 0;
         }
 
-        /* STATS BOARD */
+        /* STATS CARDS */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -320,41 +401,49 @@
         .stat-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 18px 22px;
+            border-radius: 20px;
+            padding: 20px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            backdrop-filter: blur(10px);
-            transition: border-color 0.35s ease, background 0.35s ease;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 12px 30px var(--accent-glow);
         }
 
         .stat-info .title {
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             color: var(--text-sub);
-            font-weight: 700;
-            margin-bottom: 4px;
+            font-weight: 800;
+            margin-bottom: 6px;
         }
 
         .stat-info .num {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 800;
         }
 
         .stat-icon {
-            font-size: 1.5rem;
-            opacity: 0.8;
+            font-size: 1.7rem;
+            opacity: 0.85;
         }
 
-        /* FILTER BAR */
+        /* FILTER & SEARCH */
         .filter-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             flex-wrap: wrap;
         }
 
@@ -366,7 +455,7 @@
 
         .search-box i {
             position: absolute;
-            left: 15px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-sub);
@@ -374,29 +463,33 @@
 
         .search-box input {
             width: 100%;
-            padding: 12px 15px 12px 42px;
+            padding: 13px 16px 13px 44px;
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 16px;
             color: var(--text-main);
             outline: none;
             font-family: inherit;
-            font-size: 0.9rem;
-            transition: border-color 0.25s ease;
+            font-size: 0.92rem;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
         }
 
         .search-box input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 10px var(--accent-glow);
+            box-shadow: 0 0 18px var(--accent-glow);
         }
 
         .filter-tabs {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             background: var(--card-bg);
-            padding: 4px;
-            border-radius: 12px;
+            padding: 5px;
+            border-radius: 16px;
             border: 1px solid var(--border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             overflow-x: auto;
         }
 
@@ -404,31 +497,32 @@
             background: transparent;
             border: none;
             color: var(--text-sub);
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 9px 18px;
+            border-radius: 12px;
             cursor: pointer;
             font-family: inherit;
-            font-weight: 600;
-            font-size: 0.85rem;
+            font-weight: 700;
+            font-size: 0.88rem;
             white-space: nowrap;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .tab-btn.active {
             background: var(--accent);
-            color: white;
-            box-shadow: 0 4px 12px var(--accent-glow);
+            color: #ffffff;
+            box-shadow: 0 4px 15px var(--accent-glow);
         }
 
-        /* TABLE DESIGN */
+        /* TABLE DESIGN V2 */
         .table-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            transition: border-color 0.35s ease, background 0.35s ease;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
         }
 
         .table-wrap {
@@ -439,23 +533,25 @@
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            min-width: 650px;
+            min-width: 680px;
         }
 
         th {
-            padding: 16px 20px;
+            padding: 18px 22px;
             font-size: 0.78rem;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
             color: var(--text-sub);
             border-bottom: 1px solid var(--border);
-            background: rgba(0, 0, 0, 0.15);
+            background: rgba(0, 0, 0, 0.2);
+            font-weight: 800;
         }
 
         td {
-            padding: 16px 20px;
+            padding: 18px 22px;
             border-bottom: 1px solid var(--border);
-            font-size: 0.9rem;
+            font-size: 0.92rem;
+            transition: background 0.2s ease;
         }
 
         tr:last-child td {
@@ -463,91 +559,102 @@
         }
 
         tr:hover td {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .exec-name {
-            font-weight: 700;
+            font-weight: 800;
             color: var(--text-main);
         }
 
         .plat-tag {
             color: var(--text-sub);
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            font-weight: 600;
         }
 
-        /* BADGES STATUS */
+        /* BADGES STATUS CÓ DẠ QUANG VÀ CHỚP NỔI PULSE */
         .status-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 5px 12px;
-            border-radius: 20px;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 30px;
             font-size: 0.75rem;
             font-weight: 800;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             text-transform: uppercase;
         }
 
         .status-badge .dot {
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
+            position: relative;
+        }
+
+        .status-badge .dot::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 50%;
+            background: inherit;
+            animation: pulseDot 1.8s infinite ease-out;
+            opacity: 0.6;
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(2.5); opacity: 0; }
         }
 
         .status-working {
             background: rgba(16, 185, 129, 0.12);
             color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            border: 1px solid rgba(16, 185, 129, 0.35);
         }
-        .status-working .dot {
-            background: #10b981;
-            box-shadow: 0 0 8px #10b981;
-        }
+        .status-working .dot { background: #10b981; }
 
         .status-unstable {
             background: rgba(249, 115, 22, 0.15);
             color: #f97316;
             border: 1px solid rgba(249, 115, 22, 0.35);
         }
-        .status-unstable .dot {
-            background: #f97316;
-            box-shadow: 0 0 8px #f97316;
-        }
+        .status-unstable .dot { background: #f97316; }
 
         .status-patched {
             background: rgba(239, 68, 68, 0.12);
             color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.35);
         }
-        .status-patched .dot {
-            background: #ef4444;
-            box-shadow: 0 0 8px #ef4444;
-        }
+        .status-patched .dot { background: #ef4444; }
 
         .status-outdated {
             background: rgba(185, 28, 28, 0.22);
             color: #ff4d4d;
-            border: 1px solid rgba(239, 68, 68, 0.45);
+            border: 1px solid rgba(239, 68, 68, 0.5);
         }
-        .status-outdated .dot {
-            background: #ff4d4d;
-            box-shadow: 0 0 8px #ff4d4d;
-        }
+        .status-outdated .dot { background: #ff4d4d; }
 
         .price-text {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--accent);
         }
     </style>
 </head>
 <body>
 
+    <!-- ĐỐM ÁNH SÁNG NỀN TRÔI CHILL -->
+    <div class="ambient-glow">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
     <div class="container">
-        <!-- TOP NAV WITH THEMES BUTTON -->
+        <!-- TOP BAR -->
         <div class="top-bar">
             <button class="theme-open-btn" onclick="openThemeModal()">
                 <i class="fas fa-palette"></i> Themes
@@ -616,107 +723,106 @@
                         </tr>
                     </thead>
                     <tbody id="execTableBody">
-                        <tr><td colspan="6" style="text-align:center; padding: 30px; color: var(--text-sub);">Đang tải dữ liệu...</td></tr>
+                        <tr><td colspan="6" style="text-align:center; padding: 35px; color: var(--text-sub);">Đang tải dữ liệu...</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- POPUP MODAL THEMES (GIỐNG WEAO.GG) -->
+    <!-- POPUP MODAL THEMES CỰC CHILL -->
     <div class="modal-overlay" id="themeModal" onclick="closeThemeModalOnOverlay(event)">
         <div class="modal-container">
             <div class="modal-header">
-                <h3>Themes</h3>
+                <h3><i class="fas fa-swatchbook" style="color: var(--accent);"></i> Select Theme</h3>
                 <button class="close-btn" onclick="closeThemeModal()"><i class="fas fa-times"></i></button>
             </div>
             <div class="themes-grid">
-                <!-- 1. Dark -->
-                <div class="theme-card" data-theme-id="dark" onclick="selectTheme('dark')">
+                <!-- 1. Cyber Neon -->
+                <div class="theme-card" data-theme-id="cyber" onclick="selectTheme('cyber')">
                     <div class="dots-preview">
-                        <span style="background: #0d1117;"></span>
-                        <span style="background: #161b22;"></span>
-                        <span style="background: #2ea043;"></span>
-                        <span style="background: #58a6ff;"></span>
+                        <span style="background: #07090e;"></span>
+                        <span style="background: #38bdf8;"></span>
+                        <span style="background: #ec4899;"></span>
                     </div>
-                    <span class="theme-name">Dark</span>
+                    <span class="theme-name">Cyber Neon</span>
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
-                <!-- 2. Light -->
-                <div class="theme-card" data-theme-id="light" onclick="selectTheme('light')">
+                <!-- 2. Kyoto Night -->
+                <div class="theme-card" data-theme-id="kyoto" onclick="selectTheme('kyoto')">
                     <div class="dots-preview">
-                        <span style="background: #ffffff; border: 1px solid #ddd;"></span>
-                        <span style="background: #2da44e;"></span>
-                        <span style="background: #0969da;"></span>
+                        <span style="background: #0f0a13;"></span>
+                        <span style="background: #f472b6;"></span>
+                        <span style="background: #a855f7;"></span>
                     </div>
-                    <span class="theme-name">Light</span>
+                    <span class="theme-name">Kyoto Night</span>
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
-                <!-- 3. Revision -->
-                <div class="theme-card" data-theme-id="revision" onclick="selectTheme('revision')">
-                    <div class="dots-preview">
-                        <span style="background: #1a1a20;"></span>
-                        <span style="background: #23232d;"></span>
-                        <span style="background: #f87171;"></span>
-                    </div>
-                    <span class="theme-name">Revision</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
-
-                <!-- 4. voxlis.NET -->
-                <div class="theme-card" data-theme-id="voxlis" onclick="selectTheme('voxlis')">
-                    <div class="dots-preview">
-                        <span style="background: #061412;"></span>
-                        <span style="background: #0d2824;"></span>
-                        <span style="background: #14b8a6;"></span>
-                    </div>
-                    <span class="theme-name">voxlis.NET</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
-
-                <!-- 5. Pulsery -->
-                <div class="theme-card" data-theme-id="pulsery" onclick="selectTheme('pulsery')">
-                    <div class="dots-preview">
-                        <span style="background: #090d16;"></span>
-                        <span style="background: #131b2e;"></span>
-                        <span style="background: #8b5cf6;"></span>
-                    </div>
-                    <span class="theme-name">Pulsery</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
-
-                <!-- 6. Amoled -->
+                <!-- 3. Amoled Pulse -->
                 <div class="theme-card" data-theme-id="amoled" onclick="selectTheme('amoled')">
                     <div class="dots-preview">
                         <span style="background: #000000;"></span>
-                        <span style="background: #111111;"></span>
                         <span style="background: #10b981;"></span>
+                        <span style="background: #06b6d4;"></span>
                     </div>
-                    <span class="theme-name">Amoled</span>
+                    <span class="theme-name">Amoled Pulse</span>
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
-                <!-- 7. Kyoto -->
-                <div class="theme-card" data-theme-id="kyoto" onclick="selectTheme('kyoto')">
+                <!-- 4. Sunset Chill -->
+                <div class="theme-card" data-theme-id="sunset" onclick="selectTheme('sunset')">
                     <div class="dots-preview">
-                        <span style="background: #181419;"></span>
-                        <span style="background: #241b27;"></span>
-                        <span style="background: #f472b6;"></span>
+                        <span style="background: #120913;"></span>
+                        <span style="background: #fb923c;"></span>
+                        <span style="background: #f43f5e;"></span>
                     </div>
-                    <span class="theme-name">Kyoto</span>
+                    <span class="theme-name">Sunset Chill</span>
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
-                <!-- 8. Sirmeme -->
-                <div class="theme-card" data-theme-id="sirmeme" onclick="selectTheme('sirmeme')">
+                <!-- 5. Deep Ocean -->
+                <div class="theme-card" data-theme-id="ocean" onclick="selectTheme('ocean')">
                     <div class="dots-preview">
-                        <span style="background: #120917;"></span>
-                        <span style="background: #21102b;"></span>
-                        <span style="background: #e056fd;"></span>
+                        <span style="background: #06111e;"></span>
+                        <span style="background: #06b6d4;"></span>
+                        <span style="background: #3b82f6;"></span>
                     </div>
-                    <span class="theme-name">Sirmeme</span>
+                    <span class="theme-name">Deep Ocean</span>
+                    <i class="fas fa-check check-icon"></i>
+                </div>
+
+                <!-- 6. Dracula Violet -->
+                <div class="theme-card" data-theme-id="dracula" onclick="selectTheme('dracula')">
+                    <div class="dots-preview">
+                        <span style="background: #0d0814;"></span>
+                        <span style="background: #a855f7;"></span>
+                        <span style="background: #d946ef;"></span>
+                    </div>
+                    <span class="theme-name">Dracula Violet</span>
+                    <i class="fas fa-check check-icon"></i>
+                </div>
+
+                <!-- 7. Luxury Gold -->
+                <div class="theme-card" data-theme-id="gold" onclick="selectTheme('gold')">
+                    <div class="dots-preview">
+                        <span style="background: #0f0e0a;"></span>
+                        <span style="background: #eab308;"></span>
+                        <span style="background: #f97316;"></span>
+                    </div>
+                    <span class="theme-name">Luxury Gold</span>
+                    <i class="fas fa-check check-icon"></i>
+                </div>
+
+                <!-- 8. Nordic Light -->
+                <div class="theme-card" data-theme-id="light" onclick="selectTheme('light')">
+                    <div class="dots-preview">
+                        <span style="background: #ffffff; border: 1px solid #ccc;"></span>
+                        <span style="background: #2563eb;"></span>
+                        <span style="background: #9333ea;"></span>
+                    </div>
+                    <span class="theme-name">Nordic Light</span>
                     <i class="fas fa-check check-icon"></i>
                 </div>
             </div>
@@ -724,7 +830,7 @@
     </div>
 
     <script>
-        // --- CHỨC NĂNG BỘ LỌC THEMES POPUP ---
+        // LƯU VÀ ĐỔI THEMES TỰ ĐỘNG
         function selectTheme(themeId) {
             document.documentElement.setAttribute('data-theme', themeId);
             localStorage.setItem('user_preferred_theme', themeId);
@@ -755,13 +861,13 @@
             }
         }
 
-        // Tự động load theme người dùng đã lưu từ trước
+        // Tự động khôi phục theme đã chọn khi vào lại web
         (function initTheme() {
-            const saved = localStorage.getItem('user_preferred_theme') || 'pulsery';
+            const saved = localStorage.getItem('user_preferred_theme') || 'cyber';
             selectTheme(saved);
         })();
 
-        // CHẶN MỞ DEVTOOLS & SOI CODE F12
+        // CHẶN DEVTOOLS F12 / SOI CODE
         document.addEventListener('contextmenu', e => e.preventDefault());
 
         document.addEventListener('keydown', e => {
@@ -784,7 +890,7 @@
             }
         }, 300);
 
-        // DỮ LIỆU NPOINT API
+        // KẾT NỐI API NPOINT TỰ ĐỘNG LẤY DỮ LIỆU
         const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
         let rawItemsList = [];
         let currentTab = 'all';
@@ -810,7 +916,7 @@
                 updateStats();
                 filterData();
             } catch (err) {
-                document.getElementById('execTableBody').innerHTML = `<tr><td colspan="6" style="text-align:center; color:#ef4444;">Lỗi tải dữ liệu từ máy chủ!</td></tr>`;
+                document.getElementById('execTableBody').innerHTML = `<tr><td colspan="6" style="text-align:center; color:#ef4444;">Lỗi kết nối máy chủ!</td></tr>`;
             }
         }
 
@@ -846,7 +952,7 @@
         function renderTable(data) {
             const tbody = document.getElementById('execTableBody');
             if (data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 30px; color: var(--text-sub);">Không tìm thấy dữ liệu phù hợp</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 35px; color: var(--text-sub);">Không có dữ liệu phù hợp</td></tr>`;
                 return;
             }
 
@@ -860,18 +966,18 @@
                     </td>
                     <td>${getStatusBadge(item.status)}</td>
                     <td class="price-text">${item.price || 'Free'}</td>
-                    <td style="color: var(--text-sub);">${item.time || 'Cập nhật sau'}</td>
-                    <td style="color: var(--text-sub);">${item.note || '-'}</td>
+                    <td style="color: var(--text-sub); font-size: 0.88rem;">${item.time || 'Cập nhật sau'}</td>
+                    <td style="color: var(--text-sub); font-size: 0.88rem;">${item.note || '-'}</td>
                 </tr>
             `).join('');
         }
 
         function getPlatIcon(plat) {
             const p = (plat || '').toLowerCase();
-            if (p === 'windows') return '<i class="fab fa-windows" style="color:#00a4ef;"></i>';
-            if (p === 'android') return '<i class="fab fa-android" style="color:#3dda84;"></i>';
-            if (p === 'ios') return '<i class="fab fa-apple" style="color:#a6b1b7;"></i>';
-            if (p === 'mac') return '<i class="fas fa-desktop" style="color:#ffffff;"></i>';
+            if (p === 'windows') return '<i class="fab fa-windows" style="color:#38bdf8;"></i>';
+            if (p === 'android') return '<i class="fab fa-android" style="color:#10b981;"></i>';
+            if (p === 'ios') return '<i class="fab fa-apple" style="color:#f472b6;"></i>';
+            if (p === 'mac') return '<i class="fas fa-desktop" style="color:#a855f7;"></i>';
             return '<i class="fas fa-microchip"></i>';
         }
 
