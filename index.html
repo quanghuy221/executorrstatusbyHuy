@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- BỘ MÀU THEMES CHUẨN CỰC CHILL & SANG TRỌNG --- */
+        /* --- BỘ MÀU THEMES SANG TRỌNG & CHILL --- */
         html[data-theme="cyber"] {
             --bg: #07090e;
             --card-bg: rgba(14, 19, 31, 0.65);
@@ -131,7 +131,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Ambient Orbs */
+        /* ĐỐM ÁNH SÁNG TRÔI TỰ ĐỘNG BỒNG BỀNH PHÒNG NỀN CHILL */
         .ambient-glow {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -174,6 +174,7 @@
             z-index: 1;
         }
 
+        /* TOP BAR WITH THEME BUTTON */
         .top-bar {
             display: flex;
             justify-content: flex-end;
@@ -205,7 +206,7 @@
             transform: translateY(-2px) scale(1.02);
         }
 
-        /* Modal Overlay Theme */
+        /* MODAL POPUP THEME */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -278,6 +279,7 @@
             transform: rotate(90deg);
         }
 
+        /* GRID CHỌN THEME */
         .themes-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -320,7 +322,8 @@
         }
 
         .dots-preview span {
-            width: 10px; height: 10px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             display: inline-block;
         }
@@ -345,14 +348,15 @@
             transform: scale(1);
         }
 
-        /* Header UI */
+        /* HEADER */
         .header {
             text-align: center;
             margin-bottom: 35px;
         }
 
         .header-icon {
-            width: 70px; height: 70px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, var(--accent), #9333ea);
             border-radius: 22px;
             display: inline-flex;
@@ -386,7 +390,7 @@
             margin: 0;
         }
 
-        /* Stats Grid */
+        /* STATS CARDS */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -433,7 +437,7 @@
             opacity: 0.85;
         }
 
-        /* Filter & Search Bar */
+        /* FILTER & SEARCH */
         .filter-bar {
             display: flex;
             justify-content: space-between;
@@ -509,7 +513,7 @@
             box-shadow: 0 4px 15px var(--accent-glow);
         }
 
-        /* Table Card */
+        /* TABLE DESIGN V2 */
         .table-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -521,7 +525,9 @@
             transition: all 0.4s ease;
         }
 
-        .table-wrap { overflow-x: auto; }
+        .table-wrap {
+            overflow-x: auto;
+        }
 
         table {
             width: 100%;
@@ -548,10 +554,19 @@
             transition: background 0.2s ease;
         }
 
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background: rgba(255, 255, 255, 0.04); }
+        tr:last-child td {
+            border-bottom: none;
+        }
 
-        .exec-name { font-weight: 800; color: var(--text-main); }
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .exec-name {
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
         .plat-tag {
             color: var(--text-sub);
             font-size: 0.88rem;
@@ -561,7 +576,7 @@
             font-weight: 600;
         }
 
-        /* Status Badges */
+        /* BADGES STATUS CÓ DẠ QUANG VÀ CHỚP NỔI PULSE */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -575,7 +590,8 @@
         }
 
         .status-badge .dot {
-            width: 7px; height: 7px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
             position: relative;
         }
@@ -623,29 +639,36 @@
         }
         .status-outdated .dot { background: #ff4d4d; }
 
-        .price-text { font-weight: 700; color: var(--accent); }
+        .price-text {
+            font-weight: 700;
+            color: var(--accent);
+        }
     </style>
 </head>
 <body>
 
+    <!-- ĐỐM ÁNH SÁNG NỀN TRÔI CHILL -->
     <div class="ambient-glow">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
     </div>
 
     <div class="container">
+        <!-- TOP BAR -->
         <div class="top-bar">
             <button class="theme-open-btn" onclick="openThemeModal()">
                 <i class="fas fa-palette"></i> Themes
             </button>
         </div>
 
+        <!-- HEADER -->
         <div class="header">
             <div class="header-icon"><i class="fas fa-bolt"></i></div>
             <h1 id="mainTitle">Roblox Executors Status</h1>
             <p class="subtitle" id="mainSubtitle">Trạng thái cập nhật liên tục các Executor cho Windows, Android, iOS & Mac</p>
         </div>
 
+        <!-- STATS BOARD -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-info">
@@ -663,13 +686,14 @@
             </div>
             <div class="stat-card">
                 <div class="stat-info">
-                    <div class="title">KHÔNG ỔN ĐỊNH / LỖI</div>
+                    <div class="title">KHÔNG ỔN ĐỊNH / CHƯA SÀI ĐƯỢC</div>
                     <div class="num" id="errorCount" style="color: #ef4444;">0</div>
                 </div>
                 <i class="fas fa-triangle-exclamation stat-icon" style="color: #ef4444;"></i>
             </div>
         </div>
 
+        <!-- FILTER & SEARCH -->
         <div class="filter-bar">
             <div class="search-box">
                 <i class="fas fa-search"></i>
@@ -684,6 +708,7 @@
             </div>
         </div>
 
+        <!-- MAIN TABLE -->
         <div class="table-card">
             <div class="table-wrap">
                 <table>
@@ -705,14 +730,15 @@
         </div>
     </div>
 
-    <!-- POPUP MODAL THEMES -->
+    <!-- POPUP MODAL THEMES CỰC CHILL -->
     <div class="modal-overlay" id="themeModal" onclick="closeThemeModalOnOverlay(event)">
         <div class="modal-container">
             <div class="modal-header">
-                <h3><i class="fas fa-swatchbook" style="color: var(--accent);"></i> Chọn Theme Giao Diện</h3>
+                <h3><i class="fas fa-swatchbook" style="color: var(--accent);"></i> Select Theme</h3>
                 <button class="close-btn" onclick="closeThemeModal()"><i class="fas fa-times"></i></button>
             </div>
             <div class="themes-grid">
+                <!-- 1. Cyber Neon -->
                 <div class="theme-card" data-theme-id="cyber" onclick="selectTheme('cyber')">
                     <div class="dots-preview">
                         <span style="background: #07090e;"></span>
@@ -723,6 +749,7 @@
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
+                <!-- 2. Kyoto Night -->
                 <div class="theme-card" data-theme-id="kyoto" onclick="selectTheme('kyoto')">
                     <div class="dots-preview">
                         <span style="background: #0f0a13;"></span>
@@ -733,6 +760,7 @@
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
+                <!-- 3. Amoled Pulse -->
                 <div class="theme-card" data-theme-id="amoled" onclick="selectTheme('amoled')">
                     <div class="dots-preview">
                         <span style="background: #000000;"></span>
@@ -743,6 +771,7 @@
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
+                <!-- 4. Sunset Chill -->
                 <div class="theme-card" data-theme-id="sunset" onclick="selectTheme('sunset')">
                     <div class="dots-preview">
                         <span style="background: #120913;"></span>
@@ -753,6 +782,7 @@
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
+                <!-- 5. Deep Ocean -->
                 <div class="theme-card" data-theme-id="ocean" onclick="selectTheme('ocean')">
                     <div class="dots-preview">
                         <span style="background: #06111e;"></span>
@@ -763,6 +793,7 @@
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
+                <!-- 6. Dracula Violet -->
                 <div class="theme-card" data-theme-id="dracula" onclick="selectTheme('dracula')">
                     <div class="dots-preview">
                         <span style="background: #0d0814;"></span>
@@ -773,6 +804,7 @@
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
+                <!-- 7. Luxury Gold -->
                 <div class="theme-card" data-theme-id="gold" onclick="selectTheme('gold')">
                     <div class="dots-preview">
                         <span style="background: #0f0e0a;"></span>
@@ -783,6 +815,7 @@
                     <i class="fas fa-check check-icon"></i>
                 </div>
 
+                <!-- 8. Nordic Light -->
                 <div class="theme-card" data-theme-id="light" onclick="selectTheme('light')">
                     <div class="dots-preview">
                         <span style="background: #ffffff; border: 1px solid #ccc;"></span>
@@ -828,6 +861,7 @@
             }
         }
 
+        // Tự động khôi phục theme đã chọn khi vào lại web
         (function initTheme() {
             const saved = localStorage.getItem('user_preferred_theme') || 'cyber';
             selectTheme(saved);
@@ -835,6 +869,7 @@
 
         // CHẶN DEVTOOLS F12 / SOI CODE
         document.addEventListener('contextmenu', e => e.preventDefault());
+
         document.addEventListener('keydown', e => {
             if (
                 e.key === 'F12' ||
@@ -855,8 +890,8 @@
             }
         }, 300);
 
-        // KẾT NỐI API QHuy TỰ ĐỘNG
-        const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8;
+        // KẾT NỐI API NPOINT TỰ ĐỘNG LẤY DỮ LIỆU
+        const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
         let rawItemsList = [];
         let currentTab = 'all';
 
@@ -948,10 +983,18 @@
 
         function getStatusBadge(status) {
             const s = (status || '').toUpperCase();
-            if (s === 'WORKING') return `<span class="status-badge status-working"><span class="dot"></span>WORKING</span>`;
-            if (s === 'UNSTABLE') return `<span class="status-badge status-unstable"><span class="dot"></span>UNSTABLE</span>`;
-            if (s === 'PATCHED') return `<span class="status-badge status-patched"><span class="dot"></span>PATCHED</span>`;
-            if (s === 'OUTDATED') return `<span class="status-badge status-outdated"><span class="dot"></span>OUTDATED</span>`;
+            if (s === 'WORKING') {
+                return `<span class="status-badge status-working"><span class="dot"></span>WORKING</span>`;
+            }
+            if (s === 'UNSTABLE') {
+                return `<span class="status-badge status-unstable"><span class="dot"></span>UNSTABLE</span>`;
+            }
+            if (s === 'PATCHED') {
+                return `<span class="status-badge status-patched"><span class="dot"></span>PATCHED</span>`;
+            }
+            if (s === 'OUTDATED') {
+                return `<span class="status-badge status-outdated"><span class="dot"></span>OUTDATED</span>`;
+            }
             return `<span class="status-badge status-outdated"><span class="dot"></span>${s || 'UNKNOWN'}</span>`;
         }
 
