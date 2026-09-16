@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='9' fill='%2310b981'/><text x='16' y='23' font-size='18' font-weight='900' text-anchor='middle' fill='%23000'>H</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -45,14 +45,26 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
 .wrap{width:100%;max-width:1560px;margin:0 auto;padding:0 clamp(14px,3.5vw,36px)}
 .topbar{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border)}
 .topbar-in{display:flex;align-items:center;gap:18px;height:62px}
+
+/* ============ BRAND — SVG HEX ============ */
 .brand-block{display:flex;align-items:center;gap:11px;flex-shrink:0;position:relative}
-.brand-mark{width:38px;height:38px;border-radius:11px;flex-shrink:0;background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));display:grid;place-items:center;color:#000;font-weight:900;font-size:15px;box-shadow:0 0 0 1px rgba(255,255,255,.2),0 6px 20px rgba(var(--accent),.35);position:relative;overflow:hidden;transition:transform var(--t-fast)}
-.brand-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);transform:translateX(-100%);transition:transform .8s}
-.brand-mark:hover::after{transform:translateX(100%)}
-.brand-mark:hover{transform:rotate(-6deg) scale(1.06)}
+.brand-mark{
+  width:42px;height:42px;flex-shrink:0;
+  display:grid;place-items:center;
+  filter:drop-shadow(0 6px 16px rgba(var(--accent),.45));
+  transition:transform var(--t-fast);
+}
+.brand-mark svg{width:100%;height:100%;display:block}
+.brand-mark:hover{transform:rotate(-8deg) scale(1.08)}
+.brand-mark .bm-h{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:800;font-size:15px;
+  letter-spacing:-.04em;
+}
 .brand-text{display:flex;flex-direction:column;line-height:1.1;min-width:0}
 .brand-t{font-size:14.5px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;background:linear-gradient(90deg,var(--text),rgb(var(--accent)) 130%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .brand-s{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-3);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;margin-top:2px}
+
 .nav-tabs{display:flex;gap:2px;align-items:center;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
 .nav-tabs::-webkit-scrollbar{display:none}
 .nav-tab{position:relative;padding:8px 14px;border-radius:9px;font-size:12.5px;font-weight:500;color:var(--text-3);white-space:nowrap;transition:all var(--t-fast);display:inline-flex;align-items:center;gap:6px}
@@ -193,6 +205,23 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
 .row2-meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-3);margin-top:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .row2-meta .sep{color:var(--border-2)}
 .row2-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+
+/* ============ UPDATED TIME ============ */
+.row2-updated{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;
+  color:var(--text-3);
+  margin-top:4px;
+  display:inline-flex;align-items:center;gap:5px;
+  padding:2px 7px;
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--border);
+  border-radius:5px;
+  letter-spacing:.01em;
+}
+.row2-updated svg{width:10px;height:10px;stroke:rgb(var(--accent));fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.85;flex-shrink:0}
+.row2:hover .row2-updated{border-color:rgba(var(--accent),.25);color:var(--text-2)}
+
 .copy-chip{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--bg-3);border:1px solid var(--border);color:var(--text-2);padding:3px 7px;border-radius:6px;cursor:pointer;transition:all var(--t-fast)}
 .copy-chip:hover{border-color:rgba(var(--accent),.5);color:rgb(var(--accent))}
 .copy-chip svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
@@ -370,7 +399,39 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
   <header class="topbar">
     <div class="wrap topbar-in">
       <div class="brand-block">
-        <div class="brand-mark">H</div>
+        <div class="brand-mark">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bmHex" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgb(var(--accent))"/>
+                <stop offset="100%" stop-color="rgb(var(--accent-2))"/>
+              </linearGradient>
+              <radialGradient id="bmGloss" cx="35%" cy="20%" r="70%">
+                <stop offset="0%" stop-color="rgba(255,255,255,.7)"/>
+                <stop offset="60%" stop-color="rgba(255,255,255,0)"/>
+              </radialGradient>
+            </defs>
+            <polygon points="20,2 36,11 36,29 20,38 4,29 4,11"
+                     fill="url(#bmHex)"
+                     stroke="rgba(255,255,255,.45)"
+                     stroke-width="1.2"
+                     stroke-linejoin="round"/>
+            <polygon points="20,5.5 33,12.8 33,27.2 20,34.5 7,27.2 7,12.8"
+                     fill="none"
+                     stroke="rgba(255,255,255,.22)"
+                     stroke-width="0.6"
+                     stroke-linejoin="round"/>
+            <polygon points="20,2 36,11 36,29 20,38 4,29 4,11"
+                     fill="url(#bmGloss)"
+                     stroke="none"/>
+            <text x="20" y="25.5"
+                  font-family="'Space Grotesk', system-ui, sans-serif"
+                  font-weight="800" font-size="14"
+                  text-anchor="middle"
+                  fill="#0a0a0a"
+                  letter-spacing="-0.6">H</text>
+          </svg>
+        </div>
         <div class="brand-text">
           <div class="brand-t">Exec Status by Huy</div>
           <div class="brand-s" id="iBrandSub">trình theo dõi executor roblox</div>
@@ -556,6 +617,7 @@ const I18N = {
     stUpdated:'Updated',stOutdated:'Not Updated',
     stUpdatedNote:'This executor is up to date on WEAO.',
     stOutdatedNote:'This executor has not been updated on WEAO.',
+    updLabel:'Last updated',
     bfUndetected:'Undetected',bfBanwave:'Undetected · Banwave risk',bfDetected:'Detected',
     bfUndetectedNote:'This exploit is reported as undetected.',
     bfBanwaveNote:'Bypasses client-mod bans but may still be caught in banwaves.',
@@ -631,6 +693,7 @@ const I18N = {
     stUpdated:'Updated',stOutdated:'Not Updated',
     stUpdatedNote:'Executor này đã được cập nhật trên WEAO.',
     stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.',
+    updLabel:'Last updated',
     bfUndetected:'Undetected',bfBanwave:'Undetected · Banwave risk',bfDetected:'Detected',
     bfUndetectedNote:'Executor này được báo cáo là undetected.',
     bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.',
@@ -706,6 +769,7 @@ const I18N = {
     stUpdated:'Đã cập nhật',stOutdated:'Chưa cập nhật',
     stUpdatedNote:'Executor này đã được cập nhật trên WEAO.',
     stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.',
+    updLabel:'Cập nhật',
     bfUndetected:'Không bị phát hiện',bfBanwave:'Không bị phát hiện · Rủi ro banwave',bfDetected:'Bị phát hiện',
     bfUndetectedNote:'Executor này được báo cáo là không bị phát hiện.',
     bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.',
@@ -765,7 +829,6 @@ const I18N = {
   }
 };
 
-/* DEFAULT = NORMAL */
 let currentLang = 'normal';
 const t = k => (I18N[currentLang] && I18N[currentLang][k]) || k;
 
@@ -775,13 +838,64 @@ function verLabel(v){
   return /^[vV]/.test(s) ? s : 'v' + s;
 }
 
-/* Ngày hiển thị dạng metadata — KHÔNG dùng để phân loại status nữa */
 function recentDate(daysAgo){
   const d = new Date(Date.now() - daysAgo * 86400000);
   const m = String(d.getUTCMonth()+1).padStart(2,'0');
   const day = String(d.getUTCDate()).padStart(2,'0');
   const y = d.getUTCFullYear();
   return `${m}/${day}/${y}`;
+}
+
+/* ============ PARSE WEAO DATE ============
+   Format: "09/16/2026 at 3:09 AM UTC" hoặc "9/21/2025, 6:46:57 PM UTC"
+   → trả về UTC timestamp (ms)
+========================================== */
+function parseWEAODate(str){
+  if(!str || str==='Unknown') return null;
+  const s = String(str).trim();
+  const m = s.match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})[,\s]+(?:at\s+)?(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?/i);
+  if(!m) return null;
+  const mo = parseInt(m[1],10)-1;
+  const day = parseInt(m[2],10);
+  const yr = parseInt(m[3],10);
+  let hr = parseInt(m[4],10);
+  const mn = parseInt(m[5],10);
+  const sc = parseInt(m[6]||'0',10);
+  const ampm = (m[7]||'').toUpperCase();
+  if(ampm==='PM' && hr<12) hr+=12;
+  if(ampm==='AM' && hr===12) hr=0;
+  return Date.UTC(yr, mo, day, hr, mn, sc);
+}
+
+/* ============ FORMAT UPDATED TIME ============
+   EN → show UTC (giống weao gốc)
+   NOR → show VN time (UTC+7) với label EN
+   VI  → show VN time (UTC+7) với label VI
+=============================================== */
+function formatUpdated(utcMs, lang){
+  if(utcMs===null) return '';
+  const d = new Date(utcMs);
+  if(lang==='en'){
+    const datePart = new Intl.DateTimeFormat('en-US',{
+      timeZone:'UTC',
+      month:'2-digit', day:'2-digit', year:'numeric'
+    }).format(d);
+    const timePart = new Intl.DateTimeFormat('en-US',{
+      timeZone:'UTC',
+      hour:'numeric', minute:'2-digit', hour12:true
+    }).format(d);
+    return t('updLabel')+': '+datePart+' at '+timePart+' UTC';
+  }
+  // NOR / VI → VN time UTC+7
+  const datePart = new Intl.DateTimeFormat('vi-VN',{
+    timeZone:'Asia/Ho_Chi_Minh',
+    day:'2-digit', month:'2-digit', year:'numeric'
+  }).format(d);
+  const timePart = new Intl.DateTimeFormat('vi-VN',{
+    timeZone:'Asia/Ho_Chi_Minh',
+    hour:'2-digit', minute:'2-digit', hour12:false
+  }).format(d);
+  return t('updLabel')+': '+timePart+' · '+datePart+' (UTC+7)';
 }
 
 const THEMES=[
@@ -793,20 +907,19 @@ const THEMES=[
   {id:"sakura",name:"Sakura",c:"#fda4af"},{id:"obsidian",name:"Obsidian",c:"#ffffff"}
 ];
 
-/* FALLBACK DATA — chỉ dùng updateStatus theo doc weao, KHÔNG phân loại theo ngày */
 const FALLBACK_EXPLOITS=[
-  {_id:"exl-volt",title:"Volt",version:"1.3.13.1",updatedDate:recentDate(0),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$5.99 Weekly",detected:true,clientmods:true,detectionReason:"Last banwave: March 6-18th",updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://voltbz.net/",discordlink:"https://discord.com/invite/voltbz",purchaselink:"https://rcheatz.com/product?id=volt&ref=weao",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Volt Team",fullDescription:"Volt (previously AWP.GG) is a premium Windows script executor.",logo:"https://cdn.weao.gg/slug/volt/logo.png"}},
-  {_id:"exl-wave",title:"Wave",version:"NEW-1.5.3",updatedDate:recentDate(0),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$4.99 Weekly",detected:true,clientmods:true,detectionReason:"Last banwave: May 26",updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://getwave.gg",discordlink:"https://discord.gg/rARhPpN7fY",purchaselink:"https://bloxproducts.com/?affiliate_key=weao#Wave",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Wave Team",fullDescription:"Wave is a premium Windows script executor.",logo:"https://cdn.weao.gg/slug/wave/logo.png"}},
-  {_id:"exl-sirhurt",title:"SirHurt",version:"V5.469",updatedDate:recentDate(0),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$2.80 Weekly",detected:true,clientmods:true,updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://sirhurt.net",discordlink:"https://discord.gg/CPKvWTgFdV",purchaselink:"https://sirhurt.net/#purchase",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"spook",fullDescription:"SirHurt is a long-standing premium Windows script executor.",logo:"https://cdn.weao.gg/slug/sirhurt/logo.png"}},
-  {_id:"exl-solara",title:"Solara",version:"0.1.7",updatedDate:recentDate(0),uncStatus:true,uncPercentage:66,suncPercentage:59,free:true,detected:true,clientmods:true,updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://getsolara.dev",discordlink:"https://getsolara.dev/discord",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:false,slug:{owner:"Quivings",fullDescription:"Solara is a free external Windows script executor.",logo:"https://cdn.weao.gg/slug/solara/logo.png"}},
-  {_id:"exl-xeno",title:"Xeno",version:"1.3.60",updatedDate:recentDate(0),uncStatus:true,uncPercentage:84,suncPercentage:40,free:true,detected:true,clientmods:true,updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://www.xeno.now/",discordlink:"https://discord.gg/xe-no",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:false,slug:{owner:"Rizve",fullDescription:"Xeno is a free external Windows script executor.",logo:"https://cdn.weao.gg/slug/xeno/logo.png"}},
-  {_id:"exl-delta",title:"Delta",version:"2.729.840",updatedDate:recentDate(0),uncStatus:true,uncPercentage:99,suncPercentage:100,free:true,detected:true,clientmods:true,updateStatus:true,rbxversion:"2.729.840",websitelink:"https://deltaexploits.gg/",discordlink:"https://discord.gg/deltax",purchaselink:"https://rcheatz.com/product?id=delta&ref=weao",platform:"Android",extype:"aexecutor",keysystem:true,decompiler:true,multiInject:false,raknet:true,slug:{owner:"lxnny, mlemix",fullDescription:"Delta is a free Android executor.",logo:"https://cdn.weao.gg/slug/delta/logo.png"}},
-  {_id:"exl-potassium",title:"Potassium",version:"2.4.8",updatedDate:recentDate(45),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$22.99 Lifetime",detected:true,clientmods:true,detectionReason:"Last banwave: June 1st",updateStatus:false,rbxversion:"c5aecda2245e",websitelink:"https://www.potassium.pro/",discordlink:"https://discord.com/invite/potassium",purchaselink:"https://bloxproducts.com/r/weao#Potassium",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"perm, v03",fullDescription:"Potassium is a lifetime premium Windows script executor.",logo:"https://cdn.weao.gg/slug/potassium/logo.png"}},
-  {_id:"exl-cosmic",title:"Cosmic",version:"1.733",updatedDate:recentDate(25),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$14.99 Lifetime",detected:true,clientmods:true,updateStatus:false,rbxversion:"d584fb6c717a",websitelink:"https://cosmic.best",discordlink:"https://discord.gg/cosmicbest",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:false,slug:{owner:"savage",fullDescription:"Cosmic is a budget-friendly premium Windows script executor.",logo:"https://cdn.weao.gg/slug/cosmic/cosmic-transparent.png"}},
-  {_id:"exl-real",title:"Real",version:"2.6.2",updatedDate:recentDate(20),uncStatus:true,uncPercentage:99,suncPercentage:100,free:true,detected:true,clientmods:true,updateStatus:false,rbxversion:"c5aecda2245e",websitelink:"https://projectreal.gg",discordlink:"https://discord.gg/real",platform:"Windows",extype:"wexecutor",keysystem:true,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Real Team",fullDescription:"Real is a free Windows script executor with a key system."}},
-  {_id:"exl-macsploit",title:"MacSploit",version:"736.1",updatedDate:recentDate(10),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$9.99 Lifetime",detected:false,clientmods:true,updateStatus:false,rbxversion:"4c4fc877ca9b",websitelink:"https://www.raptor.fun/",discordlink:"https://discord.gg/macsploit",purchaselink:"https://bloxproducts.com/?affiliate_key=weao#MacSploit",platform:"Mac",extype:"mexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{fullDescription:"MacSploit is a premium macOS script executor."}},
-  {_id:"exl-opiumware",title:"Opiumware",version:"v2.5.1-a",updatedDate:recentDate(5),uncStatus:true,uncPercentage:99,suncPercentage:100,free:true,detected:false,clientmods:false,updateStatus:false,rbxversion:"2a3a7efa1a93",websitelink:"https://use.opiumware.today/",discordlink:"https://discord.gg/opiumware",platform:"Mac",extype:"mexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"norby",fullDescription:"Opiumware is a free macOS script executor.",logo:"https://cdn.weao.gg/slug/opiumware/logo.png"}},
-  {_id:"exl-codex",title:"Codex",version:"2.731.944",updatedDate:recentDate(30),uncStatus:true,uncPercentage:98,suncPercentage:96,free:true,detected:true,clientmods:true,updateStatus:false,rbxversion:"2.731.944",websitelink:"https://codex.lol",discordlink:"https://discord.gg/codexlol",purchaselink:"https://rcheatz.com/affiliate/weao",platform:"Android",extype:"aexecutor",keysystem:true,decompiler:true,multiInject:false,raknet:false,slug:{owner:"Furky",fullDescription:"Codex is a free Android executor.",logo:"https://cdn.weao.gg/slug/codex/logo.png"}}
+  {_id:"exl-volt",title:"Volt",version:"1.3.13.1",updatedDate:"09/16/2026 at 5:00 AM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$5.99 Weekly",detected:true,clientmods:true,detectionReason:"Last banwave: March 6-18th",updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://voltbz.net/",discordlink:"https://discord.com/invite/voltbz",purchaselink:"https://rcheatz.com/product?id=volt&ref=weao",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Volt Team",fullDescription:"Volt (previously AWP.GG) is a premium Windows script executor.",logo:"https://cdn.weao.gg/slug/volt/logo.png"}},
+  {_id:"exl-wave",title:"Wave",version:"NEW-1.5.3",updatedDate:"09/15/2026 at 10:00 PM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$4.99 Weekly",detected:true,clientmods:true,detectionReason:"Last banwave: May 26",updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://getwave.gg",discordlink:"https://discord.gg/rARhPpN7fY",purchaselink:"https://bloxproducts.com/?affiliate_key=weao#Wave",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Wave Team",fullDescription:"Wave is a premium Windows script executor.",logo:"https://cdn.weao.gg/slug/wave/logo.png"}},
+  {_id:"exl-sirhurt",title:"SirHurt",version:"V5.469",updatedDate:"09/15/2026 at 3:34 PM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$2.80 Weekly",detected:true,clientmods:true,updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://sirhurt.net",discordlink:"https://discord.gg/CPKvWTgFdV",purchaselink:"https://sirhurt.net/#purchase",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"spook",fullDescription:"SirHurt is a long-standing premium Windows script executor.",logo:"https://cdn.weao.gg/slug/sirhurt/logo.png"}},
+  {_id:"exl-solara",title:"Solara",version:"0.1.7",updatedDate:"09/16/2026 at 12:04 AM UTC",uncStatus:true,uncPercentage:66,suncPercentage:59,free:true,detected:true,clientmods:true,updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://getsolara.dev",discordlink:"https://getsolara.dev/discord",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:false,slug:{owner:"Quivings",fullDescription:"Solara is a free external Windows script executor.",logo:"https://cdn.weao.gg/slug/solara/logo.png"}},
+  {_id:"exl-xeno",title:"Xeno",version:"1.3.60",updatedDate:"09/16/2026 at 3:53 AM UTC",uncStatus:true,uncPercentage:84,suncPercentage:40,free:true,detected:true,clientmods:true,updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://www.xeno.now/",discordlink:"https://discord.gg/xe-no",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:false,slug:{owner:"Rizve",fullDescription:"Xeno is a free external Windows script executor.",logo:"https://cdn.weao.gg/slug/xeno/logo.png"}},
+  {_id:"exl-delta",title:"Delta",version:"2.729.840",updatedDate:"09/10/2026 at 7:11 PM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:true,detected:true,clientmods:true,updateStatus:true,rbxversion:"2.729.840",websitelink:"https://deltaexploits.gg/",discordlink:"https://discord.gg/deltax",purchaselink:"https://rcheatz.com/product?id=delta&ref=weao",platform:"Android",extype:"aexecutor",keysystem:true,decompiler:true,multiInject:false,raknet:true,slug:{owner:"lxnny, mlemix",fullDescription:"Delta is a free Android executor.",logo:"https://cdn.weao.gg/slug/delta/logo.png"}},
+  {_id:"exl-real",title:"Real",version:"2.6.3",updatedDate:"09/16/2026 at 2:46 PM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:true,detected:true,clientmods:true,updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://projectreal.gg",discordlink:"https://discord.gg/real",platform:"Windows",extype:"wexecutor",keysystem:true,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Bytecode, marko, 0x108",fullDescription:"Real is a free Windows script executor with a key system."}},
+  {_id:"exl-potassium",title:"Potassium",version:"2.4.8",updatedDate:"08/10/2026 at 11:48 PM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$22.99 Lifetime",detected:true,clientmods:true,detectionReason:"Last banwave: June 1st",updateStatus:false,rbxversion:"c5aecda2245e",websitelink:"https://www.potassium.pro/",discordlink:"https://discord.com/invite/potassium",purchaselink:"https://bloxproducts.com/r/weao#Potassium",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"perm, v03",fullDescription:"Potassium is a lifetime premium Windows script executor.",logo:"https://cdn.weao.gg/slug/potassium/logo.png"}},
+  {_id:"exl-cosmic",title:"Cosmic",version:"1.733",updatedDate:"08/08/2026 at 9:41 PM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$14.99 Lifetime",detected:true,clientmods:true,updateStatus:false,rbxversion:"d584fb6c717a",websitelink:"https://cosmic.best",discordlink:"https://discord.gg/cosmicbest",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:false,slug:{owner:"savage",fullDescription:"Cosmic is a budget-friendly premium Windows script executor.",logo:"https://cdn.weao.gg/slug/cosmic/cosmic-transparent.png"}},
+  {_id:"exl-macsploit",title:"MacSploit",version:"736.1",updatedDate:"09/06/2026 at 2:42 AM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$9.99 Lifetime",detected:false,clientmods:true,updateStatus:false,rbxversion:"4c4fc877ca9b",websitelink:"https://www.raptor.fun/",discordlink:"https://discord.gg/macsploit",purchaselink:"https://bloxproducts.com/?affiliate_key=weao#MacSploit",platform:"Mac",extype:"mexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{fullDescription:"MacSploit is a premium macOS script executor."}},
+  {_id:"exl-opiumware",title:"Opiumware",version:"v2.5.1-a",updatedDate:"09/11/2026 at 4:15 AM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:true,detected:false,clientmods:false,updateStatus:false,rbxversion:"2a3a7efa1a93",websitelink:"https://use.opiumware.today/",discordlink:"https://discord.gg/opiumware",platform:"Mac",extype:"mexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"norby",fullDescription:"Opiumware is a free macOS script executor.",logo:"https://cdn.weao.gg/slug/opiumware/logo.png"}},
+  {_id:"exl-codex",title:"Codex",version:"2.731.944",updatedDate:"08/10/2026 at 9:14 PM UTC",uncStatus:true,uncPercentage:98,suncPercentage:96,free:true,detected:true,clientmods:true,updateStatus:false,rbxversion:"2.731.944",websitelink:"https://codex.lol",discordlink:"https://discord.gg/codexlol",purchaselink:"https://rcheatz.com/affiliate/weao",platform:"Android",extype:"aexecutor",keysystem:true,decompiler:true,multiInject:false,raknet:false,slug:{owner:"Furky",fullDescription:"Codex is a free Android executor.",logo:"https://cdn.weao.gg/slug/codex/logo.png"}}
 ];
 
 const FALLBACK_VERSIONS={
@@ -827,10 +940,6 @@ const isCdnWEAO=u=>{try{const h=new URL(u).hostname.toLowerCase();return h==='cd
 function lsGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catch(e){return f}}
 function lsSet(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
 
-/* ============ STATUS LOGIC — 2-tier theo đúng doc weao ============
-   Doc weao: "updateStatus — boolean — If the exploit is updated"
-   → Chỉ dùng boolean, KHÔNG dùng ngày để phân loại thêm.
-===================================================================== */
 function computeStatus(e){
   if(e.updateStatus){
     return {key:'updated', label:t('stUpdated'), tone:'ok', note:t('stUpdatedNote')};
@@ -1117,6 +1226,8 @@ function renderRow(e,i){
   const s2Cls=s.tone==='ok'?'ok':s.tone==='warn'?'warn':'bad';
   const hashShort=String(e.rbxversion||'').replace('version-','').slice(0,12);
   const vLbl = verLabel(e.version);
+  const updatedMs = parseWEAODate(e.updatedDate);
+  const updatedStr = formatUpdated(updatedMs, currentLang);
   return `
     <div class="row2" data-id="${esc(e._id)}" style="animation-delay:${Math.min(i*22,280)}ms">
       <button class="row2-cb ${inCmp?'on':''}" data-cmp="${esc(e._id)}" title="${esc(t('compare'))}">
@@ -1132,7 +1243,6 @@ function renderRow(e,i){
             <span>${esc(plat.toLowerCase())}</span>
             <span class="sep">·</span>
             <span>${e.free?(e.keysystem?'free+key':'free'):esc(e.cost||'paid')}</span>
-            ${e.updatedDate&&e.updatedDate!=='Unknown'?'<span class="sep">·</span><span>upd '+esc(e.updatedDate.split(' at ')[0])+'</span>':''}
           </div>
           <div class="row2-chips">
             <button class="copy-chip" data-copy-ver="${esc(e._id)}" title="Copy ${esc(e.version)}">
@@ -1144,6 +1254,7 @@ function renderRow(e,i){
               <svg viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16V4a2 2 0 0 1 2-2h10"/></svg>
             </button>`:''}
           </div>
+          ${updatedStr?`<div class="row2-updated"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>${esc(updatedStr)}</span></div>`:''}
         </div>
       </div>
       <div class="row2-r">
@@ -1206,6 +1317,8 @@ function renderDrawer(){
   const logoOK=isCdnWEAO(e.slug?.logo);
   const initials=e.title.replace(/[^a-zA-Z0-9]/g,'').slice(0,2).toUpperCase();
   const stTone = st.tone === 'ok' ? 'ok' : 'bad';
+  const updatedMs = parseWEAODate(e.updatedDate);
+  const updatedStr = formatUpdated(updatedMs, currentLang);
 
   const hd=$('#dwHd');
   if(!hd) return;
@@ -1233,6 +1346,7 @@ function renderDrawer(){
         <svg viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16V4a2 2 0 0 1 2-2h10"/></svg>
       </button>`:''}
     </div>
+    ${updatedStr?`<div class="row2-updated" style="margin-bottom:12px"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>${esc(updatedStr)}</span></div>`:''}
     <div class="dw-stats">
       <div class="dw-st"><div class="l">${esc(t('status'))}</div><div class="v ${stTone}">${esc(st.label)}</div></div>
       <div class="dw-st"><div class="l">${esc(t('byfron'))}</div><div class="v ${tone}">${esc(s.label)}</div></div>
