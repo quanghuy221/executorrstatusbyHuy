@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0a0c10">
 <title>Exec Status by Huy — Roblox Executor Monitor</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='9' fill='%2310b981'/><text x='16' y='23' font-size='18' font-weight='900' text-anchor='middle' fill='%23000'>H</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='9' fill='%2310b981'/><path d='M11 8h3v6h4V8h3v16h-3v-7h-4v7h-3z' fill='%23fff'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -46,47 +46,77 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
 .topbar{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border)}
 .topbar-in{display:flex;align-items:center;gap:18px;height:62px}
 
-/* ============ BRAND — CLEAN MODERN ============ */
+/* ============================================================
+   BRAND MARK — SVG H, KHÔNG CÒN CẤN
+   - Dùng SVG path thay vì text → pixel-perfect, không lệch baseline
+   - Inset shadow tạo chiều sâu 3D nhẹ
+   - Radial highlight ở góc trên trái → ánh sáng tự nhiên
+   - Shine sweep animation khi hover
+   ============================================================ */
 .brand-block{display:flex;align-items:center;gap:12px;flex-shrink:0;position:relative}
 .brand-mark{
   width:40px;height:40px;flex-shrink:0;
-  border-radius:11px;
-  background:linear-gradient(135deg,rgb(var(--accent)) 0%,rgb(var(--accent-2)) 100%);
+  border-radius:12px;
+  background:linear-gradient(145deg, rgb(var(--accent)) 0%, rgb(var(--accent-2)) 100%);
   display:grid;place-items:center;
   position:relative;
-  box-shadow:
-    0 4px 14px rgba(var(--accent),.35),
-    0 0 0 1px rgba(255,255,255,.15) inset,
-    0 -6px 12px rgba(0,0,0,.15) inset;
-  transition:transform var(--t-fast), box-shadow var(--t-fast);
   overflow:hidden;
+  isolation:isolate;
+  box-shadow:
+    0 4px 14px rgba(var(--accent),.38),
+    0 1px 0 rgba(255,255,255,.08) inset,
+    0 -2px 6px rgba(0,0,0,.18) inset;
+  transition:transform .28s cubic-bezier(.34,1.56,.64,1), box-shadow .28s ease;
+  will-change:transform;
 }
+/* Highlight tròn ở góc trên trái — tạo cảm giác cong nhẹ */
 .brand-mark::before{
   content:'';
-  position:absolute;inset:0;
-  background:radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 60%);
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 28% 22%, rgba(255,255,255,.42) 0%, rgba(255,255,255,0) 55%);
   pointer-events:none;
+  z-index:1;
 }
+/* Vệt sáng chéo (shine) — chỉ chạy khi hover */
 .brand-mark::after{
   content:'';
-  position:absolute;inset:0;
-  background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);
-  transform:translateX(-100%);
-  transition:transform 0s;
+  position:absolute;
+  top:-60%;left:-80%;
+  width:60%;height:220%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:rotate(22deg) translateX(-20%);
+  transition:left .9s ease, transform .9s ease;
   pointer-events:none;
+  z-index:2;
 }
-.brand-mark:hover::after{transform:translateX(100%);transition:transform 1s ease}
-.brand-mark:hover{transform:translateY(-2px) scale(1.04); box-shadow:0 8px 22px rgba(var(--accent),.5), 0 0 0 1px rgba(255,255,255,.2) inset, 0 -6px 12px rgba(0,0,0,.15) inset}
-.brand-mark span{
-  position:relative;z-index:1;
-  font-family:'Space Grotesk',system-ui,sans-serif;
-  font-weight:800;font-size:19px;
-  color:#0a0a0a;
-  letter-spacing:-.06em;
-  line-height:1;
-  text-shadow:0 1px 0 rgba(255,255,255,.25);
-  margin-top:-1px;
-  margin-left:-1px;
+.brand-mark:hover::after{
+  left:130%;
+}
+/* SVG chữ H — nét đều, sạch, pixel perfect */
+.brand-mark svg{
+  width:22px;height:22px;
+  position:relative;
+  z-index:3;
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.22));
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.brand-mark svg path{
+  fill:#ffffff;
+}
+.brand-mark:hover{
+  transform:translateY(-2px) scale(1.06);
+  box-shadow:
+    0 8px 22px rgba(var(--accent),.55),
+    0 0 0 1px rgba(var(--accent),.35),
+    0 1px 0 rgba(255,255,255,.15) inset,
+    0 -2px 6px rgba(0,0,0,.2) inset;
+}
+.brand-mark:hover svg{
+  transform:scale(1.08);
+}
+.brand-mark:active{
+  transform:translateY(0) scale(.98);
 }
 .brand-text{display:flex;flex-direction:column;line-height:1.1;min-width:0}
 .brand-t{font-size:14.5px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;background:linear-gradient(90deg,var(--text),rgb(var(--accent)) 130%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -212,8 +242,6 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
 .main-hd-r{display:flex;gap:8px;align-items:center}
 .pill-btn{padding:5px 11px;border-radius:99px;background:var(--surface);border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-2);display:inline-flex;align-items:center;gap:6px;transition:all var(--t-fast)}
 .pill-btn .dot{width:6px;height:6px;border-radius:50%;background:rgb(var(--accent));animation:pulseDot 1.6s infinite}
-
-/* ============ PLATFORM SECTION ============ */
 .plat-section{margin-bottom:24px}
 .plat-hd{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:12px 12px 0 0;border-bottom:none;margin-bottom:0}
 .plat-hd .plat-ico{width:26px;height:26px;border-radius:7px;background:var(--bg-3);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0}
@@ -221,7 +249,6 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
 .plat-hd .plat-name{font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:var(--text)}
 .plat-hd .plat-cnt{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-3);background:var(--surface-2);border:1px solid var(--border);padding:2px 8px;border-radius:6px}
 .plat-list{display:flex;flex-direction:column;gap:8px;padding-top:10px}
-
 .list2{display:flex;flex-direction:column;gap:8px}
 .row2{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;transition:all var(--t-med);cursor:pointer;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both;position:relative;overflow:hidden}
 .row2::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:rgb(var(--accent));opacity:0;transition:opacity var(--t-fast)}
@@ -410,7 +437,7 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
 .dw-tt{font-size:19px;font-weight:700;margin-bottom:7px;color:#fff}
 .dw-tx{font-size:13px;color:#a1a1aa;line-height:1.6}
 @media(max-width:900px){.topbar-in{height:58px}.brand-t{font-size:13.5px}.nav-tab{padding:7px 11px;font-size:12px}}
-@media(max-width:560px){.brand-s{display:none}.nav-tabs{display:none}.banner-title{font-size:26px}.stat-cluster{min-width:0}.stat-c{padding:10px 11px}.row2{padding:11px}.row2-logo{width:36px;height:36px}.row2-detail{padding:5px 10px;font-size:10.5px}.modal{max-height:96vh;border-radius:16px}.m-hd,.m-bd{padding:16px}.th-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.brand-s{display:none}.nav-tabs{display:none}.banner-title{font-size:26px}.stat-cluster{min-width:0}.stat-c{padding:10px 11px}.row2{padding:11px}.row2-logo{width:36px;height:36px}.row2-detail{padding:5px 10px;font-size:10.5px}.modal{max-height:96vh;border-radius:16px}.m-hd,.m-bd{padding:16px}.th-grid{grid-template-columns:repeat(2,1fr)}.brand-mark{width:36px;height:36px}.brand-mark svg{width:20px;height:20px}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -422,7 +449,9 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
   <header class="topbar">
     <div class="wrap topbar-in">
       <div class="brand-block">
-        <div class="brand-mark"><span>H</span></div>
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5.5 4h3.2v6.2h6.6V4h3.2v16h-3.2v-6.6H8.7V20H5.5z"/></svg>
+        </div>
         <div class="brand-text">
           <div class="brand-t">Exec Status by Huy</div>
           <div class="brand-s" id="iBrandSub">trình theo dõi executor roblox</div>
@@ -589,10 +618,7 @@ const API_EXPLOITS='https://weao.xyz/api/status/exploits';
 const API_VERSIONS='https://weao.xyz/api/versions/current';
 const THEME_KEY='huy_exec_theme';
 
-/* Thứ tự platform: Windows → Mac → Android → iOS → External */
 const PLATFORM_ORDER = ['Windows','Mac','Android','iOS','External'];
-
-/* Thứ tự ưu tiên cho từng platform (theo tên lowercase) */
 const PRIORITY_MAP = {
   Windows: ['potassium','volt','wave','sirhurt','real','cosmic','solara','xeno'],
   Mac: ['macsploit','opiumware'],
@@ -880,7 +906,6 @@ const THEMES=[
   {id:"sakura",name:"Sakura",c:"#fda4af"},{id:"obsidian",name:"Obsidian",c:"#ffffff"}
 ];
 
-/* FALLBACK — giữ status đúng weao */
 const FALLBACK_EXPLOITS=[
   {_id:"exl-volt",title:"Volt",version:"1.3.13.1",updatedDate:"09/16/2026 at 5:00 AM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$5.99 Weekly",detected:true,clientmods:true,detectionReason:"Last banwave: March 6-18th",updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://voltbz.net/",discordlink:"https://discord.com/invite/voltbz",purchaselink:"https://rcheatz.com/product?id=volt&ref=weao",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Volt Team",fullDescription:"Volt (previously AWP.GG) is a premium Windows script executor.",logo:"https://cdn.weao.gg/slug/volt/logo.png"}},
   {_id:"exl-wave",title:"Wave",version:"NEW-1.5.3",updatedDate:"09/15/2026 at 10:00 PM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$4.99 Weekly",detected:true,clientmods:true,detectionReason:"Last banwave: May 26",updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://getwave.gg",discordlink:"https://discord.gg/rARhPpN7fY",purchaselink:"https://bloxproducts.com/?affiliate_key=weao#Wave",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Wave Team",fullDescription:"Wave is a premium Windows script executor.",logo:"https://cdn.weao.gg/slug/wave/logo.png"}},
@@ -1021,11 +1046,10 @@ function updateClock(){
 }
 
 function platformIcon(p){
-  if(p==='win'||p==='Windows') return '<path d="M3 5.5 10.5 4.3v7.2H3zM12 4l9-1.3v8.8h-9zM3 12.5h7.5v7.2L3 18.5zM12 12.5h9v8.8l-9-1.3z"/>';
-  if(p==='mac'||p==='Mac') return '<path d="M16.5 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-.5.9-.8 2-.8 3.1 0 2.4 1.8 5.5 3.3 5.5.7 0 1.5-.5 2.4-.5s1.7.5 2.4.5c1.5 0 3.1-2.9 3.1-5.5-.1 0-.3 0-.3 0zM14.3 6.8c.5-.6.8-1.5.8-2.3-.7 0-1.5.4-2 1-.4.5-.8 1.4-.8 2.2.8.1 1.6-.4 2-1z"/>';
-  if(p==='apk'||p==='Android') return '<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M11 19h2"/>';
-  if(p==='ios'||p==='iOS') return '<path d="M16.5 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-.5.9-.8 2-.8 3.1 0 2.4 1.8 5.5 3.3 5.5.7 0 1.5-.5 2.4-.5s1.7.5 2.4.5c1.5 0 3.1-2.9 3.1-5.5-.1 0-.3 0-.3 0zM14.3 6.8c.5-.6.8-1.5.8-2.3-.7 0-1.5.4-2 1-.4.5-.8 1.4-.8 2.2.8.1 1.6-.4 2-1z"/>';
-  if(p==='External') return '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>';
+  if(p==='win') return '<path d="M3 5.5 10.5 4.3v7.2H3zM12 4l9-1.3v8.8h-9zM3 12.5h7.5v7.2L3 18.5zM12 12.5h9v8.8l-9-1.3z"/>';
+  if(p==='mac') return '<path d="M16.5 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-.5.9-.8 2-.8 3.1 0 2.4 1.8 5.5 3.3 5.5.7 0 1.5-.5 2.4-.5s1.7.5 2.4.5c1.5 0 3.1-2.9 3.1-5.5-.1 0-.3 0-.3 0zM14.3 6.8c.5-.6.8-1.5.8-2.3-.7 0-1.5.4-2 1-.4.5-.8 1.4-.8 2.2.8.1 1.6-.4 2-1z"/>';
+  if(p==='apk') return '<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M11 19h2"/>';
+  if(p==='ios') return '<path d="M16.5 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-.5.9-.8 2-.8 3.1 0 2.4 1.8 5.5 3.3 5.5.7 0 1.5-.5 2.4-.5s1.7.5 2.4.5c1.5 0 3.1-2.9 3.1-5.5-.1 0-.3 0-.3 0zM14.3 6.8c.5-.6.8-1.5.8-2.3-.7 0-1.5.4-2 1-.4.5-.8 1.4-.8 2.2.8.1 1.6-.4 2-1z"/>';
   return '';
 }
 
@@ -1157,24 +1181,10 @@ function renderSideFilters(){
   `).join('');
 }
 
-/* Sort theo priority trong mỗi platform */
-function sortByPriority(items, platform){
-  const prio = PRIORITY_MAP[platform] || [];
-  return items.slice().sort((a,b)=>{
-    const la = a.title.toLowerCase();
-    const lb = b.title.toLowerCase();
-    const ia = prio.indexOf(la);
-    const ib = prio.indexOf(lb);
-    if(ia !== -1 && ib !== -1) return ia - ib;
-    if(ia !== -1) return -1;
-    if(ib !== -1) return 1;
-    return la.localeCompare(lb);
-  });
-}
-
-function getPlatformKey(e){
-  if(e.extype==='wexternal') return 'External';
-  return e.platform;
+function priorityIndex(platform, title){
+  const list = PRIORITY_MAP[platform]||[];
+  const idx = list.indexOf(String(title||'').toLowerCase());
+  return idx === -1 ? 999 : idx;
 }
 
 function applyFilters(){
@@ -1207,22 +1217,6 @@ function applyFilters(){
   return list;
 }
 
-/* Nhóm executor theo platform */
-function groupByPlatform(list){
-  const groups = {};
-  PLATFORM_ORDER.forEach(p => { groups[p] = []; });
-  list.forEach(e=>{
-    const key = getPlatformKey(e);
-    if(!groups[key]) groups[key] = [];
-    groups[key].push(e);
-  });
-  // Sort trong mỗi group theo priority
-  PLATFORM_ORDER.forEach(p=>{
-    groups[p] = sortByPriority(groups[p], p);
-  });
-  return groups;
-}
-
 function renderRow(e,i){
   const s=safetyLabel(e);
   const st=computeStatus(e);
@@ -1237,8 +1231,8 @@ function renderRow(e,i){
   const s2Cls=s.tone==='ok'?'ok':s.tone==='warn'?'warn':'bad';
   const hashShort=String(e.rbxversion||'').replace('version-','').slice(0,12);
   const vLbl = verLabel(e.version);
-  const updatedMs = parseWEAODate(e.updatedDate);
-  const updatedStr = formatUpdated(updatedMs, currentLang);
+  const updMs = parseWEAODate(e.updatedDate);
+  const updTxt = updMs ? formatUpdated(updMs, currentLang) : '';
   return `
     <div class="row2" data-id="${esc(e._id)}" style="animation-delay:${Math.min(i*22,280)}ms">
       <button class="row2-cb ${inCmp?'on':''}" data-cmp="${esc(e._id)}" title="${esc(t('compare'))}">
@@ -1265,7 +1259,7 @@ function renderRow(e,i){
               <svg viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16V4a2 2 0 0 1 2-2h10"/></svg>
             </button>`:''}
           </div>
-          ${updatedStr?`<div class="row2-updated"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>${esc(updatedStr)}</span></div>`:''}
+          ${updTxt?`<div class="row2-updated"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>${esc(updTxt)}</span></div>`:''}
         </div>
       </div>
       <div class="row2-r">
@@ -1283,6 +1277,31 @@ function renderRow(e,i){
   `;
 }
 
+function renderPlatformSection(platform, list){
+  if(!list.length) return '';
+  const icon = platform==='Windows'?'win':platform==='Mac'?'mac':platform==='Android'?'apk':platform==='iOS'?'ios':'';
+  const label = platform==='Mac'?'macOS':platform;
+  // sort theo priority map
+  const sorted = list.slice().sort((a,b)=>{
+    const pa = priorityIndex(platform, a.title);
+    const pb = priorityIndex(platform, b.title);
+    if(pa!==pb) return pa-pb;
+    return a.title.localeCompare(b.title);
+  });
+  return `
+    <section class="plat-section">
+      <div class="plat-hd">
+        <div class="plat-ico"><svg viewBox="0 0 24 24">${icon?platformIcon(icon):'<circle cx="12" cy="12" r="9"/>'}</svg></div>
+        <div class="plat-name">${esc(label)}</div>
+        <span class="plat-cnt">${sorted.length}</span>
+      </div>
+      <div class="plat-list">
+        ${sorted.map((e,i)=>renderRow(e,i)).join('')}
+      </div>
+    </section>
+  `;
+}
+
 function render(){
   renderVersionBar();
   renderStats();
@@ -1296,37 +1315,25 @@ function render(){
   if(mc) mc.textContent=`${list.length} ${t('items')}`;
   const ex=$('#execList');
   if(!ex) return;
-  if(!list.length){
-    ex.innerHTML=`<div class="empty"><div class="c">[ 0 ]</div><p>${esc(t('emptyTitle'))}</p></div>`;
-    return;
+  if(!list.length){ex.innerHTML=`<div class="empty"><div class="c">[ 0 ]</div><p>${esc(t('emptyTitle'))}</p></div>`;return;}
+
+  if(state.filters.platform==='All'){
+    let html='';
+    PLATFORM_ORDER.forEach(p=>{
+      let items;
+      if(p==='External'){
+        items = list.filter(e=>e.extype==='wexternal');
+      } else {
+        items = list.filter(e=>e.platform===p && e.extype!=='wexternal');
+      }
+      if(items.length) html += renderPlatformSection(p, items);
+    });
+    ex.innerHTML = html;
+  } else {
+    const p = state.filters.platform;
+    const items = list;
+    ex.innerHTML = renderPlatformSection(p==='External'?'External':p, items);
   }
-  // Nếu user chọn 1 platform cụ thể → hiện 1 section
-  // Nếu All → chia thành 5 section theo thứ tự Windows → Mac → Android → iOS → External
-  const groups = groupByPlatform(list);
-  let html = '';
-  let globalIdx = 0;
-  PLATFORM_ORDER.forEach(p=>{
-    const items = groups[p] || [];
-    if(!items.length) return;
-    // Label hiển thị
-    const labelMap = {Windows:'Windows',Mac:'macOS',Android:'Android',iOS:'iOS',External:'External'};
-    const noteMap = {Windows:'Internal DLL / injector',Mac:'Apple Silicon / Intel',Android:'APK',iOS:'IPA / sideload',External:'Non-Lua tools'};
-    html += `
-      <section class="plat-section">
-        <div class="plat-hd">
-          <div class="plat-ico"><svg viewBox="0 0 24 24">${platformIcon(p)}</svg></div>
-          <div class="plat-name">${esc(labelMap[p])}</div>
-          <div class="plat-cnt">${items.length} ${items.length===1?'item':'items'}</div>
-        </div>
-        <div class="plat-list">
-          ${items.map((e)=>{const r=renderRow(e,globalIdx);globalIdx++;return r}).join('')}
-        </div>
-      </section>
-    `;
-  });
-  ex.innerHTML = html;
-  // Đổi #execList thành block để section xếp dọc
-  ex.style.display='block';
 }
 
 function openDrawer(id){
@@ -1357,8 +1364,8 @@ function renderDrawer(){
   const logoOK=isCdnWEAO(e.slug?.logo);
   const initials=e.title.replace(/[^a-zA-Z0-9]/g,'').slice(0,2).toUpperCase();
   const stTone = st.tone === 'ok' ? 'ok' : 'bad';
-  const updatedMs = parseWEAODate(e.updatedDate);
-  const updatedStr = formatUpdated(updatedMs, currentLang);
+  const updMs = parseWEAODate(e.updatedDate);
+  const updTxt = updMs ? formatUpdated(updMs, currentLang) : '';
 
   const hd=$('#dwHd');
   if(!hd) return;
@@ -1386,7 +1393,7 @@ function renderDrawer(){
         <svg viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16V4a2 2 0 0 1 2-2h10"/></svg>
       </button>`:''}
     </div>
-    ${updatedStr?`<div class="row2-updated" style="margin-bottom:12px"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>${esc(updatedStr)}</span></div>`:''}
+    ${updTxt?`<div style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-2);padding:8px 11px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:13px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:rgb(var(--accent));fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>${esc(updTxt)}</span></div>`:''}
     <div class="dw-stats">
       <div class="dw-st"><div class="l">${esc(t('status'))}</div><div class="v ${stTone}">${esc(st.label)}</div></div>
       <div class="dw-st"><div class="l">${esc(t('byfron'))}</div><div class="v ${tone}">${esc(s.label)}</div></div>
@@ -1473,11 +1480,7 @@ function openCompare(){
     [t('cmpName'),list.map(e=>`<div class="cmp-cell name">${esc(e.title)}</div>`)],
     [t('cmpVersion'),list.map(e=>`<div class="cmp-cell" style="font-family:monospace;color:var(--text-2)">${esc(e.version)}</div>`)],
     [t('cmpPlatform'),list.map(e=>`<div class="cmp-cell">${esc(e.platform)}</div>`)],
-    [t('cmpStatus'),list.map(e=>{
-      const st=computeStatus(e);
-      const cls = st.tone==='ok' ? '--ok' : '--bad';
-      return `<div class="cmp-cell" style="color:var(${cls});font-weight:600">${esc(st.label)}</div>`;
-    })],
+    [t('cmpStatus'),list.map(e=>{const st=computeStatus(e);const cls = st.tone==='ok' ? '--ok' : '--bad';return `<div class="cmp-cell" style="color:var(${cls});font-weight:600">${esc(st.label)}</div>`})],
     [t('cmpByfron'),list.map(e=>{const s=safetyLabel(e);return `<div class="cmp-cell" style="color:var(--${s.tone==='ok'?'ok':s.tone==='warn'?'warn':'bad'});font-weight:600">${esc(s.label)}</div>`})],
     [t('cmpUnc'),list.map(e=>{const u=e.uncPercentage??(e.uncStatus?95:0);return `<div class="cmp-cell" style="font-family:monospace;font-weight:700;color:var(--${u>=95?'ok':u>=75?'warn':'text-2'})">${u>0?u+'%':'N/A'}</div>`})],
     [t('cmpSunc'),list.map(e=>{const s=e.suncPercentage??(e.uncStatus?90:0);return `<div class="cmp-cell" style="font-family:monospace;color:rgb(var(--accent))">${s>0?s+'%':'N/A'}</div>`})],
@@ -1603,8 +1606,6 @@ function applyI18nStatic(){
   setTxt('offlineText',t('offlineBadge'));
   const si=$('#searchInput');
   if(si) si.placeholder=t('searchPh');
-  const clkD=$('#clkD');
-  if(clkD && (clkD.textContent==='Loading...' || clkD.textContent==='Đang tải...')) clkD.textContent=t('loading');
   document.documentElement.lang = currentLang==='en'?'en':'vi';
   $$('.lang-opt').forEach(b=>b.classList.toggle('on',b.dataset.lang===currentLang));
 }
