@@ -1,1005 +1,1621 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="cyber">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Roblox Executors Status</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* --- BỘ MÀU THEMES SANG TRỌNG & CHILL --- */
-        html[data-theme="cyber"] {
-            --bg: #07090e;
-            --card-bg: rgba(14, 19, 31, 0.65);
-            --border: rgba(56, 189, 248, 0.18);
-            --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.4);
-            --orb-1: rgba(56, 189, 248, 0.15);
-            --orb-2: rgba(236, 72, 153, 0.12);
-            --text-main: #f1f5f9;
-            --text-sub: #94a3b8;
-            --modal-bg: rgba(15, 23, 42, 0.92);
-        }
-
-        html[data-theme="kyoto"] {
-            --bg: #0f0a13;
-            --card-bg: rgba(26, 17, 34, 0.65);
-            --border: rgba(244, 114, 182, 0.2);
-            --accent: #f472b6;
-            --accent-glow: rgba(244, 114, 182, 0.4);
-            --orb-1: rgba(244, 114, 182, 0.18);
-            --orb-2: rgba(168, 85, 247, 0.15);
-            --text-main: #fdf2f8;
-            --text-sub: #fbcfe8;
-            --modal-bg: rgba(24, 15, 31, 0.92);
-        }
-
-        html[data-theme="amoled"] {
-            --bg: #000000;
-            --card-bg: rgba(12, 12, 12, 0.85);
-            --border: rgba(16, 185, 129, 0.2);
-            --accent: #10b981;
-            --accent-glow: rgba(16, 185, 129, 0.4);
-            --orb-1: rgba(16, 185, 129, 0.12);
-            --orb-2: rgba(6, 182, 212, 0.1);
-            --text-main: #ffffff;
-            --text-sub: #a1a1aa;
-            --modal-bg: rgba(10, 10, 10, 0.95);
-        }
-
-        html[data-theme="sunset"] {
-            --bg: #120913;
-            --card-bg: rgba(30, 15, 30, 0.65);
-            --border: rgba(251, 146, 60, 0.2);
-            --accent: #fb923c;
-            --accent-glow: rgba(251, 146, 60, 0.4);
-            --orb-1: rgba(251, 146, 60, 0.18);
-            --orb-2: rgba(244, 63, 94, 0.15);
-            --text-main: #fff7ed;
-            --text-sub: #fdba74;
-            --modal-bg: rgba(26, 12, 26, 0.92);
-        }
-
-        html[data-theme="ocean"] {
-            --bg: #06111e;
-            --card-bg: rgba(11, 29, 51, 0.65);
-            --border: rgba(6, 182, 212, 0.2);
-            --accent: #06b6d4;
-            --accent-glow: rgba(6, 182, 212, 0.4);
-            --orb-1: rgba(6, 182, 212, 0.18);
-            --orb-2: rgba(59, 130, 246, 0.15);
-            --text-main: #ecfeff;
-            --text-sub: #a5f3fc;
-            --modal-bg: rgba(9, 23, 41, 0.92);
-        }
-
-        html[data-theme="dracula"] {
-            --bg: #0d0814;
-            --card-bg: rgba(23, 14, 36, 0.65);
-            --border: rgba(168, 85, 247, 0.22);
-            --accent: #a855f7;
-            --accent-glow: rgba(168, 85, 247, 0.4);
-            --orb-1: rgba(168, 85, 247, 0.18);
-            --orb-2: rgba(217, 70, 239, 0.15);
-            --text-main: #faf5ff;
-            --text-sub: #e9d5ff;
-            --modal-bg: rgba(20, 11, 31, 0.92);
-        }
-
-        html[data-theme="gold"] {
-            --bg: #0f0e0a;
-            --card-bg: rgba(28, 25, 17, 0.65);
-            --border: rgba(234, 179, 8, 0.22);
-            --accent: #eab308;
-            --accent-glow: rgba(234, 179, 8, 0.4);
-            --orb-1: rgba(234, 179, 8, 0.15);
-            --orb-2: rgba(249, 115, 22, 0.12);
-            --text-main: #fefce8;
-            --text-sub: #fef08a;
-            --modal-bg: rgba(23, 20, 13, 0.92);
-        }
-
-        html[data-theme="light"] {
-            --bg: #f3f5f9;
-            --card-bg: rgba(255, 255, 255, 0.75);
-            --border: rgba(0, 0, 0, 0.08);
-            --accent: #2563eb;
-            --accent-glow: rgba(37, 99, 235, 0.25);
-            --orb-1: rgba(37, 99, 235, 0.1);
-            --orb-2: rgba(147, 51, 234, 0.08);
-            --text-main: #0f172a;
-            --text-sub: #475569;
-            --modal-bg: rgba(255, 255, 255, 0.95);
-        }
-
-        * {
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--text-main);
-            font-family: 'Outfit', sans-serif;
-            min-height: 100vh;
-            padding: 40px 20px;
-            transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
-            position: relative;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ĐỐM ÁNH SÁNG TRÔI TỰ ĐỘNG BỒNG BỀNH PHÒNG NỀN CHILL */
-        .ambient-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(90px);
-            animation: floatOrb 18s infinite alternate ease-in-out;
-            transition: background 0.5s ease;
-        }
-
-        .orb-1 {
-            width: 450px; height: 450px;
-            background: var(--orb-1);
-            top: -10%; left: 15%;
-        }
-
-        .orb-2 {
-            width: 500px; height: 500px;
-            background: var(--orb-2);
-            bottom: -15%; right: 10%;
-            animation-delay: -9s;
-        }
-
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(60px, 40px) scale(1.1); }
-            100% { transform: translate(-40px, 70px) scale(0.95); }
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* TOP BAR WITH THEME BUTTON */
-        .top-bar {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 15px;
-        }
-
-        .theme-open-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 9px 18px;
-            border-radius: 30px;
-            font-family: inherit;
-            font-size: 0.88rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .theme-open-btn:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        /* MODAL POPUP THEME */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-container {
-            background: var(--modal-bg);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 26px;
-            width: 90%;
-            max-width: 540px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px var(--accent-glow);
-            transform: scale(0.88) translateY(20px);
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .modal-overlay.show .modal-container {
-            transform: scale(1) translateY(0);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 22px;
-        }
-
-        .modal-header h3 {
-            margin: 0;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .close-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            color: var(--text-sub);
-            width: 34px; height: 34px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.25s ease;
-        }
-
-        .close-btn:hover {
-            color: var(--text-main);
-            border-color: var(--accent);
-            transform: rotate(90deg);
-        }
-
-        /* GRID CHỌN THEME */
-        .themes-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        @media (max-width: 480px) {
-            .themes-grid { grid-template-columns: 1fr; }
-        }
-
-        .theme-card {
-            background: var(--card-bg);
-            border: 1.5px solid var(--border);
-            border-radius: 14px;
-            padding: 12px 14px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-        }
-
-        .theme-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px var(--accent-glow);
-        }
-
-        .theme-card.active {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: inset 0 0 12px var(--accent-glow);
-        }
-
-        .dots-preview {
-            display: flex;
-            gap: 5px;
-            align-items: center;
-        }
-
-        .dots-preview span {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .theme-name {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--text-main);
-            flex: 1;
-        }
-
-        .check-icon {
-            color: var(--accent);
-            font-size: 0.9rem;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.25s ease;
-        }
-
-        .theme-card.active .check-icon {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* HEADER */
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .header-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--accent), #9333ea);
-            border-radius: 22px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            color: white;
-            box-shadow: 0 12px 30px var(--accent-glow);
-            margin-bottom: 20px;
-            animation: pulseHeader 4s infinite alternate ease-in-out;
-        }
-
-        @keyframes pulseHeader {
-            0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.05) rotate(3deg); }
-        }
-
-        h1 {
-            font-size: 2.4rem;
-            font-weight: 800;
-            margin: 0 0 10px 0;
-            letter-spacing: -0.5px;
-            background: linear-gradient(180deg, var(--text-main), var(--text-sub));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            color: var(--text-sub);
-            font-size: 0.98rem;
-            margin: 0;
-        }
-
-        /* STATS CARDS */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-            margin-bottom: 25px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 20px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-            box-shadow: 0 12px 30px var(--accent-glow);
-        }
-
-        .stat-info .title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-sub);
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .stat-info .num {
-            font-size: 1.8rem;
-            font-weight: 800;
-        }
-
-        .stat-icon {
-            font-size: 1.7rem;
-            opacity: 0.85;
-        }
-
-        /* FILTER & SEARCH */
-        .filter-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 22px;
-            flex-wrap: wrap;
-        }
-
-        .search-box {
-            position: relative;
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-sub);
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 13px 16px 13px 44px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            color: var(--text-main);
-            outline: none;
-            font-family: inherit;
-            font-size: 0.92rem;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            transition: all 0.3s ease;
-        }
-
-        .search-box input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 18px var(--accent-glow);
-        }
-
-        .filter-tabs {
-            display: flex;
-            gap: 6px;
-            background: var(--card-bg);
-            padding: 5px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            overflow-x: auto;
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-sub);
-            padding: 9px 18px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 700;
-            font-size: 0.88rem;
-            white-space: nowrap;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .tab-btn.active {
-            background: var(--accent);
-            color: #ffffff;
-            box-shadow: 0 4px 15px var(--accent-glow);
-        }
-
-        /* TABLE DESIGN V2 */
-        .table-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            overflow: hidden;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s ease;
-        }
-
-        .table-wrap {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            min-width: 680px;
-        }
-
-        th {
-            padding: 18px 22px;
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-sub);
-            border-bottom: 1px solid var(--border);
-            background: rgba(0, 0, 0, 0.2);
-            font-weight: 800;
-        }
-
-        td {
-            padding: 18px 22px;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.92rem;
-            transition: background 0.2s ease;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .exec-name {
-            font-weight: 800;
-            color: var(--text-main);
-        }
-
-        .plat-tag {
-            color: var(--text-sub);
-            font-size: 0.88rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-        }
-
-        /* BADGES STATUS CÓ DẠ QUANG VÀ CHỚP NỔI PULSE */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-        }
-
-        .status-badge .dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            position: relative;
-        }
-
-        .status-badge .dot::after {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            border-radius: 50%;
-            background: inherit;
-            animation: pulseDot 1.8s infinite ease-out;
-            opacity: 0.6;
-        }
-
-        @keyframes pulseDot {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(2.5); opacity: 0; }
-        }
-
-        .status-working {
-            background: rgba(16, 185, 129, 0.12);
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.35);
-        }
-        .status-working .dot { background: #10b981; }
-
-        .status-unstable {
-            background: rgba(249, 115, 22, 0.15);
-            color: #f97316;
-            border: 1px solid rgba(249, 115, 22, 0.35);
-        }
-        .status-unstable .dot { background: #f97316; }
-
-        .status-patched {
-            background: rgba(239, 68, 68, 0.12);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.35);
-        }
-        .status-patched .dot { background: #ef4444; }
-
-        .status-outdated {
-            background: rgba(185, 28, 28, 0.22);
-            color: #ff4d4d;
-            border: 1px solid rgba(239, 68, 68, 0.5);
-        }
-        .status-outdated .dot { background: #ff4d4d; }
-
-        .price-text {
-            font-weight: 700;
-            color: var(--accent);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0c10">
+<title>Exec Status by Huy — Roblox Executor Monitor</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='9' fill='%2310b981'/><text x='16' y='23' font-size='18' font-weight='900' text-anchor='middle' fill='%23000'>H</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .4s ease,color .3s ease;-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea{-webkit-user-select:text;user-select:text}
+img,svg{display:block;max-width:100%;-webkit-user-drag:none}
+button,input,select{font:inherit;color:inherit;background:none;border:none;outline:none}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+::selection{background:transparent;color:inherit}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:99px}
+::-webkit-scrollbar-thumb:hover{background:rgb(var(--accent))}
+:root{--accent:16,185,129;--accent-2:52,211,153;--bg:#08090c;--bg-2:#0d0f15;--bg-3:#131620;--surface:rgba(255,255,255,.035);--surface-2:rgba(255,255,255,.07);--border:rgba(255,255,255,.08);--border-2:rgba(255,255,255,.16);--text:#eef0f4;--text-2:#9aa1ad;--text-3:#5c6570;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;--purple:#a855f7;--t-fast:.16s cubic-bezier(.4,0,.2,1);--t-med:.28s cubic-bezier(.4,0,.2,1)}
+body.theme-emerald{--accent:16,185,129;--accent-2:52,211,153;--bg:#040a08;--bg-2:#08130f;--bg-3:#0d1a14}
+body.theme-cyberpunk{--accent:6,182,212;--accent-2:34,211,238;--bg:#04080e;--bg-2:#08131b;--bg-3:#0d1c26}
+body.theme-amethyst{--accent:168,85,247;--accent-2:192,132,252;--bg:#0a0414;--bg-2:#130a1f;--bg-3:#1c0f2b}
+body.theme-sunset{--accent:249,115,22;--accent-2:251,146,60;--bg:#0e0704;--bg-2:#1a0e07;--bg-3:#26140a}
+body.theme-ocean{--accent:59,130,246;--accent-2:96,165,250;--bg:#04080f;--bg-2:#08121d;--bg-3:#0d1a28}
+body.theme-crimson{--accent:239,68,68;--accent-2:248,113,113;--bg:#0d0405;--bg-2:#180708;--bg-3:#26090c}
+body.theme-gold{--accent:234,179,8;--accent-2:250,204,21;--bg:#0d0a02;--bg-2:#181205;--bg-3:#23190a}
+body.theme-vaporwave{--accent:236,72,153;--accent-2:244,114,182;--bg:#0c0412;--bg-2:#160a1c;--bg-3:#22102a}
+body.theme-matrix{--accent:34,197,94;--accent-2:74,222,128;--bg:#020a04;--bg-2:#051208;--bg-3:#091c0e}
+body.theme-aurora{--accent:20,184,166;--accent-2:45,212,191;--bg:#040d0c;--bg-2:#081613;--bg-3:#0d201c}
+body.theme-sakura{--accent:253,164,175;--accent-2:251,207,232;--bg:#0d0608;--bg-2:#170b0f;--bg-3:#221014;--text:#fdf2f4}
+body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--bg-2:#0c0c0c;--bg-3:#141414}
+.bg-fx{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.bg-fx::before{content:'';position:absolute;inset:0;background:radial-gradient(600px 400px at 80% -10%,rgba(var(--accent),.14),transparent 60%),radial-gradient(500px 500px at 0 100%,rgba(var(--accent-2),.1),transparent 55%);transition:background .5s}
+.bg-fx::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:50px 50px;-webkit-mask-image:linear-gradient(#000 0%,transparent 80%);mask-image:linear-gradient(#000 0%,transparent 80%)}
+.scanline{position:fixed;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--accent),.5),transparent);z-index:0;pointer-events:none;animation:scan 8s linear infinite;opacity:.5}
+@keyframes scan{0%{top:-10px}100%{top:100vh}}
+.shell{min-height:100vh;display:flex;flex-direction:column;position:relative;z-index:1}
+.wrap{width:100%;max-width:1560px;margin:0 auto;padding:0 clamp(14px,3.5vw,36px)}
+.topbar{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border)}
+.topbar-in{display:flex;align-items:center;gap:18px;height:62px}
+.brand-block{display:flex;align-items:center;gap:11px;flex-shrink:0;position:relative}
+.brand-mark{width:38px;height:38px;border-radius:11px;flex-shrink:0;background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));display:grid;place-items:center;color:#000;font-weight:900;font-size:15px;box-shadow:0 0 0 1px rgba(255,255,255,.2),0 6px 20px rgba(var(--accent),.35);position:relative;overflow:hidden;transition:transform var(--t-fast)}
+.brand-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);transform:translateX(-100%);transition:transform .8s}
+.brand-mark:hover::after{transform:translateX(100%)}
+.brand-mark:hover{transform:rotate(-6deg) scale(1.06)}
+.brand-text{display:flex;flex-direction:column;line-height:1.1;min-width:0}
+.brand-t{font-size:14.5px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;background:linear-gradient(90deg,var(--text),rgb(var(--accent)) 130%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.brand-s{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-3);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;margin-top:2px}
+.nav-tabs{display:flex;gap:2px;align-items:center;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{position:relative;padding:8px 14px;border-radius:9px;font-size:12.5px;font-weight:500;color:var(--text-3);white-space:nowrap;transition:all var(--t-fast);display:inline-flex;align-items:center;gap:6px}
+.nav-tab:hover{color:var(--text);background:var(--surface)}
+.nav-tab.on{color:rgb(var(--accent));background:rgba(var(--accent),.1)}
+.nav-tab.on::after{content:'';position:absolute;left:14px;right:14px;bottom:-1px;height:2px;background:rgb(var(--accent));border-radius:2px;box-shadow:0 0 10px rgb(var(--accent))}
+.nav-tab .cnt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--text-3);background:var(--surface-2);padding:1px 5px;border-radius:5px;margin-left:2px}
+.nav-tab.on .cnt{color:rgb(var(--accent));background:rgba(var(--accent),.15)}
+.topbar-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.clock2{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:10px;background:var(--surface);border:1px solid var(--border);transition:all var(--t-fast)}
+.clock2:hover{border-color:rgba(var(--accent),.4)}
+.clock2 svg{width:13px;height:13px;stroke:rgb(var(--accent));fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.clock2-t{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:var(--text);letter-spacing:.02em;line-height:1}
+.clock2-d{font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-top:2px;line-height:1}
+@media(max-width:900px){.clock2-d{display:none}}
+@media(max-width:640px){.clock2{padding:0 9px}.clock2-t{font-size:11.5px}}
+.lang-btn{display:inline-flex;align-items:center;gap:0;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--border);overflow:hidden;flex-shrink:0;transition:all var(--t-fast)}
+.lang-btn:hover{border-color:rgba(var(--accent),.4)}
+.lang-opt{padding:0 10px;height:100%;display:inline-flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--text-3);transition:all var(--t-fast);cursor:pointer;position:relative}
+.lang-opt:hover{color:var(--text)}
+.lang-opt.on{color:#000;background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));text-shadow:0 0 4px rgba(255,255,255,.4)}
+.lang-opt:not(:last-child){border-right:1px solid var(--border)}
+.lang-opt.on+.lang-opt{border-right-color:transparent}
+.lang-opt.on{border-right-color:transparent}
+.lang-btn .lang-opt.on+.lang-opt{border-left-color:transparent}
+@media(max-width:560px){.lang-opt{padding:0 7px;font-size:10px}.lang-btn{height:34px}}
+.iconbtn{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--border);color:var(--text-2);transition:all var(--t-fast);position:relative}
+.iconbtn:hover{color:rgb(var(--accent));border-color:rgba(var(--accent),.4);transform:translateY(-2px)}
+.iconbtn:active{transform:scale(.95)}
+.iconbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.offline-badge{position:fixed;bottom:18px;left:18px;z-index:200;display:none;align-items:center;gap:8px;padding:9px 13px;border-radius:11px;background:var(--bg-2);border:1px solid rgba(251,191,36,.4);box-shadow:0 12px 32px rgba(0,0,0,.5);font-size:12px;color:var(--warn);font-family:'JetBrains Mono',monospace;pointer-events:none}
+.offline-badge.on{display:flex;animation:fadeIn .3s}
+.offline-badge .d{width:7px;height:7px;border-radius:50%;background:var(--warn);box-shadow:0 0 8px var(--warn);animation:pulseDot 1.6s infinite}
+.verbar{background:linear-gradient(90deg,rgba(var(--accent),.05),transparent 30%,transparent 70%,rgba(var(--accent-2),.05));border-bottom:1px solid var(--border);overflow:hidden;position:relative;animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both}
+.verbar-in{display:flex;align-items:center;gap:0;height:46px}
+.verbar-lb{display:flex;align-items:center;gap:8px;padding:0 16px 0 0;flex-shrink:0;border-right:1px solid var(--border);height:100%}
+.verbar-lb .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulseDot 1.6s infinite}
+.verbar-lb .txt{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgb(var(--accent));font-weight:600;white-space:nowrap}
+.verbar-scroll{display:flex;align-items:center;gap:0;flex:1;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.verbar-scroll::-webkit-scrollbar{display:none}
+.verbar-item{display:flex;align-items:center;gap:10px;padding:0 16px;height:100%;border-right:1px solid var(--border);white-space:nowrap;transition:background var(--t-fast);cursor:pointer;flex-shrink:0;position:relative}
+.verbar-item:last-child{border-right:none}
+.verbar-item:hover{background:rgba(var(--accent),.06)}
+.verbar-item:active{background:rgba(var(--accent),.1)}
+.ver-ico{width:24px;height:24px;border-radius:6px;background:var(--bg-3);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;transition:transform var(--t-fast)}
+.verbar-item:hover .ver-ico{transform:scale(1.1)}
+.ver-ico svg{width:13px;height:13px;stroke:rgb(var(--accent));fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ver-body{display:flex;flex-direction:column;gap:2px;line-height:1.1;min-width:0}
+.ver-plat{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);font-weight:600}
+.ver-num{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:var(--text);letter-spacing:.01em;white-space:nowrap}
+.verbar-item:hover .ver-num{color:rgb(var(--accent))}
+.ver-cp{width:20px;height:20px;border-radius:5px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0;opacity:.5;transition:all var(--t-fast);cursor:pointer}
+.verbar-item:hover .ver-cp{opacity:1;background:rgba(var(--accent),.1);border-color:rgba(var(--accent),.35)}
+.ver-cp svg{width:10px;height:10px;stroke:var(--text-2);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ver-cp:hover svg{stroke:rgb(var(--accent))}
+.ver-cp.copied{opacity:1;background:rgba(52,211,153,.15);border-color:var(--ok)}
+.ver-cp.copied svg{stroke:var(--ok)}
+.verbar-upd{margin-left:auto;padding:0 16px;display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--text-3);flex-shrink:0;border-left:1px solid var(--border);height:100%;white-space:nowrap}
+.verbar-upd .live-dot{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:pulseDot 1.6s infinite}
+@media(max-width:820px){.verbar-lb .txt{display:none}.verbar-lb{padding:0 10px 0 0}.verbar-item{padding:0 12px;gap:8px}.ver-num{font-size:10.5px}.verbar-upd{display:none}}
+@media(max-width:520px){.ver-plat{font-size:8px}.ver-num{font-size:10px}.ver-ico{width:20px;height:20px}.ver-ico svg{width:11px;height:11px}.ver-cp{width:16px;height:16px}.ver-cp svg{width:9px;height:9px}}
+.banner{padding:clamp(22px,4vw,40px) 0 clamp(16px,2vw,24px);display:grid;grid-template-columns:1fr auto;gap:22px;align-items:end}
+@media(max-width:900px){.banner{grid-template-columns:1fr;gap:16px}}
+.banner-l{min-width:0}
+.banner-tag{display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgb(var(--accent));background:rgba(var(--accent),.1);border:1px solid rgba(var(--accent),.28);padding:5px 11px;border-radius:99px;margin-bottom:14px;animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both}
+.banner-tag .live-dot{width:6px;height:6px;border-radius:50%;background:rgb(var(--accent));box-shadow:0 0 10px rgb(var(--accent));animation:pulseDot 1.6s infinite}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.banner-title{font-size:clamp(30px,6vw,52px);font-weight:700;letter-spacing:-.035em;line-height:1;margin-bottom:10px;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .06s both}
+.banner-title .soft{color:var(--text-3);font-weight:400}
+.banner-title .strong{background:linear-gradient(120deg,rgb(var(--accent)),rgb(var(--accent-2)) 60%,rgb(var(--accent)));background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 5s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+.banner-sub{font-size:clamp(12.5px,1.4vw,14px);color:var(--text-2);max-width:580px;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .12s both}
+.banner-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .18s both}
+.btn{border:none;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 16px;border-radius:10px;font-size:12.5px;font-weight:600;letter-spacing:-.01em;transition:all var(--t-med);position:relative;overflow:hidden;cursor:pointer}
+.btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.btn-p{background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));color:#000;box-shadow:0 6px 20px rgba(var(--accent),.35),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%)}
+.btn-p:hover::before{transform:translateX(100%);transition:transform .8s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(var(--accent),.5)}
+.btn-g{background:var(--surface);border:1px solid var(--border);color:var(--text);font-weight:500}
+.btn-g:hover{background:var(--surface-2);border-color:rgba(var(--accent),.4);color:rgb(var(--accent));transform:translateY(-2px)}
+.stat-cluster{display:grid;grid-template-columns:repeat(2,minmax(90px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;min-width:200px}
+@media(max-width:900px){.stat-cluster{grid-template-columns:repeat(4,1fr);width:100%}}
+.stat-c{background:var(--bg-2);padding:12px 14px;min-width:0}
+.stat-c .v{font-family:'JetBrains Mono',monospace;font-size:clamp(18px,2.4vw,22px);font-weight:700;letter-spacing:-.02em;line-height:1;color:var(--text)}
+.stat-c .v.ok{color:var(--ok)}.stat-c .v.ac{color:rgb(var(--accent))}
+.stat-c .l{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-top:5px}
+.body{display:grid;grid-template-columns:256px minmax(0,1fr);gap:0;flex:1;padding-bottom:40px}
+@media(max-width:1000px){.body{grid-template-columns:1fr}}
+.side{border-right:1px solid var(--border);padding:20px 18px 20px 0;position:sticky;top:108px;align-self:start;max-height:calc(100vh - 108px);overflow-y:auto}
+@media(max-width:1000px){.side{position:static;border-right:none;border-bottom:1px solid var(--border);padding:16px 0;max-height:none;overflow:visible}}
+.side-sec{margin-bottom:20px}
+.side-sec:last-child{margin-bottom:0}
+.side-ttl{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.side-ttl::after{content:'';flex:1;height:1px;background:var(--border)}
+.s-input{position:relative;width:100%}
+.s-input input{width:100%;height:38px;padding:0 32px 0 34px;border-radius:10px;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-size:12.5px;transition:all var(--t-fast)}
+.s-input input:focus{border-color:rgb(var(--accent));box-shadow:0 0 0 3px rgba(var(--accent),.15)}
+.s-input input::placeholder{color:var(--text-3)}
+.s-input .ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--text-3);pointer-events:none}
+.s-input .ic svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.s-input .kb{position:absolute;right:9px;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-3);background:var(--surface-2);padding:2px 5px;border-radius:4px;border:1px solid var(--border)}
+.s-chk{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;font-size:12.5px;color:var(--text-2);text-align:left;transition:all var(--t-fast);cursor:pointer}
+.s-chk:hover{background:var(--surface);color:var(--text)}
+.s-chk .bx{width:14px;height:14px;flex-shrink:0;border-radius:4px;border:1px solid var(--border-2);background:var(--bg-2);display:grid;place-items:center;transition:all var(--t-fast)}
+.s-chk.on .bx{background:rgb(var(--accent));border-color:rgb(var(--accent))}
+.s-chk .bx svg{width:9px;height:9px;stroke:#000;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity var(--t-fast)}
+.s-chk.on .bx svg{opacity:1}
+.s-sel{width:100%;height:36px;padding:0 30px 0 11px;border-radius:9px;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-size:12px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa1ad' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.main{padding:20px 0 20px 22px;min-width:0}
+@media(max-width:1000px){.main{padding:20px 0}}
+.main-hd{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.main-hd-l{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.main-hd-l h2{font-size:15.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.main-hd-l .desc{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-3)}
+.main-hd-r{display:flex;gap:8px;align-items:center}
+.pill-btn{padding:5px 11px;border-radius:99px;background:var(--surface);border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-2);display:inline-flex;align-items:center;gap:6px;transition:all var(--t-fast)}
+.pill-btn .dot{width:6px;height:6px;border-radius:50%;background:rgb(var(--accent));animation:pulseDot 1.6s infinite}
+.list2{display:flex;flex-direction:column;gap:8px}
+.row2{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;transition:all var(--t-med);cursor:pointer;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both;position:relative;overflow:hidden}
+.row2::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:rgb(var(--accent));opacity:0;transition:opacity var(--t-fast)}
+.row2:hover{background:var(--surface-2);border-color:rgba(var(--accent),.3);transform:translateX(3px)}
+.row2:hover::before{opacity:1}
+.row2-cb{width:20px;height:20px;display:grid;place-items:center;border:1px solid var(--border-2);border-radius:6px;background:var(--bg-2);color:var(--text-3);cursor:pointer;transition:all var(--t-fast);flex-shrink:0}
+.row2-cb:hover{border-color:rgb(var(--accent));color:rgb(var(--accent))}
+.row2-cb.on{background:rgb(var(--accent));border-color:rgb(var(--accent));color:#000}
+.row2-cb svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.row2-l{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
+.row2-logo{width:40px;height:40px;border-radius:11px;background:var(--bg-2);border:1px solid var(--border);display:grid;place-items:center;overflow:hidden;flex-shrink:0;transition:transform var(--t-fast)}
+.row2:hover .row2-logo{transform:scale(1.08) rotate(-3deg)}
+.row2-logo img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.row2-logo .ini{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;color:var(--text-2)}
+.row2-mid{min-width:0;flex:1}
+.row2-name{font-size:14px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:var(--text)}
+.row2-name .vf{color:var(--ok);font-size:11px}
+.row2-meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-3);margin-top:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.row2-meta .sep{color:var(--border-2)}
+.row2-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.copy-chip{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--bg-3);border:1px solid var(--border);color:var(--text-2);padding:3px 7px;border-radius:6px;cursor:pointer;transition:all var(--t-fast)}
+.copy-chip:hover{border-color:rgba(var(--accent),.5);color:rgb(var(--accent))}
+.copy-chip svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
+.copy-chip:hover svg{opacity:1}
+.copy-chip.copied{color:var(--ok);border-color:var(--ok)}
+.copy-chip.copied svg{opacity:1;stroke:var(--ok)}
+.row2-r{display:flex;align-items:center;gap:14px;flex-shrink:0}
+@media(max-width:760px){.row2{grid-template-columns:auto minmax(0,1fr);gap:10px}.row2-r{grid-column:2/3;flex-wrap:wrap;gap:8px}}
+.status-lines{display:flex;flex-direction:column;gap:4px;font-size:10.5px;font-weight:500}
+.status-lines .line{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.status-lines .line .d{width:6px;height:6px;border-radius:2px;flex-shrink:0}
+.status-lines .ok{color:var(--ok)}.status-lines .ok .d{background:var(--ok);box-shadow:0 0 6px var(--ok)}
+.status-lines .bad{color:var(--bad)}.status-lines .bad .d{background:var(--bad);box-shadow:0 0 6px var(--bad)}
+.status-lines .warn{color:var(--warn)}.status-lines .warn .d{background:var(--warn);box-shadow:0 0 6px var(--warn)}
+.unc-mini{width:72px;flex-shrink:0}
+.unc-mini .h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.unc-mini .h .l{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+.unc-mini .h .v{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+.unc-mini .h .v.ok{color:var(--ok)}.unc-mini .h .v.warn{color:var(--warn)}.unc-mini .h .v.bad{color:var(--bad)}.unc-mini .h .v.mute{color:var(--text-3)}
+.unc-mini .bar{height:3px;border-radius:99px;background:var(--surface-2);overflow:hidden;position:relative}
+.unc-mini .fill{height:100%;border-radius:99px;transition:width 1s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.unc-mini .fill.ok{background:linear-gradient(90deg,var(--ok),#6ee7b7)}
+.unc-mini .fill.warn{background:linear-gradient(90deg,var(--warn),#fcd34d)}
+.unc-mini .fill.bad{background:linear-gradient(90deg,var(--bad),#fca5a5)}
+.unc-mini .fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:shimmer 2.2s linear infinite}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.row2-detail{padding:6px 12px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border);font-size:11px;font-weight:500;color:var(--text-2);transition:all var(--t-fast);white-space:nowrap}
+.row2-detail:hover{background:rgba(var(--accent),.12);border-color:rgba(var(--accent),.5);color:rgb(var(--accent))}
+.empty{padding:60px 24px;text-align:center;border:1px dashed var(--border);border-radius:12px;background:var(--surface)}
+.empty .c{font-family:'JetBrains Mono',monospace;font-size:32px;color:var(--text-3);margin-bottom:10px}
+.empty p{color:var(--text-2);margin-bottom:14px;font-size:13px}
+.foot{border-top:1px solid var(--border);padding:22px 0;margin-top:auto}
+.foot-in{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
+.foot-l{font-size:11.5px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
+.foot-r{display:flex;gap:16px;font-size:12px;flex-wrap:wrap}
+.foot-r a{color:var(--text-2);transition:color var(--t-fast);cursor:pointer}
+.foot-r a:hover{color:rgb(var(--accent))}
+.drawer-bd{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:120;opacity:0;pointer-events:none;transition:opacity var(--t-med)}
+.drawer-bd.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--bg-2);border-left:1px solid var(--border);z-index:125;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);box-shadow:-30px 0 80px rgba(0,0,0,.55);overflow:hidden}
+.drawer.on{transform:translateX(0)}
+.dw-hd{padding:16px 18px;border-bottom:1px solid var(--border);background:var(--bg-2)}
+.dw-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:13px}
+.dw-ti{display:flex;align-items:center;gap:11px;min-width:0}
+.dw-logo{width:44px;height:44px;border-radius:12px;background:var(--bg-3);border:1px solid var(--border);display:grid;place-items:center;overflow:hidden;flex-shrink:0}
+.dw-logo img{width:100%;height:100%;object-fit:cover;border-radius:11px}
+.dw-logo .ini{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--text-2)}
+.dw-nm{font-size:16px;font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.dw-nm .vf{color:var(--ok);font-size:12px}
+.dw-sub{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-3);margin-top:3px}
+.dw-acts{display:flex;gap:6px;flex-shrink:0}
+.mini-btn{height:30px;padding:0 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);color:var(--text-2);font-size:11px;font-weight:500;display:inline-flex;align-items:center;gap:5px;transition:all var(--t-fast);cursor:pointer}
+.mini-btn:hover{color:rgb(var(--accent));border-color:rgba(var(--accent),.4)}
+.mini-btn.on{background:rgba(var(--accent),.12);color:rgb(var(--accent));border-color:rgb(var(--accent))}
+.mini-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.x-btn{width:30px;height:30px;border-radius:8px;background:var(--surface);border:1px solid var(--border);color:var(--text-2);display:grid;place-items:center;transition:all var(--t-fast);cursor:pointer}
+.x-btn:hover{background:var(--bad);color:#fff;border-color:var(--bad);transform:rotate(90deg)}
+.x-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.dw-copy2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px}
+@media(max-width:400px){.dw-copy2{grid-template-columns:1fr}}
+.dw-cp{background:var(--bg-3);border:1px solid var(--border);border-radius:10px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;transition:all var(--t-fast);text-align:left}
+.dw-cp:hover{border-color:rgba(var(--accent),.5)}
+.dw-cp .lb{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+.dw-cp .vl{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--text);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dw-cp:hover .vl{color:rgb(var(--accent))}
+.dw-cp svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.5;flex-shrink:0}
+.dw-cp.copied{border-color:var(--ok)}
+.dw-cp.copied .vl{color:var(--ok)}
+.dw-cp.copied svg{opacity:1;stroke:var(--ok)}
+.dw-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+@media(max-width:520px){.dw-stats{grid-template-columns:repeat(2,1fr)}}
+.dw-st{background:var(--bg-3);padding:10px 11px}
+.dw-st .l{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:5px}
+.dw-st .v{font-size:11.5px;font-weight:600;line-height:1.3}
+.dw-st .v.ok{color:var(--ok)}.dw-st .v.bad{color:var(--bad)}.dw-st .v.warn{color:var(--warn)}.dw-st .v.ac{color:rgb(var(--accent))}.dw-st .v.mono{font-family:'JetBrains Mono',monospace}
+.dw-tabs{display:flex;gap:2px;padding:0 18px;border-bottom:1px solid var(--border);background:var(--bg-2);overflow-x:auto;scrollbar-width:none}
+.dw-tabs::-webkit-scrollbar{display:none}
+.dw-tab{padding:11px 13px;font-size:12.5px;font-weight:500;color:var(--text-3);border-bottom:2px solid transparent;cursor:pointer;transition:all var(--t-fast);white-space:nowrap;margin-bottom:-1px}
+.dw-tab:hover{color:var(--text-2)}
+.dw-tab.on{color:rgb(var(--accent));border-bottom-color:rgb(var(--accent))}
+.dw-body{flex:1;overflow-y:auto;padding:18px}
+.dw-pane{display:none;animation:fadeUp .3s cubic-bezier(.16,1,.3,1)}
+.dw-pane.on{display:block}
+.alert{padding:12px 14px;border-radius:11px;font-size:12.5px;line-height:1.6;margin-bottom:13px;border:1px solid transparent}
+.alert.ok{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:#a7f3d0}
+.alert.warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.25);color:#fde68a}
+.alert.bad{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.25);color:#fecaca}
+.alert b{font-weight:600;display:block;margin-bottom:4px}
+.dw-g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:13px}
+@media(max-width:520px){.dw-g2{grid-template-columns:1fr}}
+.dw-cl{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:12px}
+.dw-cl .l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:5px}
+.dw-cl .v{font-size:12.5px;font-weight:600;line-height:1.5}
+.dw-cl .v.ok{color:var(--ok)}.dw-cl .v.bad{color:var(--bad)}
+.dw-cl .n{font-size:11px;color:var(--text-3);margin-top:4px;line-height:1.5}
+.dw-desc{font-size:13px;line-height:1.75;color:var(--text-2);margin-bottom:14px;white-space:pre-wrap}
+.dw-specs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px}
+@media(max-width:520px){.dw-specs{grid-template-columns:1fr}}
+.dw-sp{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.dw-sp .k{font-size:11.5px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
+.dw-sp .v{font-size:12px;font-weight:600;text-align:right}
+.dw-sp .v.ok{color:var(--ok)}.dw-sp .v.no{color:var(--text-3)}
+.dw-shots{display:flex;flex-direction:column;gap:10px}
+.dw-shots img{width:100%;border-radius:11px;border:1px solid var(--border);transition:transform var(--t-med)}
+.dw-shots img:hover{transform:scale(1.02)}
+.dw-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.dw-lk{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:10px;font-size:12px;font-weight:500;background:var(--surface);border:1px solid var(--border);color:var(--text-2);transition:all var(--t-fast);cursor:pointer}
+.dw-lk:hover{background:var(--surface-2);color:rgb(var(--accent));border-color:rgba(var(--accent),.4);transform:translateY(-2px)}
+.dw-lk.pri{background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));color:#000;border:none}
+.dw-lk.pri:hover{color:#000;filter:brightness(1.1)}
+.dw-lk svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ovl{position:fixed;inset:0;z-index:130;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:14px;opacity:0;pointer-events:none;transition:opacity var(--t-med)}
+.ovl.on{opacity:1;pointer-events:auto}
+.modal{background:var(--bg-2);border:1px solid var(--border);border-radius:20px;width:100%;max-width:600px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;transform:scale(.94) translateY(12px);opacity:0;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .3s;box-shadow:0 40px 100px rgba(0,0,0,.6)}
+.ovl.on .modal{transform:scale(1) translateY(0);opacity:1}
+.m-hd{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.m-tt{font-size:16px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.m-tt svg{width:17px;height:17px;stroke:rgb(var(--accent));fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.m-sb{font-size:11px;color:var(--text-3);margin-top:2px;font-family:'JetBrains Mono',monospace}
+.m-bd{padding:20px;overflow-y:auto;flex:1}
+.th-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+@media(max-width:520px){.th-grid{grid-template-columns:repeat(2,1fr)}}
+.th-btn{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:15px 11px;display:flex;flex-direction:column;align-items:center;gap:9px;transition:all var(--t-med);cursor:pointer;position:relative;animation:fadeUp .35s cubic-bezier(.16,1,.3,1) both}
+.th-btn:hover{background:var(--surface-2);border-color:rgba(var(--accent),.4);transform:translateY(-3px)}
+.th-btn.on{border-color:var(--c);box-shadow:0 0 0 2px var(--c-glow),0 8px 22px var(--c-glow)}
+.th-dot{width:40px;height:40px;border-radius:50%;background:var(--c);position:relative;transition:transform var(--t-fast)}
+.th-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:var(--c);opacity:.35;filter:blur(10px)}
+.th-btn:hover .th-dot{transform:scale(1.12)}
+.th-btn.on .th-dot::before{content:'';position:absolute;inset:0;border-radius:50%;background:var(--c);box-shadow:0 0 20px var(--c),0 0 40px var(--c);animation:pulseTheme 2s infinite}
+@keyframes pulseTheme{0%,100%{opacity:.6}50%{opacity:1}}
+.th-nm{font-size:12px;font-weight:600;color:var(--text-2)}
+.th-btn.on .th-nm{color:var(--text)}
+.th-ck{position:absolute;top:8px;right:8px;width:18px;height:18px;border-radius:50%;background:var(--c);display:grid;place-items:center;opacity:0;transform:scale(.5);transition:all var(--t-fast)}
+.th-btn.on .th-ck{opacity:1;transform:scale(1)}
+.th-ck svg{width:11px;height:11px;stroke:#000;fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.cmp-scroll{overflow-x:auto}
+.cmp-row{display:grid;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:9px;overflow:hidden;margin-bottom:7px}
+.cmp-cell{background:var(--bg-3);padding:10px 12px;display:flex;align-items:center;min-height:42px;font-size:12px}
+.cmp-cell.hd{background:var(--surface);font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);justify-content:space-between;padding:10px 12px}
+.cmp-cell.lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase}
+.cmp-cell.name{font-weight:600;font-size:13px;color:var(--text)}
+.g-h3{font-size:14.5px;font-weight:600;margin-bottom:7px;display:flex;align-items:center;gap:8px;color:var(--text)}
+.g-h3 .n{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgb(var(--accent));background:rgba(var(--accent),.12);padding:3px 7px;border-radius:5px}
+.g-p{font-size:12.5px;line-height:1.75;color:var(--text-2);margin-bottom:12px}
+.g-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin-bottom:18px}
+.toasts{position:fixed;bottom:18px;right:18px;z-index:200;display:flex;flex-direction:column;gap:9px;pointer-events:none;max-width:340px}
+@media(max-width:520px){.toasts{left:18px;right:18px;max-width:none}}
+.toast{display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:11px;background:var(--bg-2);border:1px solid var(--border);box-shadow:0 12px 32px rgba(0,0,0,.5);font-size:12.5px;color:var(--text);pointer-events:auto;animation:toastIn .35s cubic-bezier(.16,1,.3,1) both;border-left:3px solid rgb(var(--accent))}
+.toast.ok{border-left-color:var(--ok)}
+.toast.warn{border-left-color:var(--warn)}
+.toast.bad{border-left-color:var(--bad)}
+.toast svg{width:15px;height:15px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.toast.ok svg{color:var(--ok)}
+.toast.warn svg{color:var(--warn)}
+@keyframes toastIn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+#devWarn{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:none;align-items:center;justify-content:center;padding:20px;text-align:center;pointer-events:none}
+#devWarn.on{display:flex;animation:fadeIn .15s ease}
+.dw-box{max-width:400px;animation:popIn .25s cubic-bezier(.16,1,.3,1) both;pointer-events:none}
+@keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.dw-ic{width:64px;height:64px;margin:0 auto 18px;border-radius:18px;background:linear-gradient(135deg,#f87171,#ef4444);display:grid;place-items:center;box-shadow:0 20px 60px rgba(248,113,113,.5);animation:shake .5s}
+.dw-ic svg{width:32px;height:32px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.dw-tt{font-size:19px;font-weight:700;margin-bottom:7px;color:#fff}
+.dw-tx{font-size:13px;color:#a1a1aa;line-height:1.6}
+@media(max-width:900px){.topbar-in{height:58px}.brand-t{font-size:13.5px}.nav-tab{padding:7px 11px;font-size:12px}}
+@media(max-width:560px){.brand-s{display:none}.nav-tabs{display:none}.banner-title{font-size:26px}.stat-cluster{min-width:0}.stat-c{padding:10px 11px}.row2{padding:11px}.row2-logo{width:36px;height:36px}.row2-detail{padding:5px 10px;font-size:10.5px}.modal{max-height:96vh;border-radius:16px}.m-hd,.m-bd{padding:16px}.th-grid{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
 </head>
-<body>
+<body class="theme-emerald">
+<div class="bg-fx"></div>
+<div class="scanline"></div>
 
-    <!-- ĐỐM ÁNH SÁNG NỀN TRÔI CHILL -->
-    <div class="ambient-glow">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
+<div class="shell">
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <div class="brand-block">
+        <div class="brand-mark">H</div>
+        <div class="brand-text">
+          <div class="brand-t">Exec Status by Huy</div>
+          <div class="brand-s" id="iBrandSub">trình theo dõi executor roblox</div>
+        </div>
+      </div>
+      <nav class="nav-tabs" id="navTabs">
+        <button class="nav-tab on" data-tab="All"><span id="iTabAll">Tất cả</span> <span class="cnt" id="cntAll">0</span></button>
+        <button class="nav-tab" data-tab="Windows"><span id="iTabWin">Windows</span> <span class="cnt" id="cntWin">0</span></button>
+        <button class="nav-tab" data-tab="Mac"><span id="iTabMac">macOS</span> <span class="cnt" id="cntMac">0</span></button>
+        <button class="nav-tab" data-tab="Android"><span id="iTabAnd">Android</span> <span class="cnt" id="cntAnd">0</span></button>
+        <button class="nav-tab" data-tab="iOS"><span id="iTabIOS">iOS</span> <span class="cnt" id="cntIOS">0</span></button>
+        <button class="nav-tab" data-tab="External"><span id="iTabExt">External</span> <span class="cnt" id="cntExt">0</span></button>
+      </nav>
+      <div class="topbar-r">
+        <div class="lang-btn" id="langBtn" title="EN / Normal / VI">
+          <button class="lang-opt" data-lang="en">EN</button>
+          <button class="lang-opt on" data-lang="normal">NOR</button>
+          <button class="lang-opt" data-lang="vi">VI</button>
+        </div>
+        <div class="clock2" title="Giờ Việt Nam (UTC+7)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div>
+            <div class="clock2-t" id="clkT">--:--:--</div>
+            <div class="clock2-d" id="clkD">Đang tải...</div>
+          </div>
+        </div>
+        <button class="iconbtn" id="btnThemes" title="Theme"><svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="14.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="14.5" r="2.5"/></svg></button>
+        <button class="iconbtn" id="btnSync" title="Sync"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></button>
+        <button class="iconbtn" id="btnCompare" title="Compare"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M3 12h18"/></svg></button>
+        <button class="iconbtn" id="btnGuide" title="Guide"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></button>
+      </div>
     </div>
+  </header>
 
-    <div class="container">
-        <!-- TOP BAR -->
-        <div class="top-bar">
-            <button class="theme-open-btn" onclick="openThemeModal()">
-                <i class="fas fa-palette"></i> Themes
+  <div class="verbar">
+    <div class="wrap verbar-in">
+      <div class="verbar-lb">
+        <span class="dot"></span>
+        <span class="txt" id="iRobloxBuilds">Bản Roblox</span>
+      </div>
+      <div class="verbar-scroll" id="verbarScroll"></div>
+      <div class="verbar-upd" id="verbarUpd">
+        <span class="live-dot"></span>
+        <span id="verbarSyncTime">sync --:--</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="banner">
+      <div class="banner-l">
+        <div class="banner-tag"><span class="live-dot"></span><span id="iLiveTag">Giám sát trực tiếp · weao.xyz</span></div>
+        <h1 class="banner-title">
+          <span class="soft" id="iDashTop">Bảng điều khiển</span><br>
+          <span class="strong" id="iDashBottom">Roblox Executor</span>
+        </h1>
+        <p class="banner-sub" id="iBannerSub">Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.</p>
+        <div class="banner-actions">
+          <button class="btn btn-p" id="btnRefresh2"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg><span id="iBtnRefresh">Làm mới dữ liệu</span></button>
+          <button class="btn btn-g" id="btnGuide2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span id="iBtnGuide">Hướng dẫn an toàn</span></button>
+        </div>
+      </div>
+      <div class="stat-cluster" id="statCluster"></div>
+    </section>
+
+    <div class="body">
+      <aside class="side">
+        <div class="side-sec">
+          <div class="side-ttl" id="iSecSearch">Tìm kiếm</div>
+          <div class="s-input">
+            <span class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+            <input type="text" id="searchInput" placeholder="Tên, dev, phiên bản..." autocomplete="off">
+            <span class="kb">/</span>
+          </div>
+        </div>
+        <div class="side-sec">
+          <div class="side-ttl" id="iSecFilters">Bộ lọc</div>
+          <div id="sideFilters"></div>
+        </div>
+        <div class="side-sec">
+          <div class="side-ttl" id="iSecSort">Sắp xếp</div>
+          <select class="s-sel" id="sortSel">
+            <option value="unc-desc" id="iSortUncDesc">UNC cao nhất</option>
+            <option value="unc-asc" id="iSortUncAsc">UNC thấp nhất</option>
+            <option value="title-asc" id="iSortTitleAsc">Tên A → Z</option>
+            <option value="updated-desc" id="iSortUpdated">Mới cập nhật</option>
+            <option value="safe-first" id="iSortSafe">An toàn nhất</option>
+          </select>
+        </div>
+        <button class="btn btn-g" id="btnReset" style="width:100%;justify-content:center;height:36px;font-size:12px"><span id="iResetFilter">Xoá bộ lọc</span></button>
+      </aside>
+
+      <main class="main">
+        <div class="main-hd">
+          <div class="main-hd-l">
+            <h2 id="mainTitle">Tất cả Executor</h2>
+            <span class="desc" id="mainDesc">đang hiển thị</span>
+          </div>
+          <div class="main-hd-r">
+            <span class="pill-btn"><span class="dot"></span><span id="mainCount">0 mục</span></span>
+          </div>
+        </div>
+        <div class="list2" id="execList"></div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div class="foot-l" id="iFooter">© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.</div>
+      <div class="foot-r">
+        <a id="ftGuide"><span id="iFtGuide">Hướng dẫn</span></a>
+        <a id="ftVersions"><span id="iFtVersions">Bản Roblox</span></a>
+        <a href="https://discord.gg/8DhdShdW8" target="_blank" rel="noopener">Discord</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div class="offline-badge" id="offlineBadge">
+  <span class="d"></span>
+  <span id="offlineText">OFFLINE · dùng dữ liệu cache</span>
+</div>
+
+<div class="drawer-bd" id="drawerBd"></div>
+<aside class="drawer" id="drawer">
+  <div class="dw-hd" id="dwHd"></div>
+  <div class="dw-tabs" id="dwTabs"></div>
+  <div class="dw-body" id="dwBody"></div>
+</aside>
+
+<div class="ovl" id="ovlTheme"><div class="modal" style="max-width:500px">
+  <div class="m-hd"><div><div class="m-tt"><svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="14.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="14.5" r="2.5"/></svg><span id="iThemeTitle">Chọn giao diện</span></div><div class="m-sb" id="iThemeSub">12 theme · tự động lưu</div></div><button class="x-btn" data-close><svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+  <div class="m-bd"><div class="th-grid" id="themeGrid"></div></div>
+</div></div>
+
+<div class="ovl" id="ovlCompare"><div class="modal" style="max-width:860px">
+  <div class="m-hd"><div><div class="m-tt"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M3 12h18"/></svg><span id="iCmpTitle">So sánh Executor</span></div><div class="m-sb" id="iCmpSub">Tối đa 3 executor</div></div><button class="x-btn" data-close><svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+  <div class="m-bd" id="cmpBody"></div>
+</div></div>
+
+<div class="ovl" id="ovlVersions"><div class="modal" style="max-width:600px">
+  <div class="m-hd"><div><div class="m-tt"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v18"/></svg><span id="iVerTitle">Bản Roblox Deployments</span></div><div class="m-sb" id="iVerSub">Hash chính thức từ weao.xyz</div></div><button class="x-btn" data-close><svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+  <div class="m-bd" id="verBody"></div>
+</div></div>
+
+<div class="ovl" id="ovlGuide"><div class="modal" style="max-width:660px">
+  <div class="m-hd"><div><div class="m-tt"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span id="iGuideTitle">Hướng dẫn an toàn</span></div><div class="m-sb" id="iGuideSub">Hyperion · UNC · bảo mật tài khoản</div></div><button class="x-btn" data-close><svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+  <div class="m-bd" id="gdBody"></div>
+</div></div>
+
+<div class="toasts" id="toasts"></div>
+
+<div id="devWarn"><div class="dw-box">
+  <div class="dw-ic"><svg viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></div>
+  <div class="dw-tt" id="iDevTitle">Cảnh báo bảo mật</div>
+  <div class="dw-tx" id="iDevText">Không được phép sử dụng công cụ gỡ lỗi. Thả chuột / phím để tiếp tục sử dụng web.</div>
+</div></div>
+
+<script>
+'use strict';
+
+const API_EXPLOITS='https://weao.xyz/api/status/exploits';
+const API_VERSIONS='https://weao.xyz/api/versions/current';
+const THEME_KEY='huy_exec_theme';
+
+const I18N = {
+  en: {
+    brandSub:'roblox executor monitor',
+    tabAll:'All',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External',
+    robloxBuilds:'Roblox builds',
+    liveTag:'Live monitoring · weao.xyz',
+    dashTop:'Control Panel',dashBottom:'Roblox Executor',
+    bannerSub:'Track Hyperion, UNC/sUNC scores, Roblox builds, and safe links. Data refreshes every 3 minutes.',
+    btnRefresh:'Refresh Data',btnGuide:'Safety Guide',
+    statExec:'Executors',statOp:'Operational',statUndet:'Undetected',statAvg:'Avg UNC',
+    secSearch:'Search',secFilters:'Filters',secSort:'Sort by',
+    searchPh:'Name, dev, version...',
+    sortUncDesc:'Highest UNC',sortUncAsc:'Lowest UNC',sortTitleAsc:'Name A → Z',sortUpdated:'Recently updated',sortSafe:'Safest first',
+    resetFilter:'Clear filters',
+    fUpdated:'Updated',fUndetected:'Undetected',fFree:'Free',fKeyless:'No key',fHighUnc:'UNC ≥ 90%',fDecomp:'Has decompiler',
+    allExec:'All Executors',showing:'showing',items:'items',
+    stUpdated:'Updated',stOutdated:'Not Updated',
+    stUpdatedNote:'This executor is up to date on WEAO.',
+    stOutdatedNote:'This executor has not been updated on WEAO.',
+    bfUndetected:'Undetected',bfBanwave:'Undetected · Banwave risk',bfDetected:'Detected',
+    bfUndetectedNote:'This exploit is reported as undetected.',
+    bfBanwaveNote:'Bypasses client-mod bans but may still be caught in banwaves.',
+    bfDetectedNote:(r)=>r?`Detected — ${r}`:'Currently detected by Hyperion.',
+    details:'Details',compare:'Compare',selected:'Selected',
+    ovOverview:'Overview',ovSpecs:'Specs',ovShots:'Screenshots',
+    status:'STATUS',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'PRICING',
+    copyVersion:'VERSION',copyHash:'ROBLOX HASH',
+    byfronDetect:'BYFRON DETECTION',clientMod:'CLIENT-MOD PROTECTION',
+    detected:'Detected',notDetected:'Not detected',supported:'Supported',notListed:'Not listed',
+    noteByfronFlag:"Taken directly from the data source's detected flag.",
+    noteBanwave:'Bypassing client-mod bans is not the same as surviving banwaves.',
+    description:'DESCRIPTION',
+    uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Multi-Instance',raknet:'RakNet',keySys:'Key System',
+    yes:'Yes',no:'No',hooked:'Hooked',required:'Required',none:'None',fullAst:'Full AST',
+    targetBuild:'Target Roblox build',
+    website:'Website',discord:'Discord',buyGet:'Buy / Get',
+    themeTitle:'Choose theme',themeSub:'12 themes · auto saved',
+    cmpTitle:'Compare Executors',cmpSub:'Up to 3 executors',
+    cmpCriteria:'Criteria',cmpName:'Name',cmpVersion:'Version',cmpPlatform:'Platform',cmpStatus:'Status',
+    cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Price',
+    cmpDecomp:'Decompiler',cmpMulti:'Multi',cmpYes:'Yes',cmpNo:'No',clearAll:'Clear all',
+    cmpEmpty:'No executors selected',cmpEmptyHint:'Click the "+" checkbox on a row to add up to 3',
+    verTitle:'Roblox Deployments',verSub:'Official hash from weao.xyz',
+    verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA',
+    verWinNote:'Main LIVE channel — Hyperion/Byfron active.',verMacNote:'No Byfron kernel driver.',
+    verApkNote:'For Delta, Codex, Arceus X…',verIosNote:'Install via TrollStore / AltStore / Sideloadly.',
+    verVersion:'Version',verReleased:'Released',copy:'Copy',copied:'Copied',
+    guideTitle:'Safety Guide',guideSub:'Hyperion · UNC · account safety',
+    guideH1:'What is Unified Naming Convention (UNC)?',
+    guideP1:'UNC is the benchmark standard for Lua execution environments. High UNC scores (95-100%) mean full compatibility with complex hubs like Blox Fruits autofarm, Dex Explorer, Remote Spy.',
+    guideG1:'Runs every major hub',guideG2:'Basic scripts: ESP, Aimbot',guideG3:'Missing functions, breaks on complex hubs',
+    guideH2:'How Hyperion / Byfron works',
+    guideP2:"Hyperion is Roblox's 64-bit anti-tamper on Windows. It inspects memory signatures, page protections, and threads. Tools that bypass client-mod checks can still be caught in server-side banwaves.",
+    guideH3:'Golden rule: Always use burner alt accounts',
+    guideP3:'Never run scripts on main accounts with rare items, limiteds, or high Robux balances. During silent banwaves, alt accounts isolate you from hardware or account termination.',
+    guideH4:'Executor architecture types',
+    guideL1:'Mac client has no 64-bit Hyperion driver — Macsploit, Opiumware are effectively ban-free.',
+    guideL2:'APK/IPA run in their own sandbox — far lower banwave risk than Windows.',
+    guideL3:'Never inject into the Roblox process, so Byfron sees nothing — ESP/aimbot only.',
+    guideL4:"Internal executors give full Lua power but sit permanently in Byfron's crosshairs.",
+    footNote:'© 2026 Exec Status by Huy — reference only, no cheating encouraged.',
+    ftGuide:'Guide',ftVersions:'Roblox builds',
+    devTitle:'Security Warning',devText:'DevTools are not allowed. Release the mouse/key to continue using the site.',
+    toastCopiedHash:(v)=>`Copied hash: ${v}`,
+    toastCopiedVer:(v)=>`Copied version: ${v}`,
+    toastCopyFail:'Copy failed — HTTPS required',
+    toastNoData:'Nothing to copy',
+    toastThemeSaved:(n)=>`Saved theme ${n}`,
+    toastSyncOk:'Synced live data',
+    toastSyncFail:'API unreachable — using cached data',
+    toastCmpMax:'Compare up to 3 executors only',
+    toastCmpAdded:(n)=>`Added ${n} to compare`,
+    emptyTitle:'No executors match your filters',
+    syncLabel:'sync',loading:'Loading...',
+    offlineBadge:'OFFLINE · cached data'
+  },
+  normal: {
+    brandSub:'trình theo dõi executor roblox',
+    tabAll:'Tất cả',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External',
+    robloxBuilds:'Bản Roblox',
+    liveTag:'Giám sát trực tiếp · weao.xyz',
+    dashTop:'Bảng điều khiển',dashBottom:'Roblox Executor',
+    bannerSub:'Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.',
+    btnRefresh:'Làm mới dữ liệu',btnGuide:'Hướng dẫn an toàn',
+    statExec:'Executor',statOp:'Đang chạy',statUndet:'Undetected',statAvg:'UNC TB',
+    secSearch:'Tìm kiếm',secFilters:'Bộ lọc',secSort:'Sắp xếp',
+    searchPh:'Tên, dev, phiên bản...',
+    sortUncDesc:'UNC cao nhất',sortUncAsc:'UNC thấp nhất',sortTitleAsc:'Tên A → Z',sortUpdated:'Mới cập nhật',sortSafe:'An toàn nhất',
+    resetFilter:'Xoá bộ lọc',
+    fUpdated:'Updated',fUndetected:'Undetected',fFree:'Miễn phí',fKeyless:'Không key',fHighUnc:'UNC ≥ 90%',fDecomp:'Có decompiler',
+    allExec:'Tất cả Executor',showing:'đang hiển thị',items:'mục',
+    stUpdated:'Updated',stOutdated:'Not Updated',
+    stUpdatedNote:'Executor này đã được cập nhật trên WEAO.',
+    stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.',
+    bfUndetected:'Undetected',bfBanwave:'Undetected · Banwave risk',bfDetected:'Detected',
+    bfUndetectedNote:'Executor này được báo cáo là undetected.',
+    bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.',
+    bfDetectedNote:(r)=>r?`Detected — ${r}`:'Hiện đang bị Hyperion phát hiện.',
+    details:'Chi tiết',compare:'So sánh',selected:'Đã chọn',
+    ovOverview:'Tổng quan',ovSpecs:'Thông số',ovShots:'Ảnh chụp',
+    status:'STATUS',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'GIÁ',
+    copyVersion:'PHIÊN BẢN',copyHash:'HASH ROBLOX',
+    byfronDetect:'BYFRON DETECTION',clientMod:'CLIENT-MOD PROTECTION',
+    detected:'Detected',notDetected:'Not detected',supported:'Supported',notListed:'Not listed',
+    noteByfronFlag:'Lấy trực tiếp từ cờ detected của nguồn dữ liệu.',
+    noteBanwave:'Bypass client-mod bans không đồng nghĩa với sống sót qua banwave.',
+    description:'MÔ TẢ',
+    uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Multi-Instance',raknet:'RakNet',keySys:'Key System',
+    yes:'Yes',no:'No',hooked:'Hooked',required:'Required',none:'None',fullAst:'Full AST',
+    targetBuild:'Bản Roblox mục tiêu',
+    website:'Website',discord:'Discord',buyGet:'Mua / Tải',
+    themeTitle:'Chọn giao diện',themeSub:'12 theme · tự động lưu',
+    cmpTitle:'So sánh Executor',cmpSub:'Tối đa 3 executor',
+    cmpCriteria:'Tiêu chí',cmpName:'Tên',cmpVersion:'Phiên bản',cmpPlatform:'Nền tảng',cmpStatus:'Status',
+    cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Giá',
+    cmpDecomp:'Decompiler',cmpMulti:'Multi',cmpYes:'Yes',cmpNo:'No',clearAll:'Xoá tất cả',
+    cmpEmpty:'Chưa chọn executor nào',cmpEmptyHint:'Bấm ô vuông "+" trên hàng để thêm tối đa 3',
+    verTitle:'Bản Roblox Deployments',verSub:'Hash chính thức từ weao.xyz',
+    verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA',
+    verWinNote:'Kênh LIVE chính — có Hyperion/Byfron.',verMacNote:'Không có Byfron kernel driver.',
+    verApkNote:'Bản cho Delta, Codex, Arceus X…',verIosNote:'Cài qua TrollStore / AltStore / Sideloadly.',
+    verVersion:'Phiên bản',verReleased:'Phát hành',copy:'Sao chép',copied:'Đã sao chép',
+    guideTitle:'Hướng dẫn an toàn',guideSub:'Hyperion · UNC · bảo mật tài khoản',
+    guideH1:'Unified Naming Convention (UNC) là gì?',
+    guideP1:'UNC là chuẩn benchmark cho môi trường thực thi Lua. Điểm UNC cao (95-100%) đồng nghĩa tương thích đầy đủ với các hub phức tạp như Blox Fruits autofarm, Dex Explorer, Remote Spy.',
+    guideG1:'Chạy mọi hub lớn',guideG2:'Script cơ bản: ESP, Aimbot',guideG3:'Thiếu hàm, dễ lỗi hub phức tạp',
+    guideH2:'Hyperion / Byfron hoạt động ra sao',
+    guideP2:'Hyperion là anti-tamper 64-bit trên Windows của Roblox. Nó kiểm tra memory signature, page protection và thread. Executor bypass client-mod vẫn có thể bị bắt trong các đợt banwave phía server.',
+    guideH3:'Nguyên tắc vàng: Luôn dùng acc phụ',
+    guideP3:'Không bao giờ chạy script trên acc chính có item hiếm, limited hay số dư Robux cao. Khi banwave âm thầm xảy ra, acc phụ sẽ cô lập rủi ro khỏi bạn.',
+    guideH4:'Kiến trúc từng loại executor',
+    guideL1:'Client Mac chưa có Hyperion 64-bit — Macsploit, Opiumware gần như an toàn tuyệt đối.',
+    guideL2:'APK/IPA chạy sandbox riêng — rủi ro banwave thấp hơn nhiều so với Windows.',
+    guideL3:'Không inject vào tiến trình Roblox nên Byfron không thấy — chỉ ESP/Aimbot.',
+    guideL4:'Internal executor đầy đủ Lua nhưng nằm trong tầm ngắm Byfron.',
+    footNote:'© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.',
+    ftGuide:'Hướng dẫn',ftVersions:'Bản Roblox',
+    devTitle:'Cảnh báo bảo mật',devText:'Không được phép sử dụng công cụ gỡ lỗi. Thả chuột / phím để tiếp tục sử dụng web.',
+    toastCopiedHash:(v)=>`Đã copy hash: ${v}`,
+    toastCopiedVer:(v)=>`Đã copy phiên bản: ${v}`,
+    toastCopyFail:'Không copy được — cần HTTPS',
+    toastNoData:'Không có dữ liệu để copy',
+    toastThemeSaved:(n)=>`Đã lưu theme ${n}`,
+    toastSyncOk:'Đã đồng bộ dữ liệu trực tiếp',
+    toastSyncFail:'API không phản hồi — dùng dữ liệu cache',
+    toastCmpMax:'Chỉ so sánh tối đa 3 executor',
+    toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`,
+    emptyTitle:'Không có executor nào phù hợp',
+    syncLabel:'sync',loading:'Đang tải...',
+    offlineBadge:'OFFLINE · dữ liệu cache'
+  },
+  vi: {
+    brandSub:'trình theo dõi executor roblox',
+    tabAll:'Tất cả',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External',
+    robloxBuilds:'Bản Roblox',
+    liveTag:'Giám sát trực tiếp · weao.xyz',
+    dashTop:'Bảng điều khiển',dashBottom:'Roblox Executor',
+    bannerSub:'Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.',
+    btnRefresh:'Làm mới dữ liệu',btnGuide:'Hướng dẫn an toàn',
+    statExec:'Executor',statOp:'Đang chạy',statUndet:'Không bị phát hiện',statAvg:'UNC TB',
+    secSearch:'Tìm kiếm',secFilters:'Bộ lọc',secSort:'Sắp xếp',
+    searchPh:'Tên, dev, phiên bản...',
+    sortUncDesc:'UNC cao nhất',sortUncAsc:'UNC thấp nhất',sortTitleAsc:'Tên A → Z',sortUpdated:'Mới cập nhật',sortSafe:'An toàn nhất',
+    resetFilter:'Xoá bộ lọc',
+    fUpdated:'Đã cập nhật',fUndetected:'Không bị phát hiện',fFree:'Miễn phí',fKeyless:'Không key',fHighUnc:'UNC ≥ 90%',fDecomp:'Có decompiler',
+    allExec:'Tất cả Executor',showing:'đang hiển thị',items:'mục',
+    stUpdated:'Đã cập nhật',stOutdated:'Chưa cập nhật',
+    stUpdatedNote:'Executor này đã được cập nhật trên WEAO.',
+    stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.',
+    bfUndetected:'Không bị phát hiện',bfBanwave:'Không bị phát hiện · Rủi ro banwave',bfDetected:'Bị phát hiện',
+    bfUndetectedNote:'Executor này được báo cáo là không bị phát hiện.',
+    bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.',
+    bfDetectedNote:(r)=>r?`Đã bị phát hiện — ${r}`:'Hiện đang bị Hyperion phát hiện.',
+    details:'Chi tiết',compare:'So sánh',selected:'Đã chọn',
+    ovOverview:'Tổng quan',ovSpecs:'Thông số',ovShots:'Ảnh chụp',
+    status:'TRẠNG THÁI',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'GIÁ',
+    copyVersion:'PHIÊN BẢN',copyHash:'HASH ROBLOX',
+    byfronDetect:'PHÁT HIỆN BYFRON',clientMod:'BẢO VỆ CLIENT-MOD',
+    detected:'Bị phát hiện',notDetected:'Không bị phát hiện',supported:'Được hỗ trợ',notListed:'Không có',
+    noteByfronFlag:'Lấy trực tiếp từ cờ phát hiện của nguồn dữ liệu.',
+    noteBanwave:'Bypass client-mod bans không đồng nghĩa với sống sót qua banwave.',
+    description:'MÔ TẢ',
+    uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Đa instance',raknet:'RakNet',keySys:'Hệ thống key',
+    yes:'Có',no:'Không',hooked:'Đã hook',required:'Bắt buộc',none:'Không',fullAst:'Full AST',
+    targetBuild:'Bản Roblox mục tiêu',
+    website:'Website',discord:'Discord',buyGet:'Mua / Tải',
+    themeTitle:'Chọn giao diện',themeSub:'12 theme · tự động lưu',
+    cmpTitle:'So sánh Executor',cmpSub:'Tối đa 3 executor',
+    cmpCriteria:'Tiêu chí',cmpName:'Tên',cmpVersion:'Phiên bản',cmpPlatform:'Nền tảng',cmpStatus:'Trạng thái',
+    cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Giá',
+    cmpDecomp:'Decompiler',cmpMulti:'Đa instance',cmpYes:'Có',cmpNo:'Không',clearAll:'Xoá tất cả',
+    cmpEmpty:'Chưa chọn executor nào',cmpEmptyHint:'Bấm ô vuông "+" trên hàng để thêm tối đa 3',
+    verTitle:'Bản Roblox Deployments',verSub:'Hash chính thức từ weao.xyz',
+    verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA',
+    verWinNote:'Kênh LIVE chính — có Hyperion/Byfron.',verMacNote:'Không có Byfron kernel driver.',
+    verApkNote:'Bản cho Delta, Codex, Arceus X…',verIosNote:'Cài qua TrollStore / AltStore / Sideloadly.',
+    verVersion:'Phiên bản',verReleased:'Phát hành',copy:'Sao chép',copied:'Đã sao chép',
+    guideTitle:'Hướng dẫn an toàn',guideSub:'Hyperion · UNC · bảo mật tài khoản',
+    guideH1:'Unified Naming Convention (UNC) là gì?',
+    guideP1:'UNC là chuẩn benchmark cho môi trường thực thi Lua. Điểm UNC cao (95-100%) đồng nghĩa tương thích đầy đủ với các hub phức tạp như Blox Fruits autofarm, Dex Explorer, Remote Spy.',
+    guideG1:'Chạy mọi hub lớn',guideG2:'Script cơ bản: ESP, Aimbot',guideG3:'Thiếu hàm, dễ lỗi hub phức tạp',
+    guideH2:'Hyperion / Byfron hoạt động ra sao',
+    guideP2:'Hyperion là anti-tamper 64-bit trên Windows của Roblox. Nó kiểm tra memory signature, page protection và thread. Executor bypass client-mod vẫn có thể bị bắt trong các đợt banwave phía server.',
+    guideH3:'Nguyên tắc vàng: Luôn dùng acc phụ',
+    guideP3:'Không bao giờ chạy script trên acc chính có item hiếm, limited hay số dư Robux cao. Khi banwave âm thầm xảy ra, acc phụ sẽ cô lập rủi ro khỏi bạn.',
+    guideH4:'Kiến trúc từng loại executor',
+    guideL1:'Client Mac chưa có Hyperion 64-bit — Macsploit, Opiumware gần như an toàn tuyệt đối.',
+    guideL2:'APK/IPA chạy sandbox riêng — rủi ro banwave thấp hơn nhiều so với Windows.',
+    guideL3:'Không inject vào tiến trình Roblox nên Byfron không thấy — chỉ ESP/Aimbot.',
+    guideL4:'Internal executor đầy đủ Lua nhưng nằm trong tầm ngắm Byfron.',
+    footNote:'© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.',
+    ftGuide:'Hướng dẫn',ftVersions:'Bản Roblox',
+    devTitle:'Cảnh báo bảo mật',devText:'Không được phép sử dụng công cụ gỡ lỗi. Thả chuột / phím để tiếp tục sử dụng web.',
+    toastCopiedHash:(v)=>`Đã copy hash: ${v}`,
+    toastCopiedVer:(v)=>`Đã copy phiên bản: ${v}`,
+    toastCopyFail:'Không copy được — cần HTTPS',
+    toastNoData:'Không có dữ liệu để copy',
+    toastThemeSaved:(n)=>`Đã lưu theme ${n}`,
+    toastSyncOk:'Đã đồng bộ dữ liệu trực tiếp',
+    toastSyncFail:'API không phản hồi — dùng dữ liệu cache',
+    toastCmpMax:'Chỉ so sánh tối đa 3 executor',
+    toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`,
+    emptyTitle:'Không có executor nào phù hợp',
+    syncLabel:'sync',loading:'Đang tải...',
+    offlineBadge:'OFFLINE · dữ liệu cache'
+  }
+};
+
+/* DEFAULT = NORMAL */
+let currentLang = 'normal';
+const t = k => (I18N[currentLang] && I18N[currentLang][k]) || k;
+
+function verLabel(v){
+  const s = String(v||'');
+  if(!s) return 'v—';
+  return /^[vV]/.test(s) ? s : 'v' + s;
+}
+
+/* Ngày hiển thị dạng metadata — KHÔNG dùng để phân loại status nữa */
+function recentDate(daysAgo){
+  const d = new Date(Date.now() - daysAgo * 86400000);
+  const m = String(d.getUTCMonth()+1).padStart(2,'0');
+  const day = String(d.getUTCDate()).padStart(2,'0');
+  const y = d.getUTCFullYear();
+  return `${m}/${day}/${y}`;
+}
+
+const THEMES=[
+  {id:"emerald",name:"Emerald",c:"#10b981"},{id:"cyberpunk",name:"Cyberpunk",c:"#06b6d4"},
+  {id:"amethyst",name:"Amethyst",c:"#a855f7"},{id:"sunset",name:"Sunset",c:"#f97316"},
+  {id:"ocean",name:"Ocean",c:"#3b82f6"},{id:"crimson",name:"Crimson",c:"#ef4444"},
+  {id:"gold",name:"Gold",c:"#eab308"},{id:"vaporwave",name:"Vaporwave",c:"#ec4899"},
+  {id:"matrix",name:"Matrix",c:"#22c55e"},{id:"aurora",name:"Aurora",c:"#14b8a6"},
+  {id:"sakura",name:"Sakura",c:"#fda4af"},{id:"obsidian",name:"Obsidian",c:"#ffffff"}
+];
+
+/* FALLBACK DATA — chỉ dùng updateStatus theo doc weao, KHÔNG phân loại theo ngày */
+const FALLBACK_EXPLOITS=[
+  {_id:"exl-volt",title:"Volt",version:"1.3.13.1",updatedDate:recentDate(0),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$5.99 Weekly",detected:true,clientmods:true,detectionReason:"Last banwave: March 6-18th",updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://voltbz.net/",discordlink:"https://discord.com/invite/voltbz",purchaselink:"https://rcheatz.com/product?id=volt&ref=weao",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Volt Team",fullDescription:"Volt (previously AWP.GG) is a premium Windows script executor.",logo:"https://cdn.weao.gg/slug/volt/logo.png"}},
+  {_id:"exl-wave",title:"Wave",version:"NEW-1.5.3",updatedDate:recentDate(0),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$4.99 Weekly",detected:true,clientmods:true,detectionReason:"Last banwave: May 26",updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://getwave.gg",discordlink:"https://discord.gg/rARhPpN7fY",purchaselink:"https://bloxproducts.com/?affiliate_key=weao#Wave",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Wave Team",fullDescription:"Wave is a premium Windows script executor.",logo:"https://cdn.weao.gg/slug/wave/logo.png"}},
+  {_id:"exl-sirhurt",title:"SirHurt",version:"V5.469",updatedDate:recentDate(0),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$2.80 Weekly",detected:true,clientmods:true,updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://sirhurt.net",discordlink:"https://discord.gg/CPKvWTgFdV",purchaselink:"https://sirhurt.net/#purchase",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"spook",fullDescription:"SirHurt is a long-standing premium Windows script executor.",logo:"https://cdn.weao.gg/slug/sirhurt/logo.png"}},
+  {_id:"exl-solara",title:"Solara",version:"0.1.7",updatedDate:recentDate(0),uncStatus:true,uncPercentage:66,suncPercentage:59,free:true,detected:true,clientmods:true,updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://getsolara.dev",discordlink:"https://getsolara.dev/discord",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:false,slug:{owner:"Quivings",fullDescription:"Solara is a free external Windows script executor.",logo:"https://cdn.weao.gg/slug/solara/logo.png"}},
+  {_id:"exl-xeno",title:"Xeno",version:"1.3.60",updatedDate:recentDate(0),uncStatus:true,uncPercentage:84,suncPercentage:40,free:true,detected:true,clientmods:true,updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://www.xeno.now/",discordlink:"https://discord.gg/xe-no",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:false,slug:{owner:"Rizve",fullDescription:"Xeno is a free external Windows script executor.",logo:"https://cdn.weao.gg/slug/xeno/logo.png"}},
+  {_id:"exl-delta",title:"Delta",version:"2.729.840",updatedDate:recentDate(0),uncStatus:true,uncPercentage:99,suncPercentage:100,free:true,detected:true,clientmods:true,updateStatus:true,rbxversion:"2.729.840",websitelink:"https://deltaexploits.gg/",discordlink:"https://discord.gg/deltax",purchaselink:"https://rcheatz.com/product?id=delta&ref=weao",platform:"Android",extype:"aexecutor",keysystem:true,decompiler:true,multiInject:false,raknet:true,slug:{owner:"lxnny, mlemix",fullDescription:"Delta is a free Android executor.",logo:"https://cdn.weao.gg/slug/delta/logo.png"}},
+  {_id:"exl-potassium",title:"Potassium",version:"2.4.8",updatedDate:recentDate(45),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$22.99 Lifetime",detected:true,clientmods:true,detectionReason:"Last banwave: June 1st",updateStatus:false,rbxversion:"c5aecda2245e",websitelink:"https://www.potassium.pro/",discordlink:"https://discord.com/invite/potassium",purchaselink:"https://bloxproducts.com/r/weao#Potassium",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"perm, v03",fullDescription:"Potassium is a lifetime premium Windows script executor.",logo:"https://cdn.weao.gg/slug/potassium/logo.png"}},
+  {_id:"exl-cosmic",title:"Cosmic",version:"1.733",updatedDate:recentDate(25),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$14.99 Lifetime",detected:true,clientmods:true,updateStatus:false,rbxversion:"d584fb6c717a",websitelink:"https://cosmic.best",discordlink:"https://discord.gg/cosmicbest",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:false,slug:{owner:"savage",fullDescription:"Cosmic is a budget-friendly premium Windows script executor.",logo:"https://cdn.weao.gg/slug/cosmic/cosmic-transparent.png"}},
+  {_id:"exl-real",title:"Real",version:"2.6.2",updatedDate:recentDate(20),uncStatus:true,uncPercentage:99,suncPercentage:100,free:true,detected:true,clientmods:true,updateStatus:false,rbxversion:"c5aecda2245e",websitelink:"https://projectreal.gg",discordlink:"https://discord.gg/real",platform:"Windows",extype:"wexecutor",keysystem:true,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Real Team",fullDescription:"Real is a free Windows script executor with a key system."}},
+  {_id:"exl-macsploit",title:"MacSploit",version:"736.1",updatedDate:recentDate(10),uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$9.99 Lifetime",detected:false,clientmods:true,updateStatus:false,rbxversion:"4c4fc877ca9b",websitelink:"https://www.raptor.fun/",discordlink:"https://discord.gg/macsploit",purchaselink:"https://bloxproducts.com/?affiliate_key=weao#MacSploit",platform:"Mac",extype:"mexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{fullDescription:"MacSploit is a premium macOS script executor."}},
+  {_id:"exl-opiumware",title:"Opiumware",version:"v2.5.1-a",updatedDate:recentDate(5),uncStatus:true,uncPercentage:99,suncPercentage:100,free:true,detected:false,clientmods:false,updateStatus:false,rbxversion:"2a3a7efa1a93",websitelink:"https://use.opiumware.today/",discordlink:"https://discord.gg/opiumware",platform:"Mac",extype:"mexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"norby",fullDescription:"Opiumware is a free macOS script executor.",logo:"https://cdn.weao.gg/slug/opiumware/logo.png"}},
+  {_id:"exl-codex",title:"Codex",version:"2.731.944",updatedDate:recentDate(30),uncStatus:true,uncPercentage:98,suncPercentage:96,free:true,detected:true,clientmods:true,updateStatus:false,rbxversion:"2.731.944",websitelink:"https://codex.lol",discordlink:"https://discord.gg/codexlol",purchaselink:"https://rcheatz.com/affiliate/weao",platform:"Android",extype:"aexecutor",keysystem:true,decompiler:true,multiInject:false,raknet:false,slug:{owner:"Furky",fullDescription:"Codex is a free Android executor.",logo:"https://cdn.weao.gg/slug/codex/logo.png"}}
+];
+
+const FALLBACK_VERSIONS={
+  Windows:"version-c5aecda2245e4fae",WindowsDate:"9/9/2026",
+  WindowsResponse:{version:"0.738.0.7381397",type:"new"},
+  Mac:"version-5b15515e80624095",MacDate:"9/9/2026",
+  MacResponse:{version:"0.738.0.7381393",type:"revert"},
+  Android:"2.738.1397",AndroidDate:"9/10/2026",AndroidResponse:{version:"2.738.1397"},
+  iOS:"2.738.1390",iOSDate:"9/10/2026",iOSResponse:{version:"2.738.1390"}
+};
+
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeURL=u=>{try{const x=new URL(u);return['http:','https:'].includes(x.protocol)?x.href:null}catch{return null}};
+const isCdnWEAO=u=>{try{const h=new URL(u).hostname.toLowerCase();return h==='cdn.weao.gg'||h.endsWith('.cdn.weao.gg')}catch{return false}};
+
+function lsGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catch(e){return f}}
+function lsSet(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
+
+/* ============ STATUS LOGIC — 2-tier theo đúng doc weao ============
+   Doc weao: "updateStatus — boolean — If the exploit is updated"
+   → Chỉ dùng boolean, KHÔNG dùng ngày để phân loại thêm.
+===================================================================== */
+function computeStatus(e){
+  if(e.updateStatus){
+    return {key:'updated', label:t('stUpdated'), tone:'ok', note:t('stUpdatedNote')};
+  }
+  return {key:'outdated', label:t('stOutdated'), tone:'bad', note:t('stOutdatedNote')};
+}
+
+function safetyLabel(e){
+  if(!e.detected) return{key:"clean",label:t('bfUndetected'),tone:"ok",rank:0,note:t('bfUndetectedNote')};
+  if(e.clientmods) return{key:"banwave",label:t('bfBanwave'),tone:"warn",rank:1,note:t('bfBanwaveNote')};
+  const r=(e.detectionReason||"").trim();
+  return{key:"detected",label:t('bfDetected'),tone:"bad",rank:2,note:I18N[currentLang].bfDetectedNote(r)};
+}
+
+function normalizeExploit(raw,idx){
+  if(!raw||typeof raw.title!=='string'||!raw.title.trim()||raw.hidden===true||raw.private===true) return null;
+  const platforms=["Windows","Mac","Android","iOS"];
+  const platform=platforms.includes(raw.platform)?raw.platform:"Windows";
+  const shots=raw.slug&&Array.isArray(raw.slug.screenshots)?raw.slug.screenshots.filter(s=>typeof s==='string'&&s.startsWith('http')):undefined;
+  const feats=raw.recommendedReason&&Array.isArray(raw.recommendedReason.features)?raw.recommendedReason.features.filter(f=>typeof f==='string'):[];
+  return{
+    _id:typeof raw._id==='string'?raw._id:`live-${idx}`,
+    title:raw.title.trim(),version:raw.version||"—",updatedDate:raw.updatedDate||"Unknown",
+    uncStatus:!!raw.uncStatus,uncPercentage:typeof raw.uncPercentage==='number'?raw.uncPercentage:undefined,
+    suncPercentage:typeof raw.suncPercentage==='number'?raw.suncPercentage:undefined,
+    free:!!raw.free,cost:raw.cost,detected:!!raw.detected,detectionReason:raw.detectionReason,
+    updateStatus:!!raw.updateStatus,rbxversion:raw.rbxversion,
+    websitelink:safeURL(raw.websitelink),discordlink:safeURL(raw.discordlink),purchaselink:safeURL(raw.purchaselink),
+    platform,extype:raw.extype,keysystem:!!raw.keysystem,decompiler:!!raw.decompiler,
+    multiInject:!!raw.multiInject,clientmods:!!raw.clientmods,raknet:!!raw.raknet,
+    slug:raw.slug&&typeof raw.slug==='object'?{fullDescription:raw.slug.fullDescription,logo:safeURL(raw.slug.logo),owner:raw.slug.owner,screenshots:shots&&shots.length?shots:undefined}:undefined,
+    recommendedReason:{features:feats},elementCertified:!!raw.elementCertified
+  };
+}
+
+const state={
+  executors:FALLBACK_EXPLOITS.slice(),
+  versions:FALLBACK_VERSIONS,
+  filters:{search:"",platform:"All",sort:"unc-desc",updated:false,undetected:false,free:false,keyless:false,highUnc:false,decomp:false},
+  compare:[],
+  drawerId:null,
+  drawerTab:'overview',
+  isLive:false
+};
+
+function toast(text,type='ok'){
+  const tt=document.createElement('div');
+  tt.className='toast '+type;
+  const ic={
+    ok:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>',
+    warn:'<svg viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
+    bad:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>'
+  };
+  tt.innerHTML=(ic[type]||ic.ok)+'<span>'+esc(text)+'</span>';
+  const box=$('#toasts');
+  if(box) box.appendChild(tt);
+  setTimeout(()=>{tt.style.transition='opacity .3s,transform .3s';tt.style.opacity='0';tt.style.transform='translateX(28px)';setTimeout(()=>tt.remove(),300)},3000);
+}
+
+async function copyText(text,kind){
+  if(!text){toast(t('toastNoData'),'warn');return false}
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(text);}
+    else{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}
+    toast(kind==='version'?I18N[currentLang].toastCopiedVer(text):I18N[currentLang].toastCopiedHash(text),'ok');
+    return true;
+  }catch(e){toast(t('toastCopyFail'),'warn');return false;}
+}
+async function copyVersion(id,btn){const e=state.executors.find(x=>x._id===id);if(!e) return;const ok=await copyText(e.version,'version');if(ok&&btn){btn.classList.add('copied');setTimeout(()=>btn.classList.remove('copied'),1500)}}
+async function copyHash(id,btn){const e=state.executors.find(x=>x._id===id);if(!e||!e.rbxversion) return;const ok=await copyText(e.rbxversion,'hash');if(ok&&btn){btn.classList.add('copied');setTimeout(()=>btn.classList.remove('copied'),1500)}}
+
+function applyTheme(id,notify){
+  document.body.className='theme-'+id;
+  lsSet(THEME_KEY,id);
+  $$('.th-btn').forEach(b=>b.classList.toggle('on',b.dataset.id===id));
+  const m=document.querySelector('meta[name="theme-color"]');
+  const th=THEMES.find(x=>x.id===id);
+  if(m&&th) m.setAttribute('content',th.c);
+  if(notify&&th) toast(I18N[currentLang].toastThemeSaved(th.name),'ok');
+}
+
+function buildThemeGrid(){
+  const g=$('#themeGrid');
+  if(!g) return;
+  g.innerHTML=THEMES.map((th,i)=>`
+    <button class="th-btn" data-id="${th.id}" style="--c:${th.c};--c-glow:${th.c}55;animation-delay:${i*22}ms">
+      <div class="th-ck"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <div class="th-dot"></div>
+      <div class="th-nm">${esc(th.name)}</div>
+    </button>
+  `).join('');
+  g.addEventListener('click',e=>{const b=e.target.closest('.th-btn');if(!b) return;applyTheme(b.dataset.id,true);});
+}
+
+function updateClock(){
+  try{
+    const now=new Date();
+    const loc = currentLang==='en'?'en-US':'vi-VN';
+    const tt=new Intl.DateTimeFormat(loc,{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);
+    const dd=new Intl.DateTimeFormat(loc,{timeZone:'Asia/Ho_Chi_Minh',weekday:'short',day:'2-digit',month:'2-digit',year:'numeric'}).format(now);
+    const tEl=$('#clkT'), dEl=$('#clkD');
+    if(tEl) tEl.textContent=tt;
+    if(dEl) dEl.textContent=dd;
+  }catch(e){}
+}
+
+function platformIcon(p){
+  if(p==='win') return '<path d="M3 5.5 10.5 4.3v7.2H3zM12 4l9-1.3v8.8h-9zM3 12.5h7.5v7.2L3 18.5zM12 12.5h9v8.8l-9-1.3z"/>';
+  if(p==='mac') return '<path d="M16.5 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-.5.9-.8 2-.8 3.1 0 2.4 1.8 5.5 3.3 5.5.7 0 1.5-.5 2.4-.5s1.7.5 2.4.5c1.5 0 3.1-2.9 3.1-5.5-.1 0-.3 0-.3 0zM14.3 6.8c.5-.6.8-1.5.8-2.3-.7 0-1.5.4-2 1-.4.5-.8 1.4-.8 2.2.8.1 1.6-.4 2-1z"/>';
+  if(p==='apk') return '<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M11 19h2"/>';
+  if(p==='ios') return '<path d="M16.5 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-.5.9-.8 2-.8 3.1 0 2.4 1.8 5.5 3.3 5.5.7 0 1.5-.5 2.4-.5s1.7.5 2.4.5c1.5 0 3.1-2.9 3.1-5.5-.1 0-.3 0-.3 0zM14.3 6.8c.5-.6.8-1.5.8-2.3-.7 0-1.5.4-2 1-.4.5-.8 1.4-.8 2.2.8.1 1.6-.4 2-1z"/>';
+  return '';
+}
+
+function renderVersionBar(){
+  const v=state.versions;
+  const items=[
+    {key:'win', label:'Windows', hash:v.Windows || '',            fallback:'version-xxxxx'},
+    {key:'mac', label:'macOS',   hash:v.Mac || '',                fallback:'version-xxxxx'},
+    {key:'apk', label:'Android', hash:v.Android || '',            fallback:'2.738.1397'},
+    {key:'ios', label:'iOS',     hash:v.iOS || '',                fallback:'2.738.1390'}
+  ];
+  const el=$('#verbarScroll');
+  if(!el) return;
+  el.innerHTML=items.map(p=>{
+    const display = p.hash || p.fallback;
+    return `
+    <div class="verbar-item" data-hash="${esc(display)}" data-plat="${esc(p.label)}" title="${esc(display)}">
+      <div class="ver-ico"><svg viewBox="0 0 24 24">${platformIcon(p.key)}</svg></div>
+      <div class="ver-body">
+        <span class="ver-plat">${esc(p.label)}</span>
+        <span class="ver-num">${esc(display)}</span>
+      </div>
+      <button class="ver-cp" data-cp-hash="${esc(display)}" title="${esc(display)}"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16V4a2 2 0 0 1 2-2h10"/></svg></button>
+    </div>`;
+  }).join('');
+
+  el.querySelectorAll('.verbar-item').forEach(item=>{
+    item.addEventListener('click',async(e)=>{
+      e.stopPropagation();
+      const hash=item.dataset.hash;
+      if(!hash){toast(t('toastNoData'),'warn');return}
+      const ok=await copyText(hash,'hash');
+      if(ok){
+        const cpBtn=item.querySelector('.ver-cp');
+        if(cpBtn){cpBtn.classList.add('copied');setTimeout(()=>cpBtn.classList.remove('copied'),1500)}
+      }
+    });
+  });
+
+  const upd=$('#verbarSyncTime');
+  if(upd){
+    const now=new Date();
+    const loc = currentLang==='en'?'en-US':'vi-VN';
+    const ts=new Intl.DateTimeFormat(loc,{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit'}).format(now);
+    upd.textContent=t('syncLabel')+' '+ts;
+  }
+}
+
+function setOfflineBadge(on){
+  const el=$('#offlineBadge');
+  if(!el) return;
+  el.classList.toggle('on',!!on);
+  const txt=$('#offlineText');
+  if(txt) txt.textContent=t('offlineBadge');
+}
+
+async function fetchData(showToast){
+  let isLive=false;
+  try{
+    const ctl=new AbortController();
+    const timer=setTimeout(()=>ctl.abort(),6000);
+    const [rE,rV]=await Promise.allSettled([
+      fetch(API_EXPLOITS,{signal:ctl.signal,headers:{Accept:'application/json','User-Agent':'WEAO-3PService'}}),
+      fetch(API_VERSIONS,{signal:ctl.signal,headers:{Accept:'application/json','User-Agent':'WEAO-3PService'}})
+    ]);
+    clearTimeout(timer);
+    if(rE.status==='fulfilled'&&rE.value.ok){
+      const arr=await rE.value.json();
+      if(Array.isArray(arr)){
+        const norm=arr.map((x,i)=>normalizeExploit(x,i)).filter(Boolean);
+        if(norm.length){state.executors=norm;isLive=true}
+      }
+    }
+    if(rV.status==='fulfilled'&&rV.value.ok){
+      const v=await rV.value.json();
+      if(v&&typeof v.Windows==='string'){state.versions=v;isLive=true}
+    }
+  }catch(e){}
+  state.isLive=isLive;
+  setOfflineBadge(!isLive);
+  render();
+  if(showToast) toast(isLive?t('toastSyncOk'):t('toastSyncFail'),isLive?'ok':'warn');
+}
+
+function renderStats(){
+  const list=state.executors;
+  const total=list.length;
+  const op=list.filter(e=>e.updateStatus).length;
+  const safe=list.filter(e=>{const s=safetyLabel(e);return s.key==='clean'||s.key==='banwave'}).length;
+  const uncList=list.filter(e=>(e.uncPercentage||0)>0);
+  const avg=uncList.length?Math.round(uncList.reduce((a,b)=>a+(b.uncPercentage||0),0)/uncList.length):0;
+  const sc=$('#statCluster');
+  if(!sc) return;
+  sc.innerHTML=`
+    <div class="stat-c"><div class="v">${total}</div><div class="l">${esc(t('statExec'))}</div></div>
+    <div class="stat-c"><div class="v ok">${op}</div><div class="l">${esc(t('statOp'))}</div></div>
+    <div class="stat-c"><div class="v">${safe}</div><div class="l">${esc(t('statUndet'))}</div></div>
+    <div class="stat-c"><div class="v ac">${avg}%</div><div class="l">${esc(t('statAvg'))}</div></div>
+  `;
+}
+
+function renderNavCounts(){
+  const list=state.executors;
+  const set=(id,n)=>{const el=$(id);if(el) el.textContent=n};
+  set('#cntAll',list.length);
+  set('#cntWin',list.filter(e=>e.platform==='Windows'&&e.extype!=='wexternal').length);
+  set('#cntMac',list.filter(e=>e.platform==='Mac').length);
+  set('#cntAnd',list.filter(e=>e.platform==='Android').length);
+  set('#cntIOS',list.filter(e=>e.platform==='iOS').length);
+  set('#cntExt',list.filter(e=>e.extype==='wexternal').length);
+}
+
+function renderSideFilters(){
+  const f=state.filters;
+  const filters=[
+    {k:'updated',l:t('fUpdated')},
+    {k:'undetected',l:t('fUndetected')},
+    {k:'free',l:t('fFree')},
+    {k:'keyless',l:t('fKeyless')},
+    {k:'highUnc',l:t('fHighUnc')},
+    {k:'decomp',l:t('fDecomp')}
+  ];
+  const sf=$('#sideFilters');
+  if(sf) sf.innerHTML=filters.map(x=>`
+    <button class="s-chk ${f[x.k]?'on':''}" data-filter="${x.k}">
+      <span class="bx"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <span>${esc(x.l)}</span>
+    </button>
+  `).join('');
+}
+
+function applyFilters(){
+  const f=state.filters;
+  let list=state.executors.filter(e=>{
+    if(f.search){
+      const q=f.search.toLowerCase();
+      const hay=[e.title,e.platform,e.cost,e.slug?.owner,e.version].filter(Boolean).join(' ').toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    if(f.platform!=='All'){
+      if(f.platform==='External'){if(e.extype!=='wexternal') return false;}
+      else if(e.platform!==f.platform) return false;
+    }
+    if(f.updated&&!e.updateStatus) return false;
+    if(f.undetected){const s=safetyLabel(e);if(!(s.key==='clean'||s.key==='banwave')) return false;}
+    if(f.free&&!e.free) return false;
+    if(f.keyless&&(!e.free||e.keysystem)) return false;
+    if(f.highUnc&&(e.uncPercentage||0)<90) return false;
+    if(f.decomp&&!e.decompiler) return false;
+    return true;
+  });
+  switch(f.sort){
+    case 'unc-desc':list.sort((a,b)=>(b.uncPercentage||0)-(a.uncPercentage||0));break;
+    case 'unc-asc':list.sort((a,b)=>(a.uncPercentage||0)-(b.uncPercentage||0));break;
+    case 'title-asc':list.sort((a,b)=>a.title.localeCompare(b.title));break;
+    case 'safe-first':list.sort((a,b)=>safetyLabel(a).rank-safetyLabel(b).rank||(b.uncPercentage||0)-(a.uncPercentage||0));break;
+    case 'updated-desc':list.sort((a,b)=>a.updateStatus!==b.updateStatus?(a.updateStatus?-1:1):(b.uncPercentage||0)-(a.uncPercentage||0));break;
+  }
+  return list;
+}
+
+function renderRow(e,i){
+  const s=safetyLabel(e);
+  const st=computeStatus(e);
+  const unc=e.uncPercentage??(e.uncStatus?95:0);
+  const sunc=e.suncPercentage??(e.uncStatus?90:0);
+  const uncCls=unc>=95?'ok':unc>=75?'warn':unc>0?'bad':'mute';
+  const inCmp=state.compare.includes(e._id);
+  const plat=e.extype==='wexternal'?'External':e.platform;
+  const logoOK=isCdnWEAO(e.slug?.logo);
+  const initials=e.title.replace(/[^a-zA-Z0-9]/g,'').slice(0,2).toUpperCase();
+  const stTone = st.tone === 'ok' ? 'ok' : 'bad';
+  const s2Cls=s.tone==='ok'?'ok':s.tone==='warn'?'warn':'bad';
+  const hashShort=String(e.rbxversion||'').replace('version-','').slice(0,12);
+  const vLbl = verLabel(e.version);
+  return `
+    <div class="row2" data-id="${esc(e._id)}" style="animation-delay:${Math.min(i*22,280)}ms">
+      <button class="row2-cb ${inCmp?'on':''}" data-cmp="${esc(e._id)}" title="${esc(t('compare'))}">
+        <svg viewBox="0 0 24 24">${inCmp?'<path d="M20 6 9 17l-5-5"/>':'<path d="M12 5v14"/><path d="M5 12h14"/>'}</svg>
+      </button>
+      <div class="row2-l">
+        <div class="row2-logo">
+          ${logoOK?`<img src="${esc(e.slug.logo)}" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'ini\\'>${initials}</span>'">`:`<span class="ini">${initials}</span>`}
+        </div>
+        <div class="row2-mid">
+          <div class="row2-name">${esc(e.title)}${e.elementCertified?'<span class="vf">✓</span>':''}</div>
+          <div class="row2-meta">
+            <span>${esc(plat.toLowerCase())}</span>
+            <span class="sep">·</span>
+            <span>${e.free?(e.keysystem?'free+key':'free'):esc(e.cost||'paid')}</span>
+            ${e.updatedDate&&e.updatedDate!=='Unknown'?'<span class="sep">·</span><span>upd '+esc(e.updatedDate.split(' at ')[0])+'</span>':''}
+          </div>
+          <div class="row2-chips">
+            <button class="copy-chip" data-copy-ver="${esc(e._id)}" title="Copy ${esc(e.version)}">
+              <span>${esc(vLbl)}</span>
+              <svg viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16V4a2 2 0 0 1 2-2h10"/></svg>
             </button>
+            ${e.rbxversion?`<button class="copy-chip" data-copy-hash="${esc(e._id)}" title="Copy ${esc(e.rbxversion)}">
+              <span>${esc(hashShort)}</span>
+              <svg viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16V4a2 2 0 0 1 2-2h10"/></svg>
+            </button>`:''}
+          </div>
         </div>
-
-        <!-- HEADER -->
-        <div class="header">
-            <div class="header-icon"><i class="fas fa-bolt"></i></div>
-            <h1 id="mainTitle">Roblox Executors Status</h1>
-            <p class="subtitle" id="mainSubtitle">Trạng thái cập nhật liên tục các Executor cho Windows, Android, iOS & Mac</p>
+      </div>
+      <div class="row2-r">
+        <div class="status-lines">
+          <div class="line ${stTone}"><span class="d"></span>${esc(st.label)}</div>
+          <div class="line ${s2Cls}"><span class="d"></span>${esc(s.label)}</div>
         </div>
-
-        <!-- STATS BOARD -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-info">
-                    <div class="title">TỔNG EXECUTOR</div>
-                    <div class="num" id="totalCount">0</div>
-                </div>
-                <i class="fas fa-cubes stat-icon" style="color: var(--accent);"></i>
-            </div>
-            <div class="stat-card">
-                <div class="stat-info">
-                    <div class="title">ĐANG HOẠT ĐỘNG</div>
-                    <div class="num" id="workingCount" style="color: #10b981;">0</div>
-                </div>
-                <i class="fas fa-check-circle stat-icon" style="color: #10b981;"></i>
-            </div>
-            <div class="stat-card">
-                <div class="stat-info">
-                    <div class="title">KHÔNG ỔN ĐỊNH / CHƯA SÀI ĐƯỢC</div>
-                    <div class="num" id="errorCount" style="color: #ef4444;">0</div>
-                </div>
-                <i class="fas fa-triangle-exclamation stat-icon" style="color: #ef4444;"></i>
-            </div>
-        </div>
-
-        <!-- FILTER & SEARCH -->
-        <div class="filter-bar">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Tìm kiếm Executor theo tên..." oninput="filterData()">
-            </div>
-            <div class="filter-tabs">
-                <button class="tab-btn active" onclick="setTab('all', this)">Tất cả</button>
-                <button class="tab-btn" onclick="setTab('Windows', this)"><i class="fab fa-windows"></i> Windows</button>
-                <button class="tab-btn" onclick="setTab('Android', this)"><i class="fab fa-android"></i> Android</button>
-                <button class="tab-btn" onclick="setTab('iOS', this)"><i class="fab fa-apple"></i> iOS</button>
-                <button class="tab-btn" onclick="setTab('Mac', this)"><i class="fas fa-desktop"></i> Mac</button>
-            </div>
-        </div>
-
-        <!-- MAIN TABLE -->
-        <div class="table-card">
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>TÊN EXECUTOR</th>
-                            <th>NỀN TẢNG</th>
-                            <th>TRẠNG THÁI</th>
-                            <th>GIÁ</th>
-                            <th>CẬP NHẬT</th>
-                            <th>GHI CHÚ</th>
-                        </tr>
-                    </thead>
-                    <tbody id="execTableBody">
-                        <tr><td colspan="6" style="text-align:center; padding: 35px; color: var(--text-sub);">Đang tải dữ liệu...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        ${unc>0?`<div class="unc-mini">
+          <div class="h"><span class="l">UNC</span><span class="v ${uncCls}">${unc}%</span></div>
+          <div class="bar"><div class="fill ${uncCls}" style="width:${unc}%"></div></div>
+        </div>`:''}
+        <button class="row2-detail" data-detail="${esc(e._id)}">${esc(t('details'))}</button>
+      </div>
     </div>
+  `;
+}
 
-    <!-- POPUP MODAL THEMES CỰC CHILL -->
-    <div class="modal-overlay" id="themeModal" onclick="closeThemeModalOnOverlay(event)">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3><i class="fas fa-swatchbook" style="color: var(--accent);"></i> Select Theme</h3>
-                <button class="close-btn" onclick="closeThemeModal()"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="themes-grid">
-                <!-- 1. Cyber Neon -->
-                <div class="theme-card" data-theme-id="cyber" onclick="selectTheme('cyber')">
-                    <div class="dots-preview">
-                        <span style="background: #07090e;"></span>
-                        <span style="background: #38bdf8;"></span>
-                        <span style="background: #ec4899;"></span>
-                    </div>
-                    <span class="theme-name">Cyber Neon</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
+function render(){
+  renderVersionBar();
+  renderStats();
+  renderNavCounts();
+  renderSideFilters();
+  const list=applyFilters();
+  const tabName=state.filters.platform==='All'?t('allExec'):(state.filters.platform==='Mac'?'macOS':state.filters.platform);
+  const mt=$('#mainTitle'),md=$('#mainDesc'),mc=$('#mainCount');
+  if(mt) mt.textContent=tabName;
+  if(md) md.textContent=t('showing');
+  if(mc) mc.textContent=`${list.length} ${t('items')}`;
+  const ex=$('#execList');
+  if(!ex) return;
+  if(!list.length){ex.innerHTML=`<div class="empty"><div class="c">[ 0 ]</div><p>${esc(t('emptyTitle'))}</p></div>`;}
+  else{ex.innerHTML=list.map((e,i)=>renderRow(e,i)).join('');}
+}
 
-                <!-- 2. Kyoto Night -->
-                <div class="theme-card" data-theme-id="kyoto" onclick="selectTheme('kyoto')">
-                    <div class="dots-preview">
-                        <span style="background: #0f0a13;"></span>
-                        <span style="background: #f472b6;"></span>
-                        <span style="background: #a855f7;"></span>
-                    </div>
-                    <span class="theme-name">Kyoto Night</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
+function openDrawer(id){
+  const e=state.executors.find(x=>x._id===id);
+  if(!e) return;
+  state.drawerId=id;state.drawerTab='overview';
+  renderDrawer();
+  const d=$('#drawer'),b=$('#drawerBd');
+  if(d) d.classList.add('on');
+  if(b) b.classList.add('on');
+}
+function closeDrawer(){
+  const d=$('#drawer'),b=$('#drawerBd');
+  if(d) d.classList.remove('on');
+  if(b) b.classList.remove('on');
+  state.drawerId=null;
+}
 
-                <!-- 3. Amoled Pulse -->
-                <div class="theme-card" data-theme-id="amoled" onclick="selectTheme('amoled')">
-                    <div class="dots-preview">
-                        <span style="background: #000000;"></span>
-                        <span style="background: #10b981;"></span>
-                        <span style="background: #06b6d4;"></span>
-                    </div>
-                    <span class="theme-name">Amoled Pulse</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
+function renderDrawer(){
+  const e=state.executors.find(x=>x._id===state.drawerId);
+  if(!e) return;
+  const s=safetyLabel(e);
+  const st=computeStatus(e);
+  const unc=e.uncPercentage??(e.uncStatus?95:0);
+  const sunc=e.suncPercentage??(e.uncStatus?90:0);
+  const tone=s.tone==='ok'?'ok':s.tone==='warn'?'warn':'bad';
+  const inCmp=state.compare.includes(e._id);
+  const logoOK=isCdnWEAO(e.slug?.logo);
+  const initials=e.title.replace(/[^a-zA-Z0-9]/g,'').slice(0,2).toUpperCase();
+  const stTone = st.tone === 'ok' ? 'ok' : 'bad';
 
-                <!-- 4. Sunset Chill -->
-                <div class="theme-card" data-theme-id="sunset" onclick="selectTheme('sunset')">
-                    <div class="dots-preview">
-                        <span style="background: #120913;"></span>
-                        <span style="background: #fb923c;"></span>
-                        <span style="background: #f43f5e;"></span>
-                    </div>
-                    <span class="theme-name">Sunset Chill</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
-
-                <!-- 5. Deep Ocean -->
-                <div class="theme-card" data-theme-id="ocean" onclick="selectTheme('ocean')">
-                    <div class="dots-preview">
-                        <span style="background: #06111e;"></span>
-                        <span style="background: #06b6d4;"></span>
-                        <span style="background: #3b82f6;"></span>
-                    </div>
-                    <span class="theme-name">Deep Ocean</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
-
-                <!-- 6. Dracula Violet -->
-                <div class="theme-card" data-theme-id="dracula" onclick="selectTheme('dracula')">
-                    <div class="dots-preview">
-                        <span style="background: #0d0814;"></span>
-                        <span style="background: #a855f7;"></span>
-                        <span style="background: #d946ef;"></span>
-                    </div>
-                    <span class="theme-name">Dracula Violet</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
-
-                <!-- 7. Luxury Gold -->
-                <div class="theme-card" data-theme-id="gold" onclick="selectTheme('gold')">
-                    <div class="dots-preview">
-                        <span style="background: #0f0e0a;"></span>
-                        <span style="background: #eab308;"></span>
-                        <span style="background: #f97316;"></span>
-                    </div>
-                    <span class="theme-name">Luxury Gold</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
-
-                <!-- 8. Nordic Light -->
-                <div class="theme-card" data-theme-id="light" onclick="selectTheme('light')">
-                    <div class="dots-preview">
-                        <span style="background: #ffffff; border: 1px solid #ccc;"></span>
-                        <span style="background: #2563eb;"></span>
-                        <span style="background: #9333ea;"></span>
-                    </div>
-                    <span class="theme-name">Nordic Light</span>
-                    <i class="fas fa-check check-icon"></i>
-                </div>
-            </div>
+  const hd=$('#dwHd');
+  if(!hd) return;
+  hd.innerHTML=`
+    <div class="dw-top">
+      <div class="dw-ti">
+        <div class="dw-logo">${logoOK?`<img src="${esc(e.slug.logo)}" alt="" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'ini\\'>${initials}</span>'">`:`<span class="ini">${initials}</span>`}</div>
+        <div style="min-width:0">
+          <div class="dw-nm">${esc(e.title)}${e.elementCertified?' <span class="vf">✓</span>':''}</div>
+          <div class="dw-sub">${esc(e.platform)}${e.slug?.owner?' · dev: '+esc(e.slug.owner):''}</div>
         </div>
+      </div>
+      <div class="dw-acts">
+        <button class="mini-btn ${inCmp?'on':''}" id="dwCmp"><svg viewBox="0 0 24 24">${inCmp?'<path d="M20 6 9 17l-5-5"/>':'<path d="M12 5v14"/><path d="M5 12h14"/>'}</svg>${inCmp?esc(t('selected')):esc(t('compare'))}</button>
+        <button class="x-btn" id="dwClose"><svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      </div>
     </div>
+    <div class="dw-copy2">
+      <button class="dw-cp" data-dw-ver="${esc(e._id)}">
+        <div style="min-width:0;flex:1"><div class="lb">${esc(t('copyVersion'))}</div><div class="vl">${esc(e.version)}</div></div>
+        <svg viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16V4a2 2 0 0 1 2-2h10"/></svg>
+      </button>
+      ${e.rbxversion?`<button class="dw-cp" data-dw-hash="${esc(e._id)}">
+        <div style="min-width:0;flex:1"><div class="lb">${esc(t('copyHash'))}</div><div class="vl">${esc(String(e.rbxversion).replace('version-','').slice(0,16))}</div></div>
+        <svg viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16V4a2 2 0 0 1 2-2h10"/></svg>
+      </button>`:''}
+    </div>
+    <div class="dw-stats">
+      <div class="dw-st"><div class="l">${esc(t('status'))}</div><div class="v ${stTone}">${esc(st.label)}</div></div>
+      <div class="dw-st"><div class="l">${esc(t('byfron'))}</div><div class="v ${tone}">${esc(s.label)}</div></div>
+      <div class="dw-st"><div class="l">${esc(t('uncSunc'))}</div><div class="v mono ${unc>=95?'ok':unc>=75?'warn':'bad'}">${unc>0?unc+'% / '+sunc+'%':'N/A'}</div></div>
+      <div class="dw-st"><div class="l">${esc(t('pricing'))}</div><div class="v">${e.free?(e.keysystem?'Free · key':'Free · keyless'):esc(e.cost||'Paid')}</div></div>
+    </div>
+  `;
 
-    <script>
-        // LƯU VÀ ĐỔI THEMES TỰ ĐỘNG
-        function selectTheme(themeId) {
-            document.documentElement.setAttribute('data-theme', themeId);
-            localStorage.setItem('user_preferred_theme', themeId);
-            updateActiveThemeUI(themeId);
-        }
+  const hasShots=e.slug?.screenshots?.length;
+  const tb=$('#dwTabs');
+  if(tb) tb.innerHTML=`
+    <div class="dw-tab ${state.drawerTab==='overview'?'on':''}" data-t="overview">${esc(t('ovOverview'))}</div>
+    <div class="dw-tab ${state.drawerTab==='specs'?'on':''}" data-t="specs">${esc(t('ovSpecs'))}</div>
+    ${hasShots?`<div class="dw-tab ${state.drawerTab==='screens'?'on':''}" data-t="screens">${esc(t('ovShots'))}</div>`:''}
+  `;
 
-        function updateActiveThemeUI(themeId) {
-            document.querySelectorAll('.theme-card').forEach(card => {
-                if (card.getAttribute('data-theme-id') === themeId) {
-                    card.classList.add('active');
-                } else {
-                    card.classList.remove('active');
-                }
-            });
-        }
+  const bd=$('#dwBody');
+  if(!bd) return;
+  bd.innerHTML=`
+    <div class="dw-pane ${state.drawerTab==='overview'?'on':''}" data-p="overview">
+      <div class="alert ${tone}"><b>${s.tone==='ok'?'✓':s.tone==='warn'?'⚠':'✕'} ${esc(s.label)}</b>${esc(s.note)}${e.detectionReason?`<br><span style="font-family:monospace;font-size:11px;opacity:.75;display:inline-block;margin-top:4px">${esc(e.detectionReason)}</span>`:''}</div>
+      <div class="alert ${stTone}" style="margin-top:-4px"><b>${st.tone==='ok'?'✓':'✕'} ${esc(t('status'))}: ${esc(st.label)}</b>${esc(st.note)}</div>
+      <div class="dw-g2">
+        <div class="dw-cl"><div class="l">${esc(t('byfronDetect'))}</div><div class="v ${s.key==='detected'?'bad':'ok'}">${s.key==='detected'?esc(t('detected')):esc(t('notDetected'))}</div><div class="n">${esc(t('noteByfronFlag'))}</div></div>
+        <div class="dw-cl"><div class="l">${esc(t('clientMod'))}</div><div class="v ${e.clientmods?'ok':''}">${e.clientmods?esc(t('supported')):esc(t('notListed'))}</div><div class="n">${esc(t('noteBanwave'))}</div></div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px">${esc(t('description'))}</div>
+      <div class="dw-desc">${esc(e.slug?.fullDescription||`${e.title} — Roblox script executor for ${e.platform}.`)}</div>
+    </div>
+    <div class="dw-pane ${state.drawerTab==='specs'?'on':''}" data-p="specs">
+      ${e.rbxversion?`<div class="dw-cl" style="margin-bottom:12px"><div class="l">${esc(t('targetBuild'))}</div><div class="v" style="font-family:monospace;color:rgb(var(--accent))">${esc(e.rbxversion)}</div></div>`:''}
+      <div class="dw-specs">
+        <div class="dw-sp"><span class="k">${esc(t('uncScore'))}</span><span class="v ${unc>=95?'ok':unc>=75?'warn':''}">${unc>0?unc+'%':'N/A'}</span></div>
+        <div class="dw-sp"><span class="k">${esc(t('suncScore'))}</span><span class="v ${sunc>0?'ok':''}">${sunc>0?sunc+'%':'N/A'}</span></div>
+        <div class="dw-sp"><span class="k">${esc(t('decompiler'))}</span><span class="v ${e.decompiler?'ok':'no'}">${e.decompiler?esc(t('fullAst')):esc(t('none'))}</span></div>
+        <div class="dw-sp"><span class="k">${esc(t('multiInst'))}</span><span class="v ${e.multiInject?'ok':'no'}">${e.multiInject?esc(t('yes')):esc(t('no'))}</span></div>
+        <div class="dw-sp"><span class="k">${esc(t('raknet'))}</span><span class="v ${e.raknet?'ok':'no'}">${e.raknet?esc(t('hooked')):'—'}</span></div>
+        <div class="dw-sp"><span class="k">${esc(t('keySys'))}</span><span class="v ${e.keysystem?'no':'ok'}">${e.keysystem?esc(t('required')):esc(t('none'))}</span></div>
+      </div>
+    </div>
+    ${hasShots?`<div class="dw-pane ${state.drawerTab==='screens'?'on':''}" data-p="screens"><div class="dw-shots">${e.slug.screenshots.map(u=>`<img src="${esc(u)}" alt="" loading="lazy">`).join('')}</div></div>`:''}
+    <div class="dw-links">
+      ${e.websitelink?`<a class="dw-lk" href="${esc(e.websitelink)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>${esc(t('website'))}</a>`:''}
+      ${e.discordlink?`<a class="dw-lk" href="${esc(e.discordlink)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.8a2 2 0 0 0-1.4.6l-2.2 2.2A.7.7 0 0 1 2 21.3V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/></svg>${esc(t('discord'))}</a>`:''}
+      ${e.purchaselink?`<a class="dw-lk pri" href="${esc(e.purchaselink)}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>${esc(t('buyGet'))}</a>`:''}
+    </div>
+  `;
 
-        function openThemeModal() {
-            document.getElementById('themeModal').classList.add('show');
-        }
+  const x=$('#dwClose');if(x) x.onclick=closeDrawer;
+  const cmp=$('#dwCmp');if(cmp) cmp.onclick=()=>{toggleCompare(e._id);renderDrawer()};
+  hd.querySelectorAll('[data-dw-ver]').forEach(b=>b.onclick=()=>copyVersion(b.dataset.dwVer,b));
+  hd.querySelectorAll('[data-dw-hash]').forEach(b=>b.onclick=()=>copyHash(b.dataset.dwHash,b));
+  tb.querySelectorAll('.dw-tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      state.drawerTab=tab.dataset.t;
+      tb.querySelectorAll('.dw-tab').forEach(x=>x.classList.toggle('on',x.dataset.t===tab.dataset.t));
+      bd.querySelectorAll('.dw-pane').forEach(p=>p.classList.toggle('on',p.dataset.p===tab.dataset.t));
+    });
+  });
+}
 
-        function closeThemeModal() {
-            document.getElementById('themeModal').classList.remove('show');
-        }
+function toggleCompare(id){
+  const i=state.compare.indexOf(id);
+  if(i>=0) state.compare.splice(i,1);
+  else{
+    if(state.compare.length>=3){toast(t('toastCmpMax'),'warn');return}
+    state.compare.push(id);
+    const e=state.executors.find(x=>x._id===id);
+    toast(I18N[currentLang].toastCmpAdded(e?.title||''),'ok');
+  }
+  render();
+  if(state.drawerId===id) renderDrawer();
+}
 
-        function closeThemeModalOnOverlay(e) {
-            if (e.target.id === 'themeModal') {
-                closeThemeModal();
-            }
-        }
+function openCompare(){
+  const list=state.compare.map(id=>state.executors.find(e=>e._id===id)).filter(Boolean);
+  const body=$('#cmpBody');
+  if(!body) return;
+  if(!list.length){
+    body.innerHTML=`<div class="empty"><div class="c">[ 0 / 3 ]</div><p>${esc(t('cmpEmpty'))}</p><p style="font-size:11.5px;color:var(--text-3);margin-top:8px">${esc(t('cmpEmptyHint'))}</p></div>`;
+    openModal('ovlCompare');return;
+  }
+  const rows=[
+    [t('cmpName'),list.map(e=>`<div class="cmp-cell name">${esc(e.title)}</div>`)],
+    [t('cmpVersion'),list.map(e=>`<div class="cmp-cell" style="font-family:monospace;color:var(--text-2)">${esc(e.version)}</div>`)],
+    [t('cmpPlatform'),list.map(e=>`<div class="cmp-cell">${esc(e.platform)}</div>`)],
+    [t('cmpStatus'),list.map(e=>{
+      const st=computeStatus(e);
+      const cls = st.tone==='ok' ? '--ok' : '--bad';
+      return `<div class="cmp-cell" style="color:var(${cls});font-weight:600">${esc(st.label)}</div>`;
+    })],
+    [t('cmpByfron'),list.map(e=>{const s=safetyLabel(e);return `<div class="cmp-cell" style="color:var(--${s.tone==='ok'?'ok':s.tone==='warn'?'warn':'bad'});font-weight:600">${esc(s.label)}</div>`})],
+    [t('cmpUnc'),list.map(e=>{const u=e.uncPercentage??(e.uncStatus?95:0);return `<div class="cmp-cell" style="font-family:monospace;font-weight:700;color:var(--${u>=95?'ok':u>=75?'warn':'text-2'})">${u>0?u+'%':'N/A'}</div>`})],
+    [t('cmpSunc'),list.map(e=>{const s=e.suncPercentage??(e.uncStatus?90:0);return `<div class="cmp-cell" style="font-family:monospace;color:rgb(var(--accent))">${s>0?s+'%':'N/A'}</div>`})],
+    [t('cmpPrice'),list.map(e=>`<div class="cmp-cell" style="color:var(--text-2)">${e.free?(e.keysystem?'Free · key':'Free'):esc(e.cost||'Paid')}</div>`)],
+    [t('cmpDecomp'),list.map(e=>`<div class="cmp-cell" style="color:var(--${e.decompiler?'ok':'text-3'})">${e.decompiler?esc(t('cmpYes')):esc(t('cmpNo'))}</div>`)],
+    [t('cmpMulti'),list.map(e=>`<div class="cmp-cell" style="color:var(--${e.multiInject?'ok':'text-3'})">${e.multiInject?esc(t('cmpYes')):esc(t('cmpNo'))}</div>`)]
+  ];
+  let html='<div class="cmp-scroll">';
+  html+=`<div class="cmp-row" style="grid-template-columns:130px repeat(${list.length},minmax(0,1fr))"><div class="cmp-cell hd">${esc(t('cmpCriteria'))}</div>${list.map(e=>`<div class="cmp-cell hd">${esc(e.title)}<button class="x-btn" style="width:22px;height:22px;padding:0" data-rm="${esc(e._id)}"><svg viewBox="0 0 24 24" style="width:11px;height:11px"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>`).join('')}</div>`;
+  rows.forEach(r=>{
+    html+=`<div class="cmp-row" style="grid-template-columns:130px repeat(${list.length},minmax(0,1fr))"><div class="cmp-cell lbl">${esc(r[0])}</div>${r[1].join('')}</div>`;
+  });
+  html+='</div>';
+  html+=`<div style="margin-top:14px;display:flex;justify-content:flex-end"><button class="btn btn-g" id="cmpClear" style="height:36px;font-size:12px">${esc(t('clearAll'))}</button></div>`;
+  body.innerHTML=html;
+  body.querySelectorAll('[data-rm]').forEach(b=>b.addEventListener('click',()=>{toggleCompare(b.dataset.rm);openCompare()}));
+  const cl=$('#cmpClear');
+  if(cl) cl.addEventListener('click',()=>{state.compare=[];render();openCompare()});
+  openModal('ovlCompare');
+}
 
-        // Tự động khôi phục theme đã chọn khi vào lại web
-        (function initTheme() {
-            const saved = localStorage.getItem('user_preferred_theme') || 'cyber';
-            selectTheme(saved);
-        })();
+function openVersions(){
+  const v=state.versions;
+  const rows=[
+    {p:t('verWin'),n:t('verWinNote'),ver:v.WindowsResponse?.version||'0.738.0.7381397',hash:v.Windows,date:v.WindowsDate,type:(v.WindowsResponse?.type||'live').toUpperCase()},
+    {p:t('verMac'),n:t('verMacNote'),ver:v.MacResponse?.version||'0.738.0.7381393',hash:v.Mac,date:v.MacDate,type:(v.MacResponse?.type||'live').toUpperCase()},
+    {p:t('verApk'),n:t('verApkNote'),ver:v.AndroidResponse?.version||v.Android||'2.738.1397',hash:v.Android,date:v.AndroidDate,type:'APK'},
+    {p:t('verIos'),n:t('verIosNote'),ver:v.iOSResponse?.version||v.iOS||'2.738.1390',hash:v.iOS,date:v.iOSDate,type:'SIDELOAD'}
+  ];
+  const body=$('#verBody');
+  if(!body) return;
+  body.innerHTML=rows.map(r=>`
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:14px;margin-bottom:11px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="font-weight:600;font-size:13.5px">${esc(r.p)}</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:rgb(var(--accent));background:rgba(var(--accent),.12);border:1px solid rgba(var(--accent),.28);padding:3px 8px;border-radius:6px">${esc(r.type)}</span>
+      </div>
+      <div class="dw-g2" style="margin-bottom:10px">
+        <div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px">${esc(t('verVersion'))}</div><div style="font-family:monospace;font-size:12.5px;font-weight:600;color:var(--ok)">${esc(r.ver)}</div></div>
+        <div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px">${esc(t('verReleased'))}</div><div style="font-size:11.5px;color:var(--text-2)">${esc(r.date)}</div></div>
+      </div>
+      <div style="background:var(--bg-3);border:1px solid var(--border);border-radius:9px;padding:9px 11px;font-family:monospace;font-size:11px;display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+        <span style="color:var(--text-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">hash: <span style="color:rgb(var(--accent))">${esc(r.hash)}</span></span>
+        <button class="dw-lk" style="height:26px;padding:0 10px;font-size:11px" data-copy="${esc(r.hash)}">${esc(t('copy'))}</button>
+      </div>
+      <div style="font-size:11.5px;color:var(--text-3);margin-top:8px">${esc(r.n)}</div>
+    </div>
+  `).join('');
+  body.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{
+    const ok=await copyText(b.dataset.copy,'hash');
+    if(ok){b.textContent=t('copied');setTimeout(()=>b.textContent=t('copy'),1500)}
+  }));
+  openModal('ovlVersions');
+}
 
-        // CHẶN DEVTOOLS F12 / SOI CODE
-        document.addEventListener('contextmenu', e => e.preventDefault());
+function openGuide(){
+  const body=$('#gdBody');
+  if(!body) return;
+  body.innerHTML=`
+    <div class="g-h3"><span class="n">01</span>${esc(t('guideH1'))}</div>
+    <p class="g-p">${esc(t('guideP1'))}</p>
+    <div class="g-grid">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px"><div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--ok)">95-100%</div><div style="font-size:11px;color:var(--text-3);margin-top:4px">${esc(t('guideG1'))}</div></div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px"><div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--warn)">70-90%</div><div style="font-size:11px;color:var(--text-3);margin-top:4px">${esc(t('guideG2'))}</div></div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px"><div style="font-family:monospace;font-size:13px;font-weight:700;color:var(--bad)">&lt; 70%</div><div style="font-size:11px;color:var(--text-3);margin-top:4px">${esc(t('guideG3'))}</div></div>
+    </div>
+    <div class="g-h3"><span class="n">02</span>${esc(t('guideH2'))}</div>
+    <p class="g-p">${esc(t('guideP2'))}</p>
+    <div class="g-h3"><span class="n">03</span>${esc(t('guideH3'))}</div>
+    <p class="g-p" style="color:var(--text)">${esc(t('guideP3'))}</p>
+    <div class="g-h3"><span class="n">04</span>${esc(t('guideH4'))}</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;font-size:12.5px;color:var(--text-2)">
+      <li><b style="color:var(--ok);font-family:monospace">macOS</b> — ${esc(t('guideL1'))}</li>
+      <li><b style="color:var(--warn);font-family:monospace">mobile</b> — ${esc(t('guideL2'))}</li>
+      <li><b style="color:rgb(var(--accent));font-family:monospace">external</b> — ${esc(t('guideL3'))}</li>
+      <li><b style="color:var(--bad);font-family:monospace">win·dll</b> — ${esc(t('guideL4'))}</li>
+    </ul>
+  `;
+  openModal('ovlGuide');
+}
 
-        document.addEventListener('keydown', e => {
-            if (
-                e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) ||
-                (e.ctrlKey && ['U', 'u', 'S', 's'].includes(e.key))
-            ) {
-                e.preventDefault();
-                return false;
-            }
-        });
+function openModal(id){const el=$('#'+id);if(el){el.classList.add('on');document.body.style.overflow='hidden'}}
+function closeModal(el){if(el){el.classList.remove('on');document.body.style.overflow=''}}
 
-        setInterval(() => {
-            const startTime = performance.now();
-            debugger;
-            const endTime = performance.now();
-            if (endTime - startTime > 100) {
-                document.body.innerHTML = '<div style="color:#ef4444;text-align:center;padding:100px;font-weight:bold;font-size:24px;">CẢNH BÁO: HÀNH VI SOI CODE BỊ CẤM!</div>';
-            }
-        }, 300);
+function applyI18nStatic(){
+  const setTxt=(id,val)=>{const el=$('#'+id);if(el) el.textContent=val};
+  setTxt('iBrandSub',t('brandSub'));
+  setTxt('iTabAll',t('tabAll'));
+  setTxt('iTabWin',t('tabWin'));
+  setTxt('iTabMac',t('tabMac'));
+  setTxt('iTabAnd',t('tabAnd'));
+  setTxt('iTabIOS',t('tabIOS'));
+  setTxt('iTabExt',t('tabExt'));
+  setTxt('iRobloxBuilds',t('robloxBuilds'));
+  setTxt('iLiveTag',t('liveTag'));
+  setTxt('iDashTop',t('dashTop'));
+  setTxt('iDashBottom',t('dashBottom'));
+  setTxt('iBannerSub',t('bannerSub'));
+  setTxt('iBtnRefresh',t('btnRefresh'));
+  setTxt('iBtnGuide',t('btnGuide'));
+  setTxt('iSecSearch',t('secSearch'));
+  setTxt('iSecFilters',t('secFilters'));
+  setTxt('iSecSort',t('secSort'));
+  setTxt('iSortUncDesc',t('sortUncDesc'));
+  setTxt('iSortUncAsc',t('sortUncAsc'));
+  setTxt('iSortTitleAsc',t('sortTitleAsc'));
+  setTxt('iSortUpdated',t('sortUpdated'));
+  setTxt('iSortSafe',t('sortSafe'));
+  setTxt('iResetFilter',t('resetFilter'));
+  setTxt('iThemeTitle',t('themeTitle'));
+  setTxt('iThemeSub',t('themeSub'));
+  setTxt('iCmpTitle',t('cmpTitle'));
+  setTxt('iCmpSub',t('cmpSub'));
+  setTxt('iVerTitle',t('verTitle'));
+  setTxt('iVerSub',t('verSub'));
+  setTxt('iGuideTitle',t('guideTitle'));
+  setTxt('iGuideSub',t('guideSub'));
+  setTxt('iFooter',t('footNote'));
+  setTxt('iFtGuide',t('ftGuide'));
+  setTxt('iFtVersions',t('ftVersions'));
+  setTxt('iDevTitle',t('devTitle'));
+  setTxt('iDevText',t('devText'));
+  setTxt('offlineText',t('offlineBadge'));
+  const si=$('#searchInput');
+  if(si) si.placeholder=t('searchPh');
+  const clkD=$('#clkD');
+  if(clkD && (clkD.textContent==='Loading...' || clkD.textContent==='Đang tải...')) clkD.textContent=t('loading');
+  document.documentElement.lang = currentLang==='en'?'en':'vi';
+  $$('.lang-opt').forEach(b=>b.classList.toggle('on',b.dataset.lang===currentLang));
+}
 
-        // KẾT NỐI API NPOINT TỰ ĐỘNG LẤY DỮ LIỆU
-        const API_URL = "https://api.npoint.io/9d78b91f5a0f7c9f5ec8";
-        let rawItemsList = [];
-        let currentTab = 'all';
+function setLang(lang){
+  if(lang!==currentLang){
+    currentLang=lang;
+    applyI18nStatic();
+    render();
+    if(state.drawerId) renderDrawer();
+    if($('#ovlCompare').classList.contains('on')) openCompare();
+    if($('#ovlVersions').classList.contains('on')) openVersions();
+    if($('#ovlGuide').classList.contains('on')) openGuide();
+  }
+}
 
-        async function fetchData() {
-            try {
-                const res = await fetch(API_URL + "?t=" + new Date().getTime());
-                const data = await res.json();
+function bindEvents(){
+  $$('.lang-opt').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const l=b.dataset.lang;
+      if(l!==currentLang) setLang(l);
+    });
+  });
 
-                if (Array.isArray(data)) {
-                    rawItemsList = data;
-                } else if (data && typeof data === 'object') {
-                    if (data.title) {
-                        document.getElementById('mainTitle').textContent = data.title;
-                        document.getElementById('pageTitle').textContent = data.title;
-                    }
-                    if (data.subtitle) {
-                        document.getElementById('mainSubtitle').textContent = data.subtitle;
-                    }
-                    rawItemsList = Array.isArray(data.items) ? data.items : [];
-                }
+  const nt=$('#navTabs');
+  if(nt){
+    nt.addEventListener('click',e=>{
+      const b=e.target.closest('[data-tab]');
+      if(!b) return;
+      const tab=b.dataset.tab;
+      state.filters.platform=tab;
+      nt.querySelectorAll('.nav-tab').forEach(x=>x.classList.toggle('on',x.dataset.tab===tab));
+      render();
+    });
+  }
 
-                updateStats();
-                filterData();
-            } catch (err) {
-                document.getElementById('execTableBody').innerHTML = `<tr><td colspan="6" style="text-align:center; color:#ef4444;">Lỗi kết nối máy chủ!</td></tr>`;
-            }
-        }
+  const bp=$('#btnRefresh2');if(bp) bp.addEventListener('click',()=>fetchData(true));
+  const bs=$('#btnSync');if(bs) bs.addEventListener('click',()=>fetchData(true));
+  const bt=$('#btnThemes');if(bt) bt.addEventListener('click',()=>openModal('ovlTheme'));
+  const bc=$('#btnCompare');if(bc) bc.addEventListener('click',openCompare);
+  const bg=$('#btnGuide');if(bg) bg.addEventListener('click',openGuide);
+  const bg2=$('#btnGuide2');if(bg2) bg2.addEventListener('click',openGuide);
 
-        function updateStats() {
-            const total = rawItemsList.length;
-            const working = rawItemsList.filter(i => (i.status || '').toUpperCase() === 'WORKING').length;
-            const error = total - working;
+  document.querySelectorAll('[data-close]').forEach(function(b){
+    b.addEventListener('click',function(e){
+      const ovl=e.target.closest('.ovl');
+      if(ovl) closeModal(ovl);
+    });
+  });
+  document.querySelectorAll('.ovl').forEach(function(o){
+    o.addEventListener('click',function(e){if(e.target===o) closeModal(o);});
+  });
 
-            document.getElementById('totalCount').textContent = total;
-            document.getElementById('workingCount').textContent = working;
-            document.getElementById('errorCount').textContent = error;
-        }
+  const si=$('#searchInput');
+  if(si) si.addEventListener('input',e=>{state.filters.search=e.target.value;render()});
+  const ss=$('#sortSel');
+  if(ss) ss.addEventListener('change',e=>{state.filters.sort=e.target.value;render()});
 
-        function setTab(plat, btn) {
-            currentTab = plat;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            filterData();
-        }
+  const sf=$('#sideFilters');
+  if(sf){
+    sf.addEventListener('click',function(e){
+      const b=e.target.closest('[data-filter]');
+      if(!b) return;
+      const k=b.dataset.filter;
+      state.filters[k]=!state.filters[k];
+      render();
+    });
+  }
 
-        function filterData() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            
-            const filtered = rawItemsList.filter(item => {
-                const matchPlat = currentTab === 'all' || (item.plat || '').toLowerCase() === currentTab.toLowerCase();
-                const matchSearch = (item.name || '').toLowerCase().includes(query);
-                return matchPlat && matchSearch;
-            });
+  const br=$('#btnReset');
+  if(br){
+    br.addEventListener('click',function(){
+      state.filters={search:"",platform:"All",sort:"unc-desc",updated:false,undetected:false,free:false,keyless:false,highUnc:false,decomp:false};
+      if(si) si.value='';
+      if(ss) ss.value='unc-desc';
+      if(nt) nt.querySelectorAll('.nav-tab').forEach(x=>x.classList.toggle('on',x.dataset.tab==='All'));
+      render();
+    });
+  }
 
-            renderTable(filtered);
-        }
+  const ex=$('#execList');
+  if(ex){
+    ex.addEventListener('click',function(e){
+      const cv=e.target.closest('[data-copy-ver]');
+      if(cv){e.stopPropagation();copyVersion(cv.dataset.copyVer,cv);return}
+      const ch=e.target.closest('[data-copy-hash]');
+      if(ch){e.stopPropagation();copyHash(ch.dataset.copyHash,ch);return}
+      const cmp=e.target.closest('[data-cmp]');
+      if(cmp){e.stopPropagation();toggleCompare(cmp.dataset.cmp);return}
+      const dt=e.target.closest('[data-detail]');
+      if(dt){e.stopPropagation();openDrawer(dt.dataset.detail);return}
+      const row=e.target.closest('.row2');
+      if(row) openDrawer(row.dataset.id);
+    });
+  }
 
-        function renderTable(data) {
-            const tbody = document.getElementById('execTableBody');
-            if (data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 35px; color: var(--text-sub);">Không có dữ liệu phù hợp</td></tr>`;
-                return;
-            }
+  const db=$('#drawerBd');if(db) db.addEventListener('click',closeDrawer);
 
-            tbody.innerHTML = data.map(item => `
-                <tr>
-                    <td class="exec-name">${item.name || '-'}</td>
-                    <td>
-                        <span class="plat-tag">
-                            ${getPlatIcon(item.plat)} ${item.plat || '-'}
-                        </span>
-                    </td>
-                    <td>${getStatusBadge(item.status)}</td>
-                    <td class="price-text">${item.price || 'Free'}</td>
-                    <td style="color: var(--text-sub); font-size: 0.88rem;">${item.time || 'Cập nhật sau'}</td>
-                    <td style="color: var(--text-sub); font-size: 0.88rem;">${item.note || '-'}</td>
-                </tr>
-            `).join('');
-        }
+  const fg=$('#ftGuide');if(fg) fg.addEventListener('click',function(e){e.preventDefault();openGuide()});
+  const fv=$('#ftVersions');if(fv) fv.addEventListener('click',function(e){e.preventDefault();openVersions()});
 
-        function getPlatIcon(plat) {
-            const p = (plat || '').toLowerCase();
-            if (p === 'windows') return '<i class="fab fa-windows" style="color:#38bdf8;"></i>';
-            if (p === 'android') return '<i class="fab fa-android" style="color:#10b981;"></i>';
-            if (p === 'ios') return '<i class="fab fa-apple" style="color:#f472b6;"></i>';
-            if (p === 'mac') return '<i class="fas fa-desktop" style="color:#a855f7;"></i>';
-            return '<i class="fas fa-microchip"></i>';
-        }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      document.querySelectorAll('.ovl.on').forEach(function(o){closeModal(o)});
+      const d=$('#drawer');
+      if(d&&d.classList.contains('on')) closeDrawer();
+    }
+    if(e.key==='/'){
+      const tag=document.activeElement&&document.activeElement.tagName;
+      if(tag!=='INPUT'&&tag!=='TEXTAREA'&&tag!=='SELECT'){
+        e.preventDefault();
+        if(si) si.focus();
+      }
+    }
+  });
+}
 
-        function getStatusBadge(status) {
-            const s = (status || '').toUpperCase();
-            if (s === 'WORKING') {
-                return `<span class="status-badge status-working"><span class="dot"></span>WORKING</span>`;
-            }
-            if (s === 'UNSTABLE') {
-                return `<span class="status-badge status-unstable"><span class="dot"></span>UNSTABLE</span>`;
-            }
-            if (s === 'PATCHED') {
-                return `<span class="status-badge status-patched"><span class="dot"></span>PATCHED</span>`;
-            }
-            if (s === 'OUTDATED') {
-                return `<span class="status-badge status-outdated"><span class="dot"></span>OUTDATED</span>`;
-            }
-            return `<span class="status-badge status-outdated"><span class="dot"></span>${s || 'UNKNOWN'}</span>`;
-        }
+let devWarnTimer=null;
+function showDevWarn(){
+  const w=$('#devWarn');
+  if(!w) return;
+  w.classList.add('on');
+  if(devWarnTimer) clearTimeout(devWarnTimer);
+  devWarnTimer=setTimeout(function(){w.classList.remove('on')},1500);
+}
 
-        fetchData();
-        setInterval(fetchData, 30000);
-    </script>
+function antiDevtools(){
+  document.addEventListener('contextmenu',function(e){e.preventDefault();showDevWarn();return false;});
+  document.addEventListener('keydown',function(e){
+    const k=e.key;
+    const isF12=k==='F12';
+    const isShiftI=e.ctrlKey&&e.shiftKey&&['I','i','J','j','C','c'].indexOf(k)!==-1;
+    const isCtrlUS=e.ctrlKey&&['U','u','S','s'].indexOf(k)!==-1;
+    const isMacDev=e.metaKey&&e.altKey&&['I','i','J','j','C','c'].indexOf(k)!==-1;
+    if(isF12||isShiftI||isCtrlUS||isMacDev){e.preventDefault();showDevWarn();return false;}
+  });
+  let devResizeTimer=null;
+  window.addEventListener('resize',function(){
+    const threshold=160;
+    if(window.outerWidth-window.innerWidth>threshold||window.outerHeight-window.innerHeight>threshold){
+      showDevWarn();
+      if(devResizeTimer) clearTimeout(devResizeTimer);
+      devResizeTimer=setTimeout(function(){const w=$('#devWarn');if(w) w.classList.remove('on');},1500);
+    }
+  });
+  document.addEventListener('dragstart',function(e){e.preventDefault();});
+}
+
+function init(){
+  const saved=lsGet(THEME_KEY,'emerald');
+  const valid=THEMES.some(t=>t.id===saved)?saved:'emerald';
+  applyTheme(valid,false);
+  buildThemeGrid();
+  applyI18nStatic();
+  updateClock();
+  setInterval(updateClock,1000);
+  bindEvents();
+  antiDevtools();
+  render();
+  fetchData(false);
+  setInterval(function(){fetchData(false)},180000);
+}
+
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
+else{init();}
+</script>
 </body>
 </html>
