@@ -46,24 +46,51 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
 .topbar{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border)}
 .topbar-in{display:flex;align-items:center;gap:18px;height:62px}
 
-/* ============ BRAND — SVG HEX ============ */
-.brand-block{display:flex;align-items:center;gap:11px;flex-shrink:0;position:relative}
+/* ============ BRAND — CLEAN MODERN ============ */
+.brand-block{display:flex;align-items:center;gap:12px;flex-shrink:0;position:relative}
 .brand-mark{
-  width:42px;height:42px;flex-shrink:0;
+  width:40px;height:40px;flex-shrink:0;
+  border-radius:11px;
+  background:linear-gradient(135deg,rgb(var(--accent)) 0%,rgb(var(--accent-2)) 100%);
   display:grid;place-items:center;
-  filter:drop-shadow(0 6px 16px rgba(var(--accent),.45));
-  transition:transform var(--t-fast);
+  position:relative;
+  box-shadow:
+    0 4px 14px rgba(var(--accent),.35),
+    0 0 0 1px rgba(255,255,255,.15) inset,
+    0 -6px 12px rgba(0,0,0,.15) inset;
+  transition:transform var(--t-fast), box-shadow var(--t-fast);
+  overflow:hidden;
 }
-.brand-mark svg{width:100%;height:100%;display:block}
-.brand-mark:hover{transform:rotate(-8deg) scale(1.08)}
-.brand-mark .bm-h{
-  font-family:'Space Grotesk',sans-serif;
-  font-weight:800;font-size:15px;
-  letter-spacing:-.04em;
+.brand-mark::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 60%);
+  pointer-events:none;
+}
+.brand-mark::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);
+  transform:translateX(-100%);
+  transition:transform 0s;
+  pointer-events:none;
+}
+.brand-mark:hover::after{transform:translateX(100%);transition:transform 1s ease}
+.brand-mark:hover{transform:translateY(-2px) scale(1.04); box-shadow:0 8px 22px rgba(var(--accent),.5), 0 0 0 1px rgba(255,255,255,.2) inset, 0 -6px 12px rgba(0,0,0,.15) inset}
+.brand-mark span{
+  position:relative;z-index:1;
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  font-weight:800;font-size:19px;
+  color:#0a0a0a;
+  letter-spacing:-.06em;
+  line-height:1;
+  text-shadow:0 1px 0 rgba(255,255,255,.25);
+  margin-top:-1px;
+  margin-left:-1px;
 }
 .brand-text{display:flex;flex-direction:column;line-height:1.1;min-width:0}
 .brand-t{font-size:14.5px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;background:linear-gradient(90deg,var(--text),rgb(var(--accent)) 130%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.brand-s{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-3);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;margin-top:2px}
+.brand-s{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-3);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;margin-top:3px}
 
 .nav-tabs{display:flex;gap:2px;align-items:center;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
 .nav-tabs::-webkit-scrollbar{display:none}
@@ -185,6 +212,16 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
 .main-hd-r{display:flex;gap:8px;align-items:center}
 .pill-btn{padding:5px 11px;border-radius:99px;background:var(--surface);border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-2);display:inline-flex;align-items:center;gap:6px;transition:all var(--t-fast)}
 .pill-btn .dot{width:6px;height:6px;border-radius:50%;background:rgb(var(--accent));animation:pulseDot 1.6s infinite}
+
+/* ============ PLATFORM SECTION ============ */
+.plat-section{margin-bottom:24px}
+.plat-hd{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:12px 12px 0 0;border-bottom:none;margin-bottom:0}
+.plat-hd .plat-ico{width:26px;height:26px;border-radius:7px;background:var(--bg-3);border:1px solid var(--border);display:grid;place-items:center;flex-shrink:0}
+.plat-hd .plat-ico svg{width:14px;height:14px;stroke:rgb(var(--accent));fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.plat-hd .plat-name{font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:var(--text)}
+.plat-hd .plat-cnt{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-3);background:var(--surface-2);border:1px solid var(--border);padding:2px 8px;border-radius:6px}
+.plat-list{display:flex;flex-direction:column;gap:8px;padding-top:10px}
+
 .list2{display:flex;flex-direction:column;gap:8px}
 .row2{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;transition:all var(--t-med);cursor:pointer;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both;position:relative;overflow:hidden}
 .row2::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:rgb(var(--accent));opacity:0;transition:opacity var(--t-fast)}
@@ -205,23 +242,9 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
 .row2-meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-3);margin-top:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .row2-meta .sep{color:var(--border-2)}
 .row2-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
-
-/* ============ UPDATED TIME ============ */
-.row2-updated{
-  font-family:'JetBrains Mono',monospace;
-  font-size:9.5px;
-  color:var(--text-3);
-  margin-top:4px;
-  display:inline-flex;align-items:center;gap:5px;
-  padding:2px 7px;
-  background:rgba(255,255,255,.025);
-  border:1px solid var(--border);
-  border-radius:5px;
-  letter-spacing:.01em;
-}
+.row2-updated{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--text-3);margin-top:4px;display:inline-flex;align-items:center;gap:5px;padding:2px 7px;background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:5px;letter-spacing:.01em}
 .row2-updated svg{width:10px;height:10px;stroke:rgb(var(--accent));fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.85;flex-shrink:0}
 .row2:hover .row2-updated{border-color:rgba(var(--accent),.25);color:var(--text-2)}
-
 .copy-chip{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--bg-3);border:1px solid var(--border);color:var(--text-2);padding:3px 7px;border-radius:6px;cursor:pointer;transition:all var(--t-fast)}
 .copy-chip:hover{border-color:rgba(var(--accent),.5);color:rgb(var(--accent))}
 .copy-chip svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
@@ -399,39 +422,7 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
   <header class="topbar">
     <div class="wrap topbar-in">
       <div class="brand-block">
-        <div class="brand-mark">
-          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="bmHex" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="rgb(var(--accent))"/>
-                <stop offset="100%" stop-color="rgb(var(--accent-2))"/>
-              </linearGradient>
-              <radialGradient id="bmGloss" cx="35%" cy="20%" r="70%">
-                <stop offset="0%" stop-color="rgba(255,255,255,.7)"/>
-                <stop offset="60%" stop-color="rgba(255,255,255,0)"/>
-              </radialGradient>
-            </defs>
-            <polygon points="20,2 36,11 36,29 20,38 4,29 4,11"
-                     fill="url(#bmHex)"
-                     stroke="rgba(255,255,255,.45)"
-                     stroke-width="1.2"
-                     stroke-linejoin="round"/>
-            <polygon points="20,5.5 33,12.8 33,27.2 20,34.5 7,27.2 7,12.8"
-                     fill="none"
-                     stroke="rgba(255,255,255,.22)"
-                     stroke-width="0.6"
-                     stroke-linejoin="round"/>
-            <polygon points="20,2 36,11 36,29 20,38 4,29 4,11"
-                     fill="url(#bmGloss)"
-                     stroke="none"/>
-            <text x="20" y="25.5"
-                  font-family="'Space Grotesk', system-ui, sans-serif"
-                  font-weight="800" font-size="14"
-                  text-anchor="middle"
-                  fill="#0a0a0a"
-                  letter-spacing="-0.6">H</text>
-          </svg>
-        </div>
+        <div class="brand-mark"><span>H</span></div>
         <div class="brand-text">
           <div class="brand-t">Exec Status by Huy</div>
           <div class="brand-s" id="iBrandSub">trình theo dõi executor roblox</div>
@@ -597,6 +588,18 @@ body.theme-obsidian{--accent:255,255,255;--accent-2:230,230,230;--bg:#050505;--b
 const API_EXPLOITS='https://weao.xyz/api/status/exploits';
 const API_VERSIONS='https://weao.xyz/api/versions/current';
 const THEME_KEY='huy_exec_theme';
+
+/* Thứ tự platform: Windows → Mac → Android → iOS → External */
+const PLATFORM_ORDER = ['Windows','Mac','Android','iOS','External'];
+
+/* Thứ tự ưu tiên cho từng platform (theo tên lowercase) */
+const PRIORITY_MAP = {
+  Windows: ['potassium','volt','wave','sirhurt','real','cosmic','solara','xeno'],
+  Mac: ['macsploit','opiumware'],
+  Android: ['delta','codex'],
+  iOS: [],
+  External: []
+};
 
 const I18N = {
   en: {
@@ -838,18 +841,6 @@ function verLabel(v){
   return /^[vV]/.test(s) ? s : 'v' + s;
 }
 
-function recentDate(daysAgo){
-  const d = new Date(Date.now() - daysAgo * 86400000);
-  const m = String(d.getUTCMonth()+1).padStart(2,'0');
-  const day = String(d.getUTCDate()).padStart(2,'0');
-  const y = d.getUTCFullYear();
-  return `${m}/${day}/${y}`;
-}
-
-/* ============ PARSE WEAO DATE ============
-   Format: "09/16/2026 at 3:09 AM UTC" hoặc "9/21/2025, 6:46:57 PM UTC"
-   → trả về UTC timestamp (ms)
-========================================== */
 function parseWEAODate(str){
   if(!str || str==='Unknown') return null;
   const s = String(str).trim();
@@ -867,34 +858,16 @@ function parseWEAODate(str){
   return Date.UTC(yr, mo, day, hr, mn, sc);
 }
 
-/* ============ FORMAT UPDATED TIME ============
-   EN → show UTC (giống weao gốc)
-   NOR → show VN time (UTC+7) với label EN
-   VI  → show VN time (UTC+7) với label VI
-=============================================== */
 function formatUpdated(utcMs, lang){
   if(utcMs===null) return '';
   const d = new Date(utcMs);
   if(lang==='en'){
-    const datePart = new Intl.DateTimeFormat('en-US',{
-      timeZone:'UTC',
-      month:'2-digit', day:'2-digit', year:'numeric'
-    }).format(d);
-    const timePart = new Intl.DateTimeFormat('en-US',{
-      timeZone:'UTC',
-      hour:'numeric', minute:'2-digit', hour12:true
-    }).format(d);
+    const datePart = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'2-digit',day:'2-digit',year:'numeric'}).format(d);
+    const timePart = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',hour:'numeric',minute:'2-digit',hour12:true}).format(d);
     return t('updLabel')+': '+datePart+' at '+timePart+' UTC';
   }
-  // NOR / VI → VN time UTC+7
-  const datePart = new Intl.DateTimeFormat('vi-VN',{
-    timeZone:'Asia/Ho_Chi_Minh',
-    day:'2-digit', month:'2-digit', year:'numeric'
-  }).format(d);
-  const timePart = new Intl.DateTimeFormat('vi-VN',{
-    timeZone:'Asia/Ho_Chi_Minh',
-    hour:'2-digit', minute:'2-digit', hour12:false
-  }).format(d);
+  const datePart = new Intl.DateTimeFormat('vi-VN',{timeZone:'Asia/Ho_Chi_Minh',day:'2-digit',month:'2-digit',year:'numeric'}).format(d);
+  const timePart = new Intl.DateTimeFormat('vi-VN',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',hour12:false}).format(d);
   return t('updLabel')+': '+timePart+' · '+datePart+' (UTC+7)';
 }
 
@@ -907,6 +880,7 @@ const THEMES=[
   {id:"sakura",name:"Sakura",c:"#fda4af"},{id:"obsidian",name:"Obsidian",c:"#ffffff"}
 ];
 
+/* FALLBACK — giữ status đúng weao */
 const FALLBACK_EXPLOITS=[
   {_id:"exl-volt",title:"Volt",version:"1.3.13.1",updatedDate:"09/16/2026 at 5:00 AM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$5.99 Weekly",detected:true,clientmods:true,detectionReason:"Last banwave: March 6-18th",updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://voltbz.net/",discordlink:"https://discord.com/invite/voltbz",purchaselink:"https://rcheatz.com/product?id=volt&ref=weao",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Volt Team",fullDescription:"Volt (previously AWP.GG) is a premium Windows script executor.",logo:"https://cdn.weao.gg/slug/volt/logo.png"}},
   {_id:"exl-wave",title:"Wave",version:"NEW-1.5.3",updatedDate:"09/15/2026 at 10:00 PM UTC",uncStatus:true,uncPercentage:99,suncPercentage:100,free:false,cost:"$4.99 Weekly",detected:true,clientmods:true,detectionReason:"Last banwave: May 26",updateStatus:true,rbxversion:"4310300497aa",websitelink:"https://getwave.gg",discordlink:"https://discord.gg/rARhPpN7fY",purchaselink:"https://bloxproducts.com/?affiliate_key=weao#Wave",platform:"Windows",extype:"wexecutor",keysystem:false,decompiler:true,multiInject:true,raknet:true,slug:{owner:"Wave Team",fullDescription:"Wave is a premium Windows script executor.",logo:"https://cdn.weao.gg/slug/wave/logo.png"}},
@@ -1047,10 +1021,11 @@ function updateClock(){
 }
 
 function platformIcon(p){
-  if(p==='win') return '<path d="M3 5.5 10.5 4.3v7.2H3zM12 4l9-1.3v8.8h-9zM3 12.5h7.5v7.2L3 18.5zM12 12.5h9v8.8l-9-1.3z"/>';
-  if(p==='mac') return '<path d="M16.5 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-.5.9-.8 2-.8 3.1 0 2.4 1.8 5.5 3.3 5.5.7 0 1.5-.5 2.4-.5s1.7.5 2.4.5c1.5 0 3.1-2.9 3.1-5.5-.1 0-.3 0-.3 0zM14.3 6.8c.5-.6.8-1.5.8-2.3-.7 0-1.5.4-2 1-.4.5-.8 1.4-.8 2.2.8.1 1.6-.4 2-1z"/>';
-  if(p==='apk') return '<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M11 19h2"/>';
-  if(p==='ios') return '<path d="M16.5 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-.5.9-.8 2-.8 3.1 0 2.4 1.8 5.5 3.3 5.5.7 0 1.5-.5 2.4-.5s1.7.5 2.4.5c1.5 0 3.1-2.9 3.1-5.5-.1 0-.3 0-.3 0zM14.3 6.8c.5-.6.8-1.5.8-2.3-.7 0-1.5.4-2 1-.4.5-.8 1.4-.8 2.2.8.1 1.6-.4 2-1z"/>';
+  if(p==='win'||p==='Windows') return '<path d="M3 5.5 10.5 4.3v7.2H3zM12 4l9-1.3v8.8h-9zM3 12.5h7.5v7.2L3 18.5zM12 12.5h9v8.8l-9-1.3z"/>';
+  if(p==='mac'||p==='Mac') return '<path d="M16.5 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-.5.9-.8 2-.8 3.1 0 2.4 1.8 5.5 3.3 5.5.7 0 1.5-.5 2.4-.5s1.7.5 2.4.5c1.5 0 3.1-2.9 3.1-5.5-.1 0-.3 0-.3 0zM14.3 6.8c.5-.6.8-1.5.8-2.3-.7 0-1.5.4-2 1-.4.5-.8 1.4-.8 2.2.8.1 1.6-.4 2-1z"/>';
+  if(p==='apk'||p==='Android') return '<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M11 19h2"/>';
+  if(p==='ios'||p==='iOS') return '<path d="M16.5 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-.5.9-.8 2-.8 3.1 0 2.4 1.8 5.5 3.3 5.5.7 0 1.5-.5 2.4-.5s1.7.5 2.4.5c1.5 0 3.1-2.9 3.1-5.5-.1 0-.3 0-.3 0zM14.3 6.8c.5-.6.8-1.5.8-2.3-.7 0-1.5.4-2 1-.4.5-.8 1.4-.8 2.2.8.1 1.6-.4 2-1z"/>';
+  if(p==='External') return '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>';
   return '';
 }
 
@@ -1182,6 +1157,26 @@ function renderSideFilters(){
   `).join('');
 }
 
+/* Sort theo priority trong mỗi platform */
+function sortByPriority(items, platform){
+  const prio = PRIORITY_MAP[platform] || [];
+  return items.slice().sort((a,b)=>{
+    const la = a.title.toLowerCase();
+    const lb = b.title.toLowerCase();
+    const ia = prio.indexOf(la);
+    const ib = prio.indexOf(lb);
+    if(ia !== -1 && ib !== -1) return ia - ib;
+    if(ia !== -1) return -1;
+    if(ib !== -1) return 1;
+    return la.localeCompare(lb);
+  });
+}
+
+function getPlatformKey(e){
+  if(e.extype==='wexternal') return 'External';
+  return e.platform;
+}
+
 function applyFilters(){
   const f=state.filters;
   let list=state.executors.filter(e=>{
@@ -1210,6 +1205,22 @@ function applyFilters(){
     case 'updated-desc':list.sort((a,b)=>a.updateStatus!==b.updateStatus?(a.updateStatus?-1:1):(b.uncPercentage||0)-(a.uncPercentage||0));break;
   }
   return list;
+}
+
+/* Nhóm executor theo platform */
+function groupByPlatform(list){
+  const groups = {};
+  PLATFORM_ORDER.forEach(p => { groups[p] = []; });
+  list.forEach(e=>{
+    const key = getPlatformKey(e);
+    if(!groups[key]) groups[key] = [];
+    groups[key].push(e);
+  });
+  // Sort trong mỗi group theo priority
+  PLATFORM_ORDER.forEach(p=>{
+    groups[p] = sortByPriority(groups[p], p);
+  });
+  return groups;
 }
 
 function renderRow(e,i){
@@ -1285,8 +1296,37 @@ function render(){
   if(mc) mc.textContent=`${list.length} ${t('items')}`;
   const ex=$('#execList');
   if(!ex) return;
-  if(!list.length){ex.innerHTML=`<div class="empty"><div class="c">[ 0 ]</div><p>${esc(t('emptyTitle'))}</p></div>`;}
-  else{ex.innerHTML=list.map((e,i)=>renderRow(e,i)).join('');}
+  if(!list.length){
+    ex.innerHTML=`<div class="empty"><div class="c">[ 0 ]</div><p>${esc(t('emptyTitle'))}</p></div>`;
+    return;
+  }
+  // Nếu user chọn 1 platform cụ thể → hiện 1 section
+  // Nếu All → chia thành 5 section theo thứ tự Windows → Mac → Android → iOS → External
+  const groups = groupByPlatform(list);
+  let html = '';
+  let globalIdx = 0;
+  PLATFORM_ORDER.forEach(p=>{
+    const items = groups[p] || [];
+    if(!items.length) return;
+    // Label hiển thị
+    const labelMap = {Windows:'Windows',Mac:'macOS',Android:'Android',iOS:'iOS',External:'External'};
+    const noteMap = {Windows:'Internal DLL / injector',Mac:'Apple Silicon / Intel',Android:'APK',iOS:'IPA / sideload',External:'Non-Lua tools'};
+    html += `
+      <section class="plat-section">
+        <div class="plat-hd">
+          <div class="plat-ico"><svg viewBox="0 0 24 24">${platformIcon(p)}</svg></div>
+          <div class="plat-name">${esc(labelMap[p])}</div>
+          <div class="plat-cnt">${items.length} ${items.length===1?'item':'items'}</div>
+        </div>
+        <div class="plat-list">
+          ${items.map((e)=>{const r=renderRow(e,globalIdx);globalIdx++;return r}).join('')}
+        </div>
+      </section>
+    `;
+  });
+  ex.innerHTML = html;
+  // Đổi #execList thành block để section xếp dọc
+  ex.style.display='block';
 }
 
 function openDrawer(id){
