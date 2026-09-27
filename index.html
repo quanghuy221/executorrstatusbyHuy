@@ -425,7 +425,6 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .btn-reset svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:560px){.search-box{min-width:100%}}
 
-/* ==== FIX: bỏ content-visibility: auto vì nó pause animation ==== */
 .section{margin-bottom:clamp(20px,2.6vw,30px)}
 .sec-hd{
   display:flex;align-items:center;gap:11px;
@@ -522,7 +521,6 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 }
 .card-meta .sep{color:var(--border-2)}
 
-/* ==== FIX: Dual rings dùng TRANSITION thay vì @keyframes ==== */
 .card-ring-wrap{
   display:flex;align-items:center;justify-content:center;
   gap:24px;
@@ -543,7 +541,6 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
   stroke:rgba(255,255,255,.07);
   stroke-width:7;
 }
-/* FIX CHÍNH: dùng transition thay vì animation. Giá trị khởi tạo & target set inline qua JS. */
 .card-ring .ring-fill{
   fill:none;
   stroke-width:7;
@@ -989,18 +986,6 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .toast.bad svg{color:var(--bad)}
 @keyframes toastIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
 
-.offline-badge{
-  position:fixed;bottom:20px;left:20px;z-index:200;
-  display:none;align-items:center;gap:8px;
-  padding:10px 16px;border-radius:14px;
-  background:rgba(15,20,30,.97);
-  border:1px solid rgba(251,191,36,.4);
-  font-size:11.5px;color:var(--warn);font-weight:600;
-  font-family:'JetBrains Mono',monospace;pointer-events:none;
-}
-.offline-badge.on{display:flex}
-.offline-badge .d{width:7px;height:7px;border-radius:50%;background:var(--warn);box-shadow:0 0 8px var(--warn)}
-
 body.dev-active > *:not(#devWarn){display:none!important;visibility:hidden!important;opacity:0!important}
 body.dev-active{background:#000!important;overflow:hidden!important}
 body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-index:2147483646}
@@ -1157,11 +1142,6 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
       </div>
     </footer>
   </div>
-</div>
-
-<div class="offline-badge" id="offlineBadge">
-  <span class="d"></span>
-  <span id="offlineText">OFFLINE · dùng dữ liệu cache</span>
 </div>
 
 <div class="drawer-bd" id="drawerBd"></div>
@@ -1356,7 +1336,7 @@ const MY_EXECUTORS = [
      tag: "Nam",
      tag_color: "#a855f7",
      ver: "1.0.0",
-     owner: "Nam Zét",
+     owner: "Nam",
      certified: true,
      updated: "09/27/2026 at 6:45 AM UTC",
      platform: "Windows",
@@ -1471,7 +1451,6 @@ const I18N = {
     toastCmpAdded:(n)=>`Added ${n} to compare`,
     emptyTitle:'No executors match your filters',
     syncLabel:'sync',loading:'Loading...',
-    offlineBadge:'OFFLINE · cached data',
     lbHint:'Scroll to zoom · Drag to pan · Swipe to switch · ESC to close'
   },
   normal: {
@@ -1546,7 +1525,6 @@ const I18N = {
     toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`,
     emptyTitle:'Không có executor nào phù hợp',
     syncLabel:'sync',loading:'Đang tải...',
-    offlineBadge:'OFFLINE · dữ liệu cache',
     lbHint:'Cuộn để zoom · Kéo để di chuyển · Vuốt để đổi ảnh · ESC để đóng'
   },
   vi: {
@@ -1621,7 +1599,6 @@ const I18N = {
     toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`,
     emptyTitle:'Không có executor nào phù hợp',
     syncLabel:'sync',loading:'Đang tải...',
-    offlineBadge:'OFFLINE · dữ liệu cache',
     lbHint:'Cuộn để zoom · Kéo để di chuyển · Vuốt để đổi ảnh · ESC để đóng'
   }
 };
@@ -1957,14 +1934,6 @@ function renderVersionBar(){
   }
 }
 
-function setOfflineBadge(on){
-  const el=$('#offlineBadge');
-  if(!el) return;
-  el.classList.toggle('on',!!on);
-  const txt=$('#offlineText');
-  if(txt) txt.textContent=t('offlineBadge');
-}
-
 async function fetchData(showToast){
   let isLive=false;
   let liveList = null;
@@ -1994,7 +1963,6 @@ async function fetchData(showToast){
     state.executors = buildExecutorList(FALLBACK_EXPLOITS.slice());
   }
   state.isLive=isLive;
-  setOfflineBadge(!isLive);
   render();
   if(showToast) toast(isLive?t('toastSyncOk'):t('toastSyncFail'),isLive?'ok':'warn');
 }
@@ -2127,21 +2095,16 @@ function applyFilters(){
   return list;
 }
 
-/* ============================================================
-   RING COMPONENT (dual UNC + SUNC)
-   FIX: Transition thay vì @keyframes để chạy 100% trên mọi browser
-   ============================================================ */
 function ringColorClass(v){
   if(v>=95) return 'ok';
   if(v>=75) return 'warn';
   if(v>0)   return 'bad';
   return 'mute';
 }
-/* FIX: dùng HEX cứng, không dùng var() để tránh bug */
 function ringStrokeColor(v){
-  if(v>=95) return '#34d399';  /* --ok */
-  if(v>=75) return '#fbbf24';  /* --warn */
-  if(v>0)   return '#f87171';  /* --bad */
+  if(v>=95) return '#34d399';
+  if(v>=75) return '#fbbf24';
+  if(v>0)   return '#f87171';
   return 'rgba(255,255,255,.15)';
 }
 const RING_CIRC = 2*Math.PI*44;
@@ -2152,8 +2115,6 @@ function renderRing(value, label){
   const target = value>0 ? RING_CIRC * (1 - value/100) : RING_CIRC;
   const num = value>0 ? value : '—';
   const pct = value>0 ? '%' : 'N/A';
-  /* FIX: đặt stroke-dashoffset ban đầu = RING_CIRC (không có arc) qua inline style
-     Sau đó JS sẽ đổi sang giá trị target → CSS transition sẽ animate mượt */
   return `
     <div class="card-ring-block">
       <div class="card-ring">
@@ -2174,7 +2135,6 @@ function renderRing(value, label){
   `;
 }
 
-/* FIX: Trigger animation sau khi render — double rAF để browser commit style trước */
 function triggerRingAnimations(root){
   const scope = root || document;
   const rings = scope.querySelectorAll('.ring-fill[data-ring-target]');
@@ -2322,7 +2282,6 @@ function render(){
     const p = state.filters.platform;
     ex.innerHTML = renderPlatformSection(p==='External'?'External':p, list);
   }
-  /* FIX: Kích hoạt animation cho tất cả ring sau khi DOM đã render */
   triggerRingAnimations(ex);
 }
 
@@ -2895,7 +2854,6 @@ function applyI18nStatic(){
   setTxt('iDevTitle',t('devTitle'));
   setHTML('iDevText',t('devText'));
   setTxt('iDevSub',t('devSub'));
-  setTxt('offlineText',t('offlineBadge'));
   const si=$('#searchInput');
   if(si) si.placeholder=t('searchPh');
   document.documentElement.lang = currentLang==='en'?'en':'vi';
@@ -3031,7 +2989,7 @@ function bindEvents(){
     if(w) w.classList.add('on');
     try{ document.title = '\u26a0 SECURITY ALERT'; }catch(e){}
     try{
-      document.querySelectorAll('.shell,.bg-fx,.drawer,.drawer-bd,.ovl,.toasts,.offline-badge,.lightbox').forEach(el=>{
+      document.querySelectorAll('.shell,.bg-fx,.drawer,.drawer-bd,.ovl,.toasts,.lightbox').forEach(el=>{
         el.style.display = 'none';
       });
     }catch(e){}
@@ -3043,7 +3001,7 @@ function bindEvents(){
     const w = document.getElementById('devWarn');
     if(w) w.classList.remove('on');
     try{
-      document.querySelectorAll('.shell,.bg-fx,.drawer,.drawer-bd,.ovl,.toasts,.offline-badge,.lightbox').forEach(el=>{
+      document.querySelectorAll('.shell,.bg-fx,.drawer,.drawer-bd,.ovl,.toasts,.lightbox').forEach(el=>{
         el.style.display = '';
       });
       document.title = 'Exec Status by Huy — Roblox Executor Monitor';
@@ -3083,22 +3041,13 @@ function bindEvents(){
       try{ Object.freeze(console); }catch(e){}
     }catch(e){}
   })();
-  (function(){
-    let strikes = 0;
-    function check(){
-      const wDiff = window.outerWidth - window.innerWidth;
-      const hDiff = window.outerHeight - window.innerHeight;
-      if(wDiff > 160 || hDiff > 160){
-        strikes++;
-        if(strikes >= 2){ triggerProtection(); }
-      } else {
-        strikes = Math.max(0, strikes - 1);
-        if(devActive && wDiff < 120 && hDiff < 120){ releaseProtection(); }
-      }
-    }
-    window.addEventListener('resize', check);
-    setInterval(check, 900);
-  })();
+  /* ═══════════════════════════════════════════════════════════════
+     FIX: XOÁ window-dimension heuristic — nguồn false-positive khi
+     user phóng to web bằng Ctrl + con lăn chuột / Ctrl + / Ctrl -.
+     Lý do: khi zoom, innerWidth (CSS px) co lại nhưng outerWidth
+     (pixel vật lý) giữ nguyên → diff tăng vọt → tưởng nhầm là
+     DevTools mở → bật SECURITY ALERT oan.
+     ═══════════════════════════════════════════════════════════════ */
   (function(){
     try{
       const desc = Object.getOwnPropertyDescriptor(Function.prototype, 'constructor');
@@ -3151,11 +3100,12 @@ function bindEvents(){
       document.documentElement.innerHTML = '<body style="background:#000"></body>';
     }
   }catch(e){}
+  /* Ngưỡng busy loop tăng 400ms → 900ms để tránh false-positive trên máy yếu */
   setTimeout(function(){
     const s = performance.now();
     for(let i = 0; i < 100000; i++){ /* busy */ }
     const dur = performance.now() - s;
-    if(dur > 400){ triggerProtection(); }
+    if(dur > 900){ triggerProtection(); }
   }, 2500);
 })();
 
