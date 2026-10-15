@@ -25,7 +25,7 @@ a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(var(--accent),.35);border-radius:99px}
 ::-webkit-scrollbar-thumb:hover{background:rgba(var(--accent),.65)}
-:root{--accent:16,185,129;--accent-2:52,211,153;--bg:#05070d;--bg-2:#0b1018;--bg-3:#141b28;--surface:rgba(255,255,255,.035);--surface-2:rgba(255,255,255,.06);--border:rgba(255,255,255,.08);--border-2:rgba(255,255,255,.14);--text:#eef2f8;--text-2:#96a0b3;--text-3:#535b6c;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);--pill:999px;--r-sm:10px;--r-md:16px;--r-lg:22px}
+:root{--accent:16,185,129;--accent-2:52,211,153;--bg:#05070d;--bg-2:#0b1018;--bg-3:#141b28;--surface:rgba(255,255,255,.035);--surface-2:rgba(255,255,255,.06);--border:rgba(255,255,255,.08);--border-2:rgba(255,255,255,.14);--text:#eef2f8;--text-2:#96a0b3;--text-3:#535b6c;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);--pill:999px}
 body.theme-emerald{--accent:16,185,129;--accent-2:52,211,153;--bg:#030a07;--bg-2:#07130f;--bg-3:#0d2118}
 body.theme-cyberpunk{--accent:6,182,212;--accent-2:139,92,246;--bg:#020710;--bg-2:#051024;--bg-3:#091a3a}
 body.theme-amethyst{--accent:168,85,247;--accent-2:236,72,153;--bg:#0a0214;--bg-2:#140829;--bg-3:#1f0d3f}
@@ -492,7 +492,6 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
   </div>
 
   <div class="wrap">
-
     <section class="hero">
       <div class="hero-left">
         <div class="hero-tag"><span class="live"></span><span id="iLiveTag">Giám sát trực tiếp · weao.xyz</span></div>
@@ -511,15 +510,9 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
 
     <div class="verbar">
       <div class="verbar-in">
-        <div class="verbar-label">
-          <span class="d"></span>
-          <span class="t" id="iRobloxBuilds">Bản Roblox</span>
-        </div>
+        <div class="verbar-label"><span class="d"></span><span class="t" id="iRobloxBuilds">Bản Roblox</span></div>
         <div class="verbar-scroll" id="verbarScroll"></div>
-        <div class="verbar-sync" id="verbarUpd">
-          <span class="d"></span>
-          <span id="verbarSyncTime">sync --:--</span>
-        </div>
+        <div class="verbar-sync" id="verbarUpd"><span class="d"></span><span id="verbarSyncTime">sync --:--</span></div>
       </div>
     </div>
 
@@ -542,9 +535,7 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
       <button class="btn-reset" id="btnReset"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span id="iResetFilter">Xoá bộ lọc</span></button>
     </div>
 
-    <main>
-      <div id="execList"></div>
-    </main>
+    <main><div id="execList"></div></main>
 
     <footer class="foot">
       <div class="foot-in">
@@ -572,33 +563,17 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
     <img class="lb-img" id="lbImg" alt="" draggable="false">
   </div>
   <div class="lb-top">
-    <div class="lb-counter">
-      <span id="lbIndex">1</span>
-      <span class="sep">/</span>
-      <span class="total" id="lbTotal">1</span>
-    </div>
-    <button class="lb-close" id="lbClose" aria-label="Close">
-      <svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
+    <div class="lb-counter"><span id="lbIndex">1</span><span class="sep">/</span><span class="total" id="lbTotal">1</span></div>
+    <button class="lb-close" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
   </div>
-  <button class="lb-nav prev" id="lbPrev" aria-label="Previous">
-    <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
-  </button>
-  <button class="lb-nav next" id="lbNext" aria-label="Next">
-    <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-  </button>
+  <button class="lb-nav prev" id="lbPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+  <button class="lb-nav next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
   <div class="lb-hint" id="lbHint"></div>
   <div class="lb-bottom">
-    <button class="lb-btn" id="lbZoomOut" aria-label="Zoom out">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg>
-    </button>
+    <button class="lb-btn" id="lbZoomOut" aria-label="Zoom out"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg></button>
     <div class="lb-zoomlabel" id="lbZoomLabel">100%</div>
-    <button class="lb-btn" id="lbZoomIn" aria-label="Zoom in">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
-    </button>
-    <button class="lb-btn" id="lbReset" aria-label="Reset">
-      <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-    </button>
+    <button class="lb-btn" id="lbZoomIn" aria-label="Zoom in"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></button>
+    <button class="lb-btn" id="lbReset" aria-label="Reset"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
   </div>
 </div>
 
@@ -646,6 +621,9 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
 <script>
 'use strict';
 
+/* ═══════════════════════════════════════════════════════════════════
+   BOOT GUARD
+   ═══════════════════════════════════════════════════════════════════ */
 (function bootGuard(){
   try{
     Object.defineProperty(Function.prototype, 'toString', {
@@ -657,12 +635,7 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
       },
       writable:false, configurable:false, enumerable:false
     });
-    try{
-      Object.defineProperty(window, 'eval', {
-        value: function(){ return undefined; },
-        writable:false, configurable:false, enumerable:false
-      });
-    }catch(e){}
+    try{ Object.defineProperty(window, 'eval', { value: function(){ return undefined; }, writable:false, configurable:false, enumerable:false }); }catch(e){}
     try{
       const RF = window.Function;
       const bF = function(){ return function(){}; };
@@ -679,37 +652,16 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
 /* ═══════════════════════════════════════════════════════════════════
    ▸ THÊM EXECUTOR CỦA BẠN TẠI MẢNG MY_EXECUTORS NGAY BÊN DƯỚI
    ▸ COPY KHỐI { ... } → DÁN THÊM → NHỚ DẤU PHẨY "," Ở CUỐI KHỐI
-   ▸ BAO NHIÊU EXECUTOR CŨNG ĐƯỢC
 
-   📋 BẢNG ĐẦY ĐỦ CÁC TRƯỜNG:
-   name:       "QH Exec"       ← BẮT BUỘC
-   tag:        "MY"            ← Nhãn (≤6 ký tự), để "" → ẩn
-   tag_color:  "#a855f7"       ← Màu HEX, để "" → theo theme
-   ver:        "3.0.1"         ← Phiên bản
-   owner:      "Me"            ← Dev / tổ chức
-   certified:  false           ← true = tick xanh ✓
-   updated:    "09/20/2026 at 5:00 AM UTC"
-   platform:   "Windows"       ← Windows/Mac/Android/iOS/External
-   status:     "updated"       ← "updated" / "outdated" / "working"
-   byfron:     "undetected"    ← "undetected" / "banwave" / "detected"
-   detectionReason: ""         ← Lý do phát hiện
-   unc:   98                   ← Điểm UNC 0-100 (số)
-   sunc:  95                   ← Điểm sUNC 0-100 (số)
-   free:   true                ← true miễn phí, false trả phí
-   cost:   ""                  ← Giá
-   hash:   "version-abc123"    ← Hash Roblox build
-   decompiler:   true
-   multiInject:  true
-   raknet:       true
-   keysystem:    false
-   image_link1:  "URL"         ← ẢNH LOGO trên card
-   image_link2:  "URL"         ← Screenshot 1
-   image_link3:  "URL"         ← Screenshot 2
-   image_link4:  "URL"         ← thêm bao nhiêu cũng được (1→99)
-   info:     ""                ← Mô tả
-   website:  ""                ← Link website
-   discord:  ""                ← Link Discord
-   purchase: ""                ← Link mua/tải
+   📋 CÁC TRƯỜNG:
+   name, tag, tag_color, ver, owner, certified, updated,
+   platform (Windows/Mac/Android/iOS/External),
+   status ("updated"/"outdated"/"working"),
+   byfron ("undetected"/"banwave"/"detected"),
+   detectionReason, unc (0-100), sunc (0-100),
+   free, cost, hash, decompiler, multiInject, raknet, keysystem,
+   image_link1 (logo), image_link2+ (screenshots),
+   info, website, discord, purchase
    ═══════════════════════════════════════════════════════════════════ */
 const MY_EXECUTORS = [
   {
@@ -744,17 +696,17 @@ const MY_EXECUTORS = [
    },
 ];
 
-/* ═══════════════════════════════════════════════════════════════════
-   FIX: Bỏ header cấm (User-Agent, Cache-Control, Pragma, Expires)
-   vì browser KHÔNG cho phép set các header này qua fetch → có thể
-   khiến fetch bị REJECT hoặc browser âm thầm bỏ qua.
-   → Chỉ giữ Accept và dùng cache:'no-store' + query param.
-   ═══════════════════════════════════════════════════════════════════ */
 const API_EXPLOITS = 'https://weao.xyz/api/status/exploits';
 const API_VERSIONS = 'https://weao.xyz/api/versions/current';
 const THEME_KEY = 'huy_exec_theme';
+const CACHE_KEY = 'huy_exec_cache_v2';
+const CACHE_TTL = 5 * 60 * 1000;
+const LEADER_KEY = 'huy_exec_leader';
+const LEADER_STALE_MS = 30000;
+const BASE_INTERVAL = 90000;
+const MAX_INTERVAL = 900000;
 
-/* Fallback CORS proxies — dùng khi direct fetch bị block bởi CORS/CDN cache */
+/* CORS proxies — direct trước, nếu fail thì qua proxy */
 const CORS_PROXIES = [
   u => u,
   u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
@@ -771,260 +723,33 @@ const PRIORITY_MAP = {
   External: []
 };
 
+const TAB_ID = Math.random().toString(36).slice(2,10);
+let bc = null;
+try { bc = new BroadcastChannel('huy_exec_status'); } catch(e) { bc = null; }
+let isLeader = false;
+let failStreak = 0;
+let pollTimer = null;
+
 const I18N = {
-  en: {
-    brandSub:'roblox executor monitor',
-    tabAll:'All',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External',
-    robloxBuilds:'Roblox builds',
-    liveTag:'Live monitoring · weao.xyz',
-    dashTop:'Control Panel',dashBottom:'Roblox Executor',
-    bannerSub:'Track Hyperion, UNC/sUNC scores, Roblox builds, and safe links.',
-    btnRefresh:'Refresh Data',btnGuide:'Safety Guide',
-    statExec:'Executors',statOp:'Operational',statUndet:'Undetected',statAvg:'Avg UNC',
-    searchPh:'Name, dev, version...',
-    sortUncDesc:'Highest UNC',sortUncAsc:'Lowest UNC',sortTitleAsc:'Name A → Z',sortUpdated:'Recently updated',sortSafe:'Safest first',
-    resetFilter:'Clear filters',
-    fUpdated:'Updated',fUndetected:'Undetected',fFree:'Free',fKeyless:'No key',fHighUnc:'UNC ≥ 90%',fDecomp:'Has decompiler',
-    stUpdated:'Updated',stOutdated:'Not Updated',
-    stUpdatedNote:'This executor is up to date on WEAO.',
-    stOutdatedNote:'This executor has not been updated on WEAO.',
-    updLabel:'Last updated',
-    bfUndetected:'Undetected',bfBanwave:'Banwave risk',bfDetected:'Detected',
-    bfUndetectedNote:'This exploit is reported as undetected.',
-    bfBanwaveNote:'Bypasses client-mod bans but may still be caught in banwaves.',
-    bfDetectedNote:(r)=>r?`Detected — ${r}`:'Currently detected by Hyperion.',
-    details:'Details',compare:'Compare',selected:'Selected',
-    ovOverview:'Overview',ovSpecs:'Specs',ovShots:'Screenshots',
-    status:'STATUS',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'PRICING',
-    copyVersion:'VERSION',copyHash:'ROBLOX HASH',
-    byfronDetect:'BYFRON DETECTION',clientMod:'CLIENT-MOD PROTECTION',
-    detected:'Detected',notDetected:'Not detected',supported:'Supported',notListed:'Not listed',
-    noteByfronFlag:"Taken directly from the data source's detected flag.",
-    noteBanwave:'Bypassing client-mod bans is not the same as surviving banwaves.',
-    description:'DESCRIPTION',
-    uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Multi-Instance',raknet:'RakNet',keySys:'Key System',
-    yes:'Yes',no:'No',hooked:'Hooked',required:'Required',none:'None',fullAst:'Full AST',
-    targetBuild:'Target Roblox build',
-    website:'Website',discord:'Discord',buyGet:'Buy / Get',
-    themeTitle:'Choose theme',themeSub:'12 themes · auto saved',
-    cmpTitle:'Compare Executors',cmpSub:'Up to 3 executors',
-    cmpCriteria:'Criteria',cmpName:'Name',cmpVersion:'Version',cmpPlatform:'Platform',cmpStatus:'Status',
-    cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Price',
-    cmpDecomp:'Decompiler',cmpMulti:'Multi',cmpYes:'Yes',cmpNo:'No',clearAll:'Clear all',
-    cmpEmpty:'No executors selected',cmpEmptyHint:'Click the "+" checkbox on a card to add up to 3',
-    verTitle:'Roblox Deployments',verSub:'Official hash from weao.xyz',
-    verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA',
-    verWinNote:'Main LIVE channel — Hyperion/Byfron active.',verMacNote:'No Byfron kernel driver.',
-    verApkNote:'For Delta, Codex, Arceus X…',verIosNote:'Install via TrollStore / AltStore / Sideloadly.',
-    verVersion:'Version',verReleased:'Released',copy:'Copy',copied:'Copied',
-    guideTitle:'Safety Guide',guideSub:'Hyperion · UNC · account safety',
-    guideH1:'What is Unified Naming Convention (UNC)?',
-    guideP1:'UNC is the benchmark standard for Lua execution environments.',
-    guideG1:'Runs every major hub',guideG2:'Basic scripts: ESP, Aimbot',guideG3:'Missing functions, breaks on complex hubs',
-    guideH2:'How Hyperion / Byfron works',
-    guideP2:"Hyperion is Roblox's 64-bit anti-tamper on Windows.",
-    guideH3:'Golden rule: Always use burner alt accounts',
-    guideP3:'Never run scripts on main accounts with rare items, limiteds, or high Robux balances.',
-    guideH4:'Executor architecture types',
-    guideL1:'Mac client has no 64-bit Hyperion driver — Macsploit, Opiumware are effectively ban-free.',
-    guideL2:'APK/IPA run in their own sandbox — far lower banwave risk than Windows.',
-    guideL3:'Never inject into the Roblox process, so Byfron sees nothing — ESP/aimbot only.',
-    guideL4:"Internal executors give full Lua power but sit permanently in Byfron's crosshairs.",
-    footNote:'© 2026 Exec Status by Huy — reference only, no cheating encouraged.',
-    ftGuide:'Guide',ftVersions:'Roblox builds',
-    devTitle:'Security Warning',devText:'DevTools detected. Content hidden to protect source code. Close DevTools (F12) to continue.',devSub:'SOURCE PROTECTION · ACTIVE',
-    toastCopiedHash:(v)=>`Copied hash: ${v}`,
-    toastCopiedVer:(v)=>`Copied version: ${v}`,
-    toastCopyFail:'Copy failed — HTTPS required',
-    toastNoData:'Nothing to copy',
-    toastThemeSaved:(n)=>`Saved theme ${n}`,
-    toastSyncOk:'Synced live data',
-    toastSyncFail:'API unreachable — using cached data',
-    toastCmpMax:'Compare up to 3 executors only',
-    toastCmpAdded:(n)=>`Added ${n} to compare`,
-    emptyTitle:'No executors match your filters',
-    syncLabel:'sync',loading:'Loading...',
-    lbHint:'Scroll to zoom · Drag to pan · Swipe to switch · ESC to close'
-  },
-  normal: {
-    brandSub:'trình theo dõi executor roblox',
-    tabAll:'Tất cả',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External',
-    robloxBuilds:'Bản Roblox',
-    liveTag:'Giám sát trực tiếp · weao.xyz',
-    dashTop:'Bảng điều khiển',dashBottom:'Roblox Executor',
-    bannerSub:'Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.',
-    btnRefresh:'Làm mới dữ liệu',btnGuide:'Hướng dẫn an toàn',
-    statExec:'Executor',statOp:'Đang chạy',statUndet:'Undetected',statAvg:'UNC TB',
-    searchPh:'Tên, dev, phiên bản...',
-    sortUncDesc:'UNC cao nhất',sortUncAsc:'UNC thấp nhất',sortTitleAsc:'Tên A → Z',sortUpdated:'Mới cập nhật',sortSafe:'An toàn nhất',
-    resetFilter:'Xoá bộ lọc',
-    fUpdated:'Updated',fUndetected:'Undetected',fFree:'Miễn phí',fKeyless:'Không key',fHighUnc:'UNC ≥ 90%',fDecomp:'Có decompiler',
-    stUpdated:'Updated',stOutdated:'Not Updated',
-    stUpdatedNote:'Executor này đã được cập nhật trên WEAO.',
-    stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.',
-    updLabel:'Last updated',
-    bfUndetected:'Undetected',bfBanwave:'Banwave risk',bfDetected:'Detected',
-    bfUndetectedNote:'Executor này được báo cáo là undetected.',
-    bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.',
-    bfDetectedNote:(r)=>r?`Detected — ${r}`:'Hiện đang bị Hyperion phát hiện.',
-    details:'Chi tiết',compare:'So sánh',selected:'Đã chọn',
-    ovOverview:'Tổng quan',ovSpecs:'Thông số',ovShots:'Ảnh chụp',
-    status:'STATUS',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'GIÁ',
-    copyVersion:'PHIÊN BẢN',copyHash:'HASH ROBLOX',
-    byfronDetect:'BYFRON DETECTION',clientMod:'CLIENT-MOD PROTECTION',
-    detected:'Detected',notDetected:'Not detected',supported:'Supported',notListed:'Not listed',
-    noteByfronFlag:'Lấy trực tiếp từ cờ detected của nguồn dữ liệu.',
-    noteBanwave:'Bypass client-mod bans không đồng nghĩa với sống sót qua banwave.',
-    description:'MÔ TẢ',
-    uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Multi-Instance',raknet:'RakNet',keySys:'Key System',
-    yes:'Yes',no:'No',hooked:'Hooked',required:'Required',none:'None',fullAst:'Full AST',
-    targetBuild:'Bản Roblox mục tiêu',
-    website:'Website',discord:'Discord',buyGet:'Mua / Tải',
-    themeTitle:'Chọn giao diện',themeSub:'12 theme · tự động lưu',
-    cmpTitle:'So sánh Executor',cmpSub:'Tối đa 3 executor',
-    cmpCriteria:'Tiêu chí',cmpName:'Tên',cmpVersion:'Phiên bản',cmpPlatform:'Nền tảng',cmpStatus:'Status',
-    cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Giá',
-    cmpDecomp:'Decompiler',cmpMulti:'Multi',cmpYes:'Yes',cmpNo:'No',clearAll:'Xoá tất cả',
-    cmpEmpty:'Chưa chọn executor nào',cmpEmptyHint:'Bấm ô vuông "+" trên card để thêm tối đa 3',
-    verTitle:'Bản Roblox Deployments',verSub:'Hash chính thức từ weao.xyz',
-    verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA',
-    verWinNote:'Kênh LIVE chính — có Hyperion/Byfron.',verMacNote:'Không có Byfron kernel driver.',
-    verApkNote:'Bản cho Delta, Codex, Arceus X…',verIosNote:'Cài qua TrollStore / AltStore / Sideloadly.',
-    verVersion:'Phiên bản',verReleased:'Phát hành',copy:'Sao chép',copied:'Đã sao chép',
-    guideTitle:'Hướng dẫn an toàn',guideSub:'Hyperion · UNC · bảo mật tài khoản',
-    guideH1:'Unified Naming Convention (UNC) là gì?',
-    guideP1:'UNC là chuẩn benchmark cho môi trường thực thi Lua.',
-    guideG1:'Chạy mọi hub lớn',guideG2:'Script cơ bản: ESP, Aimbot',guideG3:'Thiếu hàm, dễ lỗi hub phức tạp',
-    guideH2:'Hyperion / Byfron hoạt động ra sao',
-    guideP2:'Hyperion là anti-tamper 64-bit trên Windows của Roblox.',
-    guideH3:'Nguyên tắc vàng: Luôn dùng acc phụ',
-    guideP3:'Không bao giờ chạy script trên acc chính có item hiếm, limited hay số dư Robux cao.',
-    guideH4:'Kiến trúc từng loại executor',
-    guideL1:'Client Mac chưa có Hyperion 64-bit — Macsploit, Opiumware gần như an toàn tuyệt đối.',
-    guideL2:'APK/IPA chạy sandbox riêng — rủi ro banwave thấp hơn nhiều so với Windows.',
-    guideL3:'Không inject vào tiến trình Roblox nên Byfron không thấy — chỉ ESP/Aimbot.',
-    guideL4:'Internal executor đầy đủ Lua nhưng nằm trong tầm ngắm Byfron.',
-    footNote:'© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.',
-    ftGuide:'Hướng dẫn',ftVersions:'Bản Roblox',
-    devTitle:'Cảnh báo bảo mật',devText:'DevTools đã bị phát hiện. Nội dung web đã được <b>ẩn hoàn toàn</b> để bảo vệ mã nguồn. Vui lòng đóng DevTools (F12) để tiếp tục sử dụng.',devSub:'SOURCE PROTECTION · ACTIVE',
-    toastCopiedHash:(v)=>`Đã copy hash: ${v}`,
-    toastCopiedVer:(v)=>`Đã copy phiên bản: ${v}`,
-    toastCopyFail:'Không copy được — cần HTTPS',
-    toastNoData:'Không có dữ liệu để copy',
-    toastThemeSaved:(n)=>`Đã lưu theme ${n}`,
-    toastSyncOk:'Đã đồng bộ dữ liệu trực tiếp',
-    toastSyncFail:'API không phản hồi — dùng dữ liệu cache',
-    toastCmpMax:'Chỉ so sánh tối đa 3 executor',
-    toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`,
-    emptyTitle:'Không có executor nào phù hợp',
-    syncLabel:'sync',loading:'Đang tải...',
-    lbHint:'Cuộn để zoom · Kéo để di chuyển · Vuốt để đổi ảnh · ESC để đóng'
-  },
-  vi: {
-    brandSub:'trình theo dõi executor roblox',
-    tabAll:'Tất cả',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External',
-    robloxBuilds:'Bản Roblox',
-    liveTag:'Giám sát trực tiếp · weao.xyz',
-    dashTop:'Bảng điều khiển',dashBottom:'Roblox Executor',
-    bannerSub:'Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.',
-    btnRefresh:'Làm mới dữ liệu',btnGuide:'Hướng dẫn an toàn',
-    statExec:'Executor',statOp:'Đang chạy',statUndet:'Không bị phát hiện',statAvg:'UNC TB',
-    searchPh:'Tên, dev, phiên bản...',
-    sortUncDesc:'UNC cao nhất',sortUncAsc:'UNC thấp nhất',sortTitleAsc:'Tên A → Z',sortUpdated:'Mới cập nhật',sortSafe:'An toàn nhất',
-    resetFilter:'Xoá bộ lọc',
-    fUpdated:'Đã cập nhật',fUndetected:'Không bị phát hiện',fFree:'Miễn phí',fKeyless:'Không key',fHighUnc:'UNC ≥ 90%',fDecomp:'Có decompiler',
-    stUpdated:'Đã cập nhật',stOutdated:'Chưa cập nhật',
-    stUpdatedNote:'Executor này đã được cập nhật trên WEAO.',
-    stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.',
-    updLabel:'Cập nhật',
-    bfUndetected:'Không bị phát hiện',bfBanwave:'Rủi ro banwave',bfDetected:'Bị phát hiện',
-    bfUndetectedNote:'Executor này được báo cáo là không bị phát hiện.',
-    bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.',
-    bfDetectedNote:(r)=>r?`Đã bị phát hiện — ${r}`:'Hiện đang bị Hyperion phát hiện.',
-    details:'Chi tiết',compare:'So sánh',selected:'Đã chọn',
-    ovOverview:'Tổng quan',ovSpecs:'Thông số',ovShots:'Ảnh chụp',
-    status:'TRẠNG THÁI',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'GIÁ',
-    copyVersion:'PHIÊN BẢN',copyHash:'HASH ROBLOX',
-    byfronDetect:'PHÁT HIỆN BYFRON',clientMod:'BẢO VỆ CLIENT-MOD',
-    detected:'Bị phát hiện',notDetected:'Không bị phát hiện',supported:'Được hỗ trợ',notListed:'Không có',
-    noteByfronFlag:'Lấy trực tiếp từ cờ phát hiện của nguồn dữ liệu.',
-    noteBanwave:'Bypass client-mod bans không đồng nghĩa với sống sót qua banwave.',
-    description:'MÔ TẢ',
-    uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Đa instance',raknet:'RakNet',keySys:'Hệ thống key',
-    yes:'Có',no:'Không',hooked:'Đã hook',required:'Bắt buộc',none:'Không',fullAst:'Full AST',
-    targetBuild:'Bản Roblox mục tiêu',
-    website:'Website',discord:'Discord',buyGet:'Mua / Tải',
-    themeTitle:'Chọn giao diện',themeSub:'12 theme · tự động lưu',
-    cmpTitle:'So sánh Executor',cmpSub:'Tối đa 3 executor',
-    cmpCriteria:'Tiêu chí',cmpName:'Tên',cmpVersion:'Phiên bản',cmpPlatform:'Nền tảng',cmpStatus:'Trạng thái',
-    cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Giá',
-    cmpDecomp:'Decompiler',cmpMulti:'Đa instance',cmpYes:'Có',cmpNo:'Không',clearAll:'Xoá tất cả',
-    cmpEmpty:'Chưa chọn executor nào',cmpEmptyHint:'Bấm ô vuông "+" trên card để thêm tối đa 3',
-    verTitle:'Bản Roblox Deployments',verSub:'Hash chính thức từ weao.xyz',
-    verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA',
-    verWinNote:'Kênh LIVE chính — có Hyperion/Byfron.',verMacNote:'Không có Byfron kernel driver.',
-    verApkNote:'Bản cho Delta, Codex, Arceus X…',verIosNote:'Cài qua TrollStore / AltStore / Sideloadly.',
-    verVersion:'Phiên bản',verReleased:'Phát hành',copy:'Sao chép',copied:'Đã sao chép',
-    guideTitle:'Hướng dẫn an toàn',guideSub:'Hyperion · UNC · bảo mật tài khoản',
-    guideH1:'Unified Naming Convention (UNC) là gì?',
-    guideP1:'UNC là chuẩn benchmark cho môi trường thực thi Lua.',
-    guideG1:'Chạy mọi hub lớn',guideG2:'Script cơ bản: ESP, Aimbot',guideG3:'Thiếu hàm, dễ lỗi hub phức tạp',
-    guideH2:'Hyperion / Byfron hoạt động ra sao',
-    guideP2:'Hyperion là anti-tamper 64-bit trên Windows của Roblox.',
-    guideH3:'Nguyên tắc vàng: Luôn dùng acc phụ',
-    guideP3:'Không bao giờ chạy script trên acc chính có item hiếm, limited hay số dư Robux cao.',
-    guideH4:'Kiến trúc từng loại executor',
-    guideL1:'Client Mac chưa có Hyperion 64-bit — Macsploit, Opiumware gần như an toàn tuyệt đối.',
-    guideL2:'APK/IPA chạy sandbox riêng — rủi ro banwave thấp hơn nhiều so với Windows.',
-    guideL3:'Không inject vào tiến trình Roblox nên Byfron không thấy — chỉ ESP/Aimbot.',
-    guideL4:'Internal executor đầy đủ Lua nhưng nằm trong tầm ngắm Byfron.',
-    footNote:'© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.',
-    ftGuide:'Hướng dẫn',ftVersions:'Bản Roblox',
-    devTitle:'Cảnh báo bảo mật',devText:'DevTools đã bị phát hiện. Nội dung web đã được <b>ẩn hoàn toàn</b> để bảo vệ mã nguồn. Vui lòng đóng DevTools (F12) để tiếp tục sử dụng.',devSub:'SOURCE PROTECTION · ACTIVE',
-    toastCopiedHash:(v)=>`Đã copy hash: ${v}`,
-    toastCopiedVer:(v)=>`Đã copy phiên bản: ${v}`,
-    toastCopyFail:'Không copy được — cần HTTPS',
-    toastNoData:'Không có dữ liệu để copy',
-    toastThemeSaved:(n)=>`Đã lưu theme ${n}`,
-    toastSyncOk:'Đã đồng bộ dữ liệu trực tiếp',
-    toastSyncFail:'API không phản hồi — dùng dữ liệu cache',
-    toastCmpMax:'Chỉ so sánh tối đa 3 executor',
-    toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`,
-    emptyTitle:'Không có executor nào phù hợp',
-    syncLabel:'sync',loading:'Đang tải...',
-    lbHint:'Cuộn để zoom · Kéo để di chuyển · Vuốt để đổi ảnh · ESC để đóng'
-  }
+  en: { brandSub:'roblox executor monitor', tabAll:'All',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External', robloxBuilds:'Roblox builds', liveTag:'Live monitoring · weao.xyz', dashTop:'Control Panel',dashBottom:'Roblox Executor', bannerSub:'Track Hyperion, UNC/sUNC scores, Roblox builds, and safe links.', btnRefresh:'Refresh Data',btnGuide:'Safety Guide', statExec:'Executors',statOp:'Operational',statUndet:'Undetected',statAvg:'Avg UNC', searchPh:'Name, dev, version...', sortUncDesc:'Highest UNC',sortUncAsc:'Lowest UNC',sortTitleAsc:'Name A → Z',sortUpdated:'Recently updated',sortSafe:'Safest first', resetFilter:'Clear filters', fUpdated:'Updated',fUndetected:'Undetected',fFree:'Free',fKeyless:'No key',fHighUnc:'UNC ≥ 90%',fDecomp:'Has decompiler', stUpdated:'Updated',stOutdated:'Not Updated', stUpdatedNote:'This executor is up to date on WEAO.', stOutdatedNote:'This executor has not been updated on WEAO.', updLabel:'Last updated', bfUndetected:'Undetected',bfBanwave:'Banwave risk',bfDetected:'Detected', bfUndetectedNote:'This exploit is reported as undetected.', bfBanwaveNote:'Bypasses client-mod bans but may still be caught in banwaves.', bfDetectedNote:(r)=>r?`Detected — ${r}`:'Currently detected by Hyperion.', details:'Details',compare:'Compare',selected:'Selected', ovOverview:'Overview',ovSpecs:'Specs',ovShots:'Screenshots', status:'STATUS',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'PRICING', copyVersion:'VERSION',copyHash:'ROBLOX HASH', byfronDetect:'BYFRON DETECTION',clientMod:'CLIENT-MOD PROTECTION', detected:'Detected',notDetected:'Not detected',supported:'Supported',notListed:'Not listed', noteByfronFlag:"Taken directly from the data source's detected flag.", noteBanwave:'Bypassing client-mod bans is not the same as surviving banwaves.', description:'DESCRIPTION', uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Multi-Instance',raknet:'RakNet',keySys:'Key System', yes:'Yes',no:'No',hooked:'Hooked',required:'Required',none:'None',fullAst:'Full AST', targetBuild:'Target Roblox build', website:'Website',discord:'Discord',buyGet:'Buy / Get', themeTitle:'Choose theme',themeSub:'12 themes · auto saved', cmpTitle:'Compare Executors',cmpSub:'Up to 3 executors', cmpCriteria:'Criteria',cmpName:'Name',cmpVersion:'Version',cmpPlatform:'Platform',cmpStatus:'Status', cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Price', cmpDecomp:'Decompiler',cmpMulti:'Multi',cmpYes:'Yes',cmpNo:'No',clearAll:'Clear all', cmpEmpty:'No executors selected',cmpEmptyHint:'Click the "+" checkbox on a card to add up to 3', verTitle:'Roblox Deployments',verSub:'Official hash from weao.xyz', verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA', verWinNote:'Main LIVE channel — Hyperion/Byfron active.',verMacNote:'No Byfron kernel driver.', verApkNote:'For Delta, Codex, Arceus X…',verIosNote:'Install via TrollStore / AltStore / Sideloadly.', verVersion:'Version',verReleased:'Released',copy:'Copy',copied:'Copied', guideTitle:'Safety Guide',guideSub:'Hyperion · UNC · account safety', guideH1:'What is Unified Naming Convention (UNC)?', guideP1:'UNC is the benchmark standard for Lua execution environments.', guideG1:'Runs every major hub',guideG2:'Basic scripts: ESP, Aimbot',guideG3:'Missing functions, breaks on complex hubs', guideH2:'How Hyperion / Byfron works', guideP2:"Hyperion is Roblox's 64-bit anti-tamper on Windows.", guideH3:'Golden rule: Always use burner alt accounts', guideP3:'Never run scripts on main accounts with rare items, limiteds, or high Robux balances.', guideH4:'Executor architecture types', guideL1:'Mac client has no 64-bit Hyperion driver — Macsploit, Opiumware are effectively ban-free.', guideL2:'APK/IPA run in their own sandbox — far lower banwave risk than Windows.', guideL3:'Never inject into the Roblox process, so Byfron sees nothing — ESP/aimbot only.', guideL4:"Internal executors give full Lua power but sit permanently in Byfron's crosshairs.", footNote:'© 2026 Exec Status by Huy — reference only, no cheating encouraged.', ftGuide:'Guide',ftVersions:'Roblox builds', devTitle:'Security Warning',devText:'DevTools detected. Content hidden to protect source code. Close DevTools (F12) to continue.',devSub:'SOURCE PROTECTION · ACTIVE', toastCopiedHash:(v)=>`Copied hash: ${v}`, toastCopiedVer:(v)=>`Copied version: ${v}`, toastCopyFail:'Copy failed — HTTPS required', toastNoData:'Nothing to copy', toastThemeSaved:(n)=>`Saved theme ${n}`, toastSyncOk:'Synced live data', toastSyncFail:'API unreachable — using cached data', toastCmpMax:'Compare up to 3 executors only', toastCmpAdded:(n)=>`Added ${n} to compare`, emptyTitle:'No executors match your filters', syncLabel:'sync',loading:'Loading...', lbHint:'Scroll to zoom · Drag to pan · Swipe to switch · ESC to close' },
+  normal: { brandSub:'trình theo dõi executor roblox', tabAll:'Tất cả',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External', robloxBuilds:'Bản Roblox', liveTag:'Giám sát trực tiếp · weao.xyz', dashTop:'Bảng điều khiển',dashBottom:'Roblox Executor', bannerSub:'Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.', btnRefresh:'Làm mới dữ liệu',btnGuide:'Hướng dẫn an toàn', statExec:'Executor',statOp:'Đang chạy',statUndet:'Undetected',statAvg:'UNC TB', searchPh:'Tên, dev, phiên bản...', sortUncDesc:'UNC cao nhất',sortUncAsc:'UNC thấp nhất',sortTitleAsc:'Tên A → Z',sortUpdated:'Mới cập nhật',sortSafe:'An toàn nhất', resetFilter:'Xoá bộ lọc', fUpdated:'Updated',fUndetected:'Undetected',fFree:'Miễn phí',fKeyless:'Không key',fHighUnc:'UNC ≥ 90%',fDecomp:'Có decompiler', stUpdated:'Updated',stOutdated:'Not Updated', stUpdatedNote:'Executor này đã được cập nhật trên WEAO.', stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.', updLabel:'Last updated', bfUndetected:'Undetected',bfBanwave:'Banwave risk',bfDetected:'Detected', bfUndetectedNote:'Executor này được báo cáo là undetected.', bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.', bfDetectedNote:(r)=>r?`Detected — ${r}`:'Hiện đang bị Hyperion phát hiện.', details:'Chi tiết',compare:'So sánh',selected:'Đã chọn', ovOverview:'Tổng quan',ovSpecs:'Thông số',ovShots:'Ảnh chụp', status:'STATUS',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'GIÁ', copyVersion:'PHIÊN BẢN',copyHash:'HASH ROBLOX', byfronDetect:'BYFRON DETECTION',clientMod:'CLIENT-MOD PROTECTION', detected:'Detected',notDetected:'Not detected',supported:'Supported',notListed:'Not listed', noteByfronFlag:'Lấy trực tiếp từ cờ detected của nguồn dữ liệu.', noteBanwave:'Bypass client-mod bans không đồng nghĩa với sống sót qua banwave.', description:'MÔ TẢ', uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Multi-Instance',raknet:'RakNet',keySys:'Key System', yes:'Yes',no:'No',hooked:'Hooked',required:'Required',none:'None',fullAst:'Full AST', targetBuild:'Bản Roblox mục tiêu', website:'Website',discord:'Discord',buyGet:'Mua / Tải', themeTitle:'Chọn giao diện',themeSub:'12 theme · tự động lưu', cmpTitle:'So sánh Executor',cmpSub:'Tối đa 3 executor', cmpCriteria:'Tiêu chí',cmpName:'Tên',cmpVersion:'Phiên bản',cmpPlatform:'Nền tảng',cmpStatus:'Status', cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Giá', cmpDecomp:'Decompiler',cmpMulti:'Multi',cmpYes:'Yes',cmpNo:'No',clearAll:'Xoá tất cả', cmpEmpty:'Chưa chọn executor nào',cmpEmptyHint:'Bấm ô vuông "+" trên card để thêm tối đa 3', verTitle:'Bản Roblox Deployments',verSub:'Hash chính thức từ weao.xyz', verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA', verWinNote:'Kênh LIVE chính — có Hyperion/Byfron.',verMacNote:'Không có Byfron kernel driver.', verApkNote:'Bản cho Delta, Codex, Arceus X…',verIosNote:'Cài qua TrollStore / AltStore / Sideloadly.', verVersion:'Phiên bản',verReleased:'Phát hành',copy:'Sao chép',copied:'Đã sao chép', guideTitle:'Hướng dẫn an toàn',guideSub:'Hyperion · UNC · bảo mật tài khoản', guideH1:'Unified Naming Convention (UNC) là gì?', guideP1:'UNC là chuẩn benchmark cho môi trường thực thi Lua.', guideG1:'Chạy mọi hub lớn',guideG2:'Script cơ bản: ESP, Aimbot',guideG3:'Thiếu hàm, dễ lỗi hub phức tạp', guideH2:'Hyperion / Byfron hoạt động ra sao', guideP2:'Hyperion là anti-tamper 64-bit trên Windows của Roblox.', guideH3:'Nguyên tắc vàng: Luôn dùng acc phụ', guideP3:'Không bao giờ chạy script trên acc chính có item hiếm, limited hay số dư Robux cao.', guideH4:'Kiến trúc từng loại executor', guideL1:'Client Mac chưa có Hyperion 64-bit — Macsploit, Opiumware gần như an toàn tuyệt đối.', guideL2:'APK/IPA chạy sandbox riêng — rủi ro banwave thấp hơn nhiều so với Windows.', guideL3:'Không inject vào tiến trình Roblox nên Byfron không thấy — chỉ ESP/Aimbot.', guideL4:'Internal executor đầy đủ Lua nhưng nằm trong tầm ngắm Byfron.', footNote:'© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.', ftGuide:'Hướng dẫn',ftVersions:'Bản Roblox', devTitle:'Cảnh báo bảo mật',devText:'DevTools đã bị phát hiện. Nội dung web đã được <b>ẩn hoàn toàn</b> để bảo vệ mã nguồn. Vui lòng đóng DevTools (F12) để tiếp tục sử dụng.',devSub:'SOURCE PROTECTION · ACTIVE', toastCopiedHash:(v)=>`Đã copy hash: ${v}`, toastCopiedVer:(v)=>`Đã copy phiên bản: ${v}`, toastCopyFail:'Không copy được — cần HTTPS', toastNoData:'Không có dữ liệu để copy', toastThemeSaved:(n)=>`Đã lưu theme ${n}`, toastSyncOk:'Đã đồng bộ dữ liệu trực tiếp', toastSyncFail:'API không phản hồi — dùng dữ liệu cache', toastCmpMax:'Chỉ so sánh tối đa 3 executor', toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`, emptyTitle:'Không có executor nào phù hợp', syncLabel:'sync',loading:'Đang tải...', lbHint:'Cuộn để zoom · Kéo để di chuyển · Vuốt để đổi ảnh · ESC để đóng' },
+  vi: { brandSub:'trình theo dõi executor roblox', tabAll:'Tất cả',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External', robloxBuilds:'Bản Roblox', liveTag:'Giám sát trực tiếp · weao.xyz', dashTop:'Bảng điều khiển',dashBottom:'Roblox Executor', bannerSub:'Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.', btnRefresh:'Làm mới dữ liệu',btnGuide:'Hướng dẫn an toàn', statExec:'Executor',statOp:'Đang chạy',statUndet:'Không bị phát hiện',statAvg:'UNC TB', searchPh:'Tên, dev, phiên bản...', sortUncDesc:'UNC cao nhất',sortUncAsc:'UNC thấp nhất',sortTitleAsc:'Tên A → Z',sortUpdated:'Mới cập nhật',sortSafe:'An toàn nhất', resetFilter:'Xoá bộ lọc', fUpdated:'Đã cập nhật',fUndetected:'Không bị phát hiện',fFree:'Miễn phí',fKeyless:'Không key',fHighUnc:'UNC ≥ 90%',fDecomp:'Có decompiler', stUpdated:'Đã cập nhật',stOutdated:'Chưa cập nhật', stUpdatedNote:'Executor này đã được cập nhật trên WEAO.', stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.', updLabel:'Cập nhật', bfUndetected:'Không bị phát hiện',bfBanwave:'Rủi ro banwave',bfDetected:'Bị phát hiện', bfUndetectedNote:'Executor này được báo cáo là không bị phát hiện.', bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.', bfDetectedNote:(r)=>r?`Đã bị phát hiện — ${r}`:'Hiện đang bị Hyperion phát hiện.', details:'Chi tiết',compare:'So sánh',selected:'Đã chọn', ovOverview:'Tổng quan',ovSpecs:'Thông số',ovShots:'Ảnh chụp', status:'TRẠNG THÁI',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'GIÁ', copyVersion:'PHIÊN BẢN',copyHash:'HASH ROBLOX', byfronDetect:'PHÁT HIỆN BYFRON',clientMod:'BẢO VỆ CLIENT-MOD', detected:'Bị phát hiện',notDetected:'Không bị phát hiện',supported:'Được hỗ trợ',notListed:'Không có', noteByfronFlag:'Lấy trực tiếp từ cờ phát hiện của nguồn dữ liệu.', noteBanwave:'Bypass client-mod bans không đồng nghĩa với sống sót qua banwave.', description:'MÔ TẢ', uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Đa instance',raknet:'RakNet',keySys:'Hệ thống key', yes:'Có',no:'Không',hooked:'Đã hook',required:'Bắt buộc',none:'Không',fullAst:'Full AST', targetBuild:'Bản Roblox mục tiêu', website:'Website',discord:'Discord',buyGet:'Mua / Tải', themeTitle:'Chọn giao diện',themeSub:'12 theme · tự động lưu', cmpTitle:'So sánh Executor',cmpSub:'Tối đa 3 executor', cmpCriteria:'Tiêu chí',cmpName:'Tên',cmpVersion:'Phiên bản',cmpPlatform:'Nền tảng',cmpStatus:'Trạng thái', cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Giá', cmpDecomp:'Decompiler',cmpMulti:'Đa instance',cmpYes:'Có',cmpNo:'Không',clearAll:'Xoá tất cả', cmpEmpty:'Chưa chọn executor nào',cmpEmptyHint:'Bấm ô vuông "+" trên card để thêm tối đa 3', verTitle:'Bản Roblox Deployments',verSub:'Hash chính thức từ weao.xyz', verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA', verWinNote:'Kênh LIVE chính — có Hyperion/Byfron.',verMacNote:'Không có Byfron kernel driver.', verApkNote:'Bản cho Delta, Codex, Arceus X…',verIosNote:'Cài qua TrollStore / AltStore / Sideloadly.', verVersion:'Phiên bản',verReleased:'Phát hành',copy:'Sao chép',copied:'Đã sao chép', guideTitle:'Hướng dẫn an toàn',guideSub:'Hyperion · UNC · bảo mật tài khoản', guideH1:'Unified Naming Convention (UNC) là gì?', guideP1:'UNC là chuẩn benchmark cho môi trường thực thi Lua.', guideG1:'Chạy mọi hub lớn',guideG2:'Script cơ bản: ESP, Aimbot',guideG3:'Thiếu hàm, dễ lỗi hub phức tạp', guideH2:'Hyperion / Byfron hoạt động ra sao', guideP2:'Hyperion là anti-tamper 64-bit trên Windows của Roblox.', guideH3:'Nguyên tắc vàng: Luôn dùng acc phụ', guideP3:'Không bao giờ chạy script trên acc chính có item hiếm, limited hay số dư Robux cao.', guideH4:'Kiến trúc từng loại executor', guideL1:'Client Mac chưa có Hyperion 64-bit — Macsploit, Opiumware gần như an toàn tuyệt đối.', guideL2:'APK/IPA chạy sandbox riêng — rủi ro banwave thấp hơn nhiều so với Windows.', guideL3:'Không inject vào tiến trình Roblox nên Byfron không thấy — chỉ ESP/Aimbot.', guideL4:'Internal executor đầy đủ Lua nhưng nằm trong tầm ngắm Byfron.', footNote:'© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.', ftGuide:'Hướng dẫn',ftVersions:'Bản Roblox', devTitle:'Cảnh báo bảo mật',devText:'DevTools đã bị phát hiện. Nội dung web đã được <b>ẩn hoàn toàn</b> để bảo vệ mã nguồn. Vui lòng đóng DevTools (F12) để tiếp tục sử dụng.',devSub:'SOURCE PROTECTION · ACTIVE', toastCopiedHash:(v)=>`Đã copy hash: ${v}`, toastCopiedVer:(v)=>`Đã copy phiên bản: ${v}`, toastCopyFail:'Không copy được — cần HTTPS', toastNoData:'Không có dữ liệu để copy', toastThemeSaved:(n)=>`Đã lưu theme ${n}`, toastSyncOk:'Đã đồng bộ dữ liệu trực tiếp', toastSyncFail:'API không phản hồi — dùng dữ liệu cache', toastCmpMax:'Chỉ so sánh tối đa 3 executor', toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`, emptyTitle:'Không có executor nào phù hợp', syncLabel:'sync',loading:'Đang tải...', lbHint:'Cuộn để zoom · Kéo để di chuyển · Vuốt để đổi ảnh · ESC để đóng' }
 };
 
 let currentLang = 'normal';
 const t = k => (I18N[currentLang] && I18N[currentLang][k]) || k;
 
-function platDisplayName(p){
-  if(p === 'Mac') return 'macOS';
-  if(p === 'iOS') return 'iOS';
-  if(p === 'External') return 'External';
-  if(p === 'Windows') return 'Windows';
-  if(p === 'Android') return 'Android';
-  return p || 'Windows';
-}
-
-function verLabel(v){
-  const s = String(v||'');
-  if(!s) return 'v—';
-  return /^[vV]/.test(s) ? s : 'v' + s;
-}
+function platDisplayName(p){ return p==='Mac'?'macOS':p==='iOS'?'iOS':p||'Windows'; }
+function verLabel(v){ const s=String(v||''); if(!s) return 'v—'; return /^[vV]/.test(s)?s:'v'+s; }
 
 function parseWEAODate(str){
   if(!str || str==='Unknown') return null;
   const s = String(str).trim();
   const m = s.match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})[,\s]+(?:at\s+)?(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?/i);
   if(!m) return null;
-  const mo = parseInt(m[1],10)-1;
-  const day = parseInt(m[2],10);
-  const yr = parseInt(m[3],10);
+  const mo = parseInt(m[1],10)-1, day=parseInt(m[2],10), yr=parseInt(m[3],10);
   let hr = parseInt(m[4],10);
-  const mn = parseInt(m[5],10);
-  const sc = parseInt(m[6]||'0',10);
+  const mn = parseInt(m[5],10), sc = parseInt(m[6]||'0',10);
   const ampm = (m[7]||'').toUpperCase();
   if(ampm==='PM' && hr<12) hr+=12;
   if(ampm==='AM' && hr===12) hr=0;
@@ -1035,13 +760,13 @@ function formatUpdated(utcMs, lang){
   if(utcMs===null) return '';
   const d = new Date(utcMs);
   if(lang==='en'){
-    const datePart = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'2-digit',day:'2-digit',year:'numeric'}).format(d);
-    const timePart = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',hour:'numeric',minute:'2-digit',hour12:true}).format(d);
-    return t('updLabel')+': '+datePart+' at '+timePart+' UTC';
+    const dp = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'2-digit',day:'2-digit',year:'numeric'}).format(d);
+    const tp = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',hour:'numeric',minute:'2-digit',hour12:true}).format(d);
+    return t('updLabel')+': '+dp+' at '+tp+' UTC';
   }
-  const datePart = new Intl.DateTimeFormat('vi-VN',{timeZone:'Asia/Ho_Chi_Minh',day:'2-digit',month:'2-digit',year:'numeric'}).format(d);
-  const timePart = new Intl.DateTimeFormat('vi-VN',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',hour12:false}).format(d);
-  return t('updLabel')+': '+timePart+' · '+datePart+' (UTC+7)';
+  const dp = new Intl.DateTimeFormat('vi-VN',{timeZone:'Asia/Ho_Chi_Minh',day:'2-digit',month:'2-digit',year:'numeric'}).format(d);
+  const tp = new Intl.DateTimeFormat('vi-VN',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',hour12:false}).format(d);
+  return t('updLabel')+': '+tp+' · '+dp+' (UTC+7)';
 }
 
 const THEMES=[
@@ -1088,26 +813,89 @@ function lsGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catc
 function lsSet(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
 
 /* ═══════════════════════════════════════════════════════════════════
-   FIX CHÍNH: pickUpdateStatus() — đọc field updateStatus từ WEAO API
-   một cách linh hoạt, chấp nhận nhiều tên field khác nhau để tránh
-   tình trạng Potassium bị "Not Updated" oan khi WEAO đổi tên field.
+   CACHE localStorage — hiển thị instant khi mở web
+   ═══════════════════════════════════════════════════════════════════ */
+function saveCache(executors, versions){
+  try{
+    const payload = { executors, versions, ts: Date.now() };
+    localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+  }catch(e){}
+}
+function loadCache(){
+  try{
+    const raw = localStorage.getItem(CACHE_KEY);
+    if(!raw) return null;
+    const obj = JSON.parse(raw);
+    if(!obj || !Array.isArray(obj.executors)) return null;
+    return obj;
+  }catch(e){ return null; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   LEADER ELECTION — chỉ 1 tab fetch, các tab khác nhận qua BroadcastChannel
+   ═══════════════════════════════════════════════════════════════════ */
+function checkLeader(){
+  const now = Date.now();
+  let info = null;
+  try { info = JSON.parse(localStorage.getItem(LEADER_KEY) || 'null'); }catch(e){}
+  const lastBeat = info && typeof info.ts === 'number' ? info.ts : 0;
+  const leaderTabId = info && info.id ? info.id : '';
+  if(!info || now - lastBeat > LEADER_STALE_MS || leaderTabId === TAB_ID){
+    isLeader = true;
+    try { localStorage.setItem(LEADER_KEY, JSON.stringify({ id: TAB_ID, ts: now })); }catch(e){}
+  } else {
+    isLeader = false;
+  }
+}
+function heartbeat(){
+  if(isLeader){
+    try { localStorage.setItem(LEADER_KEY, JSON.stringify({ id: TAB_ID, ts: Date.now() })); }catch(e){}
+  }
+}
+function releaseLeader(){
+  try{
+    const info = JSON.parse(localStorage.getItem(LEADER_KEY) || 'null');
+    if(info && info.id === TAB_ID){ localStorage.removeItem(LEADER_KEY); }
+  }catch(e){}
+}
+
+if(bc){
+  bc.onmessage = (e) => {
+    const msg = e.data || {};
+    if(msg.type === 'data_update' && msg.tabId !== TAB_ID){
+      /* Nhận data từ leader khác */
+      if(Array.isArray(msg.executors)){
+        state.executors = buildExecutorList(msg.executors);
+        if(msg.versions && typeof msg.versions.Windows === 'string'){
+          state.versions = msg.versions;
+        }
+        state.isLive = true;
+        render();
+      }
+    }
+    if(msg.type === 'leader_release' && !isLeader){
+      /* Leader vừa đóng, kiểm tra lại sau */
+      setTimeout(checkLeader, 300);
+    }
+  };
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FIX: đọc updateStatus với nhiều tên field khác nhau
    ═══════════════════════════════════════════════════════════════════ */
 function pickUpdateStatus(raw){
   if(!raw || typeof raw !== 'object') return false;
-  /* Thử nhiều tên field — ưu tiên theo thứ tự khả năng xuất hiện */
-  const candidates = ['updateStatus','updated','isUpdated','working','is_updated','up_to_date','upToDate'];
-  for(let i=0;i<candidates.length;i++){
-    const v = raw[candidates[i]];
+  const keys = ['updateStatus','updated','isUpdated','working','is_updated','up_to_date','upToDate'];
+  for(let i=0;i<keys.length;i++){
+    const v = raw[keys[i]];
     if(v === true) return true;
     if(v === false) return false;
-    if(v === 'true' || v === 'yes' || v === '1') return true;
-    if(v === 'false' || v === 'no' || v === '0') return false;
+    if(v === 'true' || v === 'yes' || v === '1' || v === 'updated' || v === 'working') return true;
+    if(v === 'false' || v === 'no' || v === '0' || v === 'outdated') return false;
   }
-  /* Nếu có field `status` dạng string */
   const st = String(raw.status || '').toLowerCase();
   if(st === 'updated' || st === 'working' || st === 'up') return true;
   if(st === 'outdated' || st === 'not_updated' || st === 'not updated' || st === 'down') return false;
-  /* Mặc định coi là updated (WEAO không trả về false nếu không có field) */
   return true;
 }
 
@@ -1213,14 +1001,12 @@ function normalizeExploit(raw,idx){
     cost:raw.cost,
     detected:!!raw.detected,
     detectionReason:raw.detectionReason,
-    /* FIX: dùng pickUpdateStatus thay vì !!raw.updateStatus */
     updateStatus: pickUpdateStatus(raw),
     rbxversion:raw.rbxversion,
     websitelink:safeURL(raw.websitelink),
     discordlink:safeURL(raw.discordlink),
     purchaselink:safeURL(raw.purchaselink),
-    platform,
-    extype:raw.extype,
+    platform,extype:raw.extype,
     keysystem:!!raw.keysystem,
     decompiler:!!raw.decompiler,
     multiInject:!!raw.multiInject,
@@ -1237,7 +1023,7 @@ function normalizeExploit(raw,idx){
 
 const state={
   executors: buildExecutorList(FALLBACK_EXPLOITS.slice()),
-  versions:FALLBACK_VERSIONS,
+  versions: FALLBACK_VERSIONS,
   filters:{search:"",platform:"All",sort:"unc-desc",updated:false,undetected:false,free:false,keyless:false,highUnc:false,decomp:false},
   compare:[],
   drawerId:null,
@@ -1369,19 +1155,23 @@ function renderVersionBar(){
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   FIX SIÊU MẠNH: fetchData với chuỗi CORS proxy fallback
-   - Thử direct fetch trước (fast nhất)
-   - Nếu fail (CORS / Vercel CDN cache / mạng) → thử allorigins → corsproxy.io → thingproxy
-   - Mỗi request có cache-buster ?_t=<timestamp><random>
-   - cache:'no-store' + credentials:'omit' để tránh mọi cache
+   TRY FETCH — direct trước, nếu fail qua proxy. Skip proxy nếu direct OK gần đây.
    ═══════════════════════════════════════════════════════════════════ */
-async function tryFetchViaProxy(url){
-  for(let i=0;i<CORS_PROXIES.length;i++){
-    const wrapped = CORS_PROXIES[i](url);
+function getLastDirectOK(){
+  try{ return Number(sessionStorage.getItem('huy_exec_direct_ok') || 0); }catch(e){ return 0; }
+}
+function markDirectOK(){
+  try{ sessionStorage.setItem('huy_exec_direct_ok', String(Date.now())); }catch(e){}
+}
+
+async function tryFetch(url){
+  const directOKRecently = (Date.now() - getLastDirectOK()) < 600000; /* 10 phút */
+  const proxies = directOKRecently ? [CORS_PROXIES[0]] : CORS_PROXIES;
+  for(let i=0;i<proxies.length;i++){
     try{
       const ctl = new AbortController();
-      const timer = setTimeout(()=>ctl.abort(), 9000);
-      const res = await fetch(wrapped, {
+      const timer = setTimeout(()=>ctl.abort(), 10000);
+      const res = await fetch(proxies[i](url), {
         signal: ctl.signal,
         cache: 'no-store',
         credentials: 'omit',
@@ -1390,53 +1180,119 @@ async function tryFetchViaProxy(url){
       });
       clearTimeout(timer);
       if(!res.ok) continue;
-      const json = await res.json();
-      return json;
-    }catch(e){
-      /* thử proxy kế tiếp */
-    }
+      const data = await res.json();
+      if(i === 0) markDirectOK();
+      return data;
+    }catch(e){}
   }
   return null;
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   FETCH DATA — với exponential backoff + leader-only
+   ═══════════════════════════════════════════════════════════════════ */
 let isFetching = false;
-async function fetchData(showToast){
+async function fetchData(showToast, opts){
+  opts = opts || {};
   if(isFetching) return;
+
+  /* Nếu không phải leader và không force → skip (tránh spam API) */
+  if(!isLeader && !opts.force) return;
+
+  /* Exponential backoff: nếu failStreak >= 2, chờ lâu hơn */
+  if(failStreak >= 2 && !opts.force){
+    const lastFetch = Number(sessionStorage.getItem('huy_exec_last_fetch') || 0);
+    const waitMs = Math.min(BASE_INTERVAL * Math.pow(2, failStreak - 1), MAX_INTERVAL);
+    if(Date.now() - lastFetch < waitMs) return;
+  }
+
   isFetching = true;
-  let isLive=false;
+  try{ sessionStorage.setItem('huy_exec_last_fetch', String(Date.now())); }catch(e){}
+
   let liveList = null;
+  let versions = null;
+
   try{
     const bust = (url) => url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now() + Math.random().toString(36).slice(2,8);
     const [arr, v] = await Promise.all([
-      tryFetchViaProxy(bust(API_EXPLOITS)),
-      tryFetchViaProxy(bust(API_VERSIONS))
+      tryFetch(bust(API_EXPLOITS)),
+      tryFetch(bust(API_VERSIONS))
     ]);
     if(Array.isArray(arr) && arr.length){
       const norm = arr.map((x,i)=>normalizeExploit(x,i)).filter(Boolean);
-      if(norm.length){ liveList = norm; isLive = true; }
+      if(norm.length) liveList = norm;
     }
     if(v && typeof v.Windows === 'string'){
-      state.versions = v;
-      isLive = true;
+      versions = v;
     }
   }catch(e){}
+
+  const success = !!(liveList || versions);
+
   if(liveList){
     state.executors = buildExecutorList(liveList);
   } else {
-    state.executors = buildExecutorList(FALLBACK_EXPLOITS.slice());
+    const cached = loadCache();
+    if(cached && cached.executors && cached.executors.length){
+      state.executors = cached.executors;
+    } else {
+      state.executors = buildExecutorList(FALLBACK_EXPLOITS.slice());
+    }
   }
-  state.isLive = isLive;
+  if(versions){
+    state.versions = versions;
+  }
+
+  state.isLive = success;
+
+  if(success){
+    failStreak = 0;
+    saveCache(state.executors, state.versions);
+    /* Broadcast cho các tab khác */
+    if(bc){
+      try{
+        bc.postMessage({
+          type: 'data_update',
+          tabId: TAB_ID,
+          executors: liveList || null,
+          versions: versions || null
+        });
+      }catch(e){}
+    }
+  } else {
+    failStreak++;
+  }
+
   render();
-  /* Cập nhật lại timestamp sync ở verbar */
-  const upd = $('#verbarSyncTime');
+
+  const upd=$('#verbarSyncTime');
   if(upd){
-    const now = new Date();
+    const now=new Date();
     const loc = currentLang==='en'?'en-US':'vi-VN';
-    const ts = new Intl.DateTimeFormat(loc,{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit'}).format(now);
-    upd.textContent = t('syncLabel') + ' ' + ts;
+    const ts=new Intl.DateTimeFormat(loc,{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit'}).format(now);
+    upd.textContent=t('syncLabel')+' '+ts;
   }
-  if(showToast) toast(isLive ? t('toastSyncOk') : t('toastSyncFail'), isLive ? 'ok' : 'warn');
+  if(showToast) toast(success?t('toastSyncOk'):t('toastSyncFail'), success?'ok':'warn');
   isFetching = false;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SCHEDULE POLL — interval tự tăng khi fail (exponential backoff)
+   ═══════════════════════════════════════════════════════════════════ */
+function getNextInterval(){
+  if(failStreak === 0) return BASE_INTERVAL;
+  const mult = Math.min(Math.pow(2, failStreak), 10);
+  return Math.min(BASE_INTERVAL * mult, MAX_INTERVAL);
+}
+function scheduleNextPoll(){
+  if(pollTimer) clearTimeout(pollTimer);
+  pollTimer = setTimeout(async () => {
+    checkLeader();
+    if(isLeader && document.visibilityState === 'visible'){
+      await fetchData(false);
+    }
+    scheduleNextPoll();
+  }, getNextInterval());
 }
 
 function animateNumber(el, from, to, duration){
@@ -1911,11 +1767,7 @@ function renderDrawer(){
   });
 }
 
-const lbState = {
-  isOpen:false, images:[], index:0, scale:1, minScale:1, maxScale:6, tx:0, ty:0,
-  hintTimer:null, rafId:null,
-  mouseDown:false, mouseMoved:false, mouseStartX:0, mouseStartY:0, mouseStartTime:0, dragStartTx:0, dragStartTy:0
-};
+const lbState = { isOpen:false, images:[], index:0, scale:1, minScale:1, maxScale:6, tx:0, ty:0, hintTimer:null, rafId:null, mouseDown:false, mouseMoved:false, mouseStartX:0, mouseStartY:0, mouseStartTime:0, dragStartTx:0, dragStartTy:0 };
 
 function openLightbox(images, startIndex){
   if(!images || !images.length) return;
@@ -1932,7 +1784,6 @@ function openLightbox(images, startIndex){
   loadLbImage();
   showLbHint();
 }
-
 function closeLightbox(){
   if(!lbState.isOpen) return;
   lbState.isOpen = false;
@@ -1943,9 +1794,7 @@ function closeLightbox(){
   if(lbState.hintTimer){clearTimeout(lbState.hintTimer);lbState.hintTimer=null;}
   const hint = $('#lbHint'); if(hint) hint.classList.remove('show');
 }
-
 function resetTransform(){ lbState.scale=1; lbState.tx=0; lbState.ty=0; applyLbTransform(); }
-
 function applyLbTransform(){
   const img = $('#lbImg');
   if(!img) return;
@@ -1955,7 +1804,6 @@ function applyLbTransform(){
   const zo = $('#lbZoomOut'); if(zo) zo.disabled = lbState.scale <= lbState.minScale + 0.001;
   const zi = $('#lbZoomIn');  if(zi) zi.disabled = lbState.scale >= lbState.maxScale - 0.001;
 }
-
 function updateLbCounter(){
   const idx = $('#lbIndex'); const tot = $('#lbTotal');
   if(idx) idx.textContent = String(lbState.index + 1);
@@ -1964,7 +1812,6 @@ function updateLbCounter(){
   if(prev) prev.disabled = lbState.images.length <= 1;
   if(next) next.disabled = lbState.images.length <= 1;
 }
-
 function loadLbImage(){
   const img = $('#lbImg'); const sp = $('#lbSpinner');
   if(!img) return;
@@ -1986,10 +1833,8 @@ function loadLbImage(){
   if(img.complete && img.naturalWidth > 0){ settle(); }
   setTimeout(settle, 1500);
 }
-
 function nextLbImage(){ if(lbState.images.length <= 1) return; lbState.index = (lbState.index + 1) % lbState.images.length; updateLbCounter(); loadLbImage(); }
 function prevLbImage(){ if(lbState.images.length <= 1) return; lbState.index = (lbState.index - 1 + lbState.images.length) % lbState.images.length; updateLbCounter(); loadLbImage(); }
-
 function zoomInLb(){ lbState.scale = Math.min(lbState.scale * 1.35, lbState.maxScale); clampPan(); applyLbTransform(); }
 function zoomOutLb(){
   lbState.scale = Math.max(lbState.scale / 1.35, lbState.minScale);
@@ -1997,7 +1842,6 @@ function zoomOutLb(){
   else { clampPan(); }
   applyLbTransform();
 }
-
 function clampPan(){
   const img = $('#lbImg');
   if(!img) return;
@@ -2009,12 +1853,10 @@ function clampPan(){
   if(imgW <= vw) lbState.tx = 0; else lbState.tx = Math.max(-maxTx, Math.min(maxTx, lbState.tx));
   if(imgH <= vh) lbState.ty = 0; else lbState.ty = Math.max(-maxTy, Math.min(maxTy, lbState.ty));
 }
-
 function scheduleApply(){
   if(lbState.rafId) return;
   lbState.rafId = requestAnimationFrame(()=>{ lbState.rafId = null; applyLbTransform(); });
 }
-
 function showLbHint(){
   const hint = $('#lbHint');
   if(!hint) return;
@@ -2027,7 +1869,7 @@ function showLbHint(){
 function bindLightbox(){
   const lb = $('#lightbox');
   if(!lb) return;
-  const bc = $('#lbClose'); if(bc) bc.onclick = (e)=>{e.stopPropagation(); closeLightbox();};
+  const bc2 = $('#lbClose'); if(bc2) bc2.onclick = (e)=>{e.stopPropagation(); closeLightbox();};
   const bp = $('#lbPrev'); if(bp) bp.onclick = (e)=>{e.stopPropagation(); prevLbImage();};
   const bn = $('#lbNext'); if(bn) bn.onclick = (e)=>{e.stopPropagation(); nextLbImage();};
   const zi = $('#lbZoomIn'); if(zi) zi.onclick = (e)=>{e.stopPropagation(); zoomInLb();};
@@ -2094,7 +1936,6 @@ function bindLightbox(){
   const touchState = { mode:'none', startX:0, startY:0, startTx:0, startTy:0, pinchStartDist:0, pinchStartScale:1, pinchStartTx:0, pinchStartTy:0, pinchCenterX:0, pinchCenterY:0, t0:0, moved:false };
   function getTouchDist(t1, t2){ return Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY); }
   function getTouchCenter(t1, t2){ return { x:(t1.clientX + t2.clientX)/2, y:(t1.clientY + t2.clientY)/2 }; }
-
   if(stage){
     stage.addEventListener('touchstart', (e)=>{
       if(!lbState.isOpen) return;
@@ -2366,10 +2207,10 @@ function bindEvents(){
       render();
     });
   }
-  const bp=$('#btnRefresh2');if(bp) bp.addEventListener('click',()=>fetchData(true));
-  const bs=$('#btnSync');if(bs) bs.addEventListener('click',()=>fetchData(true));
+  const bp=$('#btnRefresh2');if(bp) bp.addEventListener('click',()=>fetchData(true,{force:true}));
+  const bs=$('#btnSync');if(bs) bs.addEventListener('click',()=>fetchData(true,{force:true}));
   const bt=$('#btnThemes');if(bt) bt.addEventListener('click',()=>openModal('ovlTheme'));
-  const bc=$('#btnCompare');if(bc) bc.addEventListener('click',openCompare);
+  const bc3=$('#btnCompare');if(bc3) bc3.addEventListener('click',openCompare);
   const bg=$('#btnGuide');if(bg) bg.addEventListener('click',openGuide);
   const bg2=$('#btnGuide2');if(bg2) bg2.addEventListener('click',openGuide);
   document.querySelectorAll('[data-close]').forEach(function(b){
@@ -2449,17 +2290,24 @@ function bindEvents(){
   });
   bindLightbox();
 
-  /* Tự refresh khi tab quay lại / có focus / có mạng */
+  /* Auto refresh khi tab quay lại / có focus / có mạng (chỉ leader fetch) */
   document.addEventListener('visibilitychange', function(){
     if(document.visibilityState === 'visible'){
-      fetchData(false);
+      checkLeader();
+      if(isLeader) fetchData(false);
     }
   });
   window.addEventListener('focus', function(){
-    fetchData(false);
+    checkLeader();
+    if(isLeader) fetchData(false);
   });
   window.addEventListener('online', function(){
-    fetchData(false);
+    checkLeader();
+    if(isLeader) fetchData(false, {force:true});
+  });
+  window.addEventListener('beforeunload', function(){
+    releaseLeader();
+    if(bc) try{ bc.postMessage({ type:'leader_release', tabId: TAB_ID }); }catch(e){}
   });
 }
 
@@ -2587,6 +2435,16 @@ function bindEvents(){
 })();
 
 function init(){
+  /* 1. Hiển thị cache ngay lập tức để load 100% dữ liệu */
+  const cached = loadCache();
+  if(cached && Array.isArray(cached.executors) && cached.executors.length){
+    state.executors = cached.executors;
+    if(cached.versions && typeof cached.versions.Windows === 'string'){
+      state.versions = cached.versions;
+    }
+  }
+
+  /* 2. Theme + UI setup */
   const saved=lsGet(THEME_KEY,'emerald');
   const valid=THEMES.some(t=>t.id===saved)?saved:'emerald';
   applyTheme(valid,false);
@@ -2596,16 +2454,17 @@ function init(){
   setInterval(updateClock,1000);
   bindEvents();
   render();
-  fetchData(false);
-  /* ═══════════════════════════════════════════════════════════════
-     FIX: Interval 60s (1 phút) để status khớp WEAO real-time.
-     Chỉ fetch khi tab visible để không lãng phí request.
-     ═══════════════════════════════════════════════════════════════ */
-  setInterval(function(){
-    if(document.visibilityState === 'visible'){
+
+  /* 3. Leader election — chờ 200ms để các tab khác đăng ký */
+  setTimeout(function(){
+    checkLeader();
+    if(isLeader){
       fetchData(false);
     }
-  }, 60000);
+    setInterval(checkLeader, 10000);
+    setInterval(heartbeat, 10000);
+    scheduleNextPoll();
+  }, 200);
 }
 
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
