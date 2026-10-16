@@ -14,7 +14,16 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .35s ease,color .25s ease;-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none;padding-bottom:env(safe-area-inset-bottom)}
+body{
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;overflow-x:hidden;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s ease,color .25s ease;
+  -webkit-user-select:none;-moz-user-select:none;user-select:none;
+  -webkit-touch-callout:none;
+  padding-bottom:env(safe-area-inset-bottom);
+}
 input,textarea{-webkit-user-select:text;user-select:text}
 img,svg{display:block;max-width:100%;-webkit-user-drag:none;user-drag:none}
 button,input,select{font:inherit;color:inherit;background:none;border:none;outline:none}
@@ -25,7 +34,19 @@ a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(var(--accent),.35);border-radius:99px}
 ::-webkit-scrollbar-thumb:hover{background:rgba(var(--accent),.65)}
-:root{--accent:16,185,129;--accent-2:52,211,153;--bg:#05070d;--bg-2:#0b1018;--bg-3:#141b28;--surface:rgba(255,255,255,.035);--surface-2:rgba(255,255,255,.06);--border:rgba(255,255,255,.08);--border-2:rgba(255,255,255,.14);--text:#eef2f8;--text-2:#96a0b3;--text-3:#535b6c;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);--pill:999px}
+
+:root{
+  --accent:16,185,129;--accent-2:52,211,153;
+  --bg:#05070d;--bg-2:#0b1018;--bg-3:#141b28;
+  --surface:rgba(255,255,255,.035);--surface-2:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.08);--border-2:rgba(255,255,255,.14);
+  --text:#eef2f8;--text-2:#96a0b3;--text-3:#535b6c;
+  --ok:#34d399;--warn:#fbbf24;--bad:#f87171;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --pill:999px;
+  --r-sm:10px;--r-md:16px;--r-lg:22px;
+}
 body.theme-emerald{--accent:16,185,129;--accent-2:52,211,153;--bg:#030a07;--bg-2:#07130f;--bg-3:#0d2118}
 body.theme-cyberpunk{--accent:6,182,212;--accent-2:139,92,246;--bg:#020710;--bg-2:#051024;--bg-3:#091a3a}
 body.theme-amethyst{--accent:168,85,247;--accent-2:236,72,153;--bg:#0a0214;--bg-2:#140829;--bg-3:#1f0d3f}
@@ -38,20 +59,66 @@ body.theme-matrix{--accent:34,197,94;--accent-2:132,204,22;--bg:#010802;--bg-2:#
 body.theme-aurora{--accent:20,184,166;--accent-2:139,92,246;--bg:#020c0a;--bg-2:#051815;--bg-3:#0a2823}
 body.theme-sakura{--accent:253,164,175;--accent-2:192,132,252;--bg:#0e0508;--bg-2:#1a0a11;--bg-3:#2a1020;--text:#fdf5f7}
 body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--bg-2:#080808;--bg-3:#101010}
+
 .bg-fx{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background:var(--bg)}
-.bg-fx::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 900px 600px at 12% 0%,rgba(var(--accent),.14),transparent 65%),radial-gradient(ellipse 900px 600px at 88% 100%,rgba(var(--accent-2),.11),transparent 65%)}
-.bg-fx::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:52px 52px;-webkit-mask-image:radial-gradient(ellipse 85% 60% at 50% 40%,#000 15%,transparent 85%);mask-image:radial-gradient(ellipse 85% 60% at 50% 40%,#000 15%,transparent 85%)}
+.bg-fx::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 900px 600px at 12% 0%,rgba(var(--accent),.14),transparent 65%),
+    radial-gradient(ellipse 900px 600px at 88% 100%,rgba(var(--accent-2),.11),transparent 65%);
+}
+.bg-fx::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+  background-size:52px 52px;
+  -webkit-mask-image:radial-gradient(ellipse 85% 60% at 50% 40%,#000 15%,transparent 85%);
+  mask-image:radial-gradient(ellipse 85% 60% at 50% 40%,#000 15%,transparent 85%);
+}
+
 .shell{min-height:100vh;display:flex;flex-direction:column;position:relative;z-index:1}
 .wrap{width:100%;max-width:1640px;margin:0 auto;padding:0 clamp(14px,3vw,32px)}
-.topbar-shell{position:sticky;top:14px;z-index:60;padding:0 clamp(12px,2vw,22px);margin-bottom:clamp(14px,2.2vw,22px);animation:slideDown .5s var(--ease-out) both}
+
+.topbar-shell{
+  position:sticky;top:14px;z-index:60;
+  padding:0 clamp(12px,2vw,22px);
+  margin-bottom:clamp(14px,2.2vw,22px);
+  animation:slideDown .5s var(--ease-out) both;
+}
 @keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-.topbar{max-width:1640px;margin:0 auto;background:rgba(10,15,24,.92);border:1px solid rgba(255,255,255,.08);border-radius:22px;box-shadow:0 10px 34px rgba(0,0,0,.45);padding:9px 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;row-gap:8px;position:relative;overflow:hidden}
-.topbar::before{content:'';position:absolute;top:0;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--accent),.65),rgba(var(--accent-2),.65),transparent)}
+.topbar{
+  max-width:1640px;margin:0 auto;
+  background:rgba(10,15,24,.92);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;
+  box-shadow:0 10px 34px rgba(0,0,0,.45);
+  padding:9px 12px;
+  display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;row-gap:8px;
+  position:relative;overflow:hidden;
+}
+.topbar::before{
+  content:'';position:absolute;top:0;left:8%;right:8%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(var(--accent),.65),rgba(var(--accent-2),.65),transparent);
+}
 @media(max-width:900px){.topbar{padding:7px 9px;border-radius:16px;gap:7px}}
+
 .brand{display:flex;align-items:center;gap:10px;flex:0 0 auto;min-width:0}
-.brand-mark{width:40px;height:40px;flex-shrink:0;background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));display:grid;place-items:center;position:relative;overflow:hidden;border-radius:50%;box-shadow:0 6px 16px rgba(var(--accent),.45);transition:transform .35s var(--ease-spring)}
+.brand-mark{
+  width:40px;height:40px;flex-shrink:0;
+  background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));
+  display:grid;place-items:center;position:relative;overflow:hidden;
+  border-radius:50%;
+  box-shadow:0 6px 16px rgba(var(--accent),.45);
+  transition:transform .35s var(--ease-spring);
+}
 .brand:hover .brand-mark{transform:rotate(-10deg) scale(1.08)}
-.brand-mark::after{content:'';position:absolute;top:-50%;left:-100%;width:60%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:rotate(24deg);transition:left .8s var(--ease-out)}
+.brand-mark::after{
+  content:'';position:absolute;top:-50%;left:-100%;width:60%;height:200%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:rotate(24deg);transition:left .8s var(--ease-out);
+}
 .brand:hover .brand-mark::after{left:160%}
 .brand-mark svg{width:22px;height:22px;position:relative;z-index:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
 .brand-mark svg path{fill:#fff}
@@ -59,17 +126,45 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .brand-t{font-size:14px;font-weight:800;letter-spacing:-.025em;white-space:nowrap;color:var(--text)}
 .brand-s{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-3);letter-spacing:.18em;text-transform:uppercase;margin-top:3px;white-space:nowrap;font-weight:600}
 @media(max-width:900px){.brand-text{display:none}}
-.nav-tabs{display:flex;gap:2px;align-items:center;flex:1 1 auto;min-width:0;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding:2px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+
+.nav-tabs{
+  display:flex;gap:2px;align-items:center;
+  flex:1 1 auto;min-width:0;
+  flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;
+  scrollbar-width:none;
+  padding:2px;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+}
 .nav-tabs::-webkit-scrollbar{display:none}
-.nav-tab{position:relative;padding:8px 13px;font-size:12.5px;font-weight:600;color:var(--text-3);white-space:nowrap;flex-shrink:0;transition:color .2s ease,background .2s ease,transform .25s var(--ease-spring);display:inline-flex;align-items:center;gap:7px;border-radius:10px;letter-spacing:-.005em}
+.nav-tab{
+  position:relative;padding:8px 13px;
+  font-size:12.5px;font-weight:600;color:var(--text-3);
+  white-space:nowrap;flex-shrink:0;
+  transition:color .2s ease,background .2s ease,transform .25s var(--ease-spring);
+  display:inline-flex;align-items:center;gap:7px;
+  border-radius:10px;
+  letter-spacing:-.005em;
+}
 .nav-tab:hover{color:var(--text);background:rgba(255,255,255,.05);transform:translateY(-1px)}
-.nav-tab.on{color:#000;background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));box-shadow:0 4px 14px rgba(var(--accent),.35)}
-.nav-tab .cnt{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--text-3);background:rgba(255,255,255,.07);padding:1px 6px;border-radius:5px;min-width:20px;text-align:center;transition:all .2s ease}
+.nav-tab.on{
+  color:#000;
+  background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));
+  box-shadow:0 4px 14px rgba(var(--accent),.35);
+}
+.nav-tab .cnt{
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+  color:var(--text-3);background:rgba(255,255,255,.07);
+  padding:1px 6px;border-radius:5px;min-width:20px;text-align:center;
+  transition:all .2s ease;
+}
 .nav-tab.on .cnt{color:#000;background:rgba(0,0,0,.25)}
 @media(max-width:1400px){.nav-tabs{flex:1 1 100%;order:3;padding:4px;margin-top:2px}}
 @media(max-width:640px){.nav-tab{padding:7px 11px;font-size:11.5px;gap:5px}.nav-tab .cnt{font-size:8.5px;padding:1px 5px;min-width:18px}}
+
 .topbar-r{display:flex;align-items:center;gap:6px;flex:0 0 auto;margin-left:auto}
 @media(max-width:900px){.topbar-r .hide-sm{display:none}}
+
 .clock{display:flex;align-items:center;gap:7px;height:36px;padding:0 12px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);transition:border-color .2s ease}
 .clock:hover{border-color:rgba(var(--accent),.4)}
 .clock svg{width:12px;height:12px;stroke:rgb(var(--accent));fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
@@ -77,6 +172,7 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .clock-t{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--text)}
 .clock-d{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
 @media(max-width:820px){.clock-d{display:none}.clock{padding:0 10px}}
+
 .lang{display:inline-flex;height:36px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);overflow:hidden;flex-shrink:0}
 .lang-opt{padding:0 11px;height:100%;display:inline-flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--text-3);transition:all .2s ease;cursor:pointer}
 .lang-opt:hover{color:var(--text)}
@@ -84,42 +180,141 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .lang-opt:not(:last-child){border-right:1px solid rgba(255,255,255,.05)}
 .lang-opt.on+.lang-opt{border-right-color:transparent}
 @media(max-width:560px){.lang-opt{padding:0 7px;font-size:9.5px}}
-.iconbtn{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--text-2);transition:all .25s var(--ease-spring)}
+
+.iconbtn{
+  width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  color:var(--text-2);transition:all .25s var(--ease-spring);
+}
 .iconbtn:hover{color:rgb(var(--accent));border-color:rgba(var(--accent),.5);transform:translateY(-2px);box-shadow:0 6px 14px rgba(var(--accent),.22)}
 .iconbtn:active{transform:scale(.94)}
 .iconbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:520px){.iconbtn{width:34px;height:34px}}
-.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);gap:16px;padding:clamp(8px,1.4vw,16px) 0 clamp(20px,2.6vw,32px);animation:fadeUp .6s var(--ease-out) .08s both}
+
+.hero{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(300px,360px);
+  gap:16px;
+  padding:clamp(8px,1.4vw,16px) 0 clamp(20px,2.6vw,32px);
+  animation:fadeUp .6s var(--ease-out) .08s both;
+}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:1000px){.hero{grid-template-columns:1fr}}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:clamp(4px,1vw,12px) 0}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgb(var(--accent));padding:7px 14px;border-radius:var(--pill);margin-bottom:20px;background:rgba(var(--accent),.09);border:1px solid rgba(var(--accent),.28);align-self:flex-start}
-.hero-tag .live{width:6px;height:6px;border-radius:50%;background:rgb(var(--accent));box-shadow:0 0 8px rgb(var(--accent));animation:pulseDot 1.8s infinite}
+
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(4px,1vw,12px) 0;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgb(var(--accent));
+  padding:7px 14px;border-radius:var(--pill);
+  margin-bottom:20px;
+  background:rgba(var(--accent),.09);
+  border:1px solid rgba(var(--accent),.28);
+  align-self:flex-start;
+}
+.hero-tag .live{
+  width:6px;height:6px;border-radius:50%;background:rgb(var(--accent));
+  box-shadow:0 0 8px rgb(var(--accent));
+  animation:pulseDot 1.8s infinite;
+}
 @keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
-.hero-title{font-size:clamp(36px,6.6vw,72px);font-weight:800;letter-spacing:-.05em;line-height:.98;margin-bottom:16px}
-.hero-title .soft{display:block;color:var(--text-3);font-weight:500;font-size:.62em;letter-spacing:-.02em;margin-bottom:2px}
-.hero-title .strong{display:inline-block;background:linear-gradient(100deg,rgb(var(--accent)) 0%,rgb(var(--accent-2)) 50%,rgb(var(--accent)) 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmerText 7s linear infinite}
+
+.hero-title{
+  font-size:clamp(36px,6.6vw,72px);
+  font-weight:800;letter-spacing:-.05em;line-height:.98;
+  margin-bottom:16px;
+}
+.hero-title .soft{
+  display:block;color:var(--text-3);font-weight:500;
+  font-size:.62em;letter-spacing:-.02em;
+  margin-bottom:2px;
+}
+.hero-title .strong{
+  display:inline-block;
+  background:linear-gradient(100deg,rgb(var(--accent)) 0%,rgb(var(--accent-2)) 50%,rgb(var(--accent)) 100%);
+  background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmerText 7s linear infinite;
+}
 @keyframes shimmerText{to{background-position:220% center}}
-.hero-sub{font-size:clamp(13px,1.5vw,15px);color:var(--text-2);max-width:620px;margin-bottom:22px;line-height:1.7}
+
+.hero-sub{
+  font-size:clamp(13px,1.5vw,15px);color:var(--text-2);
+  max-width:620px;margin-bottom:22px;line-height:1.7;
+}
 .hero-actions{display:flex;flex-wrap:wrap;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 22px;border-radius:13px;font-size:13px;font-weight:700;letter-spacing:-.005em;transition:transform .25s var(--ease-spring),box-shadow .25s ease,background .22s ease;position:relative;overflow:hidden}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 22px;
+  border-radius:13px;font-size:13px;font-weight:700;letter-spacing:-.005em;
+  transition:transform .25s var(--ease-spring),box-shadow .25s ease,background .22s ease;
+  position:relative;overflow:hidden;
+}
 .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.btn-primary{background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));color:#000;box-shadow:0 8px 22px rgba(var(--accent),.4)}
-.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);transition:transform .85s var(--ease-out)}
+.btn-primary{
+  background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));
+  color:#000;
+  box-shadow:0 8px 22px rgba(var(--accent),.4);
+}
+.btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);
+  transform:translateX(-120%);transition:transform .85s var(--ease-out);
+}
 .btn-primary:hover::before{transform:translateX(120%)}
 .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 30px rgba(var(--accent),.55)}
 .btn-ghost{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--text)}
 .btn-ghost:hover{background:rgba(255,255,255,.09);border-color:rgba(var(--accent),.5);color:rgb(var(--accent));transform:translateY(-2px)}
-.hero-right{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:center}
-.stat{background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.075);border-radius:18px;padding:16px 16px;position:relative;overflow:hidden;transition:border-color .25s ease,transform .3s var(--ease-spring)}
+
+.hero-right{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  align-content:center;
+}
+.stat{
+  background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.01));
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:18px;
+  padding:16px 16px;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .25s ease,transform .3s var(--ease-spring);
+}
 .stat:hover{border-color:rgba(var(--accent),.4);transform:translateY(-3px)}
-.stat::before{content:'';position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle,rgba(var(--accent),.45),transparent 70%);opacity:.6;transition:transform .35s var(--ease-spring),opacity .35s ease}
+.stat::before{
+  content:'';position:absolute;top:12px;right:12px;width:22px;height:22px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(var(--accent),.45),transparent 70%);
+  opacity:.6;
+  transition:transform .35s var(--ease-spring),opacity .35s ease;
+}
 .stat:hover::before{transform:scale(1.5);opacity:1}
-.stat .v{font-family:'JetBrains Mono',monospace;font-size:clamp(24px,3vw,34px);font-weight:800;letter-spacing:-.045em;line-height:1;color:var(--text)}
+.stat .v{
+  font-family:'JetBrains Mono',monospace;
+  font-size:clamp(24px,3vw,34px);font-weight:800;
+  letter-spacing:-.045em;line-height:1;
+  color:var(--text);
+}
 .stat .v.ok{color:var(--ok)}
 .stat .v.ac{color:rgb(var(--accent))}
-.stat .l{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--text-3);margin-top:8px}
-.verbar{background:linear-gradient(90deg,rgba(var(--accent),.05),rgba(255,255,255,.02) 30%,rgba(255,255,255,.02) 70%,rgba(var(--accent-2),.05));border:1px solid rgba(255,255,255,.075);border-radius:18px;margin-bottom:clamp(14px,2vw,20px);overflow:hidden;animation:fadeUp .55s var(--ease-out) .14s both}
+.stat .l{
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--text-3);
+  margin-top:8px;
+}
+
+.verbar{
+  background:linear-gradient(90deg,rgba(var(--accent),.05),rgba(255,255,255,.02) 30%,rgba(255,255,255,.02) 70%,rgba(var(--accent-2),.05));
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:18px;
+  margin-bottom:clamp(14px,2vw,20px);
+  overflow:hidden;
+  animation:fadeUp .55s var(--ease-out) .14s both;
+}
 .verbar-in{display:flex;align-items:stretch;min-height:56px}
 .verbar-label{display:flex;align-items:center;gap:8px;padding:0 18px;flex-shrink:0;border-right:1px solid rgba(255,255,255,.06)}
 .verbar-label .d{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:pulseDot 1.8s infinite}
@@ -127,37 +322,83 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 @media(max-width:700px){.verbar-label .t{display:none}.verbar-label{padding:0 14px}}
 .verbar-scroll{display:flex;align-items:stretch;flex:1;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .verbar-scroll::-webkit-scrollbar{display:none}
-.ver-item{display:flex;align-items:center;gap:10px;padding:0 18px;flex-shrink:0;border-right:1px solid rgba(255,255,255,.06);cursor:pointer;transition:background .2s ease}
+.ver-item{
+  display:flex;align-items:center;gap:10px;padding:0 18px;flex-shrink:0;
+  border-right:1px solid rgba(255,255,255,.06);cursor:pointer;
+  transition:background .2s ease;
+}
 .ver-item:last-child{border-right:none}
 .ver-item:hover{background:rgba(var(--accent),.06)}
 .ver-item:active{background:rgba(var(--accent),.13)}
-.ver-ico{width:28px;height:28px;border-radius:50%;background:rgba(var(--accent),.1);border:1px solid rgba(var(--accent),.24);display:grid;place-items:center;flex-shrink:0;transition:transform .25s var(--ease-spring)}
+.ver-ico{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(var(--accent),.1);border:1px solid rgba(var(--accent),.24);
+  display:grid;place-items:center;flex-shrink:0;
+  transition:transform .25s var(--ease-spring);
+}
 .ver-item:hover .ver-ico{transform:scale(1.1) rotate(-6deg)}
 .ver-ico svg{width:13px;height:13px;stroke:rgb(var(--accent));fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ver-body{display:flex;flex-direction:column;gap:2px;line-height:1.1;min-width:0}
 .ver-plat{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.22em;font-weight:700;text-transform:uppercase;color:var(--text-3)}
 .ver-hash{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text);white-space:nowrap;transition:color .2s ease}
 .ver-item:hover .ver-hash{color:rgb(var(--accent))}
-.ver-cp{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;flex-shrink:0;opacity:.55;transition:all .2s ease}
+.ver-cp{
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  display:grid;place-items:center;flex-shrink:0;opacity:.55;transition:all .2s ease;
+}
 .ver-item:hover .ver-cp{opacity:1;background:rgba(var(--accent),.12);border-color:rgba(var(--accent),.4)}
 .ver-cp svg{width:10px;height:10px;stroke:var(--text-2);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .ver-cp.copied{opacity:1;background:rgba(52,211,153,.18);border-color:var(--ok)}
 .ver-cp.copied svg{stroke:var(--ok)}
-.verbar-sync{margin-left:auto;padding:0 18px;display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-3);flex-shrink:0;border-left:1px solid rgba(255,255,255,.06);white-space:nowrap}
+.verbar-sync{
+  margin-left:auto;padding:0 18px;display:flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-3);
+  flex-shrink:0;border-left:1px solid rgba(255,255,255,.06);white-space:nowrap;
+}
 .verbar-sync .d{width:5px;height:5px;border-radius:50%;background:var(--ok);box-shadow:0 0 6px var(--ok)}
 @media(max-width:820px){.verbar-sync{display:none}}
 @media(max-width:520px){.ver-item{padding:0 12px;gap:8px}.ver-hash{font-size:10px}}
-.toolbar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding:12px;border-radius:18px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.075);margin-bottom:clamp(14px,2vw,20px);animation:fadeUp .55s var(--ease-out) .2s both}
+
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:9px;align-items:center;
+  padding:12px;border-radius:18px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.075);
+  margin-bottom:clamp(14px,2vw,20px);
+  animation:fadeUp .55s var(--ease-out) .2s both;
+}
 .search-box{position:relative;flex:1;min-width:220px}
-.search-box input{width:100%;height:44px;padding:0 44px 0 44px;border-radius:12px;background:rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.08);color:var(--text);font-size:12.5px;transition:all .2s ease}
+.search-box input{
+  width:100%;height:44px;padding:0 44px 0 44px;
+  border-radius:12px;
+  background:rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.08);
+  color:var(--text);font-size:12.5px;
+  transition:all .2s ease;
+}
 .search-box input:focus{border-color:rgb(var(--accent));box-shadow:0 0 0 3px rgba(var(--accent),.14)}
 .search-box input::placeholder{color:var(--text-3)}
 .search-box .ic{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--text-3);pointer-events:none}
 .search-box .ic svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.search-box .kb{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--text-3);background:rgba(255,255,255,.06);padding:3px 7px;border-radius:6px;border:1px solid rgba(255,255,255,.08)}
+.search-box .kb{
+  position:absolute;right:13px;top:50%;transform:translateY(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--text-3);
+  background:rgba(255,255,255,.06);padding:3px 7px;border-radius:6px;
+  border:1px solid rgba(255,255,255,.08);
+}
 .filter-chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{display:inline-flex;align-items:center;gap:7px;height:44px;padding:0 15px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:11.5px;font-weight:600;color:var(--text-2);transition:all .2s ease}
-.chip .bx{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border-2);background:rgba(0,0,0,.32);display:grid;place-items:center;transition:all .2s ease;flex-shrink:0}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;height:44px;padding:0 15px;
+  border-radius:12px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  font-size:11.5px;font-weight:600;color:var(--text-2);
+  transition:all .2s ease;
+}
+.chip .bx{
+  width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border-2);
+  background:rgba(0,0,0,.32);display:grid;place-items:center;
+  transition:all .2s ease;flex-shrink:0;
+}
 .chip .bx svg{width:8px;height:8px;stroke:#000;fill:none;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .15s ease}
 .chip.on{color:rgb(var(--accent));border-color:rgba(var(--accent),.55);background:rgba(var(--accent),.1)}
 .chip.on .bx{background:rgb(var(--accent));border-color:rgb(var(--accent))}
@@ -165,90 +406,261 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .chip:hover{transform:translateY(-1px);border-color:rgba(var(--accent),.4);color:var(--text)}
 .chip.on:hover{color:rgb(var(--accent))}
 .sort-wrap{position:relative}
-.sort-sel{height:44px;padding:0 40px 0 15px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text);font-size:11.5px;font-weight:600;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2396a0b3' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;transition:all .2s ease}
+.sort-sel{
+  height:44px;padding:0 40px 0 15px;border-radius:12px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  color:var(--text);font-size:11.5px;font-weight:600;cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2396a0b3' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;
+  transition:all .2s ease;
+}
 .sort-sel:hover{border-color:rgba(var(--accent),.4);color:rgb(var(--accent))}
-.btn-reset{height:44px;padding:0 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text-2);font-size:11.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:all .2s ease}
+.btn-reset{
+  height:44px;padding:0 16px;border-radius:12px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  color:var(--text-2);font-size:11.5px;font-weight:600;
+  display:inline-flex;align-items:center;gap:6px;transition:all .2s ease;
+}
 .btn-reset:hover{color:var(--bad);border-color:rgba(248,113,113,.5);background:rgba(248,113,113,.08)}
 .btn-reset svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:560px){.search-box{min-width:100%}}
+
 .section{margin-bottom:clamp(20px,2.6vw,30px)}
-.sec-hd{display:flex;align-items:center;gap:11px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06);position:relative}
-.sec-hd::after{content:'';position:absolute;bottom:-1px;left:0;width:110px;height:1px;background:linear-gradient(90deg,rgb(var(--accent)),transparent)}
-.sec-ico{width:34px;height:34px;border-radius:12px;background:linear-gradient(140deg,rgba(var(--accent),.22),rgba(var(--accent),.04));border:1px solid rgba(var(--accent),.32);display:grid;place-items:center;flex-shrink:0}
+.sec-hd{
+  display:flex;align-items:center;gap:11px;
+  margin-bottom:14px;padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  position:relative;
+}
+.sec-hd::after{
+  content:'';position:absolute;bottom:-1px;left:0;width:110px;height:1px;
+  background:linear-gradient(90deg,rgb(var(--accent)),transparent);
+}
+.sec-ico{
+  width:34px;height:34px;border-radius:12px;
+  background:linear-gradient(140deg,rgba(var(--accent),.22),rgba(var(--accent),.04));
+  border:1px solid rgba(var(--accent),.32);
+  display:grid;place-items:center;flex-shrink:0;
+}
 .sec-ico svg{width:15px;height:15px;stroke:rgb(var(--accent));fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sec-name{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--text)}
-.sec-count{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;color:var(--text-3);background:rgba(255,255,255,.05);padding:3px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.07)}
+.sec-count{
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;color:var(--text-3);
+  background:rgba(255,255,255,.05);padding:3px 10px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.07);
+}
 .sec-line{flex:1;height:1px;background:rgba(255,255,255,.05)}
+
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
-.card{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.008));border:1px solid rgba(255,255,255,.075);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px;transition:border-color .25s ease,background .25s ease,transform .3s var(--ease-spring),box-shadow .3s ease;animation:cardIn .45s var(--ease-out) both;cursor:pointer;overflow:hidden}
+
+.card{
+  position:relative;
+  background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.008));
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:20px;
+  padding:18px;
+  display:flex;flex-direction:column;gap:14px;
+  transition:border-color .25s ease,background .25s ease,transform .3s var(--ease-spring),box-shadow .3s ease;
+  animation:cardIn .45s var(--ease-out) both;
+  cursor:pointer;
+  overflow:hidden;
+}
 @keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
-.card::before{content:'';position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 0%,rgba(var(--accent),0) 0deg,rgba(var(--accent),.18) 30deg,rgba(var(--accent-2),.18) 60deg,rgba(var(--accent),0) 90deg);opacity:0;transition:opacity .4s ease;pointer-events:none}
-.card:hover{border-color:rgba(var(--accent),.45);background:linear-gradient(160deg,rgba(var(--accent),.06),rgba(255,255,255,.012));transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.card::before{
+  content:'';position:absolute;inset:0;
+  background:conic-gradient(from 0deg at 50% 0%,rgba(var(--accent),0) 0deg,rgba(var(--accent),.18) 30deg,rgba(var(--accent-2),.18) 60deg,rgba(var(--accent),0) 90deg);
+  opacity:0;transition:opacity .4s ease;pointer-events:none;
+}
+.card:hover{
+  border-color:rgba(var(--accent),.45);
+  background:linear-gradient(160deg,rgba(var(--accent),.06),rgba(255,255,255,.012));
+  transform:translateY(-4px);
+  box-shadow:0 18px 40px rgba(0,0,0,.4);
+}
 .card:hover::before{opacity:1}
+
 .card-top{display:flex;align-items:flex-start;gap:12px;position:relative;z-index:1}
-.card-cb{width:22px;height:22px;flex-shrink:0;border-radius:8px;border:1.5px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35);display:grid;place-items:center;color:var(--text-3);transition:all .22s ease}
+.card-cb{
+  width:22px;height:22px;flex-shrink:0;border-radius:8px;
+  border:1.5px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35);
+  display:grid;place-items:center;color:var(--text-3);
+  transition:all .22s ease;
+}
 .card-cb:hover{border-color:rgb(var(--accent));color:rgb(var(--accent))}
 .card-cb.on{background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));border-color:transparent;color:#000}
 .card-cb svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
-.card-logo{width:48px;height:48px;border-radius:14px;flex-shrink:0;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);display:grid;place-items:center;padding:5px;overflow:hidden;transition:transform .3s var(--ease-spring),border-color .25s ease}
+.card-logo{
+  width:48px;height:48px;border-radius:14px;flex-shrink:0;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.09);
+  display:grid;place-items:center;padding:5px;overflow:hidden;
+  transition:transform .3s var(--ease-spring),border-color .25s ease;
+}
 .card:hover .card-logo{transform:scale(1.08) rotate(-4deg);border-color:rgba(var(--accent),.45)}
 .card-logo img{width:100%;height:100%;object-fit:contain;object-position:center;border-radius:10px}
 .card-logo .ini{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:var(--text-2);width:100%;height:100%;display:grid;place-items:center}
 .card-head{min-width:0;flex:1}
-.card-name{font-size:15.5px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:var(--text);line-height:1.2}
+.card-name{
+  font-size:15.5px;font-weight:800;letter-spacing:-.02em;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+  color:var(--text);line-height:1.2;
+}
 .card-name .vf{color:var(--ok);font-size:11px;filter:drop-shadow(0 0 6px rgba(52,211,153,.6))}
-.card-tag{display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:800;letter-spacing:.1em;padding:2px 6px;border-radius:5px;background:rgb(var(--accent));color:#000;line-height:1}
-.card-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);margin-top:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.card-tag{
+  display:inline-flex;align-items:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:8.5px;font-weight:800;letter-spacing:.1em;
+  padding:2px 6px;border-radius:5px;
+  background:rgb(var(--accent));color:#000;
+  line-height:1;
+}
+.card-meta{
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);margin-top:4px;
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
 .card-meta .sep{color:var(--border-2)}
-.card-ring-wrap{display:flex;align-items:center;justify-content:center;gap:24px;padding:8px 0 4px;position:relative;z-index:1}
-.card-ring{position:relative;width:84px;height:84px;flex-shrink:0}
-.card-ring svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
-.card-ring .ring-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:7}
-.card-ring .ring-fill{fill:none;stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(.16,1,.3,1);will-change:stroke-dashoffset}
-.card-ring-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
-.card-ring-text .num{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--text)}
+
+.card-ring-wrap{
+  display:flex;align-items:center;justify-content:center;
+  gap:24px;
+  padding:8px 0 4px;
+  position:relative;z-index:1;
+}
+.card-ring{
+  position:relative;
+  width:84px;height:84px;flex-shrink:0;
+}
+.card-ring svg{
+  width:100%;height:100%;
+  transform:rotate(-90deg);
+  overflow:visible;
+}
+.card-ring .ring-bg{
+  fill:none;
+  stroke:rgba(255,255,255,.07);
+  stroke-width:7;
+}
+.card-ring .ring-fill{
+  fill:none;
+  stroke-width:7;
+  stroke-linecap:round;
+  transition: stroke-dashoffset 1.4s cubic-bezier(.16,1,.3,1);
+  will-change: stroke-dashoffset;
+}
+.card-ring-text{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.card-ring-text .num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:21px;font-weight:800;letter-spacing:-.05em;
+  line-height:1;color:var(--text);
+}
 .card-ring-text .num.ok{color:var(--ok)}
 .card-ring-text .num.warn{color:var(--warn)}
 .card-ring-text .num.bad{color:var(--bad)}
 .card-ring-text .num.mute{color:var(--text-3)}
-.card-ring-text .pct{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-top:3px}
-.card-ring-label{text-align:center;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);margin-top:5px}
-.card-ring-block{display:flex;flex-direction:column;align-items:center}
-.card-leds{display:flex;flex-direction:column;gap:6px;align-items:center;padding-top:4px;position:relative;z-index:1}
-.led{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.led .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--text-3)}
+.card-ring-text .pct{
+  font-family:'JetBrains Mono',monospace;
+  font-size:8.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text-3);margin-top:3px;
+}
+.card-ring-label{
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-3);
+  margin-top:5px;
+}
+.card-ring-block{
+  display:flex;flex-direction:column;align-items:center;
+}
+
+.card-leds{
+  display:flex;flex-direction:column;gap:6px;
+  align-items:center;
+  padding-top:4px;
+  position:relative;z-index:1;
+}
+.led{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:600;color:var(--text-2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.led .dot{
+  width:7px;height:7px;border-radius:50%;flex-shrink:0;
+  background:var(--text-3);
+}
 .led.ok .dot{background:var(--ok);box-shadow:0 0 8px rgba(52,211,153,.7)}
 .led.warn .dot{background:var(--warn);box-shadow:0 0 8px rgba(251,191,36,.7);animation:pulseDot 1.8s infinite}
 .led.bad .dot{background:var(--bad);box-shadow:0 0 8px rgba(248,113,113,.7);animation:pulseDot 1.4s infinite}
 .led.ok{color:var(--ok)}
 .led.warn{color:var(--warn)}
 .led.bad{color:var(--bad)}
+
 .card-chips{display:flex;gap:6px;flex-wrap:wrap;position:relative;z-index:1}
-.copy-chip{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;background:rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.075);color:var(--text-2);padding:6px 11px;border-radius:9px;cursor:pointer;transition:all .2s ease}
+.copy-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+  background:rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.075);
+  color:var(--text-2);padding:6px 11px;border-radius:9px;cursor:pointer;
+  transition:all .2s ease;
+}
 .copy-chip:hover{border-color:rgba(var(--accent),.5);color:rgb(var(--accent))}
 .copy-chip svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.55}
 .copy-chip:hover svg{opacity:1}
 .copy-chip.copied{color:var(--ok);border-color:var(--ok)}
 .copy-chip.copied svg{opacity:1;stroke:var(--ok)}
-.card-upd{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;color:var(--text-3);padding:5px 11px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:8px;width:fit-content;position:relative;z-index:1}
+
+.card-upd{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;color:var(--text-3);
+  padding:5px 11px;background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.06);border-radius:8px;
+  width:fit-content;position:relative;z-index:1;
+}
 .card-upd svg{width:10px;height:10px;stroke:rgb(var(--accent));fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
 .card-foot{display:flex;justify-content:flex-end;margin-top:2px;position:relative;z-index:1}
-.btn-detail{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;background:rgba(var(--accent),.1);border:1px solid rgba(var(--accent),.3);color:rgb(var(--accent));font-size:11.5px;font-weight:700;transition:all .22s ease}
+.btn-detail{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:10px;
+  background:rgba(var(--accent),.1);border:1px solid rgba(var(--accent),.3);
+  color:rgb(var(--accent));font-size:11.5px;font-weight:700;
+  transition:all .22s ease;
+}
 .btn-detail:hover{background:rgba(var(--accent),.2);border-color:rgb(var(--accent));transform:translateX(3px)}
 .btn-detail svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-.empty{padding:70px 24px;text-align:center;border:1px dashed rgba(255,255,255,.12);border-radius:20px;background:rgba(255,255,255,.018)}
+
+.empty{
+  padding:70px 24px;text-align:center;
+  border:1px dashed rgba(255,255,255,.12);border-radius:20px;
+  background:rgba(255,255,255,.018);
+}
 .empty .c{font-family:'JetBrains Mono',monospace;font-size:40px;color:var(--text-3);margin-bottom:12px;opacity:.5}
 .empty p{color:var(--text-2);font-size:13.5px}
+
 .foot{border-top:1px solid rgba(255,255,255,.06);padding:26px 0;margin-top:auto}
 .foot-in{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px}
 .foot-l{font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
 .foot-r{display:flex;gap:8px;font-size:12px;flex-wrap:wrap}
 .foot-r a{color:var(--text-2);transition:all .2s ease;cursor:pointer;font-weight:600;padding:6px 13px;border-radius:9px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06)}
 .foot-r a:hover{color:rgb(var(--accent));border-color:rgba(var(--accent),.4);background:rgba(var(--accent),.06)}
+
 .drawer-bd{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:120;opacity:0;pointer-events:none;transition:opacity .3s ease}
 .drawer-bd.on{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(600px,100%);background:var(--bg-2);border-left:1px solid rgba(255,255,255,.09);z-index:125;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .4s var(--ease-out);box-shadow:-30px 0 80px rgba(0,0,0,.55);overflow:hidden}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:min(600px,100%);
+  background:var(--bg-2);
+  border-left:1px solid rgba(255,255,255,.09);
+  z-index:125;display:flex;flex-direction:column;
+  transform:translateX(100%);
+  transition:transform .4s var(--ease-out);
+  box-shadow:-30px 0 80px rgba(0,0,0,.55);overflow:hidden;
+}
 .drawer.on{transform:translateX(0)}
 .dw-hd{padding:20px;border-bottom:1px solid rgba(255,255,255,.07)}
 .dw-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
@@ -260,16 +672,32 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .dw-nm .vf{color:var(--ok);font-size:12px}
 .dw-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);margin-top:4px}
 .dw-acts{display:flex;gap:6px;flex-shrink:0}
-.mini-btn{height:32px;padding:0 12px;border-radius:9px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);color:var(--text-2);font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:5px;transition:all .2s ease}
+.mini-btn{
+  height:32px;padding:0 12px;border-radius:9px;
+  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);
+  color:var(--text-2);font-size:11px;font-weight:600;
+  display:inline-flex;align-items:center;gap:5px;transition:all .2s ease;
+}
 .mini-btn:hover{color:rgb(var(--accent));border-color:rgba(var(--accent),.5)}
 .mini-btn.on{background:rgba(var(--accent),.15);color:rgb(var(--accent));border-color:rgb(var(--accent))}
 .mini-btn svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.x-btn{width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);color:var(--text-2);display:grid;place-items:center;transition:all .25s var(--ease-spring)}
+.x-btn{
+  width:32px;height:32px;border-radius:9px;
+  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);
+  color:var(--text-2);display:grid;place-items:center;
+  transition:all .25s var(--ease-spring);
+}
 .x-btn:hover{background:var(--bad);color:#fff;border-color:var(--bad);transform:rotate(90deg)}
 .x-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
 .dw-copy2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 @media(max-width:400px){.dw-copy2{grid-template-columns:1fr}}
-.dw-cp{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;transition:border-color .2s ease;text-align:left}
+.dw-cp{
+  background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:12px 14px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  cursor:pointer;transition:border-color .2s ease;text-align:left;
+}
 .dw-cp:hover{border-color:rgba(var(--accent),.5)}
 .dw-cp .lb{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.18em;font-weight:700;text-transform:uppercase;color:var(--text-3)}
 .dw-cp .vl{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -278,25 +706,45 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .dw-cp.copied{border-color:var(--ok)}
 .dw-cp.copied .vl{color:var(--ok)}
 .dw-cp.copied svg{opacity:1;stroke:var(--ok)}
+
 .dw-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
 @media(max-width:520px){.dw-stats{grid-template-columns:repeat(2,1fr)}}
-.dw-st{background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.06);border-radius:11px;padding:11px 12px}
+.dw-st{
+  background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.06);
+  border-radius:11px;padding:11px 12px;
+}
 .dw-st .l{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.18em;font-weight:700;text-transform:uppercase;color:var(--text-3);margin-bottom:5px}
 .dw-st .v{font-size:11.5px;font-weight:700;line-height:1.3}
 .dw-st .v.ok{color:var(--ok)}
 .dw-st .v.bad{color:var(--bad)}
 .dw-st .v.warn{color:var(--warn)}
 .dw-st .v.mono{font-family:'JetBrains Mono',monospace}
-.dw-upd{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.06);border-radius:11px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-2);margin-bottom:12px;font-weight:500}
+
+.dw-upd{
+  display:flex;align-items:center;gap:8px;padding:10px 12px;
+  background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.06);
+  border-radius:11px;font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text-2);margin-bottom:12px;font-weight:500;
+}
 .dw-upd svg{width:12px;height:12px;stroke:rgb(var(--accent));fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.dw-tabs{display:flex;gap:4px;padding:12px 20px;border-bottom:1px solid rgba(255,255,255,.07);overflow-x:auto;scrollbar-width:none}
+
+.dw-tabs{
+  display:flex;gap:4px;padding:12px 20px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  overflow-x:auto;scrollbar-width:none;
+}
 .dw-tabs::-webkit-scrollbar{display:none}
-.dw-tab{padding:8px 15px;font-size:12px;font-weight:600;color:var(--text-3);border-radius:9px;cursor:pointer;transition:all .2s ease;white-space:nowrap}
+.dw-tab{
+  padding:8px 15px;font-size:12px;font-weight:600;color:var(--text-3);
+  border-radius:9px;cursor:pointer;
+  transition:all .2s ease;white-space:nowrap;
+}
 .dw-tab:hover{color:var(--text-2);background:rgba(255,255,255,.04)}
 .dw-tab.on{color:#000;background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)))}
 .dw-body{flex:1;overflow-y:auto;padding:20px;overscroll-behavior:contain}
 .dw-pane{display:none}
 .dw-pane.on{display:block;animation:fadeUp .25s var(--ease-out)}
+
 .alert{padding:13px 15px;border-radius:12px;font-size:12px;line-height:1.65;margin-bottom:11px;border:1px solid transparent}
 .alert.ok{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.24);color:#a7f3d0}
 .alert.warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.24);color:#fde68a}
@@ -318,45 +766,120 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .dw-sp .v{font-size:12px;font-weight:700;text-align:right}
 .dw-sp .v.ok{color:var(--ok)}
 .dw-sp .v.no{color:var(--text-3)}
+
 .dw-shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
 @media(max-width:520px){.dw-shots{grid-template-columns:repeat(2,1fr);gap:8px}}
-.dw-shot{position:relative;width:100%;aspect-ratio:16/10;border-radius:14px;overflow:hidden;cursor:zoom-in;border:1px solid rgba(255,255,255,.09);transition:border-color .25s ease,transform .25s var(--ease-spring),box-shadow .25s ease;background:rgba(0,0,0,.28);user-select:none}
+.dw-shot{
+  position:relative;width:100%;aspect-ratio:16/10;border-radius:14px;overflow:hidden;
+  cursor:zoom-in;border:1px solid rgba(255,255,255,.09);
+  transition:border-color .25s ease,transform .25s var(--ease-spring),box-shadow .25s ease;
+  background:rgba(0,0,0,.28);user-select:none;
+}
 .dw-shot:hover{border-color:rgba(var(--accent),.6);transform:translateY(-3px) scale(1.02);box-shadow:0 12px 26px rgba(0,0,0,.4)}
 .dw-shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s var(--ease-spring);pointer-events:none}
 .dw-shot:hover img{transform:scale(1.08)}
 .dw-shot::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.72));opacity:.75;transition:opacity .25s ease;pointer-events:none}
 .dw-shot:hover::after{opacity:1}
-.dw-shot-badge{position:absolute;bottom:8px;right:8px;display:inline-flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.78);border:1px solid rgba(255,255,255,.22);padding:3px 8px;border-radius:var(--pill);opacity:0;transform:translateY(4px);transition:all .25s ease;pointer-events:none;z-index:2}
+.dw-shot-badge{
+  position:absolute;bottom:8px;right:8px;
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;background:rgba(0,0,0,.78);
+  border:1px solid rgba(255,255,255,.22);
+  padding:3px 8px;border-radius:var(--pill);
+  opacity:0;transform:translateY(4px);
+  transition:all .25s ease;pointer-events:none;z-index:2;
+}
 .dw-shot:hover .dw-shot-badge{opacity:1;transform:translateY(0)}
 .dw-shot-badge svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.dw-shot-num{position:absolute;top:8px;left:8px;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:800;color:#fff;background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.2);padding:3px 8px;border-radius:var(--pill);z-index:2;pointer-events:none}
+.dw-shot-num{
+  position:absolute;top:8px;left:8px;
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:800;
+  color:#fff;background:rgba(0,0,0,.7);
+  border:1px solid rgba(255,255,255,.2);
+  padding:3px 8px;border-radius:var(--pill);
+  z-index:2;pointer-events:none;
+}
+
 .dw-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px;padding-top:13px;border-top:1px solid rgba(255,255,255,.07)}
-.dw-lk{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 15px;border-radius:11px;font-size:12px;font-weight:600;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text-2);transition:all .2s ease;cursor:pointer}
+.dw-lk{
+  display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 15px;
+  border-radius:11px;font-size:12px;font-weight:600;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  color:var(--text-2);transition:all .2s ease;cursor:pointer;
+}
 .dw-lk:hover{color:rgb(var(--accent));border-color:rgba(var(--accent),.5);transform:translateY(-2px)}
 .dw-lk.pri{background:linear-gradient(135deg,rgb(var(--accent)),rgb(var(--accent-2)));color:#000;border:none}
 .dw-lk.pri:hover{color:#000;filter:brightness(1.1)}
 .dw-lk svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.lightbox{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.97);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease;touch-action:none;overflow:hidden}
+
+.lightbox{
+  position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.97);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease;
+  touch-action:none;overflow:hidden;
+}
 .lightbox.on{opacity:1;visibility:visible}
 .lb-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:grab}
 .lb-stage.grabbing{cursor:grabbing}
-.lb-img{max-width:94vw;max-height:88vh;object-fit:contain;transform-origin:center center;will-change:transform;user-select:none;pointer-events:none;opacity:0;transition:opacity .3s ease}
+.lb-img{
+  max-width:94vw;max-height:88vh;object-fit:contain;
+  transform-origin:center center;will-change:transform;
+  user-select:none;pointer-events:none;opacity:0;transition:opacity .3s ease;
+}
 .lb-img.loaded{opacity:1}
-.lb-top{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:linear-gradient(180deg,rgba(0,0,0,.8),transparent);z-index:3;pointer-events:none}
-.lb-counter{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#fff;letter-spacing:.05em;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.18);padding:6px 14px;border-radius:var(--pill);pointer-events:auto}
+.lb-top{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;background:linear-gradient(180deg,rgba(0,0,0,.8),transparent);
+  z-index:3;pointer-events:none;
+}
+.lb-counter{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  color:#fff;letter-spacing:.05em;
+  background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.18);
+  padding:6px 14px;border-radius:var(--pill);pointer-events:auto;
+}
 .lb-counter .sep{opacity:.45}
 .lb-counter .total{color:var(--text-3)}
-.lb-close{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;display:grid;place-items:center;transition:all .25s var(--ease-spring);pointer-events:auto;cursor:pointer}
+.lb-close{
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  color:#fff;display:grid;place-items:center;
+  transition:all .25s var(--ease-spring);pointer-events:auto;cursor:pointer;
+}
 .lb-close:hover{background:var(--bad);border-color:var(--bad);transform:rotate(90deg) scale(1.08)}
 .lb-close svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.lb-bottom{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:10px;padding:20px;background:linear-gradient(0deg,rgba(0,0,0,.8),transparent);z-index:3}
-.lb-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;display:grid;place-items:center;transition:all .25s var(--ease-spring);cursor:pointer;flex-shrink:0}
+.lb-bottom{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:20px;background:linear-gradient(0deg,rgba(0,0,0,.8),transparent);z-index:3;
+}
+.lb-btn{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  color:#fff;display:grid;place-items:center;
+  transition:all .25s var(--ease-spring);cursor:pointer;flex-shrink:0;
+}
 .lb-btn:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
 .lb-btn:active{transform:scale(.94)}
 .lb-btn:disabled{opacity:.3;cursor:not-allowed;transform:none}
 .lb-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.lb-zoomlabel{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#fff;letter-spacing:.05em;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.18);padding:8px 16px;border-radius:var(--pill);min-width:76px;text-align:center}
-.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;display:grid;place-items:center;transition:all .25s var(--ease-spring);z-index:3;cursor:pointer}
+.lb-zoomlabel{
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  color:#fff;letter-spacing:.05em;
+  background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.18);
+  padding:8px 16px;border-radius:var(--pill);min-width:76px;text-align:center;
+}
+.lb-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  color:#fff;display:grid;place-items:center;
+  transition:all .25s var(--ease-spring);z-index:3;cursor:pointer;
+}
 .lb-nav:hover{background:rgba(255,255,255,.22);transform:translateY(-50%) scale(1.06)}
 .lb-nav:active{transform:translateY(-50%) scale(.94)}
 .lb-nav:disabled{opacity:.25;cursor:not-allowed}
@@ -365,24 +888,57 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .lb-nav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:640px){.lb-nav{width:44px;height:44px}.lb-nav.prev{left:10px}.lb-nav.next{right:10px}.lb-nav svg{width:18px;height:18px}}
 @media(max-width:480px){.lb-nav.prev{left:6px}.lb-nav.next{right:6px}}
-.lb-spinner{position:absolute;top:50%;left:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:3px solid rgba(255,255,255,.15);border-top-color:rgb(var(--accent));animation:lbSpin .9s linear infinite;pointer-events:none;opacity:0;transition:opacity .25s ease}
+.lb-spinner{
+  position:absolute;top:50%;left:50%;
+  width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.15);border-top-color:rgb(var(--accent));
+  animation:lbSpin .9s linear infinite;pointer-events:none;opacity:0;transition:opacity .25s ease;
+}
 .lb-spinner.on{opacity:1}
 @keyframes lbSpin{to{transform:rotate(360deg)}}
-.lb-hint{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.14);padding:7px 15px;border-radius:var(--pill);pointer-events:none;opacity:0;transition:opacity .4s ease;z-index:2;white-space:nowrap}
+.lb-hint{
+  position:absolute;bottom:80px;left:50%;transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);background:rgba(0,0,0,.6);
+  border:1px solid rgba(255,255,255,.14);padding:7px 15px;border-radius:var(--pill);
+  pointer-events:none;opacity:0;transition:opacity .4s ease;z-index:2;white-space:nowrap;
+}
 .lb-hint.show{opacity:1}
 @media(max-width:640px){.lb-hint{font-size:9px;padding:5px 11px;bottom:70px;max-width:90vw;overflow:hidden;text-overflow:ellipsis}}
-.ovl{position:fixed;inset:0;z-index:130;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s ease}
+
+.ovl{
+  position:fixed;inset:0;z-index:130;background:rgba(0,0,0,.8);
+  display:flex;align-items:center;justify-content:center;padding:16px;
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+}
 .ovl.on{opacity:1;pointer-events:auto}
-.modal{background:var(--bg-2);border:1px solid rgba(255,255,255,.1);border-radius:22px;width:100%;max-width:620px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;transform:scale(.94) translateY(16px);opacity:0;transition:transform .3s var(--ease-spring),opacity .25s ease;box-shadow:0 40px 100px rgba(0,0,0,.7)}
+.modal{
+  background:var(--bg-2);border:1px solid rgba(255,255,255,.1);
+  border-radius:22px;width:100%;max-width:620px;max-height:92vh;
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:scale(.94) translateY(16px);opacity:0;
+  transition:transform .3s var(--ease-spring),opacity .25s ease;
+  box-shadow:0 40px 100px rgba(0,0,0,.7);
+}
 .ovl.on .modal{transform:scale(1) translateY(0);opacity:1}
-.m-hd{padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.m-hd{
+  padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
 .m-tt{font-size:16px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;color:var(--text)}
 .m-tt svg{width:18px;height:18px;stroke:rgb(var(--accent));fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .m-sb{font-size:10.5px;color:var(--text-3);margin-top:3px;font-family:'JetBrains Mono',monospace}
 .m-bd{padding:22px;overflow-y:auto;flex:1;overscroll-behavior:contain}
+
 .th-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 @media(max-width:520px){.th-grid{grid-template-columns:repeat(2,1fr)}}
-.th-btn{background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:10px;transition:all .28s var(--ease-spring);cursor:pointer;position:relative}
+.th-btn{
+  background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:16px 12px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  transition:all .28s var(--ease-spring);cursor:pointer;position:relative;
+}
 .th-btn:hover{background:rgba(255,255,255,.06);border-color:rgba(var(--accent),.4);transform:translateY(-3px)}
 .th-btn.on{border-color:var(--c);box-shadow:0 0 0 2px var(--c-glow)}
 .th-dot{width:42px;height:42px;border-radius:50%;background:var(--c);transition:transform .25s var(--ease-spring)}
@@ -390,22 +946,37 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .th-btn.on .th-dot{box-shadow:0 0 20px var(--c),0 0 40px var(--c)}
 .th-nm{font-size:12px;font-weight:700;color:var(--text-2)}
 .th-btn.on .th-nm{color:var(--text)}
-.th-ck{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:var(--c);display:grid;place-items:center;opacity:0;transform:scale(.4);transition:all .25s var(--ease-spring)}
+.th-ck{
+  position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;
+  background:var(--c);display:grid;place-items:center;
+  opacity:0;transform:scale(.4);transition:all .25s var(--ease-spring);
+}
 .th-btn.on .th-ck{opacity:1;transform:scale(1)}
 .th-ck svg{width:11px;height:11px;stroke:#000;fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+
 .cmp-scroll{overflow-x:auto;padding-bottom:4px}
 .cmp-row{display:grid;gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;margin-bottom:7px}
 .cmp-cell{background:var(--bg-3);padding:11px 13px;display:flex;align-items:center;min-height:42px;font-size:12px}
 .cmp-cell.hd{background:rgba(255,255,255,.05);font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;font-weight:700;text-transform:uppercase;color:var(--text-3);justify-content:space-between;padding:11px 13px}
 .cmp-cell.lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase}
 .cmp-cell.name{font-weight:800;font-size:13px;color:var(--text)}
+
 .g-h3{font-size:14px;font-weight:800;margin-bottom:9px;display:flex;align-items:center;gap:10px;color:var(--text)}
 .g-h3 .n{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:800;color:rgb(var(--accent));background:rgba(var(--accent),.13);padding:4px 10px;border-radius:8px;border:1px solid rgba(var(--accent),.3)}
 .g-p{font-size:12px;line-height:1.8;color:var(--text-2);margin-bottom:13px}
 .g-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:18px}
+
 .toasts{position:fixed;bottom:20px;right:20px;z-index:300;display:flex;flex-direction:column;gap:9px;pointer-events:none;max-width:340px}
 @media(max-width:520px){.toasts{left:20px;right:20px;max-width:none}}
-.toast{display:flex;align-items:center;gap:10px;padding:13px 16px;border-radius:14px;background:rgba(15,20,30,.97);border:1px solid rgba(255,255,255,.1);box-shadow:0 16px 40px rgba(0,0,0,.5);font-size:12.5px;color:var(--text);pointer-events:auto;animation:toastIn .35s var(--ease-spring) both;border-left:3px solid rgb(var(--accent))}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:13px 16px;
+  border-radius:14px;background:rgba(15,20,30,.97);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 16px 40px rgba(0,0,0,.5);
+  font-size:12.5px;color:var(--text);pointer-events:auto;
+  animation:toastIn .35s var(--ease-spring) both;
+  border-left:3px solid rgb(var(--accent));
+}
 .toast.ok{border-left-color:var(--ok)}
 .toast.warn{border-left-color:var(--warn)}
 .toast.bad{border-left-color:var(--bad)}
@@ -414,20 +985,32 @@ body.theme-obsidian{--accent:220,220,220;--accent-2:140,140,140;--bg:#020202;--b
 .toast.warn svg{color:var(--warn)}
 .toast.bad svg{color:var(--bad)}
 @keyframes toastIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+
 body.dev-active > *:not(#devWarn){display:none!important;visibility:hidden!important;opacity:0!important}
 body.dev-active{background:#000!important;overflow:hidden!important}
 body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-index:2147483646}
-#devWarn{position:fixed;inset:0;z-index:2147483647;background:#000;display:none;align-items:center;justify-content:center;padding:20px;text-align:center;pointer-events:none;-webkit-user-select:none;user-select:none}
+#devWarn{
+  position:fixed;inset:0;z-index:2147483647;background:#000;
+  display:none;align-items:center;justify-content:center;padding:20px;
+  text-align:center;pointer-events:none;
+  -webkit-user-select:none;user-select:none;
+}
 #devWarn.on{display:flex}
 .dw-box{max-width:440px;padding:20px;pointer-events:none;animation:popIn .3s var(--ease-spring) both}
 @keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
-.dw-ic{width:76px;height:76px;margin:0 auto 22px;border-radius:24px;background:linear-gradient(135deg,#f87171,#ef4444);display:grid;place-items:center;box-shadow:0 20px 60px rgba(248,113,113,.6);animation:shake .5s}
+.dw-ic{
+  width:76px;height:76px;margin:0 auto 22px;border-radius:24px;
+  background:linear-gradient(135deg,#f87171,#ef4444);
+  display:grid;place-items:center;box-shadow:0 20px 60px rgba(248,113,113,.6);
+  animation:shake .5s;
+}
 .dw-ic svg{width:38px;height:38px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 .dw-tt{font-size:22px;font-weight:800;margin-bottom:10px;color:#fff;letter-spacing:-.03em}
 .dw-tx{font-size:14px;color:#a1a1aa;line-height:1.7}
 .dw-tx b{color:#f87171;font-weight:800}
 .dw-sub{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#52525b;letter-spacing:.22em;font-weight:700;text-transform:uppercase}
+
 @media(max-width:760px){.grid{grid-template-columns:1fr}.card{padding:16px}}
 @media(max-width:560px){
   .wrap{padding:0 12px}
@@ -443,7 +1026,9 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
   .card-ring-text .num{font-size:19px}
   .card-ring-wrap{gap:18px}
 }
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
 </style>
 </head>
 <body class="theme-emerald">
@@ -492,6 +1077,7 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
   </div>
 
   <div class="wrap">
+
     <section class="hero">
       <div class="hero-left">
         <div class="hero-tag"><span class="live"></span><span id="iLiveTag">Giám sát trực tiếp · weao.xyz</span></div>
@@ -510,9 +1096,15 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
 
     <div class="verbar">
       <div class="verbar-in">
-        <div class="verbar-label"><span class="d"></span><span class="t" id="iRobloxBuilds">Bản Roblox</span></div>
+        <div class="verbar-label">
+          <span class="d"></span>
+          <span class="t" id="iRobloxBuilds">Bản Roblox</span>
+        </div>
         <div class="verbar-scroll" id="verbarScroll"></div>
-        <div class="verbar-sync" id="verbarUpd"><span class="d"></span><span id="verbarSyncTime">sync --:--</span></div>
+        <div class="verbar-sync" id="verbarUpd">
+          <span class="d"></span>
+          <span id="verbarSyncTime">sync --:--</span>
+        </div>
       </div>
     </div>
 
@@ -535,7 +1127,9 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
       <button class="btn-reset" id="btnReset"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span id="iResetFilter">Xoá bộ lọc</span></button>
     </div>
 
-    <main><div id="execList"></div></main>
+    <main>
+      <div id="execList"></div>
+    </main>
 
     <footer class="foot">
       <div class="foot-in">
@@ -563,17 +1157,33 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
     <img class="lb-img" id="lbImg" alt="" draggable="false">
   </div>
   <div class="lb-top">
-    <div class="lb-counter"><span id="lbIndex">1</span><span class="sep">/</span><span class="total" id="lbTotal">1</span></div>
-    <button class="lb-close" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    <div class="lb-counter">
+      <span id="lbIndex">1</span>
+      <span class="sep">/</span>
+      <span class="total" id="lbTotal">1</span>
+    </div>
+    <button class="lb-close" id="lbClose" aria-label="Close">
+      <svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
   </div>
-  <button class="lb-nav prev" id="lbPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-  <button class="lb-nav next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+  <button class="lb-nav prev" id="lbPrev" aria-label="Previous">
+    <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <button class="lb-nav next" id="lbNext" aria-label="Next">
+    <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
   <div class="lb-hint" id="lbHint"></div>
   <div class="lb-bottom">
-    <button class="lb-btn" id="lbZoomOut" aria-label="Zoom out"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg></button>
+    <button class="lb-btn" id="lbZoomOut" aria-label="Zoom out">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg>
+    </button>
     <div class="lb-zoomlabel" id="lbZoomLabel">100%</div>
-    <button class="lb-btn" id="lbZoomIn" aria-label="Zoom in"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></button>
-    <button class="lb-btn" id="lbReset" aria-label="Reset"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
+    <button class="lb-btn" id="lbZoomIn" aria-label="Zoom in">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+    </button>
+    <button class="lb-btn" id="lbReset" aria-label="Reset">
+      <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+    </button>
   </div>
 </div>
 
@@ -621,9 +1231,6 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
 <script>
 'use strict';
 
-/* ═══════════════════════════════════════════════════════════════════
-   BOOT GUARD
-   ═══════════════════════════════════════════════════════════════════ */
 (function bootGuard(){
   try{
     Object.defineProperty(Function.prototype, 'toString', {
@@ -635,7 +1242,12 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
       },
       writable:false, configurable:false, enumerable:false
     });
-    try{ Object.defineProperty(window, 'eval', { value: function(){ return undefined; }, writable:false, configurable:false, enumerable:false }); }catch(e){}
+    try{
+      Object.defineProperty(window, 'eval', {
+        value: function(){ return undefined; },
+        writable:false, configurable:false, enumerable:false
+      });
+    }catch(e){}
     try{
       const RF = window.Function;
       const bF = function(){ return function(){}; };
@@ -652,18 +1264,73 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
 /* ═══════════════════════════════════════════════════════════════════
    ▸ THÊM EXECUTOR CỦA BẠN TẠI MẢNG MY_EXECUTORS NGAY BÊN DƯỚI
    ▸ COPY KHỐI { ... } → DÁN THÊM → NHỚ DẤU PHẨY "," Ở CUỐI KHỐI
-
-   📋 CÁC TRƯỜNG:
-   name, tag, tag_color, ver, owner, certified, updated,
-   platform (Windows/Mac/Android/iOS/External),
-   status ("updated"/"outdated"/"working"),
-   byfron ("undetected"/"banwave"/"detected"),
-   detectionReason, unc (0-100), sunc (0-100),
-   free, cost, hash, decompiler, multiInject, raknet, keysystem,
-   image_link1 (logo), image_link2+ (screenshots),
-   info, website, discord, purchase
+   ▸ BAO NHIÊU EXECUTOR CŨNG ĐƯỢC
+   
+   📋 BẢNG ĐẦY ĐỦ CÁC TRƯỜNG:
+   
+   name:       "QH Exec"       ← BẮT BUỘC
+   tag:        "MY"            ← Nhãn (≤6 ký tự), để "" → ẩn
+   tag_color:  "#a855f7"       ← Màu HEX, để "" → theo theme
+   ver:        "3.0.1"         ← Phiên bản
+   owner:      "Me"            ← Dev / tổ chức
+   certified:  false           ← true = tick xanh ✓
+   updated:    "09/20/2026 at 5:00 AM UTC"
+   platform:   "Windows"       ← Windows/Mac/Android/iOS/External
+   status:     "updated"       ← "updated" hoặc "outdated"
+   byfron:     "undetected"    ← "undetected" / "banwave" / "detected"
+   detectionReason: ""         ← Lý do phát hiện
+   unc:   98                   ← Điểm UNC 0-100 (số)
+   sunc:  95                   ← Điểm sUNC 0-100 (số)
+   free:   true                ← true miễn phí, false trả phí
+   cost:   ""                  ← Giá
+   hash:   "version-abc123"    ← Hash Roblox build
+   decompiler:   true
+   multiInject:  true
+   raknet:       true
+   keysystem:    false
+   image_link1:  "URL"         ← ẢNH LOGO trên card
+   image_link2:  "URL"         ← Screenshot 1
+   image_link3:  "URL"         ← Screenshot 2
+   image_link4:  "URL"         ← thêm bao nhiêu cũng được (1→99)
+   info:     ""                ← Mô tả
+   website:  ""                ← Link website
+   discord:  ""                ← Link Discord
+   purchase: ""                ← Link mua/tải
+   
+   📌 KHỐI MẪU:
+   {
+     name: "QH Exec",
+     tag: "MY",
+     tag_color: "#a855f7",
+     ver: "3.0.1",
+     owner: "Me",
+     certified: false,
+     updated: "09/20/2026 at 5:00 AM UTC",
+     platform: "Windows",
+     status: "updated",
+     byfron: "undetected",
+     detectionReason: "",
+     unc: 98,
+     sunc: 95,
+     free: true,
+     cost: "",
+     hash: "version-abc123def456",
+     decompiler: true,
+     multiInject: true,
+     raknet: true,
+     keysystem: false,
+     image_link1: "https://example.com/logo.png",
+     image_link2: "https://example.com/shot1.png",
+     image_link3: "https://example.com/shot2.png",
+     image_link4: "https://example.com/shot3.png",
+     info: "Custom executor by me",
+     website: "https://example.com",
+     discord: "https://discord.gg/example",
+     purchase: ""
+   },
    ═══════════════════════════════════════════════════════════════════ */
 const MY_EXECUTORS = [
+  /* 👇 DÁN KHỐI EXECUTOR CỦA BẠN VÀO ĐÂY 👇 */
   {
      name: "Nam Executor",
      tag: "Nam",
@@ -694,25 +1361,13 @@ const MY_EXECUTORS = [
      discord: "https://discord.gg/Kx3Vp2gMD",
      purchase: ""
    },
+
+  /* 👆 ĐỪNG QUÊN DẤU PHẨY "," Ở CUỐI MỖI KHỐI 👆 */
 ];
 
-const API_EXPLOITS = 'https://weao.xyz/api/status/exploits';
-const API_VERSIONS = 'https://weao.xyz/api/versions/current';
-const THEME_KEY = 'huy_exec_theme';
-const CACHE_KEY = 'huy_exec_cache_v2';
-const CACHE_TTL = 5 * 60 * 1000;
-const LEADER_KEY = 'huy_exec_leader';
-const LEADER_STALE_MS = 30000;
-const BASE_INTERVAL = 90000;
-const MAX_INTERVAL = 900000;
-
-/* CORS proxies — direct trước, nếu fail thì qua proxy */
-const CORS_PROXIES = [
-  u => u,
-  u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
-  u => 'https://corsproxy.io/?' + encodeURIComponent(u),
-  u => 'https://thingproxy.freeboard.io/fetch/' + u
-];
+const API_EXPLOITS='https://weao.xyz/api/status/exploits';
+const API_VERSIONS='https://weao.xyz/api/versions/current';
+const THEME_KEY='huy_exec_theme';
 
 const PLATFORM_ORDER = ['Windows','Mac','Android','iOS','External'];
 const PRIORITY_MAP = {
@@ -723,33 +1378,260 @@ const PRIORITY_MAP = {
   External: []
 };
 
-const TAB_ID = Math.random().toString(36).slice(2,10);
-let bc = null;
-try { bc = new BroadcastChannel('huy_exec_status'); } catch(e) { bc = null; }
-let isLeader = false;
-let failStreak = 0;
-let pollTimer = null;
-
 const I18N = {
-  en: { brandSub:'roblox executor monitor', tabAll:'All',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External', robloxBuilds:'Roblox builds', liveTag:'Live monitoring · weao.xyz', dashTop:'Control Panel',dashBottom:'Roblox Executor', bannerSub:'Track Hyperion, UNC/sUNC scores, Roblox builds, and safe links.', btnRefresh:'Refresh Data',btnGuide:'Safety Guide', statExec:'Executors',statOp:'Operational',statUndet:'Undetected',statAvg:'Avg UNC', searchPh:'Name, dev, version...', sortUncDesc:'Highest UNC',sortUncAsc:'Lowest UNC',sortTitleAsc:'Name A → Z',sortUpdated:'Recently updated',sortSafe:'Safest first', resetFilter:'Clear filters', fUpdated:'Updated',fUndetected:'Undetected',fFree:'Free',fKeyless:'No key',fHighUnc:'UNC ≥ 90%',fDecomp:'Has decompiler', stUpdated:'Updated',stOutdated:'Not Updated', stUpdatedNote:'This executor is up to date on WEAO.', stOutdatedNote:'This executor has not been updated on WEAO.', updLabel:'Last updated', bfUndetected:'Undetected',bfBanwave:'Banwave risk',bfDetected:'Detected', bfUndetectedNote:'This exploit is reported as undetected.', bfBanwaveNote:'Bypasses client-mod bans but may still be caught in banwaves.', bfDetectedNote:(r)=>r?`Detected — ${r}`:'Currently detected by Hyperion.', details:'Details',compare:'Compare',selected:'Selected', ovOverview:'Overview',ovSpecs:'Specs',ovShots:'Screenshots', status:'STATUS',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'PRICING', copyVersion:'VERSION',copyHash:'ROBLOX HASH', byfronDetect:'BYFRON DETECTION',clientMod:'CLIENT-MOD PROTECTION', detected:'Detected',notDetected:'Not detected',supported:'Supported',notListed:'Not listed', noteByfronFlag:"Taken directly from the data source's detected flag.", noteBanwave:'Bypassing client-mod bans is not the same as surviving banwaves.', description:'DESCRIPTION', uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Multi-Instance',raknet:'RakNet',keySys:'Key System', yes:'Yes',no:'No',hooked:'Hooked',required:'Required',none:'None',fullAst:'Full AST', targetBuild:'Target Roblox build', website:'Website',discord:'Discord',buyGet:'Buy / Get', themeTitle:'Choose theme',themeSub:'12 themes · auto saved', cmpTitle:'Compare Executors',cmpSub:'Up to 3 executors', cmpCriteria:'Criteria',cmpName:'Name',cmpVersion:'Version',cmpPlatform:'Platform',cmpStatus:'Status', cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Price', cmpDecomp:'Decompiler',cmpMulti:'Multi',cmpYes:'Yes',cmpNo:'No',clearAll:'Clear all', cmpEmpty:'No executors selected',cmpEmptyHint:'Click the "+" checkbox on a card to add up to 3', verTitle:'Roblox Deployments',verSub:'Official hash from weao.xyz', verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA', verWinNote:'Main LIVE channel — Hyperion/Byfron active.',verMacNote:'No Byfron kernel driver.', verApkNote:'For Delta, Codex, Arceus X…',verIosNote:'Install via TrollStore / AltStore / Sideloadly.', verVersion:'Version',verReleased:'Released',copy:'Copy',copied:'Copied', guideTitle:'Safety Guide',guideSub:'Hyperion · UNC · account safety', guideH1:'What is Unified Naming Convention (UNC)?', guideP1:'UNC is the benchmark standard for Lua execution environments.', guideG1:'Runs every major hub',guideG2:'Basic scripts: ESP, Aimbot',guideG3:'Missing functions, breaks on complex hubs', guideH2:'How Hyperion / Byfron works', guideP2:"Hyperion is Roblox's 64-bit anti-tamper on Windows.", guideH3:'Golden rule: Always use burner alt accounts', guideP3:'Never run scripts on main accounts with rare items, limiteds, or high Robux balances.', guideH4:'Executor architecture types', guideL1:'Mac client has no 64-bit Hyperion driver — Macsploit, Opiumware are effectively ban-free.', guideL2:'APK/IPA run in their own sandbox — far lower banwave risk than Windows.', guideL3:'Never inject into the Roblox process, so Byfron sees nothing — ESP/aimbot only.', guideL4:"Internal executors give full Lua power but sit permanently in Byfron's crosshairs.", footNote:'© 2026 Exec Status by Huy — reference only, no cheating encouraged.', ftGuide:'Guide',ftVersions:'Roblox builds', devTitle:'Security Warning',devText:'DevTools detected. Content hidden to protect source code. Close DevTools (F12) to continue.',devSub:'SOURCE PROTECTION · ACTIVE', toastCopiedHash:(v)=>`Copied hash: ${v}`, toastCopiedVer:(v)=>`Copied version: ${v}`, toastCopyFail:'Copy failed — HTTPS required', toastNoData:'Nothing to copy', toastThemeSaved:(n)=>`Saved theme ${n}`, toastSyncOk:'Synced live data', toastSyncFail:'API unreachable — using cached data', toastCmpMax:'Compare up to 3 executors only', toastCmpAdded:(n)=>`Added ${n} to compare`, emptyTitle:'No executors match your filters', syncLabel:'sync',loading:'Loading...', lbHint:'Scroll to zoom · Drag to pan · Swipe to switch · ESC to close' },
-  normal: { brandSub:'trình theo dõi executor roblox', tabAll:'Tất cả',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External', robloxBuilds:'Bản Roblox', liveTag:'Giám sát trực tiếp · weao.xyz', dashTop:'Bảng điều khiển',dashBottom:'Roblox Executor', bannerSub:'Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.', btnRefresh:'Làm mới dữ liệu',btnGuide:'Hướng dẫn an toàn', statExec:'Executor',statOp:'Đang chạy',statUndet:'Undetected',statAvg:'UNC TB', searchPh:'Tên, dev, phiên bản...', sortUncDesc:'UNC cao nhất',sortUncAsc:'UNC thấp nhất',sortTitleAsc:'Tên A → Z',sortUpdated:'Mới cập nhật',sortSafe:'An toàn nhất', resetFilter:'Xoá bộ lọc', fUpdated:'Updated',fUndetected:'Undetected',fFree:'Miễn phí',fKeyless:'Không key',fHighUnc:'UNC ≥ 90%',fDecomp:'Có decompiler', stUpdated:'Updated',stOutdated:'Not Updated', stUpdatedNote:'Executor này đã được cập nhật trên WEAO.', stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.', updLabel:'Last updated', bfUndetected:'Undetected',bfBanwave:'Banwave risk',bfDetected:'Detected', bfUndetectedNote:'Executor này được báo cáo là undetected.', bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.', bfDetectedNote:(r)=>r?`Detected — ${r}`:'Hiện đang bị Hyperion phát hiện.', details:'Chi tiết',compare:'So sánh',selected:'Đã chọn', ovOverview:'Tổng quan',ovSpecs:'Thông số',ovShots:'Ảnh chụp', status:'STATUS',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'GIÁ', copyVersion:'PHIÊN BẢN',copyHash:'HASH ROBLOX', byfronDetect:'BYFRON DETECTION',clientMod:'CLIENT-MOD PROTECTION', detected:'Detected',notDetected:'Not detected',supported:'Supported',notListed:'Not listed', noteByfronFlag:'Lấy trực tiếp từ cờ detected của nguồn dữ liệu.', noteBanwave:'Bypass client-mod bans không đồng nghĩa với sống sót qua banwave.', description:'MÔ TẢ', uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Multi-Instance',raknet:'RakNet',keySys:'Key System', yes:'Yes',no:'No',hooked:'Hooked',required:'Required',none:'None',fullAst:'Full AST', targetBuild:'Bản Roblox mục tiêu', website:'Website',discord:'Discord',buyGet:'Mua / Tải', themeTitle:'Chọn giao diện',themeSub:'12 theme · tự động lưu', cmpTitle:'So sánh Executor',cmpSub:'Tối đa 3 executor', cmpCriteria:'Tiêu chí',cmpName:'Tên',cmpVersion:'Phiên bản',cmpPlatform:'Nền tảng',cmpStatus:'Status', cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Giá', cmpDecomp:'Decompiler',cmpMulti:'Multi',cmpYes:'Yes',cmpNo:'No',clearAll:'Xoá tất cả', cmpEmpty:'Chưa chọn executor nào',cmpEmptyHint:'Bấm ô vuông "+" trên card để thêm tối đa 3', verTitle:'Bản Roblox Deployments',verSub:'Hash chính thức từ weao.xyz', verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA', verWinNote:'Kênh LIVE chính — có Hyperion/Byfron.',verMacNote:'Không có Byfron kernel driver.', verApkNote:'Bản cho Delta, Codex, Arceus X…',verIosNote:'Cài qua TrollStore / AltStore / Sideloadly.', verVersion:'Phiên bản',verReleased:'Phát hành',copy:'Sao chép',copied:'Đã sao chép', guideTitle:'Hướng dẫn an toàn',guideSub:'Hyperion · UNC · bảo mật tài khoản', guideH1:'Unified Naming Convention (UNC) là gì?', guideP1:'UNC là chuẩn benchmark cho môi trường thực thi Lua.', guideG1:'Chạy mọi hub lớn',guideG2:'Script cơ bản: ESP, Aimbot',guideG3:'Thiếu hàm, dễ lỗi hub phức tạp', guideH2:'Hyperion / Byfron hoạt động ra sao', guideP2:'Hyperion là anti-tamper 64-bit trên Windows của Roblox.', guideH3:'Nguyên tắc vàng: Luôn dùng acc phụ', guideP3:'Không bao giờ chạy script trên acc chính có item hiếm, limited hay số dư Robux cao.', guideH4:'Kiến trúc từng loại executor', guideL1:'Client Mac chưa có Hyperion 64-bit — Macsploit, Opiumware gần như an toàn tuyệt đối.', guideL2:'APK/IPA chạy sandbox riêng — rủi ro banwave thấp hơn nhiều so với Windows.', guideL3:'Không inject vào tiến trình Roblox nên Byfron không thấy — chỉ ESP/Aimbot.', guideL4:'Internal executor đầy đủ Lua nhưng nằm trong tầm ngắm Byfron.', footNote:'© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.', ftGuide:'Hướng dẫn',ftVersions:'Bản Roblox', devTitle:'Cảnh báo bảo mật',devText:'DevTools đã bị phát hiện. Nội dung web đã được <b>ẩn hoàn toàn</b> để bảo vệ mã nguồn. Vui lòng đóng DevTools (F12) để tiếp tục sử dụng.',devSub:'SOURCE PROTECTION · ACTIVE', toastCopiedHash:(v)=>`Đã copy hash: ${v}`, toastCopiedVer:(v)=>`Đã copy phiên bản: ${v}`, toastCopyFail:'Không copy được — cần HTTPS', toastNoData:'Không có dữ liệu để copy', toastThemeSaved:(n)=>`Đã lưu theme ${n}`, toastSyncOk:'Đã đồng bộ dữ liệu trực tiếp', toastSyncFail:'API không phản hồi — dùng dữ liệu cache', toastCmpMax:'Chỉ so sánh tối đa 3 executor', toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`, emptyTitle:'Không có executor nào phù hợp', syncLabel:'sync',loading:'Đang tải...', lbHint:'Cuộn để zoom · Kéo để di chuyển · Vuốt để đổi ảnh · ESC để đóng' },
-  vi: { brandSub:'trình theo dõi executor roblox', tabAll:'Tất cả',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External', robloxBuilds:'Bản Roblox', liveTag:'Giám sát trực tiếp · weao.xyz', dashTop:'Bảng điều khiển',dashBottom:'Roblox Executor', bannerSub:'Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.', btnRefresh:'Làm mới dữ liệu',btnGuide:'Hướng dẫn an toàn', statExec:'Executor',statOp:'Đang chạy',statUndet:'Không bị phát hiện',statAvg:'UNC TB', searchPh:'Tên, dev, phiên bản...', sortUncDesc:'UNC cao nhất',sortUncAsc:'UNC thấp nhất',sortTitleAsc:'Tên A → Z',sortUpdated:'Mới cập nhật',sortSafe:'An toàn nhất', resetFilter:'Xoá bộ lọc', fUpdated:'Đã cập nhật',fUndetected:'Không bị phát hiện',fFree:'Miễn phí',fKeyless:'Không key',fHighUnc:'UNC ≥ 90%',fDecomp:'Có decompiler', stUpdated:'Đã cập nhật',stOutdated:'Chưa cập nhật', stUpdatedNote:'Executor này đã được cập nhật trên WEAO.', stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.', updLabel:'Cập nhật', bfUndetected:'Không bị phát hiện',bfBanwave:'Rủi ro banwave',bfDetected:'Bị phát hiện', bfUndetectedNote:'Executor này được báo cáo là không bị phát hiện.', bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.', bfDetectedNote:(r)=>r?`Đã bị phát hiện — ${r}`:'Hiện đang bị Hyperion phát hiện.', details:'Chi tiết',compare:'So sánh',selected:'Đã chọn', ovOverview:'Tổng quan',ovSpecs:'Thông số',ovShots:'Ảnh chụp', status:'TRẠNG THÁI',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'GIÁ', copyVersion:'PHIÊN BẢN',copyHash:'HASH ROBLOX', byfronDetect:'PHÁT HIỆN BYFRON',clientMod:'BẢO VỆ CLIENT-MOD', detected:'Bị phát hiện',notDetected:'Không bị phát hiện',supported:'Được hỗ trợ',notListed:'Không có', noteByfronFlag:'Lấy trực tiếp từ cờ phát hiện của nguồn dữ liệu.', noteBanwave:'Bypass client-mod bans không đồng nghĩa với sống sót qua banwave.', description:'MÔ TẢ', uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Đa instance',raknet:'RakNet',keySys:'Hệ thống key', yes:'Có',no:'Không',hooked:'Đã hook',required:'Bắt buộc',none:'Không',fullAst:'Full AST', targetBuild:'Bản Roblox mục tiêu', website:'Website',discord:'Discord',buyGet:'Mua / Tải', themeTitle:'Chọn giao diện',themeSub:'12 theme · tự động lưu', cmpTitle:'So sánh Executor',cmpSub:'Tối đa 3 executor', cmpCriteria:'Tiêu chí',cmpName:'Tên',cmpVersion:'Phiên bản',cmpPlatform:'Nền tảng',cmpStatus:'Trạng thái', cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Giá', cmpDecomp:'Decompiler',cmpMulti:'Đa instance',cmpYes:'Có',cmpNo:'Không',clearAll:'Xoá tất cả', cmpEmpty:'Chưa chọn executor nào',cmpEmptyHint:'Bấm ô vuông "+" trên card để thêm tối đa 3', verTitle:'Bản Roblox Deployments',verSub:'Hash chính thức từ weao.xyz', verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA', verWinNote:'Kênh LIVE chính — có Hyperion/Byfron.',verMacNote:'Không có Byfron kernel driver.', verApkNote:'Bản cho Delta, Codex, Arceus X…',verIosNote:'Cài qua TrollStore / AltStore / Sideloadly.', verVersion:'Phiên bản',verReleased:'Phát hành',copy:'Sao chép',copied:'Đã sao chép', guideTitle:'Hướng dẫn an toàn',guideSub:'Hyperion · UNC · bảo mật tài khoản', guideH1:'Unified Naming Convention (UNC) là gì?', guideP1:'UNC là chuẩn benchmark cho môi trường thực thi Lua.', guideG1:'Chạy mọi hub lớn',guideG2:'Script cơ bản: ESP, Aimbot',guideG3:'Thiếu hàm, dễ lỗi hub phức tạp', guideH2:'Hyperion / Byfron hoạt động ra sao', guideP2:'Hyperion là anti-tamper 64-bit trên Windows của Roblox.', guideH3:'Nguyên tắc vàng: Luôn dùng acc phụ', guideP3:'Không bao giờ chạy script trên acc chính có item hiếm, limited hay số dư Robux cao.', guideH4:'Kiến trúc từng loại executor', guideL1:'Client Mac chưa có Hyperion 64-bit — Macsploit, Opiumware gần như an toàn tuyệt đối.', guideL2:'APK/IPA chạy sandbox riêng — rủi ro banwave thấp hơn nhiều so với Windows.', guideL3:'Không inject vào tiến trình Roblox nên Byfron không thấy — chỉ ESP/Aimbot.', guideL4:'Internal executor đầy đủ Lua nhưng nằm trong tầm ngắm Byfron.', footNote:'© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.', ftGuide:'Hướng dẫn',ftVersions:'Bản Roblox', devTitle:'Cảnh báo bảo mật',devText:'DevTools đã bị phát hiện. Nội dung web đã được <b>ẩn hoàn toàn</b> để bảo vệ mã nguồn. Vui lòng đóng DevTools (F12) để tiếp tục sử dụng.',devSub:'SOURCE PROTECTION · ACTIVE', toastCopiedHash:(v)=>`Đã copy hash: ${v}`, toastCopiedVer:(v)=>`Đã copy phiên bản: ${v}`, toastCopyFail:'Không copy được — cần HTTPS', toastNoData:'Không có dữ liệu để copy', toastThemeSaved:(n)=>`Đã lưu theme ${n}`, toastSyncOk:'Đã đồng bộ dữ liệu trực tiếp', toastSyncFail:'API không phản hồi — dùng dữ liệu cache', toastCmpMax:'Chỉ so sánh tối đa 3 executor', toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`, emptyTitle:'Không có executor nào phù hợp', syncLabel:'sync',loading:'Đang tải...', lbHint:'Cuộn để zoom · Kéo để di chuyển · Vuốt để đổi ảnh · ESC để đóng' }
+  en: {
+    brandSub:'roblox executor monitor',
+    tabAll:'All',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External',
+    robloxBuilds:'Roblox builds',
+    liveTag:'Live monitoring · weao.xyz',
+    dashTop:'Control Panel',dashBottom:'Roblox Executor',
+    bannerSub:'Track Hyperion, UNC/sUNC scores, Roblox builds, and safe links.',
+    btnRefresh:'Refresh Data',btnGuide:'Safety Guide',
+    statExec:'Executors',statOp:'Operational',statUndet:'Undetected',statAvg:'Avg UNC',
+    searchPh:'Name, dev, version...',
+    sortUncDesc:'Highest UNC',sortUncAsc:'Lowest UNC',sortTitleAsc:'Name A → Z',sortUpdated:'Recently updated',sortSafe:'Safest first',
+    resetFilter:'Clear filters',
+    fUpdated:'Updated',fUndetected:'Undetected',fFree:'Free',fKeyless:'No key',fHighUnc:'UNC ≥ 90%',fDecomp:'Has decompiler',
+    stUpdated:'Updated',stOutdated:'Not Updated',
+    stUpdatedNote:'This executor is up to date on WEAO.',
+    stOutdatedNote:'This executor has not been updated on WEAO.',
+    updLabel:'Last updated',
+    bfUndetected:'Undetected',bfBanwave:'Banwave risk',bfDetected:'Detected',
+    bfUndetectedNote:'This exploit is reported as undetected.',
+    bfBanwaveNote:'Bypasses client-mod bans but may still be caught in banwaves.',
+    bfDetectedNote:(r)=>r?`Detected — ${r}`:'Currently detected by Hyperion.',
+    details:'Details',compare:'Compare',selected:'Selected',
+    ovOverview:'Overview',ovSpecs:'Specs',ovShots:'Screenshots',
+    status:'STATUS',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'PRICING',
+    copyVersion:'VERSION',copyHash:'ROBLOX HASH',
+    byfronDetect:'BYFRON DETECTION',clientMod:'CLIENT-MOD PROTECTION',
+    detected:'Detected',notDetected:'Not detected',supported:'Supported',notListed:'Not listed',
+    noteByfronFlag:"Taken directly from the data source's detected flag.",
+    noteBanwave:'Bypassing client-mod bans is not the same as surviving banwaves.',
+    description:'DESCRIPTION',
+    uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Multi-Instance',raknet:'RakNet',keySys:'Key System',
+    yes:'Yes',no:'No',hooked:'Hooked',required:'Required',none:'None',fullAst:'Full AST',
+    targetBuild:'Target Roblox build',
+    website:'Website',discord:'Discord',buyGet:'Buy / Get',
+    themeTitle:'Choose theme',themeSub:'12 themes · auto saved',
+    cmpTitle:'Compare Executors',cmpSub:'Up to 3 executors',
+    cmpCriteria:'Criteria',cmpName:'Name',cmpVersion:'Version',cmpPlatform:'Platform',cmpStatus:'Status',
+    cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Price',
+    cmpDecomp:'Decompiler',cmpMulti:'Multi',cmpYes:'Yes',cmpNo:'No',clearAll:'Clear all',
+    cmpEmpty:'No executors selected',cmpEmptyHint:'Click the "+" checkbox on a card to add up to 3',
+    verTitle:'Roblox Deployments',verSub:'Official hash from weao.xyz',
+    verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA',
+    verWinNote:'Main LIVE channel — Hyperion/Byfron active.',verMacNote:'No Byfron kernel driver.',
+    verApkNote:'For Delta, Codex, Arceus X…',verIosNote:'Install via TrollStore / AltStore / Sideloadly.',
+    verVersion:'Version',verReleased:'Released',copy:'Copy',copied:'Copied',
+    guideTitle:'Safety Guide',guideSub:'Hyperion · UNC · account safety',
+    guideH1:'What is Unified Naming Convention (UNC)?',
+    guideP1:'UNC is the benchmark standard for Lua execution environments.',
+    guideG1:'Runs every major hub',guideG2:'Basic scripts: ESP, Aimbot',guideG3:'Missing functions, breaks on complex hubs',
+    guideH2:'How Hyperion / Byfron works',
+    guideP2:"Hyperion is Roblox's 64-bit anti-tamper on Windows.",
+    guideH3:'Golden rule: Always use burner alt accounts',
+    guideP3:'Never run scripts on main accounts with rare items, limiteds, or high Robux balances.',
+    guideH4:'Executor architecture types',
+    guideL1:'Mac client has no 64-bit Hyperion driver — Macsploit, Opiumware are effectively ban-free.',
+    guideL2:'APK/IPA run in their own sandbox — far lower banwave risk than Windows.',
+    guideL3:'Never inject into the Roblox process, so Byfron sees nothing — ESP/aimbot only.',
+    guideL4:"Internal executors give full Lua power but sit permanently in Byfron's crosshairs.",
+    footNote:'© 2026 Exec Status by Huy — reference only, no cheating encouraged.',
+    ftGuide:'Guide',ftVersions:'Roblox builds',
+    devTitle:'Security Warning',devText:'DevTools detected. Content hidden to protect source code. Close DevTools (F12) to continue.',devSub:'SOURCE PROTECTION · ACTIVE',
+    toastCopiedHash:(v)=>`Copied hash: ${v}`,
+    toastCopiedVer:(v)=>`Copied version: ${v}`,
+    toastCopyFail:'Copy failed — HTTPS required',
+    toastNoData:'Nothing to copy',
+    toastThemeSaved:(n)=>`Saved theme ${n}`,
+    toastSyncOk:'Synced live data',
+    toastSyncFail:'API unreachable — using cached data',
+    toastCmpMax:'Compare up to 3 executors only',
+    toastCmpAdded:(n)=>`Added ${n} to compare`,
+    emptyTitle:'No executors match your filters',
+    syncLabel:'sync',loading:'Loading...',
+    lbHint:'Scroll to zoom · Drag to pan · Swipe to switch · ESC to close'
+  },
+  normal: {
+    brandSub:'trình theo dõi executor roblox',
+    tabAll:'Tất cả',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External',
+    robloxBuilds:'Bản Roblox',
+    liveTag:'Giám sát trực tiếp · weao.xyz',
+    dashTop:'Bảng điều khiển',dashBottom:'Roblox Executor',
+    bannerSub:'Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.',
+    btnRefresh:'Làm mới dữ liệu',btnGuide:'Hướng dẫn an toàn',
+    statExec:'Executor',statOp:'Đang chạy',statUndet:'Undetected',statAvg:'UNC TB',
+    searchPh:'Tên, dev, phiên bản...',
+    sortUncDesc:'UNC cao nhất',sortUncAsc:'UNC thấp nhất',sortTitleAsc:'Tên A → Z',sortUpdated:'Mới cập nhật',sortSafe:'An toàn nhất',
+    resetFilter:'Xoá bộ lọc',
+    fUpdated:'Updated',fUndetected:'Undetected',fFree:'Miễn phí',fKeyless:'Không key',fHighUnc:'UNC ≥ 90%',fDecomp:'Có decompiler',
+    stUpdated:'Updated',stOutdated:'Not Updated',
+    stUpdatedNote:'Executor này đã được cập nhật trên WEAO.',
+    stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.',
+    updLabel:'Last updated',
+    bfUndetected:'Undetected',bfBanwave:'Banwave risk',bfDetected:'Detected',
+    bfUndetectedNote:'Executor này được báo cáo là undetected.',
+    bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.',
+    bfDetectedNote:(r)=>r?`Detected — ${r}`:'Hiện đang bị Hyperion phát hiện.',
+    details:'Chi tiết',compare:'So sánh',selected:'Đã chọn',
+    ovOverview:'Tổng quan',ovSpecs:'Thông số',ovShots:'Ảnh chụp',
+    status:'STATUS',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'GIÁ',
+    copyVersion:'PHIÊN BẢN',copyHash:'HASH ROBLOX',
+    byfronDetect:'BYFRON DETECTION',clientMod:'CLIENT-MOD PROTECTION',
+    detected:'Detected',notDetected:'Not detected',supported:'Supported',notListed:'Not listed',
+    noteByfronFlag:'Lấy trực tiếp từ cờ detected của nguồn dữ liệu.',
+    noteBanwave:'Bypass client-mod bans không đồng nghĩa với sống sót qua banwave.',
+    description:'MÔ TẢ',
+    uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Multi-Instance',raknet:'RakNet',keySys:'Key System',
+    yes:'Yes',no:'No',hooked:'Hooked',required:'Required',none:'None',fullAst:'Full AST',
+    targetBuild:'Bản Roblox mục tiêu',
+    website:'Website',discord:'Discord',buyGet:'Mua / Tải',
+    themeTitle:'Chọn giao diện',themeSub:'12 theme · tự động lưu',
+    cmpTitle:'So sánh Executor',cmpSub:'Tối đa 3 executor',
+    cmpCriteria:'Tiêu chí',cmpName:'Tên',cmpVersion:'Phiên bản',cmpPlatform:'Nền tảng',cmpStatus:'Status',
+    cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Giá',
+    cmpDecomp:'Decompiler',cmpMulti:'Multi',cmpYes:'Yes',cmpNo:'No',clearAll:'Xoá tất cả',
+    cmpEmpty:'Chưa chọn executor nào',cmpEmptyHint:'Bấm ô vuông "+" trên card để thêm tối đa 3',
+    verTitle:'Bản Roblox Deployments',verSub:'Hash chính thức từ weao.xyz',
+    verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA',
+    verWinNote:'Kênh LIVE chính — có Hyperion/Byfron.',verMacNote:'Không có Byfron kernel driver.',
+    verApkNote:'Bản cho Delta, Codex, Arceus X…',verIosNote:'Cài qua TrollStore / AltStore / Sideloadly.',
+    verVersion:'Phiên bản',verReleased:'Phát hành',copy:'Sao chép',copied:'Đã sao chép',
+    guideTitle:'Hướng dẫn an toàn',guideSub:'Hyperion · UNC · bảo mật tài khoản',
+    guideH1:'Unified Naming Convention (UNC) là gì?',
+    guideP1:'UNC là chuẩn benchmark cho môi trường thực thi Lua.',
+    guideG1:'Chạy mọi hub lớn',guideG2:'Script cơ bản: ESP, Aimbot',guideG3:'Thiếu hàm, dễ lỗi hub phức tạp',
+    guideH2:'Hyperion / Byfron hoạt động ra sao',
+    guideP2:'Hyperion là anti-tamper 64-bit trên Windows của Roblox.',
+    guideH3:'Nguyên tắc vàng: Luôn dùng acc phụ',
+    guideP3:'Không bao giờ chạy script trên acc chính có item hiếm, limited hay số dư Robux cao.',
+    guideH4:'Kiến trúc từng loại executor',
+    guideL1:'Client Mac chưa có Hyperion 64-bit — Macsploit, Opiumware gần như an toàn tuyệt đối.',
+    guideL2:'APK/IPA chạy sandbox riêng — rủi ro banwave thấp hơn nhiều so với Windows.',
+    guideL3:'Không inject vào tiến trình Roblox nên Byfron không thấy — chỉ ESP/Aimbot.',
+    guideL4:'Internal executor đầy đủ Lua nhưng nằm trong tầm ngắm Byfron.',
+    footNote:'© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.',
+    ftGuide:'Hướng dẫn',ftVersions:'Bản Roblox',
+    devTitle:'Cảnh báo bảo mật',devText:'DevTools đã bị phát hiện. Nội dung web đã được <b>ẩn hoàn toàn</b> để bảo vệ mã nguồn. Vui lòng đóng DevTools (F12) để tiếp tục sử dụng.',devSub:'SOURCE PROTECTION · ACTIVE',
+    toastCopiedHash:(v)=>`Đã copy hash: ${v}`,
+    toastCopiedVer:(v)=>`Đã copy phiên bản: ${v}`,
+    toastCopyFail:'Không copy được — cần HTTPS',
+    toastNoData:'Không có dữ liệu để copy',
+    toastThemeSaved:(n)=>`Đã lưu theme ${n}`,
+    toastSyncOk:'Đã đồng bộ dữ liệu trực tiếp',
+    toastSyncFail:'API không phản hồi — dùng dữ liệu cache',
+    toastCmpMax:'Chỉ so sánh tối đa 3 executor',
+    toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`,
+    emptyTitle:'Không có executor nào phù hợp',
+    syncLabel:'sync',loading:'Đang tải...',
+    lbHint:'Cuộn để zoom · Kéo để di chuyển · Vuốt để đổi ảnh · ESC để đóng'
+  },
+  vi: {
+    brandSub:'trình theo dõi executor roblox',
+    tabAll:'Tất cả',tabWin:'Windows',tabMac:'macOS',tabAnd:'Android',tabIOS:'iOS',tabExt:'External',
+    robloxBuilds:'Bản Roblox',
+    liveTag:'Giám sát trực tiếp · weao.xyz',
+    dashTop:'Bảng điều khiển',dashBottom:'Roblox Executor',
+    bannerSub:'Theo dõi Hyperion, điểm UNC/sUNC, bản Roblox và liên kết an toàn. Cập nhật mỗi 3 phút.',
+    btnRefresh:'Làm mới dữ liệu',btnGuide:'Hướng dẫn an toàn',
+    statExec:'Executor',statOp:'Đang chạy',statUndet:'Không bị phát hiện',statAvg:'UNC TB',
+    searchPh:'Tên, dev, phiên bản...',
+    sortUncDesc:'UNC cao nhất',sortUncAsc:'UNC thấp nhất',sortTitleAsc:'Tên A → Z',sortUpdated:'Mới cập nhật',sortSafe:'An toàn nhất',
+    resetFilter:'Xoá bộ lọc',
+    fUpdated:'Đã cập nhật',fUndetected:'Không bị phát hiện',fFree:'Miễn phí',fKeyless:'Không key',fHighUnc:'UNC ≥ 90%',fDecomp:'Có decompiler',
+    stUpdated:'Đã cập nhật',stOutdated:'Chưa cập nhật',
+    stUpdatedNote:'Executor này đã được cập nhật trên WEAO.',
+    stOutdatedNote:'Executor này chưa được cập nhật trên WEAO.',
+    updLabel:'Cập nhật',
+    bfUndetected:'Không bị phát hiện',bfBanwave:'Rủi ro banwave',bfDetected:'Bị phát hiện',
+    bfUndetectedNote:'Executor này được báo cáo là không bị phát hiện.',
+    bfBanwaveNote:'Bypass client-mod bans nhưng vẫn có thể bị banwave.',
+    bfDetectedNote:(r)=>r?`Đã bị phát hiện — ${r}`:'Hiện đang bị Hyperion phát hiện.',
+    details:'Chi tiết',compare:'So sánh',selected:'Đã chọn',
+    ovOverview:'Tổng quan',ovSpecs:'Thông số',ovShots:'Ảnh chụp',
+    status:'TRẠNG THÁI',byfron:'BYFRON',uncSunc:'UNC / SUNC',pricing:'GIÁ',
+    copyVersion:'PHIÊN BẢN',copyHash:'HASH ROBLOX',
+    byfronDetect:'PHÁT HIỆN BYFRON',clientMod:'BẢO VỆ CLIENT-MOD',
+    detected:'Bị phát hiện',notDetected:'Không bị phát hiện',supported:'Được hỗ trợ',notListed:'Không có',
+    noteByfronFlag:'Lấy trực tiếp từ cờ phát hiện của nguồn dữ liệu.',
+    noteBanwave:'Bypass client-mod bans không đồng nghĩa với sống sót qua banwave.',
+    description:'MÔ TẢ',
+    uncScore:'UNC',suncScore:'sUNC',decompiler:'Decompiler',multiInst:'Đa instance',raknet:'RakNet',keySys:'Hệ thống key',
+    yes:'Có',no:'Không',hooked:'Đã hook',required:'Bắt buộc',none:'Không',fullAst:'Full AST',
+    targetBuild:'Bản Roblox mục tiêu',
+    website:'Website',discord:'Discord',buyGet:'Mua / Tải',
+    themeTitle:'Chọn giao diện',themeSub:'12 theme · tự động lưu',
+    cmpTitle:'So sánh Executor',cmpSub:'Tối đa 3 executor',
+    cmpCriteria:'Tiêu chí',cmpName:'Tên',cmpVersion:'Phiên bản',cmpPlatform:'Nền tảng',cmpStatus:'Trạng thái',
+    cmpByfron:'Byfron',cmpUnc:'UNC',cmpSunc:'sUNC',cmpPrice:'Giá',
+    cmpDecomp:'Decompiler',cmpMulti:'Đa instance',cmpYes:'Có',cmpNo:'Không',clearAll:'Xoá tất cả',
+    cmpEmpty:'Chưa chọn executor nào',cmpEmptyHint:'Bấm ô vuông "+" trên card để thêm tối đa 3',
+    verTitle:'Bản Roblox Deployments',verSub:'Hash chính thức từ weao.xyz',
+    verWin:'Windows 64-bit',verMac:'macOS',verApk:'Android APK',verIos:'iOS IPA',
+    verWinNote:'Kênh LIVE chính — có Hyperion/Byfron.',verMacNote:'Không có Byfron kernel driver.',
+    verApkNote:'Bản cho Delta, Codex, Arceus X…',verIosNote:'Cài qua TrollStore / AltStore / Sideloadly.',
+    verVersion:'Phiên bản',verReleased:'Phát hành',copy:'Sao chép',copied:'Đã sao chép',
+    guideTitle:'Hướng dẫn an toàn',guideSub:'Hyperion · UNC · bảo mật tài khoản',
+    guideH1:'Unified Naming Convention (UNC) là gì?',
+    guideP1:'UNC là chuẩn benchmark cho môi trường thực thi Lua.',
+    guideG1:'Chạy mọi hub lớn',guideG2:'Script cơ bản: ESP, Aimbot',guideG3:'Thiếu hàm, dễ lỗi hub phức tạp',
+    guideH2:'Hyperion / Byfron hoạt động ra sao',
+    guideP2:'Hyperion là anti-tamper 64-bit trên Windows của Roblox.',
+    guideH3:'Nguyên tắc vàng: Luôn dùng acc phụ',
+    guideP3:'Không bao giờ chạy script trên acc chính có item hiếm, limited hay số dư Robux cao.',
+    guideH4:'Kiến trúc từng loại executor',
+    guideL1:'Client Mac chưa có Hyperion 64-bit — Macsploit, Opiumware gần như an toàn tuyệt đối.',
+    guideL2:'APK/IPA chạy sandbox riêng — rủi ro banwave thấp hơn nhiều so với Windows.',
+    guideL3:'Không inject vào tiến trình Roblox nên Byfron không thấy — chỉ ESP/Aimbot.',
+    guideL4:'Internal executor đầy đủ Lua nhưng nằm trong tầm ngắm Byfron.',
+    footNote:'© 2026 Exec Status by Huy — tham khảo, không khuyến khích gian lận.',
+    ftGuide:'Hướng dẫn',ftVersions:'Bản Roblox',
+    devTitle:'Cảnh báo bảo mật',devText:'DevTools đã bị phát hiện. Nội dung web đã được <b>ẩn hoàn toàn</b> để bảo vệ mã nguồn. Vui lòng đóng DevTools (F12) để tiếp tục sử dụng.',devSub:'SOURCE PROTECTION · ACTIVE',
+    toastCopiedHash:(v)=>`Đã copy hash: ${v}`,
+    toastCopiedVer:(v)=>`Đã copy phiên bản: ${v}`,
+    toastCopyFail:'Không copy được — cần HTTPS',
+    toastNoData:'Không có dữ liệu để copy',
+    toastThemeSaved:(n)=>`Đã lưu theme ${n}`,
+    toastSyncOk:'Đã đồng bộ dữ liệu trực tiếp',
+    toastSyncFail:'API không phản hồi — dùng dữ liệu cache',
+    toastCmpMax:'Chỉ so sánh tối đa 3 executor',
+    toastCmpAdded:(n)=>`Đã thêm ${n} vào so sánh`,
+    emptyTitle:'Không có executor nào phù hợp',
+    syncLabel:'sync',loading:'Đang tải...',
+    lbHint:'Cuộn để zoom · Kéo để di chuyển · Vuốt để đổi ảnh · ESC để đóng'
+  }
 };
 
 let currentLang = 'normal';
 const t = k => (I18N[currentLang] && I18N[currentLang][k]) || k;
 
-function platDisplayName(p){ return p==='Mac'?'macOS':p==='iOS'?'iOS':p||'Windows'; }
-function verLabel(v){ const s=String(v||''); if(!s) return 'v—'; return /^[vV]/.test(s)?s:'v'+s; }
+function platDisplayName(p){
+  if(p === 'Mac') return 'macOS';
+  if(p === 'iOS') return 'iOS';
+  if(p === 'External') return 'External';
+  if(p === 'Windows') return 'Windows';
+  if(p === 'Android') return 'Android';
+  return p || 'Windows';
+}
+
+function verLabel(v){
+  const s = String(v||'');
+  if(!s) return 'v—';
+  return /^[vV]/.test(s) ? s : 'v' + s;
+}
 
 function parseWEAODate(str){
   if(!str || str==='Unknown') return null;
   const s = String(str).trim();
   const m = s.match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})[,\s]+(?:at\s+)?(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?/i);
   if(!m) return null;
-  const mo = parseInt(m[1],10)-1, day=parseInt(m[2],10), yr=parseInt(m[3],10);
+  const mo = parseInt(m[1],10)-1;
+  const day = parseInt(m[2],10);
+  const yr = parseInt(m[3],10);
   let hr = parseInt(m[4],10);
-  const mn = parseInt(m[5],10), sc = parseInt(m[6]||'0',10);
+  const mn = parseInt(m[5],10);
+  const sc = parseInt(m[6]||'0',10);
   const ampm = (m[7]||'').toUpperCase();
   if(ampm==='PM' && hr<12) hr+=12;
   if(ampm==='AM' && hr===12) hr=0;
@@ -760,13 +1642,13 @@ function formatUpdated(utcMs, lang){
   if(utcMs===null) return '';
   const d = new Date(utcMs);
   if(lang==='en'){
-    const dp = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'2-digit',day:'2-digit',year:'numeric'}).format(d);
-    const tp = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',hour:'numeric',minute:'2-digit',hour12:true}).format(d);
-    return t('updLabel')+': '+dp+' at '+tp+' UTC';
+    const datePart = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'2-digit',day:'2-digit',year:'numeric'}).format(d);
+    const timePart = new Intl.DateTimeFormat('en-US',{timeZone:'UTC',hour:'numeric',minute:'2-digit',hour12:true}).format(d);
+    return t('updLabel')+': '+datePart+' at '+timePart+' UTC';
   }
-  const dp = new Intl.DateTimeFormat('vi-VN',{timeZone:'Asia/Ho_Chi_Minh',day:'2-digit',month:'2-digit',year:'numeric'}).format(d);
-  const tp = new Intl.DateTimeFormat('vi-VN',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',hour12:false}).format(d);
-  return t('updLabel')+': '+tp+' · '+dp+' (UTC+7)';
+  const datePart = new Intl.DateTimeFormat('vi-VN',{timeZone:'Asia/Ho_Chi_Minh',day:'2-digit',month:'2-digit',year:'numeric'}).format(d);
+  const timePart = new Intl.DateTimeFormat('vi-VN',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',hour12:false}).format(d);
+  return t('updLabel')+': '+timePart+' · '+datePart+' (UTC+7)';
 }
 
 const THEMES=[
@@ -812,93 +1694,6 @@ const isAnyValidURL=u=>{try{const x=new URL(u);return['http:','https:'].includes
 function lsGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catch(e){return f}}
 function lsSet(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
 
-/* ═══════════════════════════════════════════════════════════════════
-   CACHE localStorage — hiển thị instant khi mở web
-   ═══════════════════════════════════════════════════════════════════ */
-function saveCache(executors, versions){
-  try{
-    const payload = { executors, versions, ts: Date.now() };
-    localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
-  }catch(e){}
-}
-function loadCache(){
-  try{
-    const raw = localStorage.getItem(CACHE_KEY);
-    if(!raw) return null;
-    const obj = JSON.parse(raw);
-    if(!obj || !Array.isArray(obj.executors)) return null;
-    return obj;
-  }catch(e){ return null; }
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   LEADER ELECTION — chỉ 1 tab fetch, các tab khác nhận qua BroadcastChannel
-   ═══════════════════════════════════════════════════════════════════ */
-function checkLeader(){
-  const now = Date.now();
-  let info = null;
-  try { info = JSON.parse(localStorage.getItem(LEADER_KEY) || 'null'); }catch(e){}
-  const lastBeat = info && typeof info.ts === 'number' ? info.ts : 0;
-  const leaderTabId = info && info.id ? info.id : '';
-  if(!info || now - lastBeat > LEADER_STALE_MS || leaderTabId === TAB_ID){
-    isLeader = true;
-    try { localStorage.setItem(LEADER_KEY, JSON.stringify({ id: TAB_ID, ts: now })); }catch(e){}
-  } else {
-    isLeader = false;
-  }
-}
-function heartbeat(){
-  if(isLeader){
-    try { localStorage.setItem(LEADER_KEY, JSON.stringify({ id: TAB_ID, ts: Date.now() })); }catch(e){}
-  }
-}
-function releaseLeader(){
-  try{
-    const info = JSON.parse(localStorage.getItem(LEADER_KEY) || 'null');
-    if(info && info.id === TAB_ID){ localStorage.removeItem(LEADER_KEY); }
-  }catch(e){}
-}
-
-if(bc){
-  bc.onmessage = (e) => {
-    const msg = e.data || {};
-    if(msg.type === 'data_update' && msg.tabId !== TAB_ID){
-      /* Nhận data từ leader khác */
-      if(Array.isArray(msg.executors)){
-        state.executors = buildExecutorList(msg.executors);
-        if(msg.versions && typeof msg.versions.Windows === 'string'){
-          state.versions = msg.versions;
-        }
-        state.isLive = true;
-        render();
-      }
-    }
-    if(msg.type === 'leader_release' && !isLeader){
-      /* Leader vừa đóng, kiểm tra lại sau */
-      setTimeout(checkLeader, 300);
-    }
-  };
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   FIX: đọc updateStatus với nhiều tên field khác nhau
-   ═══════════════════════════════════════════════════════════════════ */
-function pickUpdateStatus(raw){
-  if(!raw || typeof raw !== 'object') return false;
-  const keys = ['updateStatus','updated','isUpdated','working','is_updated','up_to_date','upToDate'];
-  for(let i=0;i<keys.length;i++){
-    const v = raw[keys[i]];
-    if(v === true) return true;
-    if(v === false) return false;
-    if(v === 'true' || v === 'yes' || v === '1' || v === 'updated' || v === 'working') return true;
-    if(v === 'false' || v === 'no' || v === '0' || v === 'outdated') return false;
-  }
-  const st = String(raw.status || '').toLowerCase();
-  if(st === 'updated' || st === 'working' || st === 'up') return true;
-  if(st === 'outdated' || st === 'not_updated' || st === 'not updated' || st === 'down') return false;
-  return true;
-}
-
 function normalizeCustomExec(raw, idx){
   if(!raw || typeof raw !== 'object' || !raw.name) return null;
   const imgKeys = Object.keys(raw).filter(k => /^image_link\d+$/.test(k));
@@ -917,8 +1712,7 @@ function normalizeCustomExec(raw, idx){
   const byfron = String(raw.byfron || "undetected").toLowerCase();
   const detected = byfron !== "undetected";
   const clientmods = byfron === "banwave";
-  const stLower = String(raw.status || "updated").toLowerCase();
-  const updateStatus = (stLower === 'updated' || stLower === 'working' || stLower === 'up');
+  const updateStatus = String(raw.status || "updated").toLowerCase() === "updated";
   const extype = platform === "External" ? "wexternal"
               : platform === "Mac" ? "mexecutor"
               : platform === "Android" ? "aexecutor"
@@ -991,39 +1785,25 @@ function normalizeExploit(raw,idx){
   const feats=raw.recommendedReason&&Array.isArray(raw.recommendedReason.features)?raw.recommendedReason.features.filter(f=>typeof f==='string'):[];
   return{
     _id:typeof raw._id==='string'?raw._id:`live-${idx}`,
-    title:raw.title.trim(),
-    version:raw.version||"—",
-    updatedDate:raw.updatedDate||"Unknown",
-    uncStatus:!!raw.uncStatus,
-    uncPercentage:typeof raw.uncPercentage==='number'?raw.uncPercentage:undefined,
+    title:raw.title.trim(),version:raw.version||"—",updatedDate:raw.updatedDate||"Unknown",
+    uncStatus:!!raw.uncStatus,uncPercentage:typeof raw.uncPercentage==='number'?raw.uncPercentage:undefined,
     suncPercentage:typeof raw.suncPercentage==='number'?raw.suncPercentage:undefined,
-    free:!!raw.free,
-    cost:raw.cost,
-    detected:!!raw.detected,
-    detectionReason:raw.detectionReason,
-    updateStatus: pickUpdateStatus(raw),
-    rbxversion:raw.rbxversion,
-    websitelink:safeURL(raw.websitelink),
-    discordlink:safeURL(raw.discordlink),
-    purchaselink:safeURL(raw.purchaselink),
-    platform,extype:raw.extype,
-    keysystem:!!raw.keysystem,
-    decompiler:!!raw.decompiler,
-    multiInject:!!raw.multiInject,
-    clientmods:!!raw.clientmods,
-    raknet:!!raw.raknet,
+    free:!!raw.free,cost:raw.cost,detected:!!raw.detected,detectionReason:raw.detectionReason,
+    updateStatus:!!raw.updateStatus,rbxversion:raw.rbxversion,
+    websitelink:safeURL(raw.websitelink),discordlink:safeURL(raw.discordlink),purchaselink:safeURL(raw.purchaselink),
+    platform,extype:raw.extype,keysystem:!!raw.keysystem,decompiler:!!raw.decompiler,
+    multiInject:!!raw.multiInject,clientmods:!!raw.clientmods,raknet:!!raw.raknet,
     slug:raw.slug&&typeof raw.slug==='object'
       ? {fullDescription:raw.slug.fullDescription, logo:safeURL(raw.slug.logo), owner:raw.slug.owner, screenshots: shots.length ? shots : undefined}
       : undefined,
-    recommendedReason:{features:feats},
-    elementCertified:!!raw.elementCertified,
+    recommendedReason:{features:feats},elementCertified:!!raw.elementCertified,
     isCustom:false
   };
 }
 
 const state={
   executors: buildExecutorList(FALLBACK_EXPLOITS.slice()),
-  versions: FALLBACK_VERSIONS,
+  versions:FALLBACK_VERSIONS,
   filters:{search:"",platform:"All",sort:"unc-desc",updated:false,undetected:false,free:false,keyless:false,highUnc:false,decomp:false},
   compare:[],
   drawerId:null,
@@ -1154,145 +1934,37 @@ function renderVersionBar(){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   TRY FETCH — direct trước, nếu fail qua proxy. Skip proxy nếu direct OK gần đây.
-   ═══════════════════════════════════════════════════════════════════ */
-function getLastDirectOK(){
-  try{ return Number(sessionStorage.getItem('huy_exec_direct_ok') || 0); }catch(e){ return 0; }
-}
-function markDirectOK(){
-  try{ sessionStorage.setItem('huy_exec_direct_ok', String(Date.now())); }catch(e){}
-}
-
-async function tryFetch(url){
-  const directOKRecently = (Date.now() - getLastDirectOK()) < 600000; /* 10 phút */
-  const proxies = directOKRecently ? [CORS_PROXIES[0]] : CORS_PROXIES;
-  for(let i=0;i<proxies.length;i++){
-    try{
-      const ctl = new AbortController();
-      const timer = setTimeout(()=>ctl.abort(), 10000);
-      const res = await fetch(proxies[i](url), {
-        signal: ctl.signal,
-        cache: 'no-store',
-        credentials: 'omit',
-        mode: 'cors',
-        headers: { 'Accept': 'application/json' }
-      });
-      clearTimeout(timer);
-      if(!res.ok) continue;
-      const data = await res.json();
-      if(i === 0) markDirectOK();
-      return data;
-    }catch(e){}
-  }
-  return null;
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   FETCH DATA — với exponential backoff + leader-only
-   ═══════════════════════════════════════════════════════════════════ */
-let isFetching = false;
-async function fetchData(showToast, opts){
-  opts = opts || {};
-  if(isFetching) return;
-
-  /* Nếu không phải leader và không force → skip (tránh spam API) */
-  if(!isLeader && !opts.force) return;
-
-  /* Exponential backoff: nếu failStreak >= 2, chờ lâu hơn */
-  if(failStreak >= 2 && !opts.force){
-    const lastFetch = Number(sessionStorage.getItem('huy_exec_last_fetch') || 0);
-    const waitMs = Math.min(BASE_INTERVAL * Math.pow(2, failStreak - 1), MAX_INTERVAL);
-    if(Date.now() - lastFetch < waitMs) return;
-  }
-
-  isFetching = true;
-  try{ sessionStorage.setItem('huy_exec_last_fetch', String(Date.now())); }catch(e){}
-
+async function fetchData(showToast){
+  let isLive=false;
   let liveList = null;
-  let versions = null;
-
   try{
-    const bust = (url) => url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now() + Math.random().toString(36).slice(2,8);
-    const [arr, v] = await Promise.all([
-      tryFetch(bust(API_EXPLOITS)),
-      tryFetch(bust(API_VERSIONS))
+    const ctl=new AbortController();
+    const timer=setTimeout(()=>ctl.abort(),6000);
+    const [rE,rV]=await Promise.allSettled([
+      fetch(API_EXPLOITS,{signal:ctl.signal,headers:{Accept:'application/json','User-Agent':'WEAO-3PService'}}),
+      fetch(API_VERSIONS,{signal:ctl.signal,headers:{Accept:'application/json','User-Agent':'WEAO-3PService'}})
     ]);
-    if(Array.isArray(arr) && arr.length){
-      const norm = arr.map((x,i)=>normalizeExploit(x,i)).filter(Boolean);
-      if(norm.length) liveList = norm;
+    clearTimeout(timer);
+    if(rE.status==='fulfilled'&&rE.value.ok){
+      const arr=await rE.value.json();
+      if(Array.isArray(arr)){
+        const norm=arr.map((x,i)=>normalizeExploit(x,i)).filter(Boolean);
+        if(norm.length){liveList=norm;isLive=true}
+      }
     }
-    if(v && typeof v.Windows === 'string'){
-      versions = v;
+    if(rV.status==='fulfilled'&&rV.value.ok){
+      const v=await rV.value.json();
+      if(v&&typeof v.Windows==='string'){state.versions=v;isLive=true}
     }
   }catch(e){}
-
-  const success = !!(liveList || versions);
-
   if(liveList){
     state.executors = buildExecutorList(liveList);
   } else {
-    const cached = loadCache();
-    if(cached && cached.executors && cached.executors.length){
-      state.executors = cached.executors;
-    } else {
-      state.executors = buildExecutorList(FALLBACK_EXPLOITS.slice());
-    }
+    state.executors = buildExecutorList(FALLBACK_EXPLOITS.slice());
   }
-  if(versions){
-    state.versions = versions;
-  }
-
-  state.isLive = success;
-
-  if(success){
-    failStreak = 0;
-    saveCache(state.executors, state.versions);
-    /* Broadcast cho các tab khác */
-    if(bc){
-      try{
-        bc.postMessage({
-          type: 'data_update',
-          tabId: TAB_ID,
-          executors: liveList || null,
-          versions: versions || null
-        });
-      }catch(e){}
-    }
-  } else {
-    failStreak++;
-  }
-
+  state.isLive=isLive;
   render();
-
-  const upd=$('#verbarSyncTime');
-  if(upd){
-    const now=new Date();
-    const loc = currentLang==='en'?'en-US':'vi-VN';
-    const ts=new Intl.DateTimeFormat(loc,{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit'}).format(now);
-    upd.textContent=t('syncLabel')+' '+ts;
-  }
-  if(showToast) toast(success?t('toastSyncOk'):t('toastSyncFail'), success?'ok':'warn');
-  isFetching = false;
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   SCHEDULE POLL — interval tự tăng khi fail (exponential backoff)
-   ═══════════════════════════════════════════════════════════════════ */
-function getNextInterval(){
-  if(failStreak === 0) return BASE_INTERVAL;
-  const mult = Math.min(Math.pow(2, failStreak), 10);
-  return Math.min(BASE_INTERVAL * mult, MAX_INTERVAL);
-}
-function scheduleNextPoll(){
-  if(pollTimer) clearTimeout(pollTimer);
-  pollTimer = setTimeout(async () => {
-    checkLeader();
-    if(isLeader && document.visibilityState === 'visible'){
-      await fetchData(false);
-    }
-    scheduleNextPoll();
-  }, getNextInterval());
+  if(showToast) toast(isLive?t('toastSyncOk'):t('toastSyncFail'),isLive?'ok':'warn');
 }
 
 function animateNumber(el, from, to, duration){
@@ -1767,7 +2439,11 @@ function renderDrawer(){
   });
 }
 
-const lbState = { isOpen:false, images:[], index:0, scale:1, minScale:1, maxScale:6, tx:0, ty:0, hintTimer:null, rafId:null, mouseDown:false, mouseMoved:false, mouseStartX:0, mouseStartY:0, mouseStartTime:0, dragStartTx:0, dragStartTy:0 };
+const lbState = {
+  isOpen:false, images:[], index:0, scale:1, minScale:1, maxScale:6, tx:0, ty:0,
+  hintTimer:null, rafId:null,
+  mouseDown:false, mouseMoved:false, mouseStartX:0, mouseStartY:0, mouseStartTime:0, dragStartTx:0, dragStartTy:0
+};
 
 function openLightbox(images, startIndex){
   if(!images || !images.length) return;
@@ -1784,6 +2460,7 @@ function openLightbox(images, startIndex){
   loadLbImage();
   showLbHint();
 }
+
 function closeLightbox(){
   if(!lbState.isOpen) return;
   lbState.isOpen = false;
@@ -1794,7 +2471,9 @@ function closeLightbox(){
   if(lbState.hintTimer){clearTimeout(lbState.hintTimer);lbState.hintTimer=null;}
   const hint = $('#lbHint'); if(hint) hint.classList.remove('show');
 }
+
 function resetTransform(){ lbState.scale=1; lbState.tx=0; lbState.ty=0; applyLbTransform(); }
+
 function applyLbTransform(){
   const img = $('#lbImg');
   if(!img) return;
@@ -1804,6 +2483,7 @@ function applyLbTransform(){
   const zo = $('#lbZoomOut'); if(zo) zo.disabled = lbState.scale <= lbState.minScale + 0.001;
   const zi = $('#lbZoomIn');  if(zi) zi.disabled = lbState.scale >= lbState.maxScale - 0.001;
 }
+
 function updateLbCounter(){
   const idx = $('#lbIndex'); const tot = $('#lbTotal');
   if(idx) idx.textContent = String(lbState.index + 1);
@@ -1812,6 +2492,7 @@ function updateLbCounter(){
   if(prev) prev.disabled = lbState.images.length <= 1;
   if(next) next.disabled = lbState.images.length <= 1;
 }
+
 function loadLbImage(){
   const img = $('#lbImg'); const sp = $('#lbSpinner');
   if(!img) return;
@@ -1833,8 +2514,10 @@ function loadLbImage(){
   if(img.complete && img.naturalWidth > 0){ settle(); }
   setTimeout(settle, 1500);
 }
+
 function nextLbImage(){ if(lbState.images.length <= 1) return; lbState.index = (lbState.index + 1) % lbState.images.length; updateLbCounter(); loadLbImage(); }
 function prevLbImage(){ if(lbState.images.length <= 1) return; lbState.index = (lbState.index - 1 + lbState.images.length) % lbState.images.length; updateLbCounter(); loadLbImage(); }
+
 function zoomInLb(){ lbState.scale = Math.min(lbState.scale * 1.35, lbState.maxScale); clampPan(); applyLbTransform(); }
 function zoomOutLb(){
   lbState.scale = Math.max(lbState.scale / 1.35, lbState.minScale);
@@ -1842,6 +2525,7 @@ function zoomOutLb(){
   else { clampPan(); }
   applyLbTransform();
 }
+
 function clampPan(){
   const img = $('#lbImg');
   if(!img) return;
@@ -1853,10 +2537,12 @@ function clampPan(){
   if(imgW <= vw) lbState.tx = 0; else lbState.tx = Math.max(-maxTx, Math.min(maxTx, lbState.tx));
   if(imgH <= vh) lbState.ty = 0; else lbState.ty = Math.max(-maxTy, Math.min(maxTy, lbState.ty));
 }
+
 function scheduleApply(){
   if(lbState.rafId) return;
   lbState.rafId = requestAnimationFrame(()=>{ lbState.rafId = null; applyLbTransform(); });
 }
+
 function showLbHint(){
   const hint = $('#lbHint');
   if(!hint) return;
@@ -1869,7 +2555,7 @@ function showLbHint(){
 function bindLightbox(){
   const lb = $('#lightbox');
   if(!lb) return;
-  const bc2 = $('#lbClose'); if(bc2) bc2.onclick = (e)=>{e.stopPropagation(); closeLightbox();};
+  const bc = $('#lbClose'); if(bc) bc.onclick = (e)=>{e.stopPropagation(); closeLightbox();};
   const bp = $('#lbPrev'); if(bp) bp.onclick = (e)=>{e.stopPropagation(); prevLbImage();};
   const bn = $('#lbNext'); if(bn) bn.onclick = (e)=>{e.stopPropagation(); nextLbImage();};
   const zi = $('#lbZoomIn'); if(zi) zi.onclick = (e)=>{e.stopPropagation(); zoomInLb();};
@@ -1936,6 +2622,7 @@ function bindLightbox(){
   const touchState = { mode:'none', startX:0, startY:0, startTx:0, startTy:0, pinchStartDist:0, pinchStartScale:1, pinchStartTx:0, pinchStartTy:0, pinchCenterX:0, pinchCenterY:0, t0:0, moved:false };
   function getTouchDist(t1, t2){ return Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY); }
   function getTouchCenter(t1, t2){ return { x:(t1.clientX + t2.clientX)/2, y:(t1.clientY + t2.clientY)/2 }; }
+
   if(stage){
     stage.addEventListener('touchstart', (e)=>{
       if(!lbState.isOpen) return;
@@ -2207,10 +2894,10 @@ function bindEvents(){
       render();
     });
   }
-  const bp=$('#btnRefresh2');if(bp) bp.addEventListener('click',()=>fetchData(true,{force:true}));
-  const bs=$('#btnSync');if(bs) bs.addEventListener('click',()=>fetchData(true,{force:true}));
+  const bp=$('#btnRefresh2');if(bp) bp.addEventListener('click',()=>fetchData(true));
+  const bs=$('#btnSync');if(bs) bs.addEventListener('click',()=>fetchData(true));
   const bt=$('#btnThemes');if(bt) bt.addEventListener('click',()=>openModal('ovlTheme'));
-  const bc3=$('#btnCompare');if(bc3) bc3.addEventListener('click',openCompare);
+  const bc=$('#btnCompare');if(bc) bc.addEventListener('click',openCompare);
   const bg=$('#btnGuide');if(bg) bg.addEventListener('click',openGuide);
   const bg2=$('#btnGuide2');if(bg2) bg2.addEventListener('click',openGuide);
   document.querySelectorAll('[data-close]').forEach(function(b){
@@ -2289,26 +2976,6 @@ function bindEvents(){
     }
   });
   bindLightbox();
-
-  /* Auto refresh khi tab quay lại / có focus / có mạng (chỉ leader fetch) */
-  document.addEventListener('visibilitychange', function(){
-    if(document.visibilityState === 'visible'){
-      checkLeader();
-      if(isLeader) fetchData(false);
-    }
-  });
-  window.addEventListener('focus', function(){
-    checkLeader();
-    if(isLeader) fetchData(false);
-  });
-  window.addEventListener('online', function(){
-    checkLeader();
-    if(isLeader) fetchData(false, {force:true});
-  });
-  window.addEventListener('beforeunload', function(){
-    releaseLeader();
-    if(bc) try{ bc.postMessage({ type:'leader_release', tabId: TAB_ID }); }catch(e){}
-  });
 }
 
 (function security(){
@@ -2374,6 +3041,13 @@ function bindEvents(){
       try{ Object.freeze(console); }catch(e){}
     }catch(e){}
   })();
+  /* ═══════════════════════════════════════════════════════════════
+     FIX: XOÁ window-dimension heuristic — nguồn false-positive khi
+     user phóng to web bằng Ctrl + con lăn chuột / Ctrl + / Ctrl -.
+     Lý do: khi zoom, innerWidth (CSS px) co lại nhưng outerWidth
+     (pixel vật lý) giữ nguyên → diff tăng vọt → tưởng nhầm là
+     DevTools mở → bật SECURITY ALERT oan.
+     ═══════════════════════════════════════════════════════════════ */
   (function(){
     try{
       const desc = Object.getOwnPropertyDescriptor(Function.prototype, 'constructor');
@@ -2426,6 +3100,7 @@ function bindEvents(){
       document.documentElement.innerHTML = '<body style="background:#000"></body>';
     }
   }catch(e){}
+  /* Ngưỡng busy loop tăng 400ms → 900ms để tránh false-positive trên máy yếu */
   setTimeout(function(){
     const s = performance.now();
     for(let i = 0; i < 100000; i++){ /* busy */ }
@@ -2435,16 +3110,6 @@ function bindEvents(){
 })();
 
 function init(){
-  /* 1. Hiển thị cache ngay lập tức để load 100% dữ liệu */
-  const cached = loadCache();
-  if(cached && Array.isArray(cached.executors) && cached.executors.length){
-    state.executors = cached.executors;
-    if(cached.versions && typeof cached.versions.Windows === 'string'){
-      state.versions = cached.versions;
-    }
-  }
-
-  /* 2. Theme + UI setup */
   const saved=lsGet(THEME_KEY,'emerald');
   const valid=THEMES.some(t=>t.id===saved)?saved:'emerald';
   applyTheme(valid,false);
@@ -2454,17 +3119,8 @@ function init(){
   setInterval(updateClock,1000);
   bindEvents();
   render();
-
-  /* 3. Leader election — chờ 200ms để các tab khác đăng ký */
-  setTimeout(function(){
-    checkLeader();
-    if(isLeader){
-      fetchData(false);
-    }
-    setInterval(checkLeader, 10000);
-    setInterval(heartbeat, 10000);
-    scheduleNextPoll();
-  }, 200);
+  fetchData(false);
+  setInterval(function(){fetchData(false)},180000);
 }
 
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
