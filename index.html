@@ -1261,44 +1261,7 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
   }catch(e){}
 })();
 
-/* ═══════════════════════════════════════════════════════════════════
-   ▸ THÊM EXECUTOR CỦA BẠN TẠI MẢNG MY_EXECUTORS NGAY BÊN DƯỚI
-   ▸ COPY KHỐI { ... } → DÁN THÊM → NHỚ DẤU PHẨY "," Ở CUỐI KHỐI
-   ▸ BAO NHIÊU EXECUTOR CŨNG ĐƯỢC
-   
-   📋 BẢNG ĐẦY ĐỦ CÁC TRƯỜNG:
-   
-   name:       "QH Exec"       ← BẮT BUỘC
-   tag:        "MY"            ← Nhãn (≤6 ký tự), để "" → ẩn
-   tag_color:  "#a855f7"       ← Màu HEX, để "" → theo theme
-   ver:        "3.0.1"         ← Phiên bản
-   owner:      "Me"            ← Dev / tổ chức
-   certified:  false           ← true = tick xanh ✓
-   updated:    "09/20/2026 at 5:00 AM UTC"
-   platform:   "Windows"       ← Windows/Mac/Android/iOS/External
-   status:     "updated"       ← "updated" / "outdated" / "working"
-   byfron:     "undetected"    ← "undetected" / "banwave" / "detected"
-   detectionReason: ""         ← Lý do phát hiện
-   unc:   98                   ← Điểm UNC 0-100 (số)
-   sunc:  95                   ← Điểm sUNC 0-100 (số)
-   free:   true                ← true miễn phí, false trả phí
-   cost:   ""                  ← Giá
-   hash:   "version-abc123"    ← Hash Roblox build
-   decompiler:   true
-   multiInject:  true
-   raknet:       true
-   keysystem:    false
-   image_link1:  "URL"         ← ẢNH LOGO trên card
-   image_link2:  "URL"         ← Screenshot 1
-   image_link3:  "URL"         ← Screenshot 2
-   image_link4:  "URL"         ← thêm bao nhiêu cũng được (1→99)
-   info:     ""                ← Mô tả
-   website:  ""                ← Link website
-   discord:  ""                ← Link Discord
-   purchase: ""                ← Link mua/tải
-   ═══════════════════════════════════════════════════════════════════ */
 const MY_EXECUTORS = [
-  /* 👇 DÁN KHỐI EXECUTOR CỦA BẠN VÀO ĐÂY 👇 */
   {
      name: "Nam Executor",
      tag: "Nam",
@@ -1329,8 +1292,6 @@ const MY_EXECUTORS = [
      discord: "https://discord.gg/Kx3Vp2gMD",
      purchase: ""
    },
-
-  /* 👆 ĐỪNG QUÊN DẤU PHẨY "," Ở CUỐI MỖI KHỐI 👆 */
 ];
 
 const API_EXPLOITS='https://weao.xyz/api/status/exploits';
@@ -1662,7 +1623,6 @@ const isAnyValidURL=u=>{try{const x=new URL(u);return['http:','https:'].includes
 function lsGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catch(e){return f}}
 function lsSet(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
 
-/* FIX CHÍNH: pickUpdateStatus() — đọc field updateStatus từ WEAO linh hoạt */
 function pickUpdateStatus(raw){
   if(!raw || typeof raw !== 'object') return false;
   const keys = ['updateStatus','updated','isUpdated','working','is_updated','up_to_date','upToDate'];
@@ -1697,11 +1657,8 @@ function normalizeCustomExec(raw, idx){
   const byfron = String(raw.byfron || "undetected").toLowerCase();
   const detected = byfron !== "undetected";
   const clientmods = byfron === "banwave";
-  
-  /* FIX: Chấp nhận cả "working" và "updated" */
   const stLower = String(raw.status || "updated").toLowerCase();
   const updateStatus = (stLower === 'updated' || stLower === 'working' || stLower === 'up');
-  
   const extype = platform === "External" ? "wexternal"
               : platform === "Mac" ? "mexecutor"
               : platform === "Android" ? "aexecutor"
@@ -1778,7 +1735,7 @@ function normalizeExploit(raw,idx){
     uncStatus:!!raw.uncStatus,uncPercentage:typeof raw.uncPercentage==='number'?raw.uncPercentage:undefined,
     suncPercentage:typeof raw.suncPercentage==='number'?raw.suncPercentage:undefined,
     free:!!raw.free,cost:raw.cost,detected:!!raw.detected,detectionReason:raw.detectionReason,
-    updateStatus: pickUpdateStatus(raw), /* FIX: Dùng pickUpdateStatus */
+    updateStatus: pickUpdateStatus(raw),
     rbxversion:raw.rbxversion,
     websitelink:safeURL(raw.websitelink),discordlink:safeURL(raw.discordlink),purchaselink:safeURL(raw.purchaselink),
     platform,extype:raw.extype,keysystem:!!raw.keysystem,decompiler:!!raw.decompiler,
@@ -1925,32 +1882,30 @@ function renderVersionBar(){
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   FIX SYNC WEAO: cache-buster + no-store + CORS proxy fallback chain
+   FIX LẤY DATA 100% TỪ WEAO:
+   - CORS proxy fallback chain (Vercel có thể bị block IP)
+   - Bỏ forbidden headers (User-Agent, Cache-Control, Pragma)
+   - Cache buster ?_t=timestamp
    ═══════════════════════════════════════════════════════════════════ */
 const CORS_PROXIES = [
   u => u,
   u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
   u => 'https://corsproxy.io/?' + encodeURIComponent(u),
-  u => 'https://thingproxy.freeboard.io/fetch/' + u
+  u => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u)
 ];
 
-async function tryFetchWEAO(url){
-  const bust = url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now() + Math.random().toString(36).slice(2,8);
-  for(let i=0;i<CORS_PROXIES.length;i++){
-    try{
-      const ctl = new AbortController();
-      const timer = setTimeout(()=>ctl.abort(), 8000);
-      const res = await fetch(CORS_PROXIES[i](bust), {
-        signal: ctl.signal,
+async function fetchWEAO(url){
+  const bustedUrl = url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now() + Math.random().toString(36).slice(2,8);
+  for (let i = 0; i < CORS_PROXIES.length; i++) {
+    try {
+      const res = await fetch(CORS_PROXIES[i](bustedUrl), {
         cache: 'no-store',
-        credentials: 'omit',
-        mode: 'cors',
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Accept': 'application/json' } // KHÔNG dùng User-Agent!
       });
-      clearTimeout(timer);
-      if(!res.ok) continue;
-      return await res.json();
-    }catch(e){}
+      if (res.ok) return await res.json();
+    } catch(e) {
+      // Lỗi mạng/CORS -> thử proxy tiếp theo
+    }
   }
   return null;
 }
@@ -1963,8 +1918,8 @@ async function fetchData(showToast){
   let liveList = null;
   try{
     const [arr, v] = await Promise.all([
-      tryFetchWEAO(API_EXPLOITS),
-      tryFetchWEAO(API_VERSIONS)
+      fetchWEAO(API_EXPLOITS),
+      fetchWEAO(API_VERSIONS)
     ]);
     if(Array.isArray(arr) && arr.length){
       const norm = arr.map((x,i)=>normalizeExploit(x,i)).filter(Boolean);
@@ -2997,7 +2952,6 @@ function bindEvents(){
   });
   bindLightbox();
 
-  /* FIX: Auto refresh khi quay lại tab / có focus / có mạng */
   document.addEventListener('visibilitychange', function(){
     if(document.visibilityState === 'visible'){
       fetchData(false);
@@ -3145,8 +3099,6 @@ function init(){
   bindEvents();
   render();
   fetchData(false);
-  
-  /* FIX: Interval 3 phút + kiểm tra tab visible */
   setInterval(function(){
     if(document.visibilityState === 'visible'){
       fetchData(false);
