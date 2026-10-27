@@ -1276,7 +1276,7 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
    certified:  false           ← true = tick xanh ✓
    updated:    "09/20/2026 at 5:00 AM UTC"
    platform:   "Windows"       ← Windows/Mac/Android/iOS/External
-   status:     "updated"       ← "updated" hoặc "outdated"
+   status:     "updated"       ← "updated" / "outdated" / "working"
    byfron:     "undetected"    ← "undetected" / "banwave" / "detected"
    detectionReason: ""         ← Lý do phát hiện
    unc:   98                   ← Điểm UNC 0-100 (số)
@@ -1296,38 +1296,6 @@ body.dev-active::before{content:'';position:fixed;inset:0;background:#000;z-inde
    website:  ""                ← Link website
    discord:  ""                ← Link Discord
    purchase: ""                ← Link mua/tải
-   
-   📌 KHỐI MẪU:
-   {
-     name: "QH Exec",
-     tag: "MY",
-     tag_color: "#a855f7",
-     ver: "3.0.1",
-     owner: "Me",
-     certified: false,
-     updated: "09/20/2026 at 5:00 AM UTC",
-     platform: "Windows",
-     status: "updated",
-     byfron: "undetected",
-     detectionReason: "",
-     unc: 98,
-     sunc: 95,
-     free: true,
-     cost: "",
-     hash: "version-abc123def456",
-     decompiler: true,
-     multiInject: true,
-     raknet: true,
-     keysystem: false,
-     image_link1: "https://example.com/logo.png",
-     image_link2: "https://example.com/shot1.png",
-     image_link3: "https://example.com/shot2.png",
-     image_link4: "https://example.com/shot3.png",
-     info: "Custom executor by me",
-     website: "https://example.com",
-     discord: "https://discord.gg/example",
-     purchase: ""
-   },
    ═══════════════════════════════════════════════════════════════════ */
 const MY_EXECUTORS = [
   /* 👇 DÁN KHỐI EXECUTOR CỦA BẠN VÀO ĐÂY 👇 */
@@ -1361,9 +1329,6 @@ const MY_EXECUTORS = [
      discord: "https://discord.gg/Kx3Vp2gMD",
      purchase: ""
    },
-
- 
-
 
   /* 👆 ĐỪNG QUÊN DẤU PHẨY "," Ở CUỐI MỖI KHỐI 👆 */
 ];
@@ -1697,6 +1662,23 @@ const isAnyValidURL=u=>{try{const x=new URL(u);return['http:','https:'].includes
 function lsGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catch(e){return f}}
 function lsSet(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
 
+/* FIX CHÍNH: pickUpdateStatus() — đọc field updateStatus từ WEAO linh hoạt */
+function pickUpdateStatus(raw){
+  if(!raw || typeof raw !== 'object') return false;
+  const keys = ['updateStatus','updated','isUpdated','working','is_updated','up_to_date','upToDate'];
+  for(let i=0;i<keys.length;i++){
+    const v = raw[keys[i]];
+    if(v === true) return true;
+    if(v === false) return false;
+    if(v === 'true' || v === 'yes' || v === '1' || v === 'updated' || v === 'working') return true;
+    if(v === 'false' || v === 'no' || v === '0' || v === 'outdated') return false;
+  }
+  const st = String(raw.status || '').toLowerCase();
+  if(st === 'updated' || st === 'working' || st === 'up') return true;
+  if(st === 'outdated' || st === 'not_updated' || st === 'not updated' || st === 'down') return false;
+  return true;
+}
+
 function normalizeCustomExec(raw, idx){
   if(!raw || typeof raw !== 'object' || !raw.name) return null;
   const imgKeys = Object.keys(raw).filter(k => /^image_link\d+$/.test(k));
@@ -1715,7 +1697,11 @@ function normalizeCustomExec(raw, idx){
   const byfron = String(raw.byfron || "undetected").toLowerCase();
   const detected = byfron !== "undetected";
   const clientmods = byfron === "banwave";
-  const updateStatus = String(raw.status || "updated").toLowerCase() === "updated";
+  
+  /* FIX: Chấp nhận cả "working" và "updated" */
+  const stLower = String(raw.status || "updated").toLowerCase();
+  const updateStatus = (stLower === 'updated' || stLower === 'working' || stLower === 'up');
+  
   const extype = platform === "External" ? "wexternal"
               : platform === "Mac" ? "mexecutor"
               : platform === "Android" ? "aexecutor"
@@ -1792,7 +1778,8 @@ function normalizeExploit(raw,idx){
     uncStatus:!!raw.uncStatus,uncPercentage:typeof raw.uncPercentage==='number'?raw.uncPercentage:undefined,
     suncPercentage:typeof raw.suncPercentage==='number'?raw.suncPercentage:undefined,
     free:!!raw.free,cost:raw.cost,detected:!!raw.detected,detectionReason:raw.detectionReason,
-    updateStatus:!!raw.updateStatus,rbxversion:raw.rbxversion,
+    updateStatus: pickUpdateStatus(raw), /* FIX: Dùng pickUpdateStatus */
+    rbxversion:raw.rbxversion,
     websitelink:safeURL(raw.websitelink),discordlink:safeURL(raw.discordlink),purchaselink:safeURL(raw.purchaselink),
     platform,extype:raw.extype,keysystem:!!raw.keysystem,decompiler:!!raw.decompiler,
     multiInject:!!raw.multiInject,clientmods:!!raw.clientmods,raknet:!!raw.raknet,
@@ -1937,37 +1924,67 @@ function renderVersionBar(){
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   FIX SYNC WEAO: cache-buster + no-store + CORS proxy fallback chain
+   ═══════════════════════════════════════════════════════════════════ */
+const CORS_PROXIES = [
+  u => u,
+  u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
+  u => 'https://corsproxy.io/?' + encodeURIComponent(u),
+  u => 'https://thingproxy.freeboard.io/fetch/' + u
+];
+
+async function tryFetchWEAO(url){
+  const bust = url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now() + Math.random().toString(36).slice(2,8);
+  for(let i=0;i<CORS_PROXIES.length;i++){
+    try{
+      const ctl = new AbortController();
+      const timer = setTimeout(()=>ctl.abort(), 8000);
+      const res = await fetch(CORS_PROXIES[i](bust), {
+        signal: ctl.signal,
+        cache: 'no-store',
+        credentials: 'omit',
+        mode: 'cors',
+        headers: { 'Accept': 'application/json' }
+      });
+      clearTimeout(timer);
+      if(!res.ok) continue;
+      return await res.json();
+    }catch(e){}
+  }
+  return null;
+}
+
+let isFetching = false;
 async function fetchData(showToast){
+  if(isFetching) return;
+  isFetching = true;
   let isLive=false;
   let liveList = null;
   try{
-    const ctl=new AbortController();
-    const timer=setTimeout(()=>ctl.abort(),6000);
-    const [rE,rV]=await Promise.allSettled([
-      fetch(API_EXPLOITS,{signal:ctl.signal,headers:{Accept:'application/json','User-Agent':'WEAO-3PService'}}),
-      fetch(API_VERSIONS,{signal:ctl.signal,headers:{Accept:'application/json','User-Agent':'WEAO-3PService'}})
+    const [arr, v] = await Promise.all([
+      tryFetchWEAO(API_EXPLOITS),
+      tryFetchWEAO(API_VERSIONS)
     ]);
-    clearTimeout(timer);
-    if(rE.status==='fulfilled'&&rE.value.ok){
-      const arr=await rE.value.json();
-      if(Array.isArray(arr)){
-        const norm=arr.map((x,i)=>normalizeExploit(x,i)).filter(Boolean);
-        if(norm.length){liveList=norm;isLive=true}
-      }
+    if(Array.isArray(arr) && arr.length){
+      const norm = arr.map((x,i)=>normalizeExploit(x,i)).filter(Boolean);
+      if(norm.length){ liveList = norm; isLive = true; }
     }
-    if(rV.status==='fulfilled'&&rV.value.ok){
-      const v=await rV.value.json();
-      if(v&&typeof v.Windows==='string'){state.versions=v;isLive=true}
+    if(v && typeof v.Windows === 'string'){
+      state.versions = v;
+      isLive = true;
     }
   }catch(e){}
+  
   if(liveList){
     state.executors = buildExecutorList(liveList);
   } else {
     state.executors = buildExecutorList(FALLBACK_EXPLOITS.slice());
   }
-  state.isLive=isLive;
+  state.isLive = isLive;
   render();
   if(showToast) toast(isLive?t('toastSyncOk'):t('toastSyncFail'),isLive?'ok':'warn');
+  isFetching = false;
 }
 
 function animateNumber(el, from, to, duration){
@@ -2979,6 +2996,19 @@ function bindEvents(){
     }
   });
   bindLightbox();
+
+  /* FIX: Auto refresh khi quay lại tab / có focus / có mạng */
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'visible'){
+      fetchData(false);
+    }
+  });
+  window.addEventListener('focus', function(){
+    fetchData(false);
+  });
+  window.addEventListener('online', function(){
+    fetchData(false);
+  });
 }
 
 (function security(){
@@ -3044,13 +3074,6 @@ function bindEvents(){
       try{ Object.freeze(console); }catch(e){}
     }catch(e){}
   })();
-  /* ═══════════════════════════════════════════════════════════════
-     FIX: XOÁ window-dimension heuristic — nguồn false-positive khi
-     user phóng to web bằng Ctrl + con lăn chuột / Ctrl + / Ctrl -.
-     Lý do: khi zoom, innerWidth (CSS px) co lại nhưng outerWidth
-     (pixel vật lý) giữ nguyên → diff tăng vọt → tưởng nhầm là
-     DevTools mở → bật SECURITY ALERT oan.
-     ═══════════════════════════════════════════════════════════════ */
   (function(){
     try{
       const desc = Object.getOwnPropertyDescriptor(Function.prototype, 'constructor');
@@ -3103,7 +3126,6 @@ function bindEvents(){
       document.documentElement.innerHTML = '<body style="background:#000"></body>';
     }
   }catch(e){}
-  /* Ngưỡng busy loop tăng 400ms → 900ms để tránh false-positive trên máy yếu */
   setTimeout(function(){
     const s = performance.now();
     for(let i = 0; i < 100000; i++){ /* busy */ }
@@ -3123,7 +3145,13 @@ function init(){
   bindEvents();
   render();
   fetchData(false);
-  setInterval(function(){fetchData(false)},180000);
+  
+  /* FIX: Interval 3 phút + kiểm tra tab visible */
+  setInterval(function(){
+    if(document.visibilityState === 'visible'){
+      fetchData(false);
+    }
+  }, 180000);
 }
 
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
